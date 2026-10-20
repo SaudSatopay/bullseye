@@ -51,11 +51,13 @@ Everything is Markdown except the scripts, and each script prints an install hin
 |---|---|---|
 | Node 20+ | Every `.mjs` script | nodejs.org |
 | Python 3.10+ | PDF finishing and QA, PPTX tools, QR codes, voiceover, statistics | python.org |
-| PyMuPDF, python-pptx, qrcode | `pitch-deck` and `submission-pack` scripts | `pip install pymupdf python-pptx "qrcode[pil]"` |
-| edge-tts | Free voiceover in `demo-video` | `pip install edge-tts` |
-| Playwright | Evidence sensor (`missile`), scripted recordings (`demo-video`) | In your project: `npm i -D playwright` then `npx playwright install chromium` |
-| Chrome or Edge | HTML to PDF rendering (`pitch-deck`) | Usually already installed |
-| ffmpeg | Video conversion, GIFs, contact sheets | Your OS package manager |
+| PyMuPDF, fonttools, python-pptx, qrcode | `pitch-deck` and `submission-pack` scripts (fonttools does the font subsetting) | `pip install pymupdf fonttools python-pptx "qrcode[pil]"` |
+| opencv-python-headless, mutagen | Optional: QR codes decoded back to their URLs (`qr.py --verify`); exact clip lengths in `voiceover.py` | `pip install opencv-python-headless mutagen` |
+| edge-tts | Free voiceover in `demo-video` | `pip install -U edge-tts` (an old version is refused by the voice service) |
+| Playwright | Evidence sensor (`missile`), scripted recordings (`demo-video`), README screenshots (`submission-pack`) | In your project: `npm i -D playwright` then `npx playwright install chromium`. A global install also works (or set `PLAYWRIGHT_MODULE`); without Playwright's own Chromium the scripts launch an installed Chrome or Edge |
+| Chrome or Edge | HTML to PDF rendering (`pitch-deck`), and the browser fallback above | Usually already installed |
+| ffmpeg | Video recording, conversion, GIFs, contact sheets | Your OS package manager |
+| GitHub CLI (`gh`), logged in | The README render check (`readme-preview.mjs`), and requirement checks such as `gh repo view` | cli.github.com |
 
 ## Check that it works
 
