@@ -16,7 +16,7 @@ Prompts the missile hands to subagents, skills or itself. Fill the angle-bracket
 > Build <screen list> from DESIGN.md. Tokens only; no literal colors in components. Real copy from PRODUCT.md. The hero carries the signature moment: <spec>. Every screen has its loading, empty and error state designed, not stubbed. Then capture 390 and 1440 screenshots and critique your own result against design-rules.md before reporting.
 
 **With Impeccable installed**
-> /impeccable craft — <same brief as above>. Follow with `/impeccable critique`, apply, then one `/impeccable bolder` if the result plays it safe.
+> /impeccable craft: <same brief as above>. Follow with `/impeccable critique`, apply, then one `/impeccable bolder` if the result plays it safe.
 
 **Motion pass**
 > Use the animate skill (or the motion budget in design-rules.md). Add one page-load sequence to the hero, 600 to 900 ms total, staggered, transform and opacity only, honoring prefers-reduced-motion. Add hover and focus states to every interactive element at 120 to 240 ms. Nothing else moves yet.

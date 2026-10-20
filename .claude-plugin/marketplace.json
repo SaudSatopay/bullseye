@@ -1,0 +1,12 @@
+{
+  "name": "bullseye",
+  "owner": { "name": "Saud Satopay", "url": "https://github.com/SaudSatopay" },
+  "description": "BULLSEYE: the hackathon playbook for coding agents.",
+  "plugins": [
+    {
+      "name": "bullseye",
+      "source": ".",
+      "description": "Twelve skills and five subagents that take a hackathon entry from problem statement to podium: intake, idea round, build, polish, proof, judge simulation, submission and finale."
+    }
+  ]
+}

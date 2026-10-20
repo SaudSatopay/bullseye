@@ -2,7 +2,12 @@
 name: missile
 description: Fire the missile at any project to take it from wherever it is to a shipped 10/10 product. It runs recon, locks a target (product, design direction, plan), arms the sensors and design skills, builds foundations, design system, signature moment and features, then loops sense → score → fix with screenshots and a separate critic until every rubric dimension is 9 or better, and ships (deploy, README, OG image, tagged release). Use it whenever the user says "fire the missile", "/missile", "missile this", "make this 10/10", "take this to the next level", "build me <idea> at production quality", "polish this until it is perfect", or asks to make an app or site dramatically better end to end. Works on an empty folder with an idea and on an existing repo.
 argument-hint: "[new <idea> | recon | arm | polish | score | ship] [go]"
-allowed-tools: Bash(node '${CLAUDE_SKILL_DIR}/scripts/recon.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/scorecard.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/lh-summary.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' *)
+allowed-tools: Bash(node '${CLAUDE_SKILL_DIR}/scripts/recon.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/scorecard.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/lh-summary.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' *), Bash(node '${CLAUDE_SKILL_DIR}/scripts/sense.mjs' *)
+license: MIT
+metadata:
+  author: Saud Satopay
+  version: "1.1.0"
+  part-of: bullseye
 ---
 
 # Missile
@@ -10,6 +15,8 @@ allowed-tools: Bash(node '${CLAUDE_SKILL_DIR}/scripts/recon.mjs' *), Bash(node '
 Fire it at a folder. Whatever is there, a blank directory with an idea or a repo with years of history, it takes to a shipped product that scores 9 or better on every dimension of `references/rubric.md`. You decide the target once; after that the missile senses, scores and corrects on its own until impact.
 
 Read `references/flight.md` before doing anything. This file is the summary; that file is the procedure.
+
+**Inside a hackathon.** When the sibling skill `bullseye` runs the event, the missile is the Polish phase: it owns product craft (the ten dimensions below), while `judge-panel` scores contest fit against the event's own rubric and `prove-it` owns every number. Read `BULLSEYE.md` first: its Contract, Thesis and golden path are the target, and its owner checklist covers the human-only actions that otherwise hold `shipped` at 6. On a deadline, scale the iteration cap to the time left; never skip Impact.
 
 ## Arguments
 
@@ -49,10 +56,13 @@ Procedure, gates and resume rules are in `references/flight.md`. In one line eac
 
 Use the first available; never skip screenshots because a tool is missing.
 
-1. Claude Code desktop Browser pane tools (`preview_start` or `navigate`, `resize_window` mobile and desktop, `screenshot`, `read_console_messages`).
-2. `playwright-cli`: `playwright-cli open <url>`, `playwright-cli resize 390 844`, `playwright-cli screenshot --filename=.missile/shots/it<N>/home-390.png`, `playwright-cli resize 1440 900`, screenshot again, `playwright-cli console` for errors, `playwright-cli close`.
-3. `node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' <url> .missile/shots/it<N> home pricing app` (route names without a leading slash; `home` is `/`). It uses `npx playwright screenshot`; if it reports Chromium missing, run it once with `--install`.
-4. Playwright MCP or Chrome DevTools MCP.
+1. `node '${CLAUDE_SKILL_DIR}/scripts/sense.mjs' <url> .missile/shots/it<N> home pricing app --keyboard --perf`: one command for the whole evidence pass. Every route at 390 and 1440 in light and dark, full-page screenshots, horizontal overflow and console errors per screen, a keyboard walk with focus visibility (`keyboard.txt`), and 4x CPU frame, long-task, LCP and CLS numbers (`perf.json`). It resolves Playwright from the project, then global installs, and launches Playwright's Chromium, installed Chrome or Edge, in that order.
+2. Claude Code desktop Browser pane tools (`preview_start` or `navigate`, `resize_window` mobile and desktop, `screenshot`, `read_console_messages`).
+3. `playwright-cli`: `playwright-cli open <url>`, `playwright-cli resize 390 844`, `playwright-cli screenshot --filename=.missile/shots/it<N>/home-390.png`, `playwright-cli resize 1440 900`, screenshot again, `playwright-cli console` for errors, `playwright-cli close`.
+4. `node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' <url> .missile/shots/it<N> home pricing app` (route names without a leading slash; `home` is `/`). It uses `npx playwright screenshot`; if it reports Chromium missing, run it once with `--install`.
+5. Playwright MCP or Chrome DevTools MCP.
+
+Always sense the production build (`build` then `start`), never the dev server: dev overlays and dev-only hydration bugs pollute the evidence.
 
 Metrics: `npx lighthouse <url> --output=json --output-path=.missile/lh/it<N>/<route>.json --chrome-flags="--headless=new" --quiet --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile`, then `node '${CLAUDE_SKILL_DIR}/scripts/lh-summary.mjs' <json>`.
 
@@ -63,13 +73,14 @@ Metrics: `npx lighthouse <url> --output=json --output-path=.missile/lh/it<N>/<ro
 | `node '${CLAUDE_SKILL_DIR}/scripts/recon.mjs' <dir>` | Inventory: stack, commands, routes, design signals, smells, machine tools, arsenal. Writes `.missile/recon.json`. Add `--dry` to skip the write. |
 | `node '${CLAUDE_SKILL_DIR}/scripts/scorecard.mjs' <dir> <scorecard.json>` | Validates a critic scorecard, computes mean, min, verdict and stall, updates the status line, scoreboard and iteration log in MISSILE.md. Run it after every critic pass; it is the only way the scoreboard changes. |
 | `node '${CLAUDE_SKILL_DIR}/scripts/lh-summary.mjs' <json...>` | Lighthouse JSON to a short table with metrics, opportunities and accessibility findings. |
+| `node '${CLAUDE_SKILL_DIR}/scripts/sense.mjs' <url> <outDir> [route names] [--keyboard] [--perf]` | The full evidence pass: screenshots at 390 and 1440 in both schemes, overflow, console errors, keyboard walk, 4x CPU performance. Writes `sense.json`. |
 | `node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' <url> <outDir> [route names] [--install]` | Fallback screenshots at 390 and 1440. Route names without slashes (`home pricing app`). |
 
 Quote the script path in single quotes exactly as shown; it keeps Windows paths intact in every shell.
 
 ## Delegation
 
-Subagent names are `missile-recon`, `missile-critic`, `missile-builder`; when the missile is installed as a plugin they are `missile:missile-recon` and so on.
+Subagent names are `missile-recon`, `missile-critic`, `missile-builder`; when installed through the BULLSEYE plugin they are `bullseye:missile-recon`, `bullseye:missile-critic` and `bullseye:missile-builder`. Outside Claude Code there are no subagents: run recon yourself, and run the critic in a fresh session that sees only the rubric and the evidence files, never your narrative.
 
 - **Recon** (existing projects): give the directory, the absolute path of `scripts/recon.mjs`, and any screenshot paths. Paste the returned report into MISSILE.md under Recon.
 - **Critic** (every iteration): use the critic delegation prompt in `references/prompts.md`. Always pass the absolute rubric path `${CLAUDE_SKILL_DIR}/references/rubric.md`, the evidence paths, the previous scorecard, the URL and the save path `.missile/scorecards/it<N>.json`. Then run `scorecard.mjs`.

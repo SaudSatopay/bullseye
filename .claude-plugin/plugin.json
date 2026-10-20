@@ -1,0 +1,10 @@
+{
+  "name": "bullseye",
+  "version": "1.0.0",
+  "description": "The hackathon playbook for coding agents: decode the brief, build the demo path first, polish to 9/10, prove every claim, simulate the judges, and ship a judge-ready submission. Twelve skills and five subagents distilled from 30+ hackathons.",
+  "author": { "name": "Saud Satopay", "url": "https://github.com/SaudSatopay" },
+  "homepage": "https://github.com/SaudSatopay/bullseye",
+  "repository": "https://github.com/SaudSatopay/bullseye",
+  "license": "MIT",
+  "keywords": ["hackathon", "agent-skills", "claude-code", "codex", "pitch", "demo", "judging", "design", "anti-slop"]
+}

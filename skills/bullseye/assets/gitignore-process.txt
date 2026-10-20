@@ -1,0 +1,11 @@
+# Bullseye process files: kept on disk, never pushed (private mode)
+BULLSEYE.md
+MISSILE.md
+PRODUCT.md
+DESIGN.md
+HANDOFF.md
+QA-BANK.md
+judging/
+brief/
+.missile/
+.claude/

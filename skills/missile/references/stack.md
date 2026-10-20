@@ -16,7 +16,7 @@ Versions verified 2026-10-01. Re-check with `npm view <pkg> version` before pinn
 | Data | Supabase (Postgres, auth, storage, realtime) or Convex for reactive apps | Free tiers cover a launch; MCPs exist for both. |
 | Auth | Better Auth 1.7 (self-hosted) or Clerk (hosted UI) | Both work with Next.js 16 today. |
 | ORM | Drizzle 0.45 | Stay off the 1.0 release candidate. |
-| AI | Anthropic SDK with `claude-opus-5-5` (quality) or `claude-sonnet-5-5` (latency); Vercel AI SDK 7 for streaming UI | Adaptive thinking on, streaming on, no prefill. Avoid Haiku 4.5 for anything shipping after mid-October 2026. |
+| AI | Anthropic SDK with `claude-opus-5-5` by default (set the effort level explicitly; it defaults to medium), `claude-sonnet-5-5` for latency-sensitive chat, `claude-haiku-5-5` for cheap high-volume work; Vercel AI SDK 7 for streaming UI | Adaptive thinking, streaming for long outputs, structured outputs instead of assistant prefill. In a hackathon, use the sponsor's model when the event requires or rewards it. |
 | Deploy | Vercel (preview per branch) | `vercel` for preview, `vercel --prod` to ship. Cloudflare Workers as the backup. |
 | Observe | Vercel Analytics, Sentry (free 5K errors), PostHog (replays) | Optional, but `shipped` scores higher with one wired. |
 

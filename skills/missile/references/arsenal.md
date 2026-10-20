@@ -8,10 +8,11 @@ Use the first one available. Never skip screenshots because a tool is missing; f
 
 | Priority | Sensor | Detect | Use |
 |---|---|---|---|
-| 1 | Claude Code desktop Browser pane | tools named `mcp__Claude_Browser__*` are present | `preview_start` or `navigate`, `resize_window` preset `mobile` then `desktop`, `screenshot`, `read_console_messages`. Add `.claude/launch.json` so the dev server starts itself. |
-| 2 | Playwright CLI | `playwright-cli --version` | `playwright-cli open <url>`, `playwright-cli resize 390 844`, `playwright-cli screenshot --filename=<path>`, `playwright-cli resize 1440 900`, screenshot again, `playwright-cli console` for errors, `playwright-cli eval "<expression>"` for checks such as horizontal overflow, `playwright-cli close`. Verified on Windows on 2026-10-01. |
-| 3 | Bundled fallback | Node present | `node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' <url> <outDir> home pricing app` uses `npx playwright screenshot` at 390 and 1440. Route names without slashes. If Chromium is missing, run once with `--install`. |
-| 4 | Playwright MCP or Chrome DevTools MCP | `claude mcp list` | Same job, more context cost. Chrome DevTools MCP is the only one that gives performance traces. |
+| 1 | Bundled evidence sensor | Playwright resolvable from the project or a global install (`node '${CLAUDE_SKILL_DIR}/scripts/sense.mjs' --check`) | `node '${CLAUDE_SKILL_DIR}/scripts/sense.mjs' <url> .missile/shots/it<N> home app --keyboard --perf`: screenshots at 390 and 1440 in light and dark, overflow and console errors per screen, keyboard walk, 4x CPU numbers. Falls back to installed Chrome or Edge when Playwright's own browser build is missing. Verified on Windows on 2026-10-20. |
+| 2 | Claude Code desktop Browser pane | tools named `mcp__Claude_Browser__*` are present | `preview_start` or `navigate`, `resize_window` preset `mobile` then `desktop`, `screenshot`, `read_console_messages`. Add `.claude/launch.json` so the dev server starts itself. |
+| 3 | Playwright CLI | `playwright-cli --version` | `playwright-cli open <url>`, `playwright-cli resize 390 844`, `playwright-cli screenshot --filename=<path>`, `playwright-cli resize 1440 900`, screenshot again, `playwright-cli console` for errors, `playwright-cli eval "<expression>"` for checks such as horizontal overflow, `playwright-cli close`. Verified on Windows on 2026-10-01. |
+| 4 | Screenshot fallback | Node present | `node '${CLAUDE_SKILL_DIR}/scripts/shots.mjs' <url> <outDir> home pricing app` uses `npx playwright screenshot` at 390 and 1440. Route names without slashes. If Chromium is missing, run once with `--install`. |
+| 5 | Playwright MCP or Chrome DevTools MCP | `claude mcp list` | Same job, more context cost. Chrome DevTools MCP is the only one that gives performance traces. |
 
 Metrics: `npx lighthouse <url> --output=json --output-path=<file> --chrome-flags="--headless=new" --quiet --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile` then `node ${CLAUDE_SKILL_DIR}/scripts/lh-summary.mjs <file>`.
 

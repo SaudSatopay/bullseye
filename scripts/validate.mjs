@@ -55,7 +55,7 @@ function unquote(v) {
 }
 
 // ---------- skills ----------
-const SKILL_FIELDS = new Set(['name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools', 'argument-hint', 'disable-model-invocation', 'user-invocable', 'model', 'effort', 'version']);
+const SKILL_FIELDS = new Set(['name', 'description', 'when_to_use', 'license', 'compatibility', 'metadata', 'allowed-tools', 'argument-hint', 'disable-model-invocation', 'user-invocable', 'model', 'effort', 'version']);
 const skillsDir = path.join(root, 'skills');
 const skills = fs.existsSync(skillsDir) ? fs.readdirSync(skillsDir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name) : [];
 if (!skills.length) fail('skills/', 'no skills found');
@@ -144,6 +144,20 @@ function checkLinks(file, text) {
     if (!fs.existsSync(resolved)) fail(rel(file), `broken link → ${m[1]}`);
   }
 }
+
+// ---------- house style: no em dashes ----------
+// The builder strips em dashes from everything judges and maintainers read; this repo practises it.
+const EM_DASH = String.fromCharCode(0x2014);
+(function style(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (IGNORE.has(e.name)) continue;
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) { style(full); continue; }
+    if (!/\.(md|mjs|js|ts|tsx|json|ya?ml|html|css|py|sh|txt|bat|ps1)$/.test(e.name)) continue;
+    const lines = read(full).split('\n');
+    lines.forEach((line, i) => { if (line.includes(EM_DASH)) fail(`${rel(full)}:${i + 1}`, 'em dash (U+2014); use a colon, comma, period, parentheses or a middot'); });
+  }
+})(root);
 
 // ---------- secrets ----------
 const SECRET_PATTERNS = [
