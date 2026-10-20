@@ -1,0 +1,35 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Optional Python libraries used by the bundled scripts
+        run: python -m pip install --quiet pymupdf fonttools python-pptx "qrcode[pil]" opencv-python-headless mutagen
+
+      - name: Skills follow the Agent Skills spec, links resolve, no secrets, no em dashes
+        run: node scripts/validate.mjs
+
+      - name: Every bundled script passes its tests (offline, no API keys)
+        run: node --test
