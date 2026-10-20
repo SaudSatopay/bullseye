@@ -1,0 +1,90 @@
+{
+  "title": "Example recording script for record-demo.mjs. Copy it to video/beats.json, then rewrite the steps from the beat sheet in docs/demo-script.md: one or more steps per beat, holds sized to each beat's voiceover window.",
+  "url": "http://localhost:3000",
+  "viewport": { "w": 1280, "h": 720 },
+  "deviceScaleFactor": 1.5,
+  "colorScheme": "light",
+  "waitUntil": "load",
+  "maxSeconds": 170,
+  "hide": ["#cookie-banner", "[data-sonner-toaster]"],
+  "cursor": true,
+  "captionStyle": { "position": "bottom" },
+  "steps": [
+    {
+      "id": "hook",
+      "note": "Beat 1. Open on the calm state from a reset link. No cursor movement; let the caption carry the hook.",
+      "goto": "/?demo=reset",
+      "waitFor": "main",
+      "caption": "The problem, in one line",
+      "detail": "Beat 1: the hook. One sourced number, said in the first 10 seconds.",
+      "hold": 9000
+    },
+    {
+      "id": "input",
+      "note": "Beat 2. Type the exact input from the beat sheet. A typing delay lets the viewer read it.",
+      "fill": { "selector": "textarea[name=input]", "text": "Paste the exact input string from the beat sheet here", "delay": 35 },
+      "caption": "One real input, typed live",
+      "hold": 3000
+    },
+    {
+      "id": "run",
+      "note": "Beat 3. Click, wait for the result, then caption the result.",
+      "click": "button:has-text('Check')",
+      "waitFor": "[data-testid=result]",
+      "timeout": 60000,
+      "caption": "The answer and its reasons",
+      "detail": "Every number on screen comes from a tool, not the model.",
+      "hold": 9000
+    },
+    {
+      "id": "money-shot",
+      "note": "Beat 4. Bring the decisive frame to the centre and hold it a full beat.",
+      "scroll": "[data-testid=reasons]",
+      "caption": "The money shot: hold it",
+      "hold": 8000
+    },
+    {
+      "id": "live-intro",
+      "note": "Caption the slow part before it starts; a caption set inside a sped-up step is gone too fast.",
+      "caption": "A live model run, sped up",
+      "detail": "The badge in the corner says how much.",
+      "hold": 2500
+    },
+    {
+      "id": "live-run",
+      "note": "A slow live call. It records in real time and plays 4x faster in demo.mp4 with a speed badge.",
+      "click": "button:has-text('Run the full analysis')",
+      "waitFor": "text=Analysis complete",
+      "timeout": 120000,
+      "speed": 4,
+      "hold": 1000
+    },
+    {
+      "id": "contrast",
+      "note": "Beat 5. The contrast: a legitimate input stays quiet. Deep links make the beat repeatable.",
+      "goto": "/?input=legit-sample&autorun=1",
+      "waitFor": "[data-testid=result]",
+      "caption": "A legitimate input: no alarm",
+      "detail": "The contrast beat shows it does not cry wolf.",
+      "hold": 9000
+    },
+    {
+      "id": "proof",
+      "note": "Beat 6. The proof page: measured numbers, with where each one comes from.",
+      "goto": "/proof",
+      "scroll": "#results",
+      "waitFor": "#results",
+      "caption": "Measured, not claimed",
+      "detail": "One command re-measures every number on this page.",
+      "hold": 9000
+    },
+    {
+      "id": "close",
+      "note": "Beat 7. Close on the live URL, on screen and spoken.",
+      "goto": "/",
+      "caption": "app.example.com",
+      "detail": "Live now. Code, tests and the beat sheet are in the repo.",
+      "hold": 6000
+    }
+  ]
+}
