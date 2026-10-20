@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SaudSatopay/bullseye/blob/main/skills/judge-panel/assets/judge-scorecard.schema.json",
+  "title": "BULLSEYE judge scorecard",
+  "description": "One judge's verdict on one round, scored against this event's rubric with its exact weights. Written by the hackathon-judge subagent or copied from a fresh session's reply, then recorded with scripts/judge-round.mjs, which recomputes the weighted total from the Contract.",
+  "type": "object",
+  "required": ["round", "type", "criteria", "weighted_total", "verdict", "findings", "non_issues", "improvements", "biggest_gap", "code_maxed"],
+  "properties": {
+    "round": { "type": "integer", "minimum": 1, "description": "The round number, as in judging/round-<n>/." },
+    "type": { "enum": ["blind", "adversarial", "verify-fixes", "newest-surface"] },
+    "timestamp": { "type": "string", "description": "ISO 8601 time the judge finished." },
+    "judge": {
+      "type": "object",
+      "properties": {
+        "persona": { "type": "string", "description": "The jury this judge played." },
+        "runner": { "type": "string", "description": "Where it ran: the hackathon-judge subagent, a fresh Codex or Cursor session, a chat app." }
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One entry per rubric criterion, named exactly as the rubric names it.",
+      "items": {
+        "type": "object",
+        "required": ["name", "weight", "score", "evidence"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "weight": { "type": "number", "minimum": 0, "description": "The weight as published (25 for 25%). Use 0 for every criterion only when the event publishes no weights." },
+          "score": { "type": "number", "minimum": 0, "maximum": 10, "description": "9-10 exceptional, would win; 7-8 strong; 5-6 solid but capped; below 5 significant gaps." },
+          "evidence": { "type": "string", "minLength": 1, "description": "The command, file:line or number that sets this score." },
+          "to_raise": { "type": "string", "description": "What would earn the next point." },
+          "moved": { "type": "string", "description": "Informed rounds: whether it moved from the prior round, and why." }
+        }
+      }
+    },
+    "weighted_total": { "type": "number", "minimum": 0, "maximum": 10, "description": "Sum of score x weight divided by the sum of the weights. The recorder recomputes it." },
+    "prior_score": { "type": ["number", "null"], "description": "The weighted total the previous round gave." },
+    "verdict": { "type": "string", "minLength": 1, "description": "One paragraph: what it is, how good, the core tension, where it would place." },
+    "findings": {
+      "type": "array",
+      "description": "Most severe first. Only what the judge could substantiate.",
+      "items": {
+        "type": "object",
+        "required": ["severity", "title", "where", "evidence", "fix"],
+        "properties": {
+          "id": { "type": "string" },
+          "severity": { "enum": ["high", "medium", "low"] },
+          "category": { "enum": ["bug", "correctness", "overclaim", "honesty", "demo-failure", "security", "methodology", "ux", "docs"] },
+          "title": { "type": "string", "minLength": 1 },
+          "where": { "type": "string", "minLength": 1, "description": "file:line, endpoint, screen or artifact." },
+          "evidence": { "type": "string", "minLength": 1, "description": "What the judge ran or read, and what it showed." },
+          "fix": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "non_issues": {
+      "type": "array",
+      "description": "What the judge checked that held up. Feeds the next round's do-not-re-flag list.",
+      "items": {
+        "type": "object",
+        "required": ["checked", "result"],
+        "properties": {
+          "checked": { "type": "string", "minLength": 1 },
+          "result": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "improvements": {
+      "type": "array",
+      "description": "Ranked by rubric weight x impact per hour.",
+      "items": {
+        "type": "object",
+        "required": ["change", "criterion", "effort"],
+        "properties": {
+          "rank": { "type": "integer", "minimum": 1 },
+          "change": { "type": "string", "minLength": 1 },
+          "criterion": { "type": "string", "minLength": 1 },
+          "impact": { "enum": ["high", "medium", "low"] },
+          "effort": { "type": "string", "minLength": 1, "description": "S (under 30 min), M (under 2 h), L, or hours." },
+          "quick_win": { "type": "boolean" }
+        }
+      }
+    },
+    "wow": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["idea", "criterion", "effort", "feasibility"],
+        "properties": {
+          "idea": { "type": "string", "minLength": 1 },
+          "criterion": { "type": "string", "minLength": 1 },
+          "effort": { "type": "string", "minLength": 1 },
+          "feasibility": { "enum": ["realistic", "aspirational"] }
+        }
+      }
+    },
+    "biggest_gap": { "type": "string", "minLength": 1, "description": "The single biggest thing standing between it and first place." },
+    "code_maxed": { "type": "boolean", "description": "True when more code will not move the score and the ceiling is something else." },
+    "ceiling": { "type": "string", "description": "What caps the score when it is not code: outside data, real users, a pilot, the pitch." },
+    "coverage": {
+      "type": "array",
+      "description": "Blind rounds: every illustrative build, deliverable and evaluation-focus item the problem statement names.",
+      "items": {
+        "type": "object",
+        "required": ["item", "status", "evidence"],
+        "properties": {
+          "item": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["illustrative-build", "evaluation-focus", "deliverable", "requirement"] },
+          "status": { "enum": ["covered", "partial", "missing"] },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "fix_verification": {
+      "type": "array",
+      "description": "Verify-fixes rounds: one verdict per claimed fix.",
+      "items": {
+        "type": "object",
+        "required": ["fix", "status", "evidence"],
+        "properties": {
+          "fix": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["confirmed", "partial", "cosmetic", "regressed"] },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "surfaces": {
+      "type": "array",
+      "description": "Newest-surface rounds: one verdict per surface.",
+      "items": {
+        "type": "object",
+        "required": ["surface", "verdict", "evidence"],
+        "properties": {
+          "surface": { "type": "string", "minLength": 1 },
+          "verdict": { "enum": ["honest", "mixed", "sleight-of-hand"] },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "build_next": { "type": "string", "description": "Verify-fixes rounds: the one thing to build before the deadline, and why." }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "blind" } } },
+      "then": { "required": ["coverage"], "properties": { "coverage": { "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "type": { "const": "adversarial" } } },
+      "then": { "required": ["wow"] }
+    },
+    {
+      "if": { "properties": { "type": { "const": "verify-fixes" } } },
+      "then": {
+        "required": ["fix_verification", "prior_score", "build_next"],
+        "properties": { "fix_verification": { "minItems": 1 }, "prior_score": { "type": "number" }, "build_next": { "minLength": 1 } }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "newest-surface" } } },
+      "then": { "required": ["surfaces"], "properties": { "surfaces": { "minItems": 1 } } }
+    }
+  ]
+}

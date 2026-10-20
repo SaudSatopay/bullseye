@@ -64,6 +64,8 @@ process: private
 
 ### Judging
 
+Judges: two oceanographers, a port-operations manager and a sponsor engineer; they will see through model-only answers and uncredited data. Weights: published. Screening before scoring: none.
+
 | Criterion | Weight | What wins it | Our evidence | Where it shows | Owner |
 |---|---|---|---|---|---|
 | Impact | 30 | A named user with a real decision, sized | Harbour-pilot scenario with measured lead time | Video 0:20, README "Why" | A |

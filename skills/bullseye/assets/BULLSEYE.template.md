@@ -56,6 +56,8 @@ Rules: update the status line at the end of every session; never delete history 
 
 ### Judging
 
+Judges: {{who they are, and what they will see through}}. Weights: {{published | not published | proxy built from <source>}}. Screening before scoring: {{pass/fail stage, automated metric, profile screen, none}}.
+
 | Criterion | Weight | What wins it | Our evidence | Where it shows | Owner |
 |---|---|---|---|---|---|
 
