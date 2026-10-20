@@ -99,6 +99,8 @@ Turn every deliverable and every hard rule into one line under `### Requirements
 
 `[hard]` lines disqualify when missed; `[scored]` lines cost points. `check:` is either `cmd:` (a command and the result that passes) or `manual:` (one line a person verifies). Number the lines R1, R2 and so on, and never renumber them.
 
+Every R line must be checkable before anyone presses submit: the final sweep runs before submitting and fails on any open `[hard]` line. The deadline is not an R line. It lives in `### Deadlines` and the status line, and the submission itself is recorded under `## Submission`.
+
 Gate: every deliverable and every hard rule maps to at least one R line, and every R line has a check.
 
 > Field note (StorePilot · OpenAI Build Week): The brief listed a README section on the Codex collaboration as a hard requirement. Nothing checked it at the end, and the submitted README did not have it.

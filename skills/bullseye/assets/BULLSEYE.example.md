@@ -55,7 +55,7 @@ process: private
 ### Requirements gate
 
 - [x] R1 [hard] Both members meet the age rule · check: manual: confirmed in the team chat · source: Rules §2, read 2026-11-13
-- [ ] R2 [hard] Submitted before the internal deadline 2026-11-16 07:30 IST · check: manual: confirmation saved in brief/ · source: Deadlines
+- [x] R2 [hard] Every form answer within its limit (tagline 200 chars, "How we used open data" 1,500 chars) · check: manual: form-check.mjs reports 0 FAIL on idea/SUBMISSION-FORM.md · source: Submission form, read 2026-11-13
 - [ ] R3 [hard] Demo video at most 3:00 · check: cmd: ffprobe -v error -show_entries format=duration -of csv=p=0 demo.mp4 (pass: 180 or less) · source: FAQ, read 2026-11-13
 - [x] R4 [hard] Repo public with an OSI licence · check: cmd: gh repo view --json visibility,licenseInfo (pass: PUBLIC and mit) · source: Rules §4, read 2026-11-13
 - [ ] R5 [hard] README describes how AI assistants were used · check: cmd: grep -in "AI assistance" README.md (pass: a heading matches) · source: Rules §7, read 2026-11-13

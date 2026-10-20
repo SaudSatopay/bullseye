@@ -82,7 +82,7 @@ One line per deliverable and per hard rule, in this exact shape (submission-pack
 -->
 
 - [ ] R1 [hard] Every member meets the eligibility rule: {{rule}} · check: manual: each member confirmed in writing · source: {{rules}}, read {{date}}
-- [ ] R2 [hard] Submitted before the internal deadline {{internal}} · check: manual: confirmation saved in brief/ · source: Deadlines
+- [ ] R2 [hard] {{Every required form field answered within its limit}} · check: manual: each field pasted, then read back from the saved draft · source: {{form}}, read {{date}}
 - [ ] R3 [hard] {{Demo video at most 3:00, public, with audio}} · check: cmd: ffprobe -v error -show_entries format=duration -of csv=p=0 {{video}} (pass: 180 or less); manual: link opens in a private window · source: {{FAQ}}, read {{date}}
 - [ ] R4 [hard] {{Repo public with an MIT licence}} · check: cmd: gh repo view --json visibility,licenseInfo (pass: PUBLIC, mit) · source: {{rules}}, read {{date}}
 - [ ] R5 [hard] {{README section "<name>"}} · check: cmd: grep -in "{{name}}" README.md (pass: a heading matches) · source: {{rules}}, read {{date}}
