@@ -23,7 +23,7 @@ Many events cut most teams before anyone writes code. Treat the idea submission 
 1. Confirm the exact format: document, deck, form essays, template, video, anonymity, naming, size.
 2. Build evidence even at idea stage: prove the core on the organiser's data if any is provided, or record a thin vertical prototype.
 3. Write the narrative once and render it three ways (brief, deck, form essays) with the same numbers.
-4. Run the honesty pass: every number typed (sourced, simulated, projected, target, illustrative), unverified claims removed, competitors rated fairly.
+4. Run the honesty pass: every number typed (measured, sourced, simulated, projected, target, illustrative), unverified claims removed, competitors rated fairly.
 5. Produce the organiser-format cut separately from any longer presentation deck.
 6. Submit early when edits are allowed; shortlisting can happen in waves.
 

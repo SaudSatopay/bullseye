@@ -46,7 +46,7 @@ Ship labelled modes (live, scripted on the same tools, recorded from a real run)
 
 One facts file, written by the scripts that measure, feeds the README, deck, video, form and UI. A claims ledger maps each claim to the command that measures it and the test that pins it. Re-derive every number before each docs pass.
 
-Label every number on the artifact: sourced, simulated, projected, target or illustrative.
+Label every number on the artifact: measured, sourced, simulated, projected, target or illustrative.
 
 > Field note (Detour · Graph Hacks 2026): one command re-measured all 16 README claims, checked that the README still contained each claim's text, compared it with an independent reimplementation, and failed on any mismatch.
 

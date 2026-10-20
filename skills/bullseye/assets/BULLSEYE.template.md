@@ -1,7 +1,9 @@
 # BULLSEYE · {{project}} · {{event}}
 
 status: phase=intake step=0 updated={{ISO timestamp}} next="Decode the brief (brief-decoder)"
-deadline: {{official deadline, ISO with offset}} ({{same moment in local time}}) · internal: {{official minus buffer}} · {{T-minus}}
+deadline: label="{{what}}" official="{{deadline in the organiser's zone}}" yours="{{same moment on your clock}}" internal="{{official minus buffer}}" buffer={{24h}} tminus="{{T-…}}" asof={{ISO}}
+<!-- Generated, never typed: node <brief-decoder>/scripts/tminus.mjs "<label>=<deadline with zone>" --buffer 24h --line -->
+
 process: {{private | public}} <!-- private: this file, MISSILE.md, PRODUCT.md, DESIGN.md, judging/ stay gitignored. CLAIMS.md and LIMITS.md are always public. -->
 
 <!--
@@ -10,43 +12,69 @@ Rules: update the status line at the end of every session; never delete history 
 -->
 
 ## Contract
-<!-- Owner: brief-decoder. Facts only, with the source of each. Quote rules verbatim. -->
+<!-- Owner: brief-decoder. Filled from brief-decoder/assets/contract.template.md, which has the full slots and filling rules. Facts carry a source and a read date; rules are quoted verbatim; "not published" is an answer, a blank is not. -->
+
+### Facts
 
 | Fact | Value | Source |
 |---|---|---|
-| Event / organiser / platform | | |
-| Format and window | <!-- online/onsite, start → end with timezone --> | |
-| Team rules and eligibility | | |
-| Submission deadline | <!-- official, then local time --> | |
-| Rounds | <!-- idea gate → shortlist → build → finale, with dates --> | |
-| Prizes and side prizes | <!-- include blog prizes, sponsor tracks --> | |
+| Event | {{name}} · {{organiser}} · {{platform}} | |
+| Format | {{online / onsite}} · {{build window}} | |
+| Team and eligibility | {{size}} · "{{eligibility rule}}" · {{member PASS / ASK}} | |
+| Prizes | {{main}} · side prizes: {{blog, sponsor tracks}} | |
+| Edits after submitting | {{allowed until the deadline / locked on submit}} | |
 
-**Deliverables (with limits):**
-- [ ] {{deliverable}}: {{format, length or size cap, naming rule, where it is uploaded}}
+### Deadlines
 
-**Hard rules (verbatim):**
-> {{rule as written by the organiser}}
+| What | Official (organiser zone) | Your clock | Internal | Note |
+|---|---|---|---|---|
+| {{Final submission}} | | | | |
 
-**Instant-rejection traps:** {{anonymity, pre-existing work, file limits, eligibility, AI disclosure}}
+### Rounds
 
-**Rubric:**
+| Round | What is judged | Dates | Who judges | Advance |
+|---|---|---|---|---|
+
+### Deliverables and limits
+
+| Deliverable | Exact limit | Format and naming | Where it goes | Source |
+|---|---|---|---|---|
+
+### Hard rules (verbatim)
+
+- {{topic}}: "{{rule as written}}" ({{source}}, read {{date}})
+
+### Disqualifiers and traps
+
+- {{trap}}: {{how we avoid it}}
+
+### Requirements gate
+<!-- One line per deliverable and hard rule, exact shape (submission-pack lints it):
+- [ ] R<n> [hard|scored] <requirement> · check: cmd: <command> (pass: <result>) | manual: <one line> · source: <where>, read <date> -->
+
+- [ ] R1 [hard] {{requirement}} · check: {{cmd or manual}} · source: {{where}}, read {{date}}
+
+### Judging
 
 | Criterion | Weight | What wins it | Our evidence | Where it shows | Owner |
 |---|---|---|---|---|---|
-| | | | | product / deck / video / README | |
 
-**Judges:** {{who, and what they reward}}
-**Sponsor test:** does the product still work without {{sponsor tech}}? {{answer; if yes, the tech is decoration}}
+Non-code share: {{n of m criteria}}. Implication: {{one line}}.
+
+### Sponsor-tech test
+
+Required: {{tech}}. If we removed it, {{what stops working}}. A judge sees it at {{where}}.
 
 ## Thesis
 <!-- Owner: brief-decoder. -->
-- One-liner (a claim, not a greeting):
-- Problem statement chosen, and why (runner-up and why not):
-- The moment a judge leans in:
-- Why we win, per criterion:
-- Dual layer: {{event domain as proof}} → {{real-world problem as the point}}
-- Signature moment:
-- Out of scope:
+- **One-liner (a claim, not a greeting):**
+- **Problem statement:** {{id}} · runner-up: {{id}} · why this one:
+- **The moment:**
+- **Dual layer:** proof: {{event domain}} · point: {{real-world problem}}
+- **Why we win, per criterion:**
+- **Signature moment:**
+- **Jury:** {{who}}; weight what they reward:
+- **Out of scope, on purpose:**
 
 ## Owner checklist
 <!-- Owner: bullseye. Things only a human can do. Do them on day 1; they cap the "shipped" score when left to the end. -->

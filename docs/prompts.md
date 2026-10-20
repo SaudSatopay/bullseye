@@ -33,7 +33,7 @@ If yes, propose how to make the sponsor technology load-bearing.
 ```text
 Use idea-round. The idea submission is due <date time timezone> as <format and limits>. Write the narrative
 once, then render a concept brief, an idea deck and the form answers with the same numbers. Label every
-number as sourced, simulated, projected, target or illustrative. Run the honesty pass before I submit.
+number as measured, sourced, simulated, projected, target or illustrative. Run the honesty pass before I submit.
 ```
 
 ```text

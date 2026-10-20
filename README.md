@@ -126,12 +126,12 @@ A few of the builds this came from (the full set is in [docs/field-notes.md](doc
 skills/        twelve Agent Skills, one folder each (SKILL.md, references/, assets/, scripts/)
 agents/        five Claude Code subagents: missile-recon, missile-critic, missile-builder,
                hackathon-judge, claims-auditor
-docs/          the method, field notes, install guide, prompt cookbook
+docs/          the method, field notes, install guide, prompt cookbook, FAQ
 scripts/       repository tooling (validator, banner render)
 tests/         node:test suites for every bundled script
 ```
 
-Every bundled script is tested (`node --test tests/`) and the repository checks itself (`node scripts/validate.mjs`): Agent Skills spec, links, manifests, secrets, and no em dashes anywhere.
+Every bundled script is tested (`node --test`) and the repository checks itself (`node scripts/validate.mjs`): Agent Skills spec, links, manifests, secrets, and no em dashes anywhere.
 
 ## Works with
 
@@ -152,6 +152,8 @@ Hackathons run on trust. BULLSEYE is built to win honestly:
 - Never fabricate a screen, a metric, a testimonial or a result. Label what is simulated, projected, a target or illustrative, on the artifact itself.
 - Never use an AI to answer real judges live on your behalf. Rehearse with the mock judge instead.
 - Disclose what your coding agent did, plainly, in the README.
+
+Questions about rules, teams, non-web projects and which agent to use are answered in [docs/faq.md](docs/faq.md).
 
 ## Contributing
 

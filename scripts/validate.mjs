@@ -119,14 +119,17 @@ for (const manifest of ['.claude-plugin/plugin.json', '.claude-plugin/marketplac
 }
 
 // ---------- links in every Markdown file ----------
+// SKILL.md files were checked above. Files under a skill's assets/ are templates copied into a user's project,
+// so their relative links point at files that exist there, not here; they are skipped.
 const IGNORE = new Set(['.git', 'node_modules', '.missile', 'out', 'dist']);
 const mdFiles = [];
 (function walk(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (IGNORE.has(e.name)) continue;
     const full = path.join(dir, e.name);
-    if (e.isDirectory()) walk(full);
-    else if (e.name.endsWith('.md') && !full.includes(`${path.sep}skills${path.sep}`)) mdFiles.push(full);
+    if (e.isDirectory()) { if (!(e.name === 'assets' && full.includes(`${path.sep}skills${path.sep}`))) walk(full); continue; }
+    const isSkillFile = e.name === 'SKILL.md' && path.basename(path.dirname(path.dirname(full))) === 'skills';
+    if (e.name.endsWith('.md') && !isSkillFile) mdFiles.push(full);
   }
 })(root);
 for (const file of mdFiles) checkLinks(file, read(file));

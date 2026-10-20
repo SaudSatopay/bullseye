@@ -63,7 +63,7 @@ If a phase skill is not installed, read its folder in this repository and follow
 **At the start of every session:**
 1. Read `BULLSEYE.md` top to bottom. Trust it over memory; the status line says where to resume.
 2. Run `git status` and `git log --oneline -10`. Uncommitted work you did not make: ask the user before touching it.
-3. Recompute the deadline countdown (the `tminus.mjs` script in the sibling skill `brief-decoder`, or by hand) and rewrite the deadline line.
+3. Recompute the deadline countdown and rewrite the deadline line with the sibling skill `brief-decoder`'s script: `node "${CLAUDE_SKILL_DIR}/../brief-decoder/scripts/tminus.mjs" "<label>=<deadline with zone>" --buffer 24h --line` (other agents: run it from that skill's folder). Never type a countdown by hand.
 4. Check the owner checklist. Anything still open that blocks the next phase goes to the user in one short message.
 5. State the plan for this session in three lines, then work.
 

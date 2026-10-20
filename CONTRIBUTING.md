@@ -52,7 +52,7 @@ tests/                        node:test suites, one file per bundled script
 
 ```bash
 node scripts/validate.mjs
-node --test tests/
+node --test
 claude plugin validate .
 ```
 

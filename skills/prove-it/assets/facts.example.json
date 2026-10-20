@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "note": "Example for an incident-desk agent. Every value below is written by the script named in its _meta entry, never typed by hand. Unknown is null, never 0.",
+    "tests": { "script": "scripts/facts/tests.mjs", "command": "npm test -- --test-reporter=tap", "commit": "3f2c1ab", "generatedAt": "2026-10-18T14:02:11Z" },
+    "eval": { "script": "scripts/eval/analyze.mjs", "set": "data/eval/questions.json, seed 20261018, split before any run", "results": "data/results/heldout_v3.json", "model": "<model id and version>", "commit": "3f2c1ab", "generatedAt": "2026-10-18T13:40:55Z" },
+    "quiet": { "script": "scripts/eval/quiet-replays.mjs", "matrix": "8 areas x 4 quiet days", "commit": "3f2c1ab", "generatedAt": "2026-10-18T13:44:02Z" },
+    "grounding": { "script": "scripts/eval/grounding-check.mjs", "seed": 7, "generatedAt": "2026-10-18T13:45:10Z" },
+    "bench": { "script": "latency-bench.mjs", "scope": "HTTP round trip to the API on the CI runner, warm-up 20 discarded, concurrency 4", "machine": "linux x64, 4 x AMD EPYC 7763, node v22.11.0", "generatedAt": "2026-10-18T13:52:30Z" },
+    "claims": { "script": "scripts/facts/claims-count.mjs", "source": "claims.json" }
+  },
+  "tests": { "count": 231, "files": 33 },
+  "eval": {
+    "heldout": {
+      "n": 101,
+      "system": 0.8812,
+      "systemLo": 0.8218,
+      "systemHi": 0.9406,
+      "noTools": 0.0693,
+      "rules": 0.6139,
+      "unanswerable": 20,
+      "unanswerableDeclined": 19
+    },
+    "dev": { "n": 43 }
+  },
+  "quiet": { "replays": 32, "falseAlerts": 0 },
+  "grounding": { "randomFiguresTried": 400, "randomFiguresPassing": 8 },
+  "bench": { "p50Ms": 41.2, "p95Ms": 118.6, "p99Ms": 171.9, "throughputRps": 23.4, "requests": 200, "errors": 0 },
+  "busiestLink": "Harbor Rd",
+  "claims": 15
+}

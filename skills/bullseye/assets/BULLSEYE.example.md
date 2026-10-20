@@ -3,33 +3,66 @@
 <!-- A worked example. The event, product, people and numbers are fictional; the shape is what a well-kept control file looks like about 30 hours into a 48-hour online hackathon. -->
 
 status: phase=prove step=3 updated=2026-11-15T16:30+05:30 next="Wire claims-check into CI and fix the stale test count in the README"
-deadline: 2026-11-15T23:59-05:00 (2026-11-16 10:29 IST) · internal: 2026-11-16 07:30 IST · T-17:59 to the deadline, T-15:00 to internal
+deadline: label="Submission" official="Sun 2026-11-15 23:59 America/New_York (UTC-05:00)" yours="Mon 2026-11-16 10:29 Asia/Kolkata (UTC+05:30)" internal="Mon 2026-11-16 07:29" buffer=3h tminus="T-0d 17:59" asof=2026-11-15T11:00:00Z
 process: private
 
 ## Contract
 
+### Facts
+
 | Fact | Value | Source |
 |---|---|---|
-| Event / organiser / platform | Coastal Data Hack 2026, run by a fictional ocean-data nonprofit, on Devpost | Event overview page |
-| Format and window | Online, 2026-11-14 00:00 to 2026-11-15 23:59 US Eastern (48 h) | Schedule page |
-| Team rules and eligibility | 1 to 4 people, 18+, any country | Rules §2 |
-| Submission deadline | 2026-11-15 23:59 ET = 2026-11-16 10:29 IST (after midnight on our clock) | Rules §6 |
-| Rounds | Online judging, then a 5-minute live finale for the top 8 on 2026-11-22 | Judging page |
-| Prizes and side prizes | 3 places plus "Best use of open data" and "Best write-up" (blog) | Prizes page |
+| Event | Coastal Data Hack 2026 · a fictional ocean-data nonprofit · Devpost | Overview page, read 2026-11-13 |
+| Format | Online · 2026-11-14 00:00 to 2026-11-15 23:59 US Eastern (48 h) | Schedule page, read 2026-11-13 |
+| Team and eligibility | 1 to 4 people · "Participants must be 18 or older" · both members PASS | Rules §2, read 2026-11-13 |
+| Prizes | 3 places · side prizes: "Best use of open data", "Best write-up" (blog) | Prizes page, read 2026-11-13 |
+| Edits after submitting | Allowed until the deadline | FAQ, read 2026-11-13 |
 
-**Deliverables (with limits):**
-- [x] Public repository with an OSI licence, created after the window opened
-- [ ] Demo video, 3:00 maximum, YouTube or Vimeo, public or unlisted
-- [ ] Devpost form: tagline (200 chars), description, "How we used open data" (1,500 chars)
-- [ ] Live URL that works without login
+### Deadlines
 
-**Hard rules (verbatim):**
-> "Projects must be started during the submission period. Pre-existing libraries and datasets are allowed and must be credited."
-> "Use of AI coding assistants is allowed. Describe how you used them in your submission."
+| What | Official (organiser zone) | Your clock | Internal | Note |
+|---|---|---|---|---|
+| Submission | Sun 2026-11-15 23:59 America/New_York (UTC−05:00) | Mon 2026-11-16 10:29 Asia/Kolkata | Mon 2026-11-16 07:30 | Lands after midnight on our clock; submit v1 early, edits allowed |
+| Finale (top 8) | 2026-11-22 18:00 America/New_York | 2026-11-23 04:30 Asia/Kolkata | n/a | 5-minute live pitch |
 
-**Instant-rejection traps:** a video over 3:00; a repository created before the window; a live URL behind a login.
+### Rounds
 
-**Rubric:**
+| Round | What is judged | Dates | Who judges | Advance |
+|---|---|---|---|---|
+| 1 · online | Repo, live URL, video, form | 2026-11-16 to 2026-11-20 | Panel of four | Top 8 |
+| Finale | Live pitch and Q&A, 5 + 3 min | 2026-11-22 | Same panel | Prizes |
+
+### Deliverables and limits
+
+| Deliverable | Exact limit | Format and naming | Where it goes | Source |
+|---|---|---|---|---|
+| Demo video | At most 3:00 | YouTube or Vimeo, public or unlisted | Form field | FAQ |
+| Repo | Public, OSI licence, created inside the window | GitHub | Form field | Rules §4 |
+| Live URL | Works without login | | Form field | Rules §5 |
+| Form | Tagline 200 chars · "How we used open data" 1,500 chars | Plain text | Devpost | Submission form |
+
+### Hard rules (verbatim)
+
+- Pre-existing work: "Projects must be started during the submission period. Pre-existing libraries and datasets are allowed and must be credited." (Rules §4, read 2026-11-13)
+- AI use: "Use of AI coding assistants is allowed. Describe how you used them in your submission." (Rules §7, read 2026-11-13)
+
+### Disqualifiers and traps
+
+- A video over 3:00: cut to 2:50 and check with ffprobe.
+- A repository created before the window: new repository, created after 2026-11-14 00:00 ET.
+- A live URL behind a login: check in a private window after every deploy.
+
+### Requirements gate
+
+- [x] R1 [hard] Both members meet the age rule · check: manual: confirmed in the team chat · source: Rules §2, read 2026-11-13
+- [ ] R2 [hard] Submitted before the internal deadline 2026-11-16 07:30 IST · check: manual: confirmation saved in brief/ · source: Deadlines
+- [ ] R3 [hard] Demo video at most 3:00 · check: cmd: ffprobe -v error -show_entries format=duration -of csv=p=0 demo.mp4 (pass: 180 or less) · source: FAQ, read 2026-11-13
+- [x] R4 [hard] Repo public with an OSI licence · check: cmd: gh repo view --json visibility,licenseInfo (pass: PUBLIC and mit) · source: Rules §4, read 2026-11-13
+- [ ] R5 [hard] README describes how AI assistants were used · check: cmd: grep -in "AI assistance" README.md (pass: a heading matches) · source: Rules §7, read 2026-11-13
+- [x] R6 [hard] Live URL works without login · check: manual: opens in a private window with demo data · source: Rules §5, read 2026-11-13
+- [ ] R7 [scored] Open data is load-bearing and credited · check: manual: README "Data" names every feed with its licence · source: Judging page, read 2026-11-13
+
+### Judging
 
 | Criterion | Weight | What wins it | Our evidence | Where it shows | Owner |
 |---|---|---|---|---|---|
@@ -38,17 +71,21 @@ process: private
 | Technical execution | 25 | It works, it is fast, it is checked | Golden path green on prod; claims re-measured | README "Evidence" | B |
 | Presentation | 20 | Understood in two minutes | 60-second judge path, 2:50 video | README top, video | A |
 
-**Judges:** two oceanographers, a port-operations manager, one sponsor engineer. They reward real decisions and distrust model-only answers.
-**Sponsor test:** without the open feeds the product shows nothing, so the data is load-bearing.
+Non-code share: Impact and Presentation, 50 points of 100. Implication: one argument, one moment, a demo that never breaks.
+
+### Sponsor-tech test
+
+Required: the event's open feeds. If we removed them, the chart would show nothing: the data is load-bearing. A judge sees it on the chart, in "Why", and in the README's Data section.
 
 ## Thesis
-- One-liner: Tideline tells a harbour pilot six hours ahead whether a channel will be too shallow to cross, and shows the readings that prove it.
-- Problem statement chosen: "Safer small-port operations" (runner-up "coral bleaching alerts": crowded, eleven similar repos found in the scan).
-- The moment a judge leans in: the channel turns red on the chart six hours before the tide gauge would have said so, with the three readings that caused it.
-- Why we win, per criterion: Impact (a named user and a measured lead time) · Open data (three feeds, credited, fused) · Execution (deterministic engine, re-measured claims) · Presentation (one argument, one moment).
-- Dual layer: one pilot's crossing decision as the proof → every small port without a hydrographic office as the point.
-- Signature moment: the chart answers (poster first, then the real forecast replaces it in place).
-- Out of scope: vessel tracking, accounts, mobile app.
+- **One-liner (a claim, not a greeting):** Tideline tells a harbour pilot six hours ahead whether a channel will be too shallow to cross, and shows the readings that prove it.
+- **Problem statement:** "Safer small-port operations" · runner-up: "coral bleaching alerts" · why this one: the scan found eleven similar bleaching repos and no load-bearing use of the open feeds.
+- **The moment:** the channel turns red on the chart six hours before the tide gauge would have said so, with the three readings that caused it.
+- **Dual layer:** proof: one pilot's crossing decision · point: every small port without a hydrographic office.
+- **Why we win, per criterion:** Impact (a named user and a measured lead time) · Open data (three feeds, credited, fused) · Execution (deterministic engine, re-measured claims) · Presentation (one argument, one moment).
+- **Signature moment:** the chart answers (poster first, then the real forecast replaces it in place).
+- **Jury:** two oceanographers, a port-operations manager, a sponsor engineer; weight what they reward: real decisions, provenance, no model-only answers.
+- **Out of scope, on purpose:** vessel tracking, accounts, a mobile app.
 
 ## Owner checklist
 - [x] Register every team member; confirm eligibility
@@ -88,7 +125,7 @@ process: private
 |---|---|---|---|---|
 | "6 hours of warning" | 6.2 h median lead time on 40 replayed nights | SIMULATED | `npm run eval:lead` | `lead-time.test.ts` |
 | "0 false red channels on 40 calm nights" | 0 of 40 | SIMULATED | `npm run eval:calm` | `calm-nights.test.ts` |
-| "47 tests" | 51 | measured | `npm test` | facts.json `tests` (README is stale: fix in P1) |
+| "47 tests" | 51 | MEASURED | `npm test` | facts.json `tests` (README is stale: fix in P1) |
 
 ## Judge rounds
 

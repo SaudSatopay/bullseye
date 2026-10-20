@@ -36,4 +36,4 @@ Read `CONTRIBUTING.md`. In short:
 - House style: plain, imperative, concrete. No em dash characters anywhere (the validator fails on them); no emoji; no hype words.
 - Scripts: Node 20+ ESM with zero dependencies where possible, or Python 3.10+ with optional libraries checked at import and an install hint. Every script has `--help`, clear errors, and a test in `tests/` (`node:test`).
 - Do not copy third-party skills into this repository; reference them with install commands.
-- Before finishing: `node scripts/validate.mjs` and `node --test tests/` must both pass.
+- Before finishing: `node scripts/validate.mjs` and `node --test` must both pass.

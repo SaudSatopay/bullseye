@@ -1,0 +1,46 @@
+{
+  "facts": "facts.json",
+  "files": ["README.md"],
+  "claims": [
+    {
+      "id": "tests",
+      "text": "**231** tests",
+      "files": ["README.md", "SUBMISSION.md", "docs/demo-script.md"],
+      "fact": "tests.count",
+      "measure": { "cmd": "npm test -- --test-reporter=tap", "regex": "# pass (\\d+)" }
+    },
+    {
+      "id": "heldout-system",
+      "text": "**88.1%** of 101 held-out questions",
+      "files": ["README.md", "SUBMISSION.md"],
+      "fact": "eval.heldout.system",
+      "scale": 100,
+      "measure": { "cmd": "python scripts/bootstrap-ci.py data/results/heldout_v3.jsonl --col correct --cluster group --json", "json": "groups.0.value", "label": "re-scored" }
+    },
+    { "id": "heldout-n", "text": "of 101 held-out questions", "fact": "eval.heldout.n" },
+    { "id": "heldout-ci-low", "text": "95% CI 82.2-94.1%", "fact": "eval.heldout.systemLo", "scale": 100, "value": 82.2 },
+    { "id": "heldout-ci-high", "text": "95% CI 82.2-94.1%", "fact": "eval.heldout.systemHi", "scale": 100, "value": 94.1 },
+    { "id": "no-tools", "text": "the same model without tools: **6.9%**", "fact": "eval.heldout.noTools", "scale": 100 },
+    { "id": "rules-floor", "text": "a rules-only floor: **61.4%**", "fact": "eval.heldout.rules", "scale": 100 },
+    { "id": "declines", "text": "declines 19 of 20 questions it cannot answer", "fact": "eval.heldout.unanswerableDeclined" },
+    { "id": "quiet-false-alerts", "text": "**0** false alerts on 32 quiet-day replays", "fact": "quiet.falseAlerts" },
+    { "id": "quiet-replays", "text": "**0** false alerts on 32 quiet-day replays", "fact": "quiet.replays", "value": 32 },
+    {
+      "id": "p95",
+      "text": "p95 under 200 ms",
+      "fact": "bench.p95Ms",
+      "op": "<=",
+      "measure": { "cmd": "node scripts/latency-bench.mjs --url http://127.0.0.1:3000/api/ask --method POST --body-file bench/ask.json --n 200 --concurrency 4 --json", "json": "latencyMs.p95" }
+    },
+    { "id": "bench-errors", "text": "0 errors in 200 requests", "fact": "bench.errors" },
+    { "id": "grounding", "text": "8 of 400 random figures pass the grounding check", "fact": "grounding.randomFiguresPassing" },
+    { "id": "busiest-link", "text": "busiest link: **Harbor Rd**", "fact": "busiestLink" },
+    { "id": "judge-badge", "text": "15/15 claims re-measured", "fact": "claims" }
+  ],
+  "drift": [
+    { "id": "drift:tests", "pattern": "(\\d+)\\**\\s+tests", "fact": "tests.count", "files": ["README.md", "SUBMISSION.md", "docs/demo-script.md", "deck/deck.html"] },
+    { "id": "drift:ci-step-names", "pattern": "Tests \\((\\d+) passing", "fact": "tests.count", "files": [".github/workflows/claims.yml"] },
+    { "id": "drift:heldout-n", "pattern": "(\\d+) held-out questions", "fact": "eval.heldout.n", "files": ["README.md", "SUBMISSION.md"] },
+    { "id": "drift:badge", "pattern": "(\\d+)/\\d+ claims re-measured", "fact": "claims", "files": ["README.md"] }
+  ]
+}

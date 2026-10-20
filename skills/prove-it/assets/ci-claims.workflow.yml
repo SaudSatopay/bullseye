@@ -1,0 +1,109 @@
+# claims.yml: CI that re-runs every claim the README makes, with zero secrets.
+# Copy to .github/workflows/claims.yml, then replace each <placeholder> in step names and adjust the
+# commands to your project's scripts (npm run eval:offline and friends are examples).
+#
+# Before relying on it:
+#   1. `gh auth status` must list the "workflow" scope, or the push that adds this file is refused and
+#      any README line saying "checked on every push" is untrue. Fix: gh auth refresh -s workflow
+#   2. After the first push, open the Actions tab and confirm a green run on the remote. A badge or a
+#      "runs in CI" sentence for a workflow that never ran is a false claim.
+#
+# Rules this file follows:
+#   - No secrets. Nothing reads a key, so nothing can spend credits: the app runs offline or on recorded
+#     fixtures. One live run with real keys happens by hand before submitting.
+#   - A step that carries a claim in its name must exit non-zero when the claim fails. A step that only
+#     prints its numbers stays green forever.
+#   - Step names are claims too: list this file in a claims.json drift rule so a stale count fails.
+#   - shell: bash turns on pipefail, so `command | tee file` cannot hide a failing command.
+
+name: claims
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  # Offline by construction. Rename to your app's offline flag; never add an API key here.
+  APP_OFFLINE: "1"
+
+jobs:
+  checks:
+    name: Build and tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          npm ci
+          # pip install -r requirements.txt
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: "Tests (<231> passing, offline: no API keys, no credits spent)"
+        run: npm test
+      - name: Production build
+        run: npm run build
+
+  claims:
+    name: Claims re-measured
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # A sponsor database or engine runs as a service container pinned to the exact version the claims
+    # were measured on, never "latest":
+    # services:
+    #   db:
+    #     image: <vendor/image>:<exact version>
+    #     ports: ["6379:6379"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: npm ci
+      - name: Print the output shapes the code relies on
+        run: node scripts/probe.mjs
+      - name: "Held-out eval on recorded responses (<88.1%> of <101> questions)"
+        run: npm run eval:offline
+      - name: "Negative case (<0> false alerts on <32> quiet-day replays)"
+        run: npm run eval:quiet
+      - name: "Latency (p95 under <200> ms on the runner, 0 errors)"
+        run: |
+          mkdir -p ci-out
+          npm run start > ci-out/server.log 2>&1 &
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:3000/api/health > /dev/null && break; sleep 1; done
+          node scripts/latency-bench.mjs --url http://127.0.0.1:3000/api/health --n 200 --concurrency 4 \
+            --max-errors 0 --max-p95 200 --scope "API round trip on the CI runner" --json > ci-out/bench.json
+      - name: "Every README claim re-checked (claims-check)"
+        run: |
+          mkdir -p ci-out
+          node scripts/claims-check.mjs claims.json | tee ci-out/claims.txt
+          node scripts/claims-check.mjs claims.json --json --no-measure > ci-out/claims.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-${{ github.sha }}
+          path: ci-out/
