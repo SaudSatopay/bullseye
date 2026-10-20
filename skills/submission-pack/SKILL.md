@@ -151,7 +151,7 @@ Gate: the sweep's `secret`, `history`, `env-file`, `abs-path`, `process-file` an
 
 - The live URL works logged out, on a phone and in a private window, and the production alias serves the current build (compare the footer build stamp or the bundle hash).
 - Preview deploys: open the exact link you will paste, logged out. A Vercel preview behind Deployment Protection answers strangers with a redirect to a login (HTTP 302) or HTTP 401; share the production alias, or turn protection off for that deploy. `--check-links` fails any link that redirects to a login.
-- Sandboxes: invite judges early and confirm they are active members (the Slack challenge required judges to be active members of the sandbox workspace).
+- Sandboxes: invite judges early and confirm they are active members (the Slack challenge required the organisers' judging accounts to be active members of the sandbox workspace).
 - The video is unlisted or public and plays in a private window; `--check-links` asks YouTube whether it is private.
 - Demo credentials, when a login cannot be avoided: a seeded judge account in the form's notes, never a personal one.
 - Free-tier hosts: a cold-start note in the README, and a keep-alive or a warm-up before judging windows.
@@ -207,7 +207,7 @@ Gate: the sweep exits 0, the claims check exits 0, the fresh clone runs. Paste t
 
 Details and templates: [references/integrity.md](references/integrity.md). Gate: the tag is on the remote, the SUBMITTED line is written, and the README callout is in place once anything changes after the deadline.
 
-> Field note (Detour · Graph Hacks 2026): The v1.0.0 tag landed 39 minutes before the deadline; the next day's 49 commits were listed under "After the deadline" with a compare link, and a counting error found later was published with "The submitted v1.0.0 still has the error."
+> Field note (Detour · Graph Hacks 2026): The v1.0.0 tag landed 39 minutes before the deadline; the next day's 49 commits were summarised under "After the deadline" with a compare link, and a counting error found later was published with "The submitted v1.0.0 still has the error."
 
 ## Scripts
 

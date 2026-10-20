@@ -16,7 +16,7 @@ Put the submission in front of a jury before the jury sees it. Each round hands 
 
 This is not the missile's critic. The [missile](../missile/SKILL.md) critic scores product craft on ten fixed dimensions. The judge panel scores contest fit against this event's rubric and attacks claims the way a jury does: a polished product that ignores a 25% Business criterion still loses here.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): Eight judge prompts, each written for a fresh session with no memory of the build, moved the weighted score 7.3 → 7.6 → 7.7 → 7.9 → 8.0, and the final blind run, given only the problem statement and the rubric, scored 8.5: the highest of any round.
+> Field note (Trinetra · ET AI Hackathon 2.0): Six judge rounds, each run in a fresh session with no memory of the build, moved the weighted score 7.3 → 7.6 → 7.7 → 7.9 → 8.0, and the final blind run, given the problem statement, the rubric and the repository but no hints, scored 8.5: the highest of any round.
 
 ## Inputs
 

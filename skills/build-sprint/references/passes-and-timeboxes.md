@@ -152,7 +152,7 @@ After the freeze, not allowed: new features, new dependencies, schema changes, f
 - When the form allows edits, submit a complete first version immediately and update it; shortlists can be read in waves.
 - Record the submission time with its timezone, tag the submission commit, and keep later work visibly separate.
 
-> Field note (Detour · Graph Hacks 2026): a third track was added on deadline day and the submission tag landed 39 minutes before the deadline; the strongest evidence work (held-out evals, a flow certificate, the claims command) came after the deadline and could not count.
+> Field note (Detour · Graph Hacks 2026): a third track was added on deadline day and the submission tag landed 39 minutes before the deadline; the strongest evidence work (held-out evals, a flow certificate, the claims command) came after the deadline and was not part of the submitted entry.
 
 ## 7. Prompt packs when another tool must write the code
 

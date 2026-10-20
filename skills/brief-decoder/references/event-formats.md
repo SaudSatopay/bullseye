@@ -79,7 +79,7 @@ TrackShift finale, 24 h:
 | 85–95% | Video, form answers, final sweep |
 | 95–100% | Buffer: the internal deadline sits here |
 
-> Field note (Detour · Graph Hacks 2026): The first production build failed on Vercel about 2 hours after the scaffold; because the preview went up that early, the bisect and the fix took 13 minutes on day 1.
+> Field note (Detour · Graph Hacks 2026): The first production build failed on Vercel about 2 hours after the scaffold; because the preview went up that early, the bisect and the fix took 13 minutes on the first day of the build.
 
 ## Online, multi-week
 

@@ -32,7 +32,7 @@ Anything a judge can check (money, scores, verdicts, routes, counts) comes from 
 
 Lock 6 to 8 numbered beats a judge will see, then build those before anything else. Ship a preview deployment in the first hours, so build, hosting and environment problems appear while there is time to fix them.
 
-> Field note (Detour · Graph Hacks 2026): the first production build failed on day 1 because a bundler loader scanned the whole project, including the package store on the build host. It was found and fixed in 13 minutes because the deploy happened early, not on deadline night.
+> Field note (Detour · Graph Hacks 2026): the first production build failed on the first day of the build because a bundler loader scanned the whole project, including the package store on the build host. It was found and fixed in 13 minutes because the deploy happened early, not on deadline night.
 
 ## 5. The demo cannot die
 
@@ -70,7 +70,7 @@ Choose a visual language native to the problem (a nautical chart for fishers, a 
 
 Paste the problem statement, rubric and repo into a fresh session with no memory of the build. Ask it to reproduce the numbers, read the code, run the app and try to break it. Verify each finding before fixing it, fix every substantiated one, record the non-issues, and rotate the next round onto the newest work. Finish with a blind round.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): eight judge prompts moved the score from 7.3 to 8.5. Some findings were wrong (an "invented" identifier was in the scenario data), which is why every finding is checked against the code first.
+> Field note (Trinetra · ET AI Hackathon 2.0): seven recorded judge rounds moved the score from 7.3 to 8.5. Some findings were wrong (an "invented" identifier was in the scenario data), which is why every finding is checked against the code first.
 
 ## 10. Submit early, tag it, never edit after the deadline
 
