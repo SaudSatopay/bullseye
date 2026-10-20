@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Missile recon: inventory a project directory and the local Claude Code arsenal.
-// Usage: node recon.mjs [dir]
+// Usage: node recon.mjs [dir] [--dry] [--no-arsenal]
+//   --dry          print the report without writing .missile/recon.json
+//   --no-arsenal   skip the machine probes (tool versions, `claude mcp list`, logins): faster, and offline
 // Prints a Markdown report to stdout and writes <dir>/.missile/recon.json. Read-only apart from that file.
 
 import fs from 'node:fs';
@@ -10,6 +12,7 @@ import { execSync } from 'node:child_process';
 
 const args = process.argv.slice(2);
 const dry = args.includes('--dry');
+const noArsenal = args.includes('--no-arsenal');
 const root = path.resolve(args.find((a) => !a.startsWith('--')) || process.cwd());
 const home = os.homedir();
 const IGNORE = new Set(['node_modules', '.git', '.next', 'dist', 'build', 'out', '.turbo', '.vercel', '.missile', 'coverage', '.cache', '.svelte-kit', '.astro', '.output', '.wrangler', 'android', 'ios', 'Pods', '.expo', 'target', 'vendor', '.venv', '__pycache__']);
@@ -160,11 +163,12 @@ for (const f of files) {
 }
 
 // ---------- machine and arsenal ----------
+const probe = (cmd) => (noArsenal ? null : sh(cmd));
 const tools = {
-  node: sh('node --version'), pnpm: sh('pnpm --version'), npm: sh('npm --version'), bun: sh('bun --version'), yarn: sh('yarn --version'),
-  git: sh('git --version'), gh: sh('gh --version')?.split('\n')[0], vercel: sh('vercel --version'), wrangler: sh('wrangler --version'),
-  playwrightCli: sh('playwright-cli --version'), ffmpeg: sh('ffmpeg -version')?.split('\n')[0]?.slice(0, 40), claude: sh('claude --version'),
-  vercelLoggedIn: (() => { const w = sh('vercel whoami'); return !!w && !/logged out|not logged in|no existing credentials/i.test(w); })(),
+  node: probe('node --version'), pnpm: probe('pnpm --version'), npm: probe('npm --version'), bun: probe('bun --version'), yarn: probe('yarn --version'),
+  git: probe('git --version'), gh: probe('gh --version')?.split('\n')[0], vercel: probe('vercel --version'), wrangler: probe('wrangler --version'),
+  playwrightCli: probe('playwright-cli --version'), ffmpeg: probe('ffmpeg -version')?.split('\n')[0]?.slice(0, 40), claude: probe('claude --version'),
+  vercelLoggedIn: (() => { const w = probe('vercel whoami'); return !!w && !/logged out|not logged in|no existing credentials/i.test(w); })(),
 };
 const skillsDir = path.join(home, '.claude', 'skills');
 const personalSkills = fs.existsSync(skillsDir) ? fs.readdirSync(skillsDir) : [];
@@ -176,7 +180,7 @@ const claudeJson = readJSON(path.join(home, '.claude.json'));
 const userMcp = claudeJson?.mcpServers ? Object.keys(claudeJson.mcpServers) : [];
 const projectMcpJson = readJSON(path.join(root, '.mcp.json'));
 const projectMcp = projectMcpJson?.mcpServers ? Object.keys(projectMcpJson.mcpServers) : [];
-const mcpList = sh('claude mcp list') || '';
+const mcpList = probe('claude mcp list') || '';
 const mcpStatus = mcpList.split('\n').filter((l) => /[✓✗]|Connected|Failed/.test(l)).map((l) => l.trim());
 const has = (name) => personalSkills.some((s) => s.toLowerCase().includes(name)) || projectSkills.some((s) => s.toLowerCase().includes(name)) || plugins.some((p) => p.toLowerCase().includes(name));
 const arsenal = {
@@ -186,7 +190,7 @@ const arsenal = {
   'emil animate': has('animate'),
   'web-design-guidelines': has('web-design-guidelines'),
   'hallmark': has('hallmark'),
-  'uipro': !!sh('uipro --version') || has('ui-ux-pro-max'),
+  'uipro': !!probe('uipro --version') || has('ui-ux-pro-max'),
   'superpowers': has('superpowers'),
   'ralph-loop': has('ralph'),
   'playwright-cli': !!tools.playwrightCli,
