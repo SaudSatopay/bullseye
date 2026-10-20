@@ -1,6 +1,6 @@
 ---
 name: brief-decoder
-description: Decode a hackathon before any code is written. Reads the event pages, rules, FAQ, problem statements and organiser templates, writes the Contract into BULLSEYE.md (deadlines on your clock with a buffer, deliverables with exact limits, rules quoted verbatim, a pass/fail requirements gate, the rubric map) and the Thesis, scans past winners and competitor repos, picks the problem statement with a decision matrix and writes the battle plan. Use it when the user shares a hackathon link or problem statement, or says "decode this brief", "which problem statement should we pick", "what is the deadline in my time", "map the rubric", "scan the competition" or "start a new hackathon".
+description: Decode a hackathon before any code is written. Reads the event pages, rules, FAQ, problem statements and organiser templates, writes the Contract into BULLSEYE.md (deadlines on your clock with a buffer, deliverables and exact limits, rules quoted verbatim, a pass/fail requirements gate, the rubric map) and the Thesis, scans past winners and competitor repos, and picks the problem statement with a decision matrix. Use it when the user shares a hackathon link or problem statement, or says "decode this brief", "which problem statement should we pick", "what is the deadline in my time", "map the rubric", "scan the competition" or "start a new hackathon".
 argument-hint: "[full | contract | scan | pick | plan | refresh] [event URL or folder]"
 allowed-tools: Bash(node "${CLAUDE_SKILL_DIR}/scripts/tminus.mjs" *)
 license: MIT

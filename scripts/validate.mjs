@@ -30,6 +30,10 @@ function parseFrontmatter(text, where) {
     if (!kv) { fail(where, `cannot parse frontmatter line: ${line}`); continue; }
     const [, key, rawValue] = kv;
     let value = rawValue.trim();
+    // Real YAML parsers (the skills CLI, Claude Code, Codex) reject a plain value with ": " or " #" in it.
+    if (value && !/^["']/.test(value) && !['|', '>', '|-', '>-'].includes(value) && (value.includes(': ') || value.includes(' #') || /^[&*!%@`,#?]|^- /.test(value))) {
+      fail(where, `frontmatter "${key}" must be quoted: a plain YAML value cannot contain ": " or " #" or start with an indicator character`);
+    }
     if (value === '' || value === '|' || value === '>' || value === '>-' || value === '|-') {
       const block = [];
       while (i + 1 < lines.length && (/^\s+/.test(lines[i + 1]) || lines[i + 1].trim() === '')) block.push(lines[++i]);

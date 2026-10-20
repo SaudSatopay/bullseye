@@ -1,6 +1,6 @@
 ---
 name: prove-it
-description: Make every claim in a hackathon project true, checkable and impossible to drift. Inventories every number and capability statement in the README, deck, video script, form answers and UI, labels each one, writes facts.json from the scripts that measure, a CLAIMS.md ledger and a one-command check (claims-check) that fails on stale numbers, then adds claim-pinning tests, evals with baselines and intervals, latency benchmarks, zero-secret CI and LIMITS.md. Use it when the user says "prove it", "are our numbers right", "add evals", "benchmark this", "judge script", "claims ledger", "stale numbers", "write limits", or before any README, deck, video or submission pass.
+description: Make every claim in a hackathon project true, checkable and impossible to drift. Inventories every number and capability statement in the README, deck, video script, form answers and UI, labels each one, writes facts.json from the scripts that measure, a CLAIMS.md ledger and one command (claims-check) that fails on stale numbers, then adds claim-pinning tests, evals with baselines, latency benchmarks, CI and LIMITS.md. Use it when the user says "prove it", "are our numbers right", "add evals", "benchmark this", "claims ledger", "stale numbers" or "write limits", or before any README, deck, video or submission pass.
 argument-hint: "[inventory | facts | ledger | judge | tests | eval | bench | ci | honesty | sweep]"
 license: MIT
 metadata:

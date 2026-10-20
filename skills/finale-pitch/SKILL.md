@@ -1,6 +1,6 @@
 ---
 name: finale-pitch
-description: Prepare and run the live round. A pitch script timed to the slot and the jury, a run-sheet where every demo beat has a paste-ready input, the expected result and the line to say, a Q&A bank with honest limits first, a T-15 pre-flight with a decision rule for a broken step, the online-call setup, and the playbook for surprise-challenge rounds where mentors hand over a new task to build in fixed hours. Use when the user says "finale", "live pitch", "demo day", "pitch script", "run-sheet", "Q&A prep", "judging call", "present to the judges", "rehearse the pitch", "mentor challenge" or "surprise round", or when a shortlist email arrives.
+description: Prepare and run the live round. A pitch script timed to the slot and the jury, a run-sheet where every demo beat has a paste-ready input, the expected result and the line to say, a Q&A bank with honest limits first, a T-15 pre-flight with a decision rule for a broken step, the online-call setup, and the playbook for surprise-challenge rounds. Use when the user says "finale", "live pitch", "demo day", "pitch script", "run-sheet", "Q&A prep", "judging call", "present to the judges", "rehearse the pitch", "mentor challenge" or "surprise round", or when a shortlist email arrives.
 argument-hint: "[plan | runsheet | script | qa | preflight | online | challenge | after] [slot minutes]"
 license: MIT
 metadata:

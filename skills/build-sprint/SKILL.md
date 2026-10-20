@@ -1,6 +1,6 @@
 ---
 name: build-sprint
-description: Build the hackathon product demo-path first, with a demo layer that cannot die and AI that is honest by construction. Writes PRODUCT.md (the judge as a user, a must-never-break list), locks 6 to 8 golden-path beats with a money shot and a quiet negative beat, splits engine from model, deploys a day-1 skeleton with an independent verifier, seeds planted stories, adds labelled live, scripted and recorded modes with failover, grounds every AI number in tool results, and runs named passes to a feature freeze. Use it when the user says "build it", "start the build", "build the MVP", "make the demo bulletproof", "add the AI part", "stop the hallucinations", "split the work across the team", or once brief-decoder has written the Contract.
+description: Build the hackathon product demo-path first, with a demo layer that cannot die and AI that is honest by construction. Writes PRODUCT.md (the judge as a user, a must-never-break list), locks 6 to 8 golden-path beats with a money shot and a quiet negative beat, splits engine from model, deploys a day-1 skeleton, seeds planted stories, adds labelled live, scripted and recorded modes, and grounds every AI number in tool results. Use it when the user says "build it", "start the build", "build the MVP", "make the demo bulletproof", "add the AI part", "stop the hallucinations" or "split the work across the team", or once brief-decoder has written the Contract.
 argument-hint: "[plan | skeleton | demo | ai | pass <name> | freeze | team] [notes]"
 license: MIT
 metadata:

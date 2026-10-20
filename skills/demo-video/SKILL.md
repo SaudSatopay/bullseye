@@ -1,6 +1,6 @@
 ---
 name: demo-video
-description: Make the hackathon demo video like code. A timed beat sheet with exact inputs and a source for every number, real captures (a scripted Playwright recording with captions drawn in the app's own type, or OBS), a voiceover fitted to each beat's window (edge-tts clips checked OK or OVER, or a human read), SRT captions from the same timeline, ffmpeg assembly and QA, then an unlisted upload tested logged out. Optional launch film or trailer. Use when the user says "demo video", "record the demo", "make the 3-minute video", "voiceover", "captions", "screen recording", "pitch video", "launch film" or "trailer", or when a submission form asks for a video link.
+description: Make the hackathon demo video like code. A timed beat sheet with exact inputs and a source for every number, real captures (a scripted Playwright recording with captions in the app's own type, or OBS), a voiceover fitted to each beat's window, SRT captions from the same timeline, ffmpeg assembly and QA, then an unlisted upload tested logged out. Use when the user says "demo video", "record the demo", "make the 3-minute video", "voiceover", "captions", "screen recording", "pitch video", "launch film" or "trailer", or when a submission form asks for a video link.
 argument-hint: "[script | record | voiceover | captions | assemble | qa | deliver | film]"
 license: MIT
 metadata:

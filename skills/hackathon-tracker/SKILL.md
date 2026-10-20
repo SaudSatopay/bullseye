@@ -1,6 +1,6 @@
 ---
 name: hackathon-tracker
-description: Keep one TRACKER.md across every hackathon in play. Finds events from the user's list and the project folders, verifies each status live on the official page with the check date, converts every deadline to the user's clock, ranks what needs action, lists pending announcements, flags calendar collisions, keeps submitted entries eligible, and archives finished events with one lesson each. Use it when the user says "update my tracker", "what hackathons are due", "what is next", "check results", "add this hackathon", "am I still eligible after submitting", or at the start of a week with several events running.
+description: Keep one TRACKER.md across every hackathon in play. Finds events from the user's list and project folders, verifies each status on the official page with the check date, converts every deadline to the user's clock, ranks what needs action, flags calendar collisions, keeps submitted entries eligible, and archives finished events with one lesson each. Use it when the user says "update my tracker", "what hackathons are due", "what is next", "check results", "add this hackathon" or "am I still eligible after submitting", or at the start of a week with several events running.
 argument-hint: "[refresh | add <event URL> | archive <event> | calendar]"
 allowed-tools: Bash(node "${CLAUDE_SKILL_DIR}/../brief-decoder/scripts/tminus.mjs" *)
 license: MIT

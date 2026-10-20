@@ -1,6 +1,6 @@
 ---
 name: bullseye
-description: Run a whole hackathon with a coding agent, from problem statement to podium. Decodes the brief and rubric, locks a winning thesis, builds the demo path first, polishes the product, proves every claim, simulates the judges, ships the submission package and prepares the finale, keeping one control file (BULLSEYE.md) so any session can resume. Use when the user starts, joins or continues a hackathon, ideathon, buildathon, idea-submission round, sprint or finale; pastes a problem statement, rules page or rubric; or says "bullseye", "help me win this hackathon", "build for the judges", "the submission is due", "what should I do next for the hackathon", or "resume the hackathon".
+description: Run a whole hackathon with a coding agent, from problem statement to podium. Decodes the brief and rubric, locks a winning thesis, builds the demo path first, polishes the product, proves every claim, simulates the judges, ships the submission and prepares the finale, keeping one control file (BULLSEYE.md) so any session can resume. Use when the user starts, joins or continues a hackathon, ideathon, buildathon, idea round or finale; pastes a problem statement, rules page or rubric; or says "bullseye", "help me win this hackathon", "build for the judges", "the submission is due", "what next for the hackathon" or "resume the hackathon".
 argument-hint: "[start <event, link or problem statement> | status | next | handoff | intake | idea | build | polish | prove | judge | package | finale]"
 license: MIT
 metadata:

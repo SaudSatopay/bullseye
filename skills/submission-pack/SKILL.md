@@ -1,6 +1,6 @@
 ---
 name: submission-pack
-description: "Package a hackathon project for its judges: a judge-first README, paste-ready form answers (SUBMISSION.md), a one-page team briefing, OG card, screenshots and QR codes, repo hygiene, judge-access checks, and a final sweep that fails on unfilled placeholders, stale counts, missing required sections, localhost links, open hard requirements, absolute paths and secrets. It freezes the entry too: tag, submit early, label post-deadline work. Use it when the user says 'write the README', 'prepare the submission', 'fill the Devpost form', 'final sweep', 'are we ready to submit', 'package this for judges', 'make the OG image' or 'tag the release', or when a deadline is under 24 hours away."
+description: "Package a hackathon project for its judges: a judge-first README, paste-ready form answers, a one-page team briefing, OG card, screenshots and QR codes, repo hygiene, judge-access checks, and a final sweep that fails on placeholders, stale counts, missing sections, localhost links, open hard requirements, absolute paths and secrets. Then it freezes the entry: tag, submit early, label post-deadline work. Use it when the user says 'write the README', 'prepare the submission', 'fill the Devpost form', 'final sweep', 'are we ready to submit', 'make the OG image' or 'tag the release', or when a deadline is under 24 hours away."
 argument-hint: "[start | readme | form | briefing | media | blog | hygiene | access | sweep | freeze]"
 license: MIT
 metadata:

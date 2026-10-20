@@ -1,6 +1,6 @@
 ---
 name: idea-round
-description: 'Win idea, proposal and concept gates, the round where most teams are cut before anything is built. Use it when a first round asks for an idea submission, concept note, proposal PDF, idea deck, organiser template or a portal form with character limits (SIH, ISRO, bank and government hackathons, MSME-style funding calls), or when re-pitching an existing project into a new or surprise-challenge round. Triggers: "idea submission", "Round 1", "proposal", "concept note", "fill the template", "form answers", "character limit", "shortlist". It sets the quality bar, writes the narrative spine, proves the core first, writes paste-ready answers, hardens every claim and records the submission.'
+description: Win idea, proposal and concept gates, the round where most teams are cut before anything is built. Sets the quality bar, writes the narrative spine, proves the core first, writes paste-ready answers within every limit, hardens each claim and records the submission. Use it when a first round asks for an idea submission, concept note, proposal PDF, idea deck, organiser template or a portal form with character limits (SIH, ISRO, bank and government hackathons, MSME-style calls), when re-pitching a project into a new round, or when the user says "Round 1", "proposal", "fill the template", "form answers", "character limit" or "shortlist".
 argument-hint: "[spine | proof | form | harden | template <file> | gov | repitch | submit]"
 license: MIT
 metadata:
