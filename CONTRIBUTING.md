@@ -28,7 +28,7 @@ tests/                        node:test suites, one file per bundled script
 
 ## Rules for skills
 
-- Follow the [Agent Skills specification](https://agentskills.io/specification): `name` equals the folder name in lowercase with single hyphens; `description` says what the skill does and when to use it, in at most 1024 characters, with the phrases users actually say.
+- Follow the [Agent Skills specification](https://agentskills.io/specification): `name` equals the folder name in lowercase with single hyphens; `description` says what the skill does and when to use it, in at most 1024 characters, with the phrases users actually say. All names and descriptions together stay under about 8,000 characters, the budget Codex lists by default (the validator warns), and a description holding ": " is quoted, because YAML rejects it plain (the validator fails).
 - Keep `SKILL.md` under 500 lines. Put depth in `references/`, linked directly from `SKILL.md` (one level deep).
 - Write for any agent. Where a Claude Code feature helps (subagents, the Browser pane, plan mode), give the fallback for other agents in the same paragraph.
 - Link a sibling skill as `../<skill>/...` and keep the essential rule inline, so each skill still works when installed alone.

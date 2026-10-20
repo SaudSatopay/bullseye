@@ -31,7 +31,7 @@ This repository is a playbook for coding agents that build hackathon projects. I
 
 Read `CONTRIBUTING.md`. In short:
 
-- Every skill follows the Agent Skills specification: `name` equals the folder name (lowercase, hyphens), `description` says what it does and when to use it (at most 1024 characters), the `SKILL.md` body stays under 500 lines, and depth goes into `references/` one level deep.
+- Every skill follows the Agent Skills specification: `name` equals the folder name (lowercase, hyphens), `description` says what it does and when to use it (at most 1024 characters; all descriptions together under about 8,000, Codex's listing budget), the `SKILL.md` body stays under 500 lines, and depth goes into `references/` one level deep.
 - Every new rule carries a field note saying where it was learned: `> Field note (Project · Event): what happened and the lesson.` No invented results; no personal data; no secrets.
 - House style: plain, imperative, concrete. No em dash characters anywhere (the validator fails on them); no emoji; no hype words.
 - Scripts: Node 20+ ESM with zero dependencies where possible, or Python 3.10+ with optional libraries checked at import and an install hint. Every script has `--help`, clear errors, and a test in `tests/` (`node:test`).

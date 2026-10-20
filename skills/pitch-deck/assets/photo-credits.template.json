@@ -1,0 +1,10 @@
+[
+  {
+    "local": "assets/photos/{{slug}}-graded.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:{{File_name.jpg}}",
+    "license": "{{CC BY-SA 4.0 | CC BY 4.0 | CC0 | public domain}}",
+    "artist": "{{the author exactly as the source credits them}}",
+    "used_on": ["deck slide {{NN}}", "brief page {{N}}"],
+    "credit_line": "PHOTO: {{ARTIST}} · WIKIMEDIA COMMONS · {{LICENSE}}"
+  }
+]

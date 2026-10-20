@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VialWatch Sample Deck</title>
+<!--
+  BULLSEYE pitch-deck starter · 16:9 deck as code (route A: HTML + print CSS -> PDF)
+
+  VialWatch is a FICTIONAL sample product. Every number below is invented to show the layout.
+  Replace the content, keep the grammar. Rules this file already follows:
+    - one .page per slide, fixed 338.667 x 190.5 mm (13.333 x 7.5 in), overflow hidden, one page break each
+    - tokens in :root are named by ROLE, never by hue; page types set context tokens (--ink, --hot ...)
+    - three type roles: condensed display caps, body sans, mono for every number, label and chip
+    - colour is meaning: --ok in range / verified, --warn uncertain / a human decides, --crit failure / loss,
+      --model anything a model produced; --accent is the brand and nothing else
+    - every number carries a type: MEASURED, SOURCED, SIMULATED, PROJECTED, TARGET, ILLUSTRATIVE (appendix slide)
+    - no CSS filter, SVG filter, blurred box-shadow or text-shadow (each prints as a bitmap); no element
+      opacity or mix-blend-mode (transparency groups): use rgba fills and fill-opacity / stroke-opacity
+    - static font files only: Chrome prints a variable font as Type3 glyph drawings, not as a font
+    - footers number themselves (CSS counters): edit --product, --event and --total, never type page numbers
+  Render:  node render-pdf.mjs deck-16x9.html --out out/Deck.pdf --expect-pages 14
+  QA:      node render-pdf.mjs deck-16x9.html --qa --out qa.pdf   then   python qa-pdf.py qa.pdf --sheet
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- static families only (Barlow, Barlow Condensed and IBM Plex Mono are served static; IBM Plex Sans, Archivo,
+     Space Grotesk and JetBrains Mono are served variable today and would print as Type3) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<!-- the default subsets leave out these symbols although the fonts have them: text= fetches exactly these
+     glyphs (less-or-equal, greater-or-equal, approx, rupee, arrow). Barlow has no rupee or arrow: set those in mono -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&text=%E2%89%A4%E2%89%A5%E2%89%88%E2%82%B9%E2%86%92&display=swap">
+<style>
+  :root {
+    /* identity: the three values a project edits first (footers read them) */
+    --product: "VIALWATCH";
+    --event: "{{EVENT}}";
+    --total: "14";
+
+    /* ground: the dark narrative page, tinted to the domain (a cold room at night) */
+    --ground: #071016;
+    --ground-raise: #0D1B24;
+    --ground-sunk: #040A0E;
+    --ground-line: #1D303C;
+    --ground-ink: #E8F0F3;
+    --ground-ink-2: #A3B6C2;
+    --ground-ink-3: #62798A;
+
+    /* paper: the one light page type, for rhythm (the paper temperature log the product replaces) */
+    --paper: #F3F1EA;
+    --paper-raise: #FFFFFF;
+    --paper-grid: rgba(16, 48, 72, .06);
+    --paper-line: #D3D6D0;
+    --paper-ink: #0F1D27;
+    --paper-ink-2: #42556A;
+    --paper-ink-3: #7F8D99;
+
+    /* accent: the brand. Frost on the ground, ballpoint blue on paper (holds 4.5:1) */
+    --accent: #7DD3F5;
+    --accent-on-paper: #1D58A6;
+
+    /* meaning: status only, never decoration */
+    --ok: #43D697;    --ok-on-paper: #0E7C4C;     /* in range, verified, measured */
+    --warn: #F5B544;  --warn-on-paper: #A35F00;   /* uncertain, on the line: a human decides */
+    --crit: #FF5C55;  --crit-on-paper: #C12F29;   /* excursion, failure, loss */
+    --model: #B59CFF; --model-on-paper: #6447CF;  /* anything a model produced: forecasts, scores */
+
+    /* type roles */
+    --font-display: "Barlow Condensed", "Bahnschrift", "Arial Narrow", sans-serif;
+    --font-body: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  /* ---------------------------------------------------------------- print frame */
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: 338.667mm 190.5mm; margin: 0; }
+  html, body { background: #22282E; }
+  body { font-family: var(--font-body); counter-reset: slide; }
+  .page {
+    --bg: var(--ground); --raise: var(--ground-raise); --sunk: var(--ground-sunk); --line: var(--ground-line);
+    --ink: var(--ground-ink); --ink-2: var(--ground-ink-2); --ink-3: var(--ground-ink-3); --hot: var(--accent);
+    --c-ok: var(--ok); --c-warn: var(--warn); --c-crit: var(--crit); --c-model: var(--model);
+    position: relative; width: 338.667mm; height: 190.5mm; overflow: hidden; page-break-after: always;
+    background: var(--bg); color: var(--ink); counter-increment: slide;
+  }
+  .page:last-child { page-break-after: auto; }
+  .page.paper {
+    --bg: var(--paper); --raise: var(--paper-raise); --sunk: #E9E6DC; --line: var(--paper-line);
+    --ink: var(--paper-ink); --ink-2: var(--paper-ink-2); --ink-3: var(--paper-ink-3); --hot: var(--accent-on-paper);
+    --c-ok: var(--ok-on-paper); --c-warn: var(--warn-on-paper); --c-crit: var(--crit-on-paper); --c-model: var(--model-on-paper);
+    background-color: var(--paper);
+    background-image: linear-gradient(var(--paper-grid) .25mm, transparent .25mm), linear-gradient(90deg, var(--paper-grid) .25mm, transparent .25mm);
+    background-size: 5mm 5mm;
+  }
+  @media screen { .page { margin: 0 auto 8mm; } body { padding: 8mm 0; } }
+
+  .num, .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .num { font-size: .92em; font-weight: 600; }
+
+  /* ---------------------------------------------------------------- furniture */
+  .frame { position: absolute; inset: 12mm 16mm 16mm; display: flex; flex-direction: column; }
+  .push { margin-top: auto; }
+  .kicker { display: flex; align-items: center; gap: 2.4mm; font: 600 8.6pt/1 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--hot); }
+  .kicker::before {   /* motif: the vaccine vial monitor, a square inside a circle */
+    content: ""; flex: none; width: 3mm; height: 3mm; border-radius: 50%; border: .35mm solid currentColor;
+    background: linear-gradient(currentColor, currentColor) center / 1.1mm 1.1mm no-repeat;
+  }
+  h2.big { font: 800 46pt/.92 var(--font-display); text-transform: uppercase; letter-spacing: .004em; margin-top: 3.2mm; color: var(--ink); }
+  h2.big em { font-style: normal; color: var(--hot); }
+  .lede { font: 500 14pt/1.45 var(--font-body); color: var(--ink-2); max-width: 268mm; margin-top: 4mm; text-wrap: pretty; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .foot { position: absolute; left: 16mm; right: 16mm; bottom: 6.5mm; display: flex; align-items: center; justify-content: space-between;
+          font: 500 7pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .folio::after { content: var(--product) "  ·  " var(--event) "  ·  " counter(slide, decimal-leading-zero) " / " var(--total); }
+  .foot .note { margin-right: 6mm; }
+  .vvm { display: flex; align-items: center; gap: 2mm; }
+  .vvm i { width: 2.5mm; height: 2.5mm; border-radius: 50%; border: .3mm solid var(--ink-3); }
+  .page[data-sec="1"] .vvm i:nth-child(1), .page[data-sec="2"] .vvm i:nth-child(2), .page[data-sec="3"] .vvm i:nth-child(3),
+  .page[data-sec="4"] .vvm i:nth-child(4), .page[data-sec="5"] .vvm i:nth-child(5) {
+    width: 3.2mm; height: 3.2mm; border: .35mm solid var(--hot); background: linear-gradient(var(--hot), var(--hot)) center / 1.2mm 1.2mm no-repeat;
+  }
+
+  /* chips: product status. IMPLEMENTED filled · PROTOTYPED outline · SIMULATED dashed · FUTURE muted */
+  .chip { display: inline-flex; align-items: center; gap: 1.6mm; height: 5.4mm; padding: 0 2.6mm; border: .3mm solid var(--ink);
+          font: 700 7.2pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .chip::before { content: ""; width: 1.6mm; height: 1.6mm; background: currentColor; }
+  .chip.impl { background: var(--ink); color: var(--bg); }
+  .chip.sim { border-style: dashed; }
+  .chip.sim::before { background: transparent; border: .3mm dotted currentColor; }
+  .chip.future { color: var(--ink-3); border-color: var(--ink-3); }
+  .chip.future::before { background: transparent; border: .3mm solid currentColor; }
+
+  /* number types: every figure says what kind of number it is
+     MEASURED · SOURCED · SIMULATED · PROJECTED · TARGET · ILLUSTRATIVE */
+  .nt { display: inline-flex; align-items: center; height: 4.6mm; padding: 0 1.8mm; border: .25mm solid var(--ink-3); color: var(--ink-2);
+        font: 600 6.8pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+  .nt.meas { border-color: var(--c-ok); color: var(--c-ok); }
+  .nt.sim { border-style: dashed; }
+  .nt.proj { border-style: dotted; }
+  .nt.tgt { border-color: var(--hot); color: var(--hot); }
+  .nt.ill { border-color: transparent; padding-left: 0; color: var(--ink-3); }
+
+  .cap { font: 500 7pt/1.5 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .punchline { font: 500 16pt/1.4 var(--font-body); color: var(--ink); }
+  .punchline b { color: var(--c-crit); font-weight: 700; }
+  .punchline b.hot { color: var(--hot); }
+  svg text { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------------------------------------------------------------- cover */
+  .cover { background-image: radial-gradient(130mm 100mm at 76% 42%, rgba(125, 211, 245, .07), transparent 70%); }
+  .cover .top { position: absolute; top: 11mm; left: 16mm; right: 16mm; display: flex; justify-content: space-between; align-items: center;
+                font: 600 7.8pt/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); }
+  .cover .top .serial { border: .3mm solid var(--line); padding: 1.8mm 2.8mm; }
+  .cover .tag { position: absolute; top: 33mm; left: 16mm; font: 600 9.6pt/1 var(--font-mono); letter-spacing: .3em; color: var(--hot); }
+  .cover h1 { position: absolute; top: 41mm; left: 14.2mm; font: 900 118pt/.8 var(--font-display); text-transform: uppercase; letter-spacing: -.004em; color: var(--ink); }
+  .cover h1 em { font-style: normal; color: var(--hot); }
+  .cover .sub { position: absolute; top: 117mm; left: 16mm; width: 142mm; font: 500 13pt/1.5 var(--font-body); color: var(--ink-2); }
+  .cover .sub b { color: var(--ink); font-weight: 600; }
+  .cover .meta { position: absolute; left: 16mm; right: 16mm; bottom: 11mm; display: flex; gap: 12mm; border-top: .3mm solid var(--line); padding-top: 3.8mm; }
+  .cover .meta .k, .back-meta .k { font: 600 6.8pt/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.8mm; }
+  .cover .meta .v, .back-meta .v { font: 600 9pt/1.3 var(--font-mono); color: var(--ink); }
+  .cover .meta .grow { margin-left: auto; text-align: right; }
+
+  .hero { position: absolute; right: 16mm; top: 27mm; width: 152mm; }
+  .panel { background: var(--raise); border: .3mm solid var(--line); }
+  .panel .bar { display: flex; justify-content: space-between; align-items: center; padding: 2.8mm 3.8mm; border-bottom: .3mm solid var(--line);
+                font: 600 7.2pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+  .live { display: inline-flex; align-items: center; gap: 1.6mm; color: var(--c-ok); }
+  .live::before { content: ""; width: 1.9mm; height: 1.9mm; border-radius: 50%; background: currentColor; }
+  .panel svg { display: block; width: 100%; height: auto; }
+  .panel .read { display: grid; grid-template-columns: repeat(3, 1fr); border-top: .3mm solid var(--line); }
+  .panel .read div { padding: 2.8mm 3.8mm; border-right: .3mm solid var(--line); }
+  .panel .read div:last-child { border-right: 0; }
+  .panel .read .k { font: 600 6.6pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
+  .panel .read .v { font: 700 15pt/1.1 var(--font-mono); color: var(--ink); margin-top: 1.6mm; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .panel .read .v.warn { color: var(--c-warn); }
+  .panel .read .v.model { color: var(--c-model); }
+  .panel-cap { margin-top: 3mm; display: flex; justify-content: space-between; }
+
+  /* ---------------------------------------------------------------- problem */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9mm; margin-top: 7mm; }
+  .stat { border-top: 1mm solid var(--c-crit); padding-top: 3mm; }
+  .stat .n { font: 800 60pt/.9 var(--font-display); color: var(--ink); white-space: nowrap; }
+  .stat .n small { font-size: 22pt; font-weight: 700; color: var(--ink-2); margin-left: 1.4mm; }
+  .stat .d { font: 500 12pt/1.4 var(--font-body); color: var(--ink-2); margin-top: 2.4mm; }
+  .stat .d b { color: var(--ink); font-weight: 600; }
+  .stat .nt { margin-top: 2.6mm; }
+  .log { position: relative; margin-top: 7mm; background: var(--raise); border: .3mm solid var(--line); padding: 3.6mm 5.5mm;
+         font: 500 10pt/1.85 var(--font-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .log .t { color: var(--ink-3); margin-right: 3.4mm; }
+  .log .bad { color: var(--c-crit); font-weight: 700; }
+  .log .unsure { color: var(--c-warn); font-weight: 600; }
+  .log .lt { position: absolute; right: 5.5mm; top: 3.8mm; color: var(--ink-3); font-size: 7pt; letter-spacing: .14em; }
+
+  /* ---------------------------------------------------------------- gap */
+  .two { display: grid; grid-template-columns: 1fr 100mm; gap: 10mm; margin-top: 6mm; flex: 1; min-height: 0; }
+  .two > div { display: flex; flex-direction: column; min-height: 0; }
+  .compare { background: var(--raise); border: .3mm solid var(--line); }
+  .compare .row { display: grid; grid-template-columns: 54mm 1fr 38mm; align-items: center; padding: 3.4mm 4.6mm; border-bottom: .3mm solid var(--line); }
+  .compare .row:last-child { border-bottom: 0; }
+  .compare .what { font: 800 15pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .04em; color: var(--ink); }
+  .compare .how { font: 500 11pt/1.35 var(--font-body); color: var(--ink-2); }
+  .compare .when { font: 700 8.2pt/1.3 var(--font-mono); letter-spacing: .06em; text-align: right; text-transform: uppercase; color: var(--c-ok); }
+  .compare .row.bad { background: rgba(193, 47, 41, .06); }
+  .compare .row.bad .what, .compare .row.bad .when { color: var(--c-crit); }
+  .rails { display: grid; grid-template-columns: 1fr 1fr; gap: 3.4mm; margin-top: 5mm; }
+  .rail { background: var(--raise); border: .3mm solid var(--line); border-left: 1.1mm solid var(--hot); padding: 2.8mm 3.6mm; }
+  .rail b { display: block; font: 800 14pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .03em; color: var(--ink); }
+  .rail span { display: block; margin-top: 1.4mm; font: 600 7.4pt/1.35 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); }
+  .band { border-left: 1.4mm solid var(--hot); padding: .8mm 0 .8mm 5mm; }
+  .band p { font: 500 14pt/1.4 var(--font-body); color: var(--ink); }
+  .band p b { color: var(--hot); font-weight: 700; }
+  .slot { position: relative; flex: 1; border: .4mm dashed var(--ink-3); background: rgba(16, 48, 72, .04); display: flex; flex-direction: column;
+          justify-content: center; align-items: center; text-align: center; padding: 10mm 9mm 22mm; }
+  .slot .corners { position: absolute; inset: 3mm; }
+  .slot .corners i { position: absolute; width: 6mm; height: 6mm; border: 0 solid var(--ink-2); }
+  .slot .corners i:nth-child(1) { left: 0; top: 0; border-left-width: .6mm; border-top-width: .6mm; }
+  .slot .corners i:nth-child(2) { right: 0; top: 0; border-right-width: .6mm; border-top-width: .6mm; }
+  .slot .corners i:nth-child(3) { left: 0; bottom: 0; border-left-width: .6mm; border-bottom-width: .6mm; }
+  .slot .corners i:nth-child(4) { right: 0; bottom: 0; border-right-width: .6mm; border-bottom-width: .6mm; }
+  .slot .h { font: 800 18pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .05em; color: var(--ink); }
+  .slot p { font: 500 10pt/1.5 var(--font-body); color: var(--ink-2); margin-top: 2.8mm; max-width: 74mm; }
+  .capchip { position: absolute; left: 5mm; bottom: 9mm; background: rgba(7, 16, 22, .9); border-left: 1.1mm solid var(--accent); color: var(--ground-ink);
+             font: 500 7pt/1.5 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 2mm 3mm; text-align: left; max-width: 84mm; }
+  .capchip b { color: var(--accent); font-weight: 600; }
+  .credit { position: absolute; right: 4mm; bottom: 3.6mm; font: 500 6pt/1 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* ---------------------------------------------------------------- solution */
+  .journey { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8mm; margin-top: 8mm; }
+  .journey::before { content: ""; position: absolute; left: 7mm; right: 7mm; top: 7mm; height: .5mm; background: var(--line); }
+  .step .node { position: relative; width: 14mm; height: 14mm; border-radius: 50%; border: .6mm solid var(--hot); background: var(--bg);
+                display: flex; align-items: center; justify-content: center; font: 800 17pt/1 var(--font-display); color: var(--hot); }
+  .step h4 { margin-top: 3.4mm; font: 900 26pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .02em; color: var(--ink); }
+  .step .q { margin-top: 1.8mm; font: 600 9pt/1.35 var(--font-mono); color: var(--hot); }
+  .step p { margin-top: 2mm; font: 500 11pt/1.4 var(--font-body); color: var(--ink-2); }
+  .step .chip { margin-top: 3.2mm; }
+  .ba { margin-top: 7mm; border: .3mm solid var(--line); }
+  .ba .r { display: grid; grid-template-columns: 50mm repeat(4, 1fr); align-items: stretch; }
+  .ba .r + .r { border-top: .3mm solid var(--line); }
+  .ba .l { display: flex; align-items: center; padding: 3mm 4.4mm; font: 800 14pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .05em; }
+  .ba .today .l { color: var(--c-crit); }
+  .ba .with { background: rgba(67, 214, 151, .07); }
+  .ba .with .l { color: var(--c-ok); }
+  .ba .c { padding: 2.8mm 3.8mm; border-left: .3mm solid var(--line); font: 600 7.4pt/1.35 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+  .ba .c b { display: block; font: 800 17pt/1 var(--font-display); letter-spacing: .03em; color: var(--ink); margin-bottom: 1.2mm; }
+  .ba .today .c b { color: var(--c-crit); }
+  .ba .with .c b { color: var(--c-ok); }
+  .principle { border-left: 1.4mm solid var(--c-warn); padding-left: 5mm; font: 500 15pt/1.4 var(--font-body); color: var(--ink); }
+  .principle b { font-weight: 700; color: var(--c-warn); }
+
+  /* ---------------------------------------------------------------- product (console mock in live type) */
+  .concept { position: absolute; right: 16mm; top: 12mm; }
+  .console { margin-top: 4.6mm; background: #0B151C; border: .4mm solid #22333F; color: var(--ground-ink); }
+  .console .cbar { display: flex; justify-content: space-between; align-items: center; padding: 2.2mm 4mm; border-bottom: .3mm solid #22333F;
+                   font: 600 7.4pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ground-ink-2); }
+  .console .live { color: var(--ok); }
+  .cgrid { display: grid; grid-template-columns: 100mm 1fr; }
+  .queue { border-right: .3mm solid #22333F; }
+  .queue .qh { padding: 2.4mm 3.8mm; font: 600 6.8pt/1 var(--font-mono); letter-spacing: .14em; color: var(--ground-ink-3); border-bottom: .3mm solid #1B2A34; }
+  .qrow { display: grid; grid-template-columns: 15mm 1fr 17mm; gap: 2.4mm; align-items: center; padding: 2.5mm 3.8mm; border-bottom: .3mm solid #1B2A34; }
+  .qrow:last-child { border-bottom: 0; }
+  .qrow .id { font: 800 16pt/1 var(--font-display); color: var(--ground-ink); }
+  .qrow .m { font: 500 7.6pt/1.4 var(--font-mono); color: var(--ground-ink-2); text-transform: uppercase; letter-spacing: .02em; }
+  .qrow .cb { height: 1.5mm; background: #1D2E39; margin-top: 1.4mm; }
+  .qrow .cb i { display: block; height: 100%; }
+  .qrow .st { font: 700 7.4pt/1.35 var(--font-mono); text-align: right; letter-spacing: .03em; text-transform: uppercase; }
+  .qrow.sel { background: rgba(245, 181, 68, .1); box-shadow: inset .9mm 0 0 var(--warn); }
+  .st.crit { color: var(--crit); } .st.warn { color: var(--warn); } .st.ok { color: var(--ok); }
+  .view { padding: 2.4mm 3.8mm 3mm; display: flex; flex-direction: column; }
+  .view svg { display: block; width: 100%; height: auto; }
+  .measure { margin-top: 1.4mm; border-left: 1mm solid var(--warn); background: rgba(245, 181, 68, .08); padding: 1.8mm 3mm;
+             font: 600 7.4pt/1.45 var(--font-mono); letter-spacing: .03em; text-transform: uppercase; color: var(--ground-ink); }
+  .measure b { color: var(--warn); }
+  .verdicts { display: flex; gap: 2.6mm; margin-top: 2mm; }
+  .vbtn { flex: 1; text-align: center; padding: 2mm 0; border: .3mm solid #2C3F4C; font: 700 9.6pt/1 var(--font-display); letter-spacing: .1em;
+          text-transform: uppercase; color: var(--ground-ink-2); }
+  .vbtn.hot { background: var(--warn); border-color: var(--warn); color: #0B151C; }
+  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; }
+  .promise { border-top: 1mm solid var(--ink); padding-top: 2.6mm; }
+  .promise h4 { display: inline; font: 900 17pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .03em; color: var(--ink); }
+  .promise .m { display: inline; margin-left: 2.2mm; font: 700 7.6pt/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--hot); }
+  .promise p { margin-top: 1.6mm; font: 500 11pt/1.4 var(--font-body); color: var(--ink-2); }
+
+  /* ---------------------------------------------------------------- how it works */
+  .arch { display: grid; grid-template-columns: 1fr 76mm; gap: 10mm; margin-top: 6mm; }
+  .layers { position: relative; }
+  .layers::before { content: ""; position: absolute; left: 5.2mm; top: 5mm; bottom: 5mm; width: .4mm; background: var(--line); }
+  .layer { position: relative; display: grid; grid-template-columns: 15mm 1fr 56mm; gap: 2.4mm; align-items: center; padding: 2.2mm 0; }
+  .layer + .layer { border-top: .3mm solid var(--line); }
+  .layer .ln { width: 10.4mm; height: 10.4mm; border-radius: 50%; background: var(--ink); color: var(--bg); display: flex; align-items: center; justify-content: center;
+               font: 800 12pt/1 var(--font-display); position: relative; z-index: 1; }
+  .layer.decide .ln { background: var(--hot); }
+  .layer h4 { font: 900 16pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .03em; color: var(--ink); }
+  .layer h4 span { margin-left: 2.2mm; font: 600 7.4pt/1 var(--font-mono); letter-spacing: .08em; color: var(--hot); }
+  .layer p { margin-top: 1.1mm; font: 500 10.4pt/1.35 var(--font-body); color: var(--ink-2); }
+  .tags { display: flex; flex-wrap: wrap; gap: 1.6mm; justify-content: flex-end; }
+  .tag { font: 600 6.8pt/1 var(--font-mono); letter-spacing: .04em; padding: 1.2mm 2mm; border: .25mm solid var(--line); background: var(--raise); color: var(--ink-2); }
+  .why { border-left: .4mm solid var(--line); padding-left: 5.5mm; }
+  .why h4 { font: 900 15pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .05em; color: var(--ink); margin-bottom: 3.4mm; }
+  .why .w { margin-bottom: 3.6mm; }
+  .why .w b { display: block; font: 700 11pt/1.3 var(--font-body); color: var(--ink); }
+  .why .w p { margin-top: .8mm; font: 500 10pt/1.4 var(--font-body); color: var(--ink-2); }
+  .budget .bar { display: grid; grid-template-columns: 3fr 1.1fr .9fr 1.5fr 2fr; height: 10mm; border: .35mm solid var(--ink); }
+  .budget .seg { display: flex; align-items: center; justify-content: center; font: 700 7.6pt/1 var(--font-mono); letter-spacing: .04em; color: var(--paper); background: var(--ink); border-right: .3mm solid var(--paper); white-space: nowrap; }
+  .budget .seg.m { background: var(--c-model); }
+  .budget .seg.d { background: var(--hot); }
+  .budget .seg:last-child { border-right: 0; }
+  .budget .lbl { display: flex; justify-content: space-between; margin-top: 1.8mm; font: 700 7.6pt/1.3 var(--font-mono); letter-spacing: .05em; color: var(--ink-2); text-transform: uppercase; }
+
+  /* ---------------------------------------------------------------- advantage */
+  .vs { display: grid; grid-template-columns: 1fr 108mm; gap: 11mm; margin-top: 7mm; }
+  .vtable { border: .3mm solid var(--line); }
+  .vtable .vr { display: grid; grid-template-columns: 1fr 1fr; }
+  .vtable .vr + .vr { border-top: .3mm solid var(--line); }
+  .vtable .vh { font: 700 7.6pt/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; padding: 3mm 4.4mm; color: var(--ink-3); }
+  .vtable .vh.us { color: var(--hot); border-left: .3mm solid var(--line); }
+  .vtable .vc { padding: 3.4mm 4.4mm; font: 500 11.4pt/1.38 var(--font-body); color: var(--ink-2); }
+  .vtable .vc.us { background: rgba(125, 211, 245, .06); color: var(--ink); border-left: .3mm solid var(--line); }
+  .vtable .vc.us b { color: var(--hot); font-weight: 600; }
+  .factory .h { font: 700 7.6pt/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .factory .big { margin-top: 3mm; font: 900 72pt/.88 var(--font-display); color: var(--ink); }
+  .factory .big em { font-style: normal; color: var(--hot); }
+  .factory .unit { margin-top: 2mm; font: 800 16pt/1.1 var(--font-display); text-transform: uppercase; letter-spacing: .04em; color: var(--ink); }
+  .factory .math { margin-top: 4.4mm; padding: 3.4mm 4mm; background: var(--raise); border: .3mm solid var(--line); font: 500 9.2pt/1.7 var(--font-mono); color: var(--ink-2); }
+  .factory .math b { color: var(--ink); font-weight: 600; }
+  .factory .nt { margin-top: 3.4mm; }
+
+  /* ---------------------------------------------------------------- proof declared in advance */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; margin-top: 6mm; }
+  .metric { background: var(--raise); border: .35mm solid var(--ink); padding: 3.4mm 4mm 3.6mm; }
+  .metric .n { font: 900 34pt/.95 var(--font-display); color: var(--ink); white-space: nowrap; }
+  .metric .n span { color: var(--hot); }
+  .metric .d { margin-top: 1.8mm; font: 500 10.4pt/1.38 var(--font-body); color: var(--ink-2); }
+  .metric .d b { color: var(--ink); font-weight: 600; }
+  .metric .nt { margin-top: 2.6mm; }
+  .proofgrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10mm; margin-top: 6mm; }
+  .chartbox { background: var(--raise); border: .3mm solid var(--line); padding: 3.6mm 4.2mm 3.2mm; }
+  .chartbox .h { font: 700 7.4pt/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+  .chartbox svg { display: block; width: 100%; height: auto; margin-top: 2.4mm; }
+  .measured h4 { font: 900 15pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .05em; color: var(--ink); }
+  .measured p { margin-top: 2.4mm; font: 500 11pt/1.45 var(--font-body); color: var(--ink-2); }
+  .measured p b { color: var(--ink); font-weight: 600; }
+  .measured .hold { margin-top: 4.4mm; border-left: 1.3mm solid var(--hot); padding-left: 4mm; font: 600 12pt/1.4 var(--font-body); color: var(--ink); }
+
+  /* ---------------------------------------------------------------- results (after the build) */
+  .rtags { display: flex; gap: 2.4mm; margin-top: 5mm; }
+  .results { margin-top: 2.6mm; border: .35mm solid var(--ink); background: var(--raise); }
+  .results .rr { display: grid; grid-template-columns: 1fr 36mm 36mm 32mm; align-items: center; padding: 2.8mm 4.4mm; }
+  .results .rr + .rr { border-top: .3mm solid var(--line); }
+  .results .rr.hd { padding: 2.2mm 4.4mm; background: var(--ink); }
+  .results .rr.hd div { font: 700 7pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--bg); }
+  .results .mname { font: 800 14pt/1.1 var(--font-display); text-transform: uppercase; letter-spacing: .03em; color: var(--ink); }
+  .results .mname span { display: block; margin-top: 1mm; font: 500 7.4pt/1.3 var(--font-mono); letter-spacing: .02em; text-transform: none; color: var(--ink-3); }
+  .results .tv { font: 600 11.4pt/1 var(--font-mono); color: var(--ink-2); }
+  .results .mv { font: 700 13pt/1 var(--font-mono); color: var(--ink); }
+  .pill { display: inline-block; padding: 1.4mm 2.6mm; border-radius: 3mm; background: var(--c-ok); color: var(--paper-raise); font: 700 8.6pt/1 var(--font-mono); letter-spacing: .04em; }
+  .pill.miss { background: var(--c-crit); }
+  .rgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 6mm; }
+  .abl .h, .sets .h { font: 700 7.4pt/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 2.6mm; }
+  .abl .row { display: grid; grid-template-columns: 58mm 1fr 15mm; gap: 2.6mm; align-items: center; margin-bottom: 2mm; }
+  .abl .row .nm { font: 500 8.4pt/1.2 var(--font-mono); color: var(--ink-2); }
+  .abl .row .tr { height: 4.6mm; background: var(--sunk); }
+  .abl .row .tr i { display: block; height: 100%; background: var(--ink-3); }
+  .abl .row.prod .nm { color: var(--ink); font-weight: 700; }
+  .abl .row.prod .tr i { background: var(--hot); }
+  .abl .row .v { font: 700 8.6pt/1 var(--font-mono); text-align: right; color: var(--ink); }
+  .sets table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); }
+  .sets th { font: 600 6.8pt/1.2 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 0 0 1.8mm; }
+  .sets th:last-child, .sets td:last-child { text-align: right; }
+  .sets td { font: 500 8.6pt/1.25 var(--font-mono); color: var(--ink-2); padding: 1.9mm 0; border-top: .3mm solid var(--line); }
+  .sets td:first-child { color: var(--ink); font-weight: 600; }
+
+  /* ---------------------------------------------------------------- impact */
+  .impact { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10mm; margin: auto 0; padding: 6mm 0; }
+  .icol { border-top: 1mm solid var(--line); padding-top: 3.4mm; }
+  .icol.sim { border-top-color: var(--c-model); } .icol.proj { border-top-color: var(--ink-3); } .icol.tgt { border-top-color: var(--hot); }
+  .icol .n { margin-top: 3.6mm; font: 900 84pt/.88 var(--font-display); color: var(--ink); white-space: nowrap; }
+  .icol .n small { font-size: 28pt; font-weight: 700; color: var(--ink-2); margin-left: 1.2mm; }
+  .icol .n .cur { font: 700 42pt/1 var(--font-mono); margin-right: .8mm; vertical-align: .14em; }
+  .icol .d { margin-top: 3mm; font: 600 15pt/1.35 var(--font-body); color: var(--ink); }
+  .icol .how { margin-top: 3mm; font: 500 9pt/1.6 var(--font-mono); color: var(--ink-2); }
+  .icol .how b { color: var(--ink); font-weight: 600; }
+  .notyet { display: grid; grid-template-columns: 52mm 1fr; gap: 6mm; align-items: center; padding: 4.6mm 5.5mm; background: var(--raise); border: .3mm solid var(--line); }
+  .notyet .k { font: 900 17pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .05em; color: var(--c-warn); }
+  .notyet p { font: 500 12pt/1.45 var(--font-body); color: var(--ink-2); }
+  .notyet p b { color: var(--ink); font-weight: 600; }
+
+  /* ---------------------------------------------------------------- scale */
+  .stairs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; align-items: end; margin-top: 6mm; }
+  .run { background: var(--raise); border: .35mm solid var(--ink); padding: 3.4mm 4mm; }
+  .run .rt { font: 700 7.4pt/1 var(--font-mono); letter-spacing: .14em; color: var(--hot); }
+  .run h4 { margin-top: 1.8mm; font: 900 22pt/.95 var(--font-display); text-transform: uppercase; color: var(--ink); }
+  .run p { margin-top: 1.8mm; font: 500 11.4pt/1.38 var(--font-body); color: var(--ink-2); }
+  .run.r2 { padding-bottom: 11mm; } .run.r3 { padding-bottom: 19mm; } .run.r4 { padding-bottom: 27mm; border-color: var(--hot); border-width: .5mm; }
+  .matrix { border: .35mm solid var(--ink); background: var(--raise); }
+  .matrix .mh { display: flex; justify-content: space-between; padding: 2mm 4mm; background: var(--ink); color: var(--bg); font: 700 7.2pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+  .mgrid { display: grid; grid-template-columns: 38mm repeat(4, 1fr); }
+  .mgrid > div { padding: 2.2mm 3.4mm; border-bottom: .25mm solid var(--line); border-right: .25mm solid var(--line); font: 500 8.2pt/1.3 var(--font-mono); color: var(--ink-2); }
+  .mgrid > div:nth-child(5n) { border-right: 0; }
+  .mgrid > div:nth-last-child(-n+5) { border-bottom: 0; }
+  .mgrid .colh { font: 800 10.6pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .06em; color: var(--ink); background: var(--sunk); }
+  .mgrid .colh.now { color: var(--hot); }
+  .mgrid .rowh { font: 800 11.4pt/1 var(--font-display); text-transform: uppercase; letter-spacing: .05em; color: var(--ink); }
+  .mgrid .now { background: rgba(29, 88, 166, .06); }
+  .yes { display: inline-block; width: 2.2mm; height: 2.2mm; margin-right: 1.8mm; background: var(--c-ok); vertical-align: .1mm; }
+
+  /* ---------------------------------------------------------------- execution */
+  .tl { display: flex; margin-top: 6mm; border: .35mm solid var(--ink); background: var(--raise); }
+  .tseg { flex: 1; padding: 3.6mm 3.8mm 4mm; border-right: .3mm solid var(--line); }
+  .tseg:last-child { border-right: 0; }
+  .tseg .h { font: 700 10pt/1 var(--font-mono); color: var(--hot); }
+  .tseg .w { margin-top: 2mm; font: 500 11.6pt/1.38 var(--font-body); color: var(--ink); }
+  .tseg.freeze { background: rgba(163, 95, 0, .07); }
+  .tseg.freeze .h { color: var(--c-warn); }
+  .demo { margin: auto 0; padding: 1mm 0 1mm 5mm; border-left: 1.4mm solid var(--hot); font: 500 15pt/1.45 var(--font-body); color: var(--ink); }
+  .demo b { color: var(--hot); font-weight: 700; }
+  .pm { border: .35mm solid var(--ink); background: var(--raise); }
+  .pm .ph { padding: 2mm 4mm; background: var(--ink); color: var(--bg); font: 700 7.2pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+  .pm .pr { display: grid; grid-template-columns: 74mm 1fr; gap: 5mm; padding: 2.6mm 4mm; align-items: baseline; }
+  .pm .pr + .pr { border-top: .3mm solid var(--line); }
+  .pm .pr b { font: 800 12.6pt/1.1 var(--font-display); text-transform: uppercase; letter-spacing: .03em; color: var(--ink); }
+  .pm .pr span { font: 500 11pt/1.4 var(--font-body); color: var(--ink-2); }
+
+  /* ---------------------------------------------------------------- close + ask */
+  .close-title { position: absolute; top: 22mm; left: 16mm; right: 16mm; font: 900 84pt/.86 var(--font-display); text-transform: uppercase; color: var(--ink); }
+  .close-title em { font-style: normal; color: var(--hot); }
+  .rule { position: absolute; left: 0; right: 0; top: 88mm; height: 1mm; background: var(--hot); }
+  .roster-h { position: absolute; top: 97mm; left: 16mm; }
+  .roster { position: absolute; top: 105mm; left: 16mm; width: 156mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .member { border-top: .4mm solid var(--line); padding-top: 2.8mm; }
+  .member .nm { font: 900 19pt/1 var(--font-display); text-transform: uppercase; color: var(--ink); }
+  .member .rl { margin-top: 1.8mm; font: 700 7.4pt/1.35 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--hot); }
+  .ask { position: absolute; top: 97mm; right: 16mm; width: 140mm; border: .4mm solid var(--hot); background: var(--raise); padding: 4.4mm 6mm 5mm; }
+  .ask .k { font: 700 7.6pt/1 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--hot); }
+  .ask p { margin-top: 2.2mm; font: 800 18pt/1.12 var(--font-display); text-transform: uppercase; color: var(--ink); }
+  .ask p em { font-style: normal; color: var(--hot); }
+  .back-meta { position: absolute; top: 142mm; left: 16mm; right: 16mm; display: flex; justify-content: space-between; gap: 8mm; border-top: .3mm solid var(--line); padding-top: 3.6mm; }
+  .sources { position: absolute; left: 16mm; right: 16mm; bottom: 14mm; font: 500 7.6pt/1.55 var(--font-body); color: var(--ink-3); }
+  .sources b { color: var(--ink-2); font-weight: 600; }
+
+  /* ---------------------------------------------------------------- appendix */
+  .acols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9mm; margin-top: 6mm; }
+  .acol h5 { font: 700 7.8pt/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--hot); margin-bottom: 2.8mm; }
+  .acol p { font: 500 11pt/1.45 var(--font-body); color: var(--ink-2); margin-bottom: 2.4mm; }
+  .acol p b { color: var(--ink); font-weight: 600; }
+  .types { border: .3mm solid var(--line); display: grid; grid-template-columns: repeat(6, 1fr); }
+  .types div { padding: 3mm 3.4mm; border-right: .3mm solid var(--line); font: 500 9.4pt/1.4 var(--font-body); color: var(--ink-2); }
+  .types div:last-child { border-right: 0; }
+  .types .nt { margin-bottom: 2mm; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================== 01 · COVER ======================================================== -->
+<section class="page cover" data-sec="0">
+  <div class="top">
+    <span>{{EVENT}} · {{TRACK}} · {{DATE}}</span>
+    <span class="serial">DOC VW-01 · REV 0.1 · FICTIONAL SAMPLE</span>
+  </div>
+  <div class="tag">EVERY DOSE, KEPT COLD.</div>
+  <h1>Vial<br><em>Watch</em></h1>
+  <p class="sub">It reads every vaccine fridge every minute, <b>forecasts a failure before the vials warm</b>, and wakes the one nurse who can fix it. Built for clinics with one fridge and no night shift.</p>
+
+  <!-- product-derived hero: the reading, the forecast, the moment it acts. Labelled illustrative. -->
+  <div class="hero">
+  <div class="panel">
+    <div class="bar"><span>Fridge C-14 · Clinic 07 · 2–8 °C</span><span class="live">Live · 01:20</span></div>
+    <svg viewBox="0 0 640 360" aria-label="Illustrative temperature trace with a forecast crossing the 8 degree limit">
+      <rect x="50" y="180" width="560" height="105" fill="#7DD3F5" fill-opacity=".07"/>
+      <g stroke="#1D303C" stroke-width="1">
+        <line x1="50" y1="285" x2="610" y2="285"/><line x1="50" y1="215" x2="610" y2="215"/>
+        <line x1="50" y1="145" x2="610" y2="145"/><line x1="50" y1="75" x2="610" y2="75"/>
+      </g>
+      <line x1="50" y1="180" x2="610" y2="180" stroke="#FF5C55" stroke-width="1.6" stroke-dasharray="7 5"/>
+      <text x="606" y="172" text-anchor="end" fill="#FF5C55" font-size="13" font-weight="600">8 °C LIMIT</text>
+      <text x="606" y="278" text-anchor="end" fill="#62798A" font-size="12.5">2 °C</text>
+      <polygon points="174.4,187 252.2,169.5 330,117 470,40 470,110 330,155.5 252.2,190.5" fill="#B59CFF" fill-opacity=".14"/>
+      <polyline points="174.4,187 252.2,180 330,136.25 470,75" fill="none" stroke="#B59CFF" stroke-width="2.4" stroke-dasharray="8 6"/>
+      <polyline points="50,239.5 81.1,236 112.2,227.25 143.3,211.5 174.4,187" fill="none" stroke="#7DD3F5" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="174.4" cy="187" r="5" fill="#7DD3F5"/>
+      <line x1="174.4" y1="30" x2="174.4" y2="285" stroke="#A3B6C2" stroke-width="1" stroke-dasharray="3 4"/>
+      <text x="168" y="44" text-anchor="end" fill="#A3B6C2" font-size="12.5" font-weight="600">NOW</text>
+      <text x="322" y="96" text-anchor="end" fill="#B59CFF" font-size="12.5" font-weight="600">FORECAST · 80% BAND</text>
+      <g fill="none" stroke="#F5B544" stroke-width="2.4">
+        <path d="M232 162 V152 H242"/><path d="M272 162 V152 H262"/><path d="M232 198 V208 H242"/><path d="M272 198 V208 H262"/>
+      </g>
+      <circle cx="252.2" cy="180" r="4.5" fill="#F5B544"/>
+      <text x="286" y="231" fill="#F5B544" font-size="13.5" font-weight="700">CROSSES 8 °C ≈ 02:10</text>
+      <text x="286" y="250" fill="#A3B6C2" font-size="12.5">CALLING THE NURSE ON DUTY</text>
+      <g fill="#62798A" font-size="12.5">
+        <text x="50" y="340">00:00</text><text x="236.7" y="340" text-anchor="middle">02:00</text>
+        <text x="423.3" y="340" text-anchor="middle">04:00</text><text x="610" y="340" text-anchor="end">06:00</text>
+      </g>
+    </svg>
+    <div class="read">
+      <div><div class="k">Now</div><div class="v">7.6 °C</div></div>
+      <div><div class="k">Trend · per 10 min</div><div class="v warn">+0.7 °C</div></div>
+      <div><div class="k">Crosses 8 °C</div><div class="v model">≈ 02:10</div></div>
+    </div>
+  </div>
+  <div class="panel-cap"><span class="cap">Concept UI · readings and forecast illustrative</span><span class="nt ill">Illustrative</span></div>
+  </div>
+
+  <div class="meta">
+    <div><div class="k">Team</div><div class="v">{{TEAM}}</div></div>
+    <div><div class="k">Contact</div><div class="v">{{CONTACT}}</div></div>
+    <div><div class="k">Built on</div><div class="v">LoRa sensors · {{STACK}}</div></div>
+    <div class="grow"><div class="k">Status</div><div class="v">Working prototype · {{LIVE URL}}</div></div>
+  </div>
+</section>
+
+<!-- ======================================================== 02 · PROBLEM ======================================================== -->
+<section class="page" data-sec="1">
+  <div class="frame">
+    <div class="kicker">01 · The problem</div>
+    <h2 class="big">A fridge fails at 02:10.<br><em>Nobody knows until 09:30.</em></h2>
+    <p class="lede">A rural clinic keeps a month of vaccines in one fridge. When it fails at night, the vials warm in silence, and the morning log shows a number <b>nobody saw happen.</b></p>
+    <div class="stats">
+      <!-- REPLACE: three numbers from real sources; one idea per stat -->
+      <div class="stat"><div class="n">1 in 4</div><div class="d">clinic fridges logged <b>at least one excursion</b> last quarter</div><span class="nt">Sourced · {{SOURCE, YEAR}}</span></div>
+      <div class="stat"><div class="n">7.3<small>HRS</small></div><div class="d">median time from a failure to <b>someone noticing</b></div><span class="nt">Sourced · {{SOURCE, YEAR}}</span></div>
+      <div class="stat"><div class="n">18<small>%</small></div><div class="d">of doses discarded for heat exposure in <b>the worst districts</b></div><span class="nt">Sourced · {{SOURCE, YEAR}}</span></div>
+    </div>
+    <div class="log">
+      <span class="lt">ONE NIGHT · RECONSTRUCTED</span>
+      <div><span class="t">02:10</span>FRIDGE C-14 · 8.4 °C · compressor relay stuck · <span class="bad">no alarm</span></div>
+      <div><span class="t">03:40</span>12.9 °C · nobody on site · the paper log waits for morning</div>
+      <div><span class="t">06:15</span>17.2 °C · <span class="bad">140 vials above the limit</span></div>
+      <div><span class="t">09:30</span>nurse reads the log · <span class="unsure">discard 140 vials · reorder: 2 weeks</span></div>
+    </div>
+    <p class="punchline push">The fridge measured every minute of it. <b>Nothing was listening.</b></p>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 03 · GAP ======================================================== -->
+<section class="page paper" data-sec="1">
+  <div class="frame">
+    <div class="kicker">02 · The gap</div>
+    <h2 class="big">Solved for parcels.<br><em>Still paper for vaccines.</em></h2>
+    <div class="two">
+      <div>
+        <!-- REPLACE: analogies the judges have felt themselves, each with the year it was solved (cite them on the appendix) -->
+        <div class="compare">
+          <div class="row"><div class="what">A food order</div><div class="how">On a live map, to the minute</div><div class="when">Solved · 2014</div></div>
+          <div class="row"><div class="what">A parcel</div><div class="how">Every hop pushed to your phone</div><div class="when">Solved · 2015</div></div>
+          <div class="row"><div class="what">A card payment</div><div class="how">A fraud alert within seconds</div><div class="when">Solved · 2009</div></div>
+          <div class="row bad"><div class="what">A fridge of vaccines</div><div class="how">A paper log, read the next morning</div><div class="when">Still manual · 2026</div></div>
+        </div>
+        <div class="rails">
+          <div class="rail"><b>LoRa sensors</b><span>₹900 each · 2 km range · 5-year battery</span></div>
+          <div class="rail"><b>Vaccine registry</b><span>stock already tracked per clinic</span></div>
+          <div class="rail"><b>SMS and voice</b><span>reach a phone with no data plan</span></div>
+          <div class="rail"><b>Small models</b><span>forecast on a ₹3,000 gateway, offline</span></div>
+        </div>
+        <div class="band push"><p>The registry knows how many vials a clinic holds. <b>Nobody knows how warm they are.</b></p></div>
+      </div>
+      <div>
+        <div class="slot">
+          <div class="corners"><i></i><i></i><i></i><i></i></div>
+          <div class="h">Photo slot</div>
+          <p>A real, credited photo: a clinic fridge with its paper log taped to the door. Grade baked into the JPEG, a dark ramp baked in under the caption. Never a stock or generated image.</p>
+          <div class="capchip"><b>Clinic 07, {{DISTRICT}}</b> · where the log is still read at 09:30</div>
+          <span class="credit">Photo: {{ARTIST}} · {{SOURCE}} · {{LICENCE}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 04 · SOLUTION ======================================================== -->
+<section class="page" data-sec="2">
+  <div class="frame">
+    <div class="kicker">03 · The solution</div>
+    <h2 class="big">Four verbs.<br><em>One night shift.</em></h2>
+    <div class="journey">
+      <!-- the user's own question introduces each verb; the chip says how real it is today -->
+      <div class="step"><div class="node">1</div><h4>Sense</h4><div class="q">"Is the fridge fine right now?"</div><p>A <span class="num">₹900</span> sensor reads every fridge every 60 s and keeps 7 days on the gateway when the network drops.</p><span class="chip impl">Implemented</span></div>
+      <div class="step"><div class="node">2</div><h4>Forecast</h4><div class="q">"Will it be fine at 6 AM?"</div><p>A small model reads the curve's shape and forecasts the next 45 minutes, with an honest band.</p><span class="chip">Prototyped</span></div>
+      <div class="step"><div class="node">3</div><h4>Wake</h4><div class="q">"Who do I call?"</div><p>SMS, then a voice call, then the supervisor. The right person, in her language, in minutes.</p><span class="chip sim">Simulated</span></div>
+      <div class="step"><div class="node">4</div><h4>Prove</h4><div class="q">"Can I still use these vials?"</div><p>Every vial's minutes above 8 °C, logged and ready for the discard decision and the audit.</p><span class="chip future">Future</span></div>
+    </div>
+    <div class="ba">
+      <div class="r today"><div class="l">The night, today</div>
+        <div class="c"><b>7.3 hrs</b>to notice</div><div class="c"><b>0 alarms</b>the log waits</div><div class="c"><b>140 vials</b>lost in one night</div><div class="c"><b>Paper</b>no audit trail</div></div>
+      <div class="r with"><div class="l">With VialWatch</div>
+        <div class="c"><b>&lt; 10 min</b>to a ringing phone · target</div><div class="c"><b>1 call</b>the right person</div><div class="c"><b>0 vials</b>in simulation</div><div class="c"><b>Per vial</b>minutes above 8 °C</div></div>
+    </div>
+    <p class="principle push">The model forecasts. <b>The nurse decides.</b> Nothing is discarded or moved without a person looking at the curve.</p>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 05 · PRODUCT ======================================================== -->
+<section class="page paper" data-sec="2">
+  <span class="concept nt ill">Concept UI · values illustrative</span>
+  <div class="frame">
+    <div class="kicker">04 · The product</div>
+    <h2 class="big">It ranks every fridge.<br><em>It says when it is unsure.</em></h2>
+    <div class="console">
+      <div class="cbar"><span>VialWatch · district console</span><span class="live">Live · 14 fridges · 06:59</span></div>
+      <div class="cgrid">
+        <div class="queue">
+          <div class="qh">FRIDGES · RANKED BY RISK OF AN EXCURSION</div>
+          <div class="qrow"><div class="id">C-14</div><div class="m">Clinic 07 · 7.6 °C · rising<div class="cb"><i style="width:93%;background:#FF5C55"></i></div></div><div class="st crit">0.93<br>Call sent</div></div>
+          <div class="qrow"><div class="id">A-02</div><div class="m">Clinic 02 · 6.9 °C · rising<div class="cb"><i style="width:81%;background:#FF5C55"></i></div></div><div class="st crit">0.81<br>Call sent</div></div>
+          <div class="qrow sel"><div class="id">B-07</div><div class="m">Clinic 11 · 7.4 °C · door opened<div class="cb"><i style="width:58%;background:#F5B544"></i></div></div><div class="st warn">0.58<br>Ask nurse</div></div>
+          <div class="qrow"><div class="id">D-11</div><div class="m">Clinic 04 · 4.4 °C · steady<div class="cb"><i style="width:8%;background:#43D697"></i></div></div><div class="st ok">0.08<br>OK</div></div>
+          <div class="qrow"><div class="id">E-03</div><div class="m">Clinic 09 · 3.9 °C · steady<div class="cb"><i style="width:4%;background:#43D697"></i></div></div><div class="st ok">0.04<br>OK</div></div>
+        </div>
+        <div class="view">
+          <svg viewBox="0 0 600 186" aria-label="Fridge B-07: a door opening with two forecasts that both fit">
+            <rect x="40" y="60" width="545" height="86" fill="#7DD3F5" fill-opacity=".07"/>
+            <line x1="40" y1="60" x2="585" y2="60" stroke="#FF5C55" stroke-width="1.4" stroke-dasharray="6 5"/>
+            <text x="44" y="53" fill="#FF5C55" font-size="10" font-weight="600">8 °C</text>
+            <text x="44" y="140" fill="#62798A" font-size="10">2 °C</text>
+            <polyline points="40,113 100,111.5 160,114 220,112 280,113.5 340,112 392,113 397,93 400,68.6" fill="none" stroke="#7DD3F5" stroke-width="2.6" stroke-linejoin="round"/>
+            <line x1="397" y1="26" x2="397" y2="152" stroke="#F5B544" stroke-width="1.2" stroke-dasharray="3 4"/>
+            <text x="391" y="38" text-anchor="end" fill="#F5B544" font-size="10" font-weight="700">DOOR OPENED 06:58</text>
+            <polyline points="400,68.6 440,84 500,102 585,110" fill="none" stroke="#B59CFF" stroke-width="2.2" stroke-dasharray="7 5"/>
+            <polyline points="400,68.6 440,54 500,36 585,22" fill="none" stroke="#B59CFF" stroke-width="2.2" stroke-dasharray="2 5"/>
+            <text x="585" y="14" text-anchor="end" fill="#B59CFF" font-size="10">IF THE COMPRESSOR FAILED</text>
+            <text x="585" y="128" text-anchor="end" fill="#B59CFF" font-size="10">IF THE DOOR CLOSES</text>
+            <circle cx="400" cy="68.6" r="4.5" fill="#F5B544"/>
+            <g fill="#62798A" font-size="10"><text x="40" y="178">05:00</text><text x="312.5" y="178" text-anchor="middle">06:30</text><text x="585" y="178" text-anchor="end">08:00</text></g>
+          </svg>
+          <div class="measure">B-07 · Clinic 11 · 06:59 · <b>two stories fit the curve</b> · restock or failure · conf 0.58 · asks the nurse</div>
+          <div class="verdicts"><span class="vbtn hot">Restocking · no action</span><span class="vbtn">Move the vials</span><span class="vbtn">Call a technician</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="promises push">
+      <div class="promise"><h4>Rank</h4><span class="m">Every fridge, every minute</span><p>The riskiest fridge is always on top, with the number behind it.</p></div>
+      <div class="promise"><h4>Doubt</h4><span class="m">Below 0.70, a person decides</span><p>Two stories fit B-07's curve, so it asks instead of guessing.</p></div>
+      <div class="promise"><h4>Prove</h4><span class="m">Every call logged</span><p>Reading, forecast, who was called, what they chose, and when.</p></div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 06 · HOW IT WORKS ======================================================== -->
+<section class="page paper" data-sec="2">
+  <div class="frame">
+    <div class="kicker">05 · How it works</div>
+    <h2 class="big">Five layers.<br><em>One phone call.</em></h2>
+    <div class="arch">
+      <div class="layers">
+        <div class="layer"><div class="ln">1</div><div><h4>Ingest <span>every 60 s</span></h4><p>LoRa sensor to a clinic gateway; store-and-forward keeps 7 days offline.</p></div><div class="tags"><span class="tag">ESP32</span><span class="tag">LoRa 865 MHz</span><span class="tag">SQLite</span></div></div>
+        <div class="layer"><div class="ln">2</div><div><h4>Clean <span>door vs drift</span></h4><p>Flags door openings, sensor drift and gaps before anything reads the curve.</p></div><div class="tags"><span class="tag">rules</span><span class="tag">unit-tested</span></div></div>
+        <div class="layer"><div class="ln">3</div><div><h4>Forecast <span>45 min ahead</span></h4><p>A small model per fridge model, with a calibrated 80% band, not a point.</p></div><div class="tags"><span class="tag">LightGBM</span><span class="tag">conformal band</span></div></div>
+        <div class="layer decide"><div class="ln">4</div><div><h4>Decide <span>deterministic</span></h4><p>Rules over the forecast choose who to call and when. The model never calls.</p></div><div class="tags"><span class="tag">rules as config</span><span class="tag">escalation</span></div></div>
+        <div class="layer"><div class="ln">5</div><div><h4>Notify <span>SMS, then voice</span></h4><p>The nurse on duty, then the supervisor; every step in the vial's log.</p></div><div class="tags"><span class="tag">SMS</span><span class="tag">IVR</span><span class="tag">audit log</span></div></div>
+      </div>
+      <div class="why">
+        <h4>Why it holds up</h4>
+        <div class="w"><b>Works offline</b><p>The gateway forecasts and calls over a SIM. No Wi-Fi, no cloud on the critical path.</p></div>
+        <div class="w"><b>Rules decide, the model advises</b><p>A wrong forecast can change a ranking, never skip a call.</p></div>
+        <div class="w"><b>Cheap to copy</b><p><span class="num">₹900</span> per fridge, <span class="num">₹3,000</span> per clinic, no per-seat licence.</p></div>
+        <div class="w"><b>Measured, not claimed</b><p>Every target on slide 08 has a script in the repo.</p></div>
+      </div>
+    </div>
+    <div class="budget push">
+      <div class="bar"><div class="seg">Read · ≤ 60 s</div><div class="seg m">Forecast · 40 ms</div><div class="seg d">Rules · 5 ms</div><div class="seg">SMS · ~8 s</div><div class="seg">Voice call · ~30 s</div></div>
+      <div class="lbl"><span>Latency budget, reading to a ringing phone</span><span>Under 2 min · target</span></div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 07 · UNFAIR ADVANTAGE ======================================================== -->
+<section class="page" data-sec="3">
+  <div class="frame">
+    <div class="kicker">06 · Unfair advantage</div>
+    <h2 class="big">Others wait for failures.<br><em>We manufacture them.</em></h2>
+    <div class="vs">
+      <div class="vtable">
+        <div class="vr"><div class="vh">Everyone else</div><div class="vh us">VialWatch</div></div>
+        <div class="vr"><div class="vc">An alarm at a fixed 8 °C, after the vials have warmed</div><div class="vc us">A forecast <b>45 minutes before</b> the limit, from the curve's shape</div></div>
+        <div class="vr"><div class="vc">Months of real failures before a model can learn</div><div class="vc us">A thermal simulator <b>generates failures</b> for every fridge model</div></div>
+        <div class="vr"><div class="vc">A cloud dashboard nobody opens at 02:00</div><div class="vc us">A <b>phone call</b> to the nurse on duty, in her language</div></div>
+        <div class="vr"><div class="vc">Hardware lock-in and a per-seat licence</div><div class="vc us">A <b><span class="num">₹900</span> sensor</b> and open firmware</div></div>
+      </div>
+      <div class="factory">
+        <div class="h">The data factory</div>
+        <div class="big">2.76<em>M</em></div>
+        <div class="unit">labelled failure minutes</div>
+        <div class="math">8 fridge models × 6 failure modes<br>× 40 ambient profiles × 1,440 min / day<br>= <b>2,764,800</b> minutes, each one labelled</div>
+        <span class="nt sim">Simulated · sim/thermal.py · seeds 1–5</span>
+      </div>
+    </div>
+    <p class="punchline push">Everyone else demos a dashboard. <b class="hot">We demo a 03:00 phone call.</b></p>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 08 · PROOF DECLARED IN ADVANCE ======================================================== -->
+<section class="page paper" data-sec="3">
+  <div class="frame">
+    <div class="kicker">07 · Proof, declared in advance</div>
+    <h2 class="big">Targets set<br><em>before we build.</em></h2>
+    <div class="metrics">
+      <div class="metric"><div class="n">≥ 0.90</div><div class="d"><b>Recall of excursions</b> on 30 held-out failure days</div><span class="nt tgt">Target</span></div>
+      <div class="metric"><div class="n">≤ 1<span>/wk</span></div><div class="d"><b>False alerts</b> per fridge-week, so nurses keep answering</div><span class="nt tgt">Target</span></div>
+      <div class="metric"><div class="n">45<span> min</span></div><div class="d"><b>Median warning</b> before a fridge crosses 8 °C</div><span class="nt tgt">Target</span></div>
+      <div class="metric"><div class="n">&lt; 2<span> min</span></div><div class="d"><b>Reading to ringing phone</b>, timed live on stage</div><span class="nt tgt">Target</span></div>
+    </div>
+    <div class="proofgrid push">
+      <div class="chartbox">
+        <div class="h">Recall at ≤ 1 false alert per fridge-week · named baselines vs our target</div>
+        <svg viewBox="0 0 600 170" aria-label="Recall of two baselines against the declared target">
+          <g font-size="12.5">
+            <text x="0" y="32" fill="#42556A">FIXED 8 °C ALARM</text>
+            <rect x="200" y="16" width="208" height="24" fill="#7F8D99"/><text x="416" y="33" fill="#0F1D27" font-weight="700">0.52</text>
+            <text x="0" y="82" fill="#42556A">RATE-OF-CHANGE RULE</text>
+            <rect x="200" y="66" width="284" height="24" fill="#7F8D99"/><text x="492" y="83" fill="#0F1D27" font-weight="700">0.71</text>
+            <text x="0" y="132" fill="#1D58A6" font-weight="700">VIALWATCH (TARGET)</text>
+            <rect x="200" y="116" width="360" height="24" fill="#1D58A6" fill-opacity=".14"/>
+            <rect x="200" y="116" width="360" height="24" fill="none" stroke="#1D58A6" stroke-width="2" stroke-dasharray="6 4"/>
+            <text x="568" y="133" fill="#1D58A6" font-weight="700">0.90</text>
+          </g>
+          <line x1="200" y1="6" x2="200" y2="150" stroke="#0F1D27" stroke-width="1"/>
+          <g font-size="11" fill="#7F8D99"><text x="200" y="166">0</text><text x="400" y="166" text-anchor="middle">0.5</text><text x="600" y="166" text-anchor="end">1.0</text></g>
+        </svg>
+      </div>
+      <div class="measured">
+        <h4>How we measure it, live</h4>
+        <p><b>Held out before training:</b> 30 failure days from two fridge models the model never saw. <b>Scored by a script</b> in the repo, run on stage, with the baselines through the same pipeline.</p>
+        <p><b>Both baselines are real practice:</b> the fixed alarm most clinics own, and the rate rule a careful engineer would write first.</p>
+        <div class="hold">Hold us to these at the finale. That is the point.</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 09 · RESULTS (after the build) ======================================================== -->
+<!-- Use after the build: it replaces slide 08 once the measurements exist. Every row comes from facts.json. -->
+<section class="page paper" data-sec="3">
+  <div class="frame">
+    <div class="kicker">08 · Results</div>
+    <h2 class="big">Targets vs measurements:<br><em>beaten by 1.03× to 3.4×.</em></h2>
+    <div class="rtags"><span class="nt meas">Measured · eval/score.py · run {{DATE}}</span><span class="nt tgt">Target · declared on slide 08</span></div>
+    <div class="results">
+      <div class="rr hd"><div>Metric</div><div>Target</div><div>Measured</div><div>× target</div></div>
+      <div class="rr"><div class="mname">Recall of excursions<span>30 held-out failure days · 2 unseen fridge models</span></div><div class="tv">≥ 0.90</div><div class="mv">0.93</div><div><span class="pill">1.03×</span></div></div>
+      <div class="rr"><div class="mname">False alerts per fridge-week<span>lower is better · 1,200 fridge-days of normal operation</span></div><div class="tv">≤ 1.0</div><div class="mv">0.6</div><div><span class="pill">1.7×</span></div></div>
+      <div class="rr"><div class="mname">Median warning before 8 °C<span>minutes between our call and the crossing</span></div><div class="tv">45 min</div><div class="mv">52 min</div><div><span class="pill">1.16×</span></div></div>
+      <div class="rr"><div class="mname">Reading to ringing phone<span>p50 of 40 timed runs on the venue SIM</span></div><div class="tv">&lt; 120 s</div><div class="mv">35 s</div><div><span class="pill">3.4×</span></div></div>
+    </div>
+    <div class="rgrid push">
+      <div class="abl">
+        <div class="h">Ablation · recall at ≤ 1 false alert / week</div>
+        <div class="row"><span class="nm">Fixed 8 °C alarm (baseline)</span><span class="tr"><i style="width:52%"></i></span><span class="v">0.52</span></div>
+        <div class="row"><span class="nm">Rate rule (baseline)</span><span class="tr"><i style="width:71%"></i></span><span class="v">0.71</span></div>
+        <div class="row"><span class="nm">Model, no door detection</span><span class="tr"><i style="width:84%"></i></span><span class="v">0.84</span></div>
+        <div class="row prod"><span class="nm">Production: model + door + rules</span><span class="tr"><i style="width:93%"></i></span><span class="v">0.93</span></div>
+      </div>
+      <div class="sets">
+        <div class="h">Eval sets · different authors, frozen before tuning</div>
+        <table>
+          <tr><th>Set</th><th>Size</th><th>Author</th><th>Result</th></tr>
+          <tr><td>held-out failures</td><td>30 days</td><td>simulator, unseen models</td><td>0.93</td></tr>
+          <tr><td>normal operation</td><td>1,200 days</td><td>logged, 3 clinics</td><td>0.6 FA/wk</td></tr>
+          <tr><td>door-heavy days</td><td>60 days</td><td>independent reviewer</td><td>0.88</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 10 · IMPACT ======================================================== -->
+<section class="page" data-sec="4">
+  <div class="frame">
+    <div class="kicker">09 · Impact</div>
+    <h2 class="big">Counted,<br><em>and how we know.</em></h2>
+    <div class="impact">
+      <div class="icol sim"><span class="nt sim">Simulated</span><div class="n">−96<small>%</small></div><div class="d">vials lost to night excursions</div><p class="how"><b>400 simulated clinic-years</b>, seeds 1–5, against the fixed 8 °C alarm. sim/clinic.py</p></div>
+      <div class="icol proj"><span class="nt proj">Projected</span><div class="n"><span class="cur">₹</span>2.1<small>L</small></div><div class="d">saved per district per year</div><p class="how">Only holds if the simulated loss rate holds: <b>96% × 1,800 vials × ₹120</b></p></div>
+      <div class="icol tgt"><span class="nt tgt">Target</span><div class="n">45<small>min</small></div><div class="d">warning before a fridge crosses 8 °C</div><p class="how">Declared on slide 08, <b>measured live</b> on held-out days</p></div>
+    </div>
+    <div class="notyet">
+      <div class="k">Not yet counted</div>
+      <p>Nurse hours saved on paper logs, fewer cancelled immunisation sessions, trust in the cold chain. <b>We will not put a number on these until we have measured them.</b></p>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 11 · SCALE ======================================================== -->
+<section class="page paper" data-sec="4">
+  <div class="frame">
+    <div class="kicker">10 · Scale</div>
+    <h2 class="big">One fridge.<br><em>Then every cold chain.</em></h2>
+    <div class="stairs">
+      <div class="run"><div class="rt">NOW · HACKATHON</div><h4>One clinic</h4><p>Three fridges, one gateway, the nurse's own phone.</p></div>
+      <div class="run r2"><div class="rt">NEXT · 3 MONTHS</div><h4>A district</h4><p>120 clinics on one console and a supervisor tier.</p></div>
+      <div class="run r3"><div class="rt">THEN · YEAR 1</div><h4>A state</h4><p>Wired into the vaccine registry; discard decisions per vial.</p></div>
+      <div class="run r4"><div class="rt">VISION</div><h4>Any cold chain</h4><p>Blood banks, insulin, fresh food: anything that must stay cold.</p></div>
+    </div>
+    <div class="matrix push">
+      <div class="mh"><span>Same five layers, re-pointed</span><span>Zero rebuilds per rung</span></div>
+      <div class="mgrid">
+        <div class="colh">Layer</div><div class="colh now">Clinic · now</div><div class="colh">District</div><div class="colh">State</div><div class="colh">Any cold chain</div>
+        <div class="rowh">Ingest</div><div class="now"><span class="yes"></span>3 sensors</div><div><span class="yes"></span>360 sensors</div><div><span class="yes"></span>registry feed</div><div><span class="yes"></span>any logger</div>
+        <div class="rowh">Forecast</div><div class="now"><span class="yes"></span>per fridge model</div><div><span class="yes"></span>same models</div><div><span class="yes"></span>same models</div><div><span class="yes"></span>new product curves</div>
+        <div class="rowh">Decide</div><div class="now"><span class="yes"></span>nurse on duty</div><div><span class="yes"></span>+ supervisor</div><div><span class="yes"></span>+ district officer</div><div><span class="yes"></span>rules as config</div>
+        <div class="rowh">Notify</div><div class="now"><span class="yes"></span>SMS + voice</div><div><span class="yes"></span>same</div><div><span class="yes"></span>+ registry alert</div><div><span class="yes"></span>same</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 12 · EXECUTION ======================================================== -->
+<section class="page paper" data-sec="4">
+  <div class="frame">
+    <div class="kicker">11 · Execution</div>
+    <h2 class="big">The 24 hours,<br><em>hour by hour.</em></h2>
+    <div class="tl">
+      <div class="tseg"><div class="h">H0</div><div class="w">Rails up: gateway, store, eval harness, repo public</div></div>
+      <div class="tseg"><div class="h">H3</div><div class="w">Three fridges streaming a live curve to the console</div></div>
+      <div class="tseg"><div class="h">H8</div><div class="w">Forecast model and band, scored on held-out days</div></div>
+      <div class="tseg freeze"><div class="h">H12 · FREEZE</div><div class="w">Rules and phone call end to end; only fixes after this</div></div>
+      <div class="tseg"><div class="h">H16</div><div class="w">Evals run; backup video saved in two places</div></div>
+      <div class="tseg"><div class="h">H20</div><div class="w">Rehearse twice. The presenter sleeps.</div></div>
+    </div>
+    <p class="demo"><b>The demo:</b> a judge holds a fridge door open, the curve bends, and VialWatch says <b>"restock or failure? unsure"</b> and asks. We pull the plug on fridge two: the forecast crosses 8 °C, <b>a phone rings on stage</b>, and the log writes itself.</p>
+    <div class="pm">
+      <div class="ph">Pre-mortem · what breaks, and what is ready</div>
+      <div class="pr"><b>Venue Wi-Fi fails</b><span>The gateway forecasts offline and calls over a SIM; Wi-Fi is not on the path.</span></div>
+      <div class="pr"><b>The forecast is wrong on stage</b><span>Rules still call at the limit; the band is shown; a recorded run is the fallback.</span></div>
+      <div class="pr"><b>SMS provider rate-limits us</b><span>Voice-call fallback, two pre-registered numbers, tested at H16.</span></div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 13 · CLOSE + THE ASK ======================================================== -->
+<section class="page" data-sec="5">
+  <div class="close-title">Every dose,<br><em>kept cold.</em></div>
+  <div class="rule"></div>
+  <div class="roster-h kicker">The team</div>
+  <div class="roster">
+    <div class="member"><div class="nm">{{NAME 1}}</div><div class="rl">{{ROLE 1}}</div></div>
+    <div class="member"><div class="nm">{{NAME 2}}</div><div class="rl">{{ROLE 2}}</div></div>
+    <div class="member"><div class="nm">{{NAME 3}}</div><div class="rl">{{ROLE 3}}</div></div>
+  </div>
+  <div class="ask">
+    <div class="k">The ask</div>
+    <!-- small and specific: what you need, from whom, by when -->
+    <p>A table at the finale, two fridges and a power strip. <em>We hand back a cold chain that calls for help.</em></p>
+  </div>
+  <div class="back-meta">
+    <div><div class="k">Event</div><div class="v">{{EVENT}}</div></div>
+    <div><div class="k">Track</div><div class="v">{{TRACK}}</div></div>
+    <div><div class="k">Date</div><div class="v">{{DATE}}</div></div>
+    <div><div class="k">Contact</div><div class="v">{{CONTACT}}</div></div>
+  </div>
+  <p class="sources"><b>Sources:</b> {{SOURCE 1}} · {{SOURCE 2}} · {{SOURCE 3}}. <b>Method:</b> simulation and scoring scripts in the repository; every number is traced on slide 14. <b>Note:</b> VialWatch is a fictional sample product; screens are concept mock-ups and every value in this deck is invented to show the layout.</p>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div class="folio"></div></div>
+</section>
+
+<!-- ======================================================== 14 · APPENDIX ======================================================== -->
+<section class="page" data-sec="5">
+  <div class="frame">
+    <div class="kicker">Appendix · sources, method, credits</div>
+    <h2 class="big">Every number,<br><em>and where it came from.</em></h2>
+    <div class="acols">
+      <div class="acol"><h5>Sources</h5>
+        <p><b>1 in 4 fridges with an excursion:</b> {{SOURCE, YEAR, URL}}.</p>
+        <p><b>7.3 hrs median to notice:</b> {{SOURCE, YEAR, URL}}.</p>
+        <p><b>18% of doses discarded:</b> {{SOURCE, YEAR, URL}}.</p>
+        <p><b>Analogy years (slide 03):</b> {{SOURCE FOR EACH YEAR}}.</p>
+      </div>
+      <div class="acol"><h5>Method</h5>
+        <p><b>eval/score.py:</b> the measured results on slide 09, from 30 held-out failure days and 1,200 normal fridge-days.</p>
+        <p><b>sim/thermal.py, sim/clinic.py:</b> 8 fridge models, 6 failure modes, 40 ambient profiles, seeds 1–5; 400 clinic-years against the fixed alarm.</p>
+        <p><b>Limits:</b> door behaviour is modelled, not logged; the <span class="num">₹</span> figure holds only if the simulated loss rate holds.</p>
+      </div>
+      <div class="acol"><h5>Photo and map credits</h5>
+        <p><b>Slide 03:</b> {{ARTIST}} · {{SOURCE}} · {{LICENCE}}. Grade and ramp baked into the JPEG.</p>
+        <p>Every credit is also in <b>photo-credits.json</b> beside the deck source.</p>
+        <p><b>Illustrative:</b> the console, fridge readings and forecasts drawn on slides 01 and 05.</p>
+      </div>
+    </div>
+    <div class="types push">
+      <div><span class="nt meas">Measured</span><br>Our scripts on real data; the run is in the repo.</div>
+      <div><span class="nt">Sourced</span><br>Cited above, with year and link.</div>
+      <div><span class="nt sim">Simulated</span><br>A script in the repo; seeds and assumptions stated.</div>
+      <div><span class="nt proj">Projected</span><br>Derived from others; says what it depends on.</div>
+      <div><span class="nt tgt">Target</span><br>Declared now, measured live.</div>
+      <div><span class="nt ill">Illustrative</span><br>UI values and overlays; not evidence.</div>
+    </div>
+  </div>
+  <div class="foot"><div class="vvm"><i></i><i></i><i></i><i></i><i></i></div><div><span class="note">Appendix · not part of the timed pitch</span><span class="folio"></span></div></div>
+</section>
+
+<!-- QA probe: runs only when the URL ends in ?qa=1 (render-pdf.mjs --qa). It outlines text cut by a clipping box
+     or the page edge, text below the frame or touching the footer, overlapping text, and a --total that does not
+     match the page count, then stamps a list on the page. Without ?qa=1 it does nothing.
+     Mark a deliberate overlap or bleed with data-qa-skip. -->
+<script>
+(function () {
+  if (!/[?&]qa=1\b/.test(location.search)) return;
+  var MM = 25.4 / 96, TOL = 0.6 / MM;
+  function lineRects(el) {           /* one rect per rendered line of each direct text node */
+    var out = [];
+    if (el instanceof SVGElement) { if (el.tagName === 'text') { var b = el.getBoundingClientRect(); if (b.width && b.height) out.push(b); } return out; }
+    for (var i = 0; i < el.childNodes.length; i++) {
+      var n = el.childNodes[i];
+      if (n.nodeType !== 3 || !n.textContent.trim()) continue;
+      var r = document.createRange(); r.selectNodeContents(n);
+      var list = r.getClientRects();
+      for (var j = 0; j < list.length; j++) if (list[j].width > 0.5 && list[j].height > 0.5) out.push(list[j]);
+    }
+    return out;
+  }
+  function core(r, k) { var h = r.bottom - r.top; return { left: r.left, right: r.right, top: r.top + h * k, bottom: r.bottom - h * k }; }
+  function area(r) { return Math.max(0, r.right - r.left) * Math.max(0, r.bottom - r.top); }
+  function inter(a, b) {
+    var w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+    return w > 0 && h > 0 ? w * h : 0;
+  }
+  function name(el) {
+    var c = (el.getAttribute('class') || '').split(/\s+/)[0];
+    var t = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 26);
+    return el.tagName.toLowerCase() + (c ? '.' + c : '') + ' "' + t + '"';
+  }
+  function clips(el) {
+    if (el.tagName.toLowerCase() === 'svg') return getComputedStyle(el).overflow !== 'visible';
+    var s = getComputedStyle(el); return /hidden|clip/.test(s.overflowX + ' ' + s.overflowY);
+  }
+  function run() {
+    var pages = document.querySelectorAll('.page');
+    var total = getComputedStyle(document.documentElement).getPropertyValue('--total').replace(/["'\s]/g, '');
+    for (var p = 0; p < pages.length; p++) {
+      var page = pages[p], issues = [], flagged = [], texts = [];
+      if (p === 0 && total && Number(total) !== pages.length) issues.push('FOLIO --total is ' + total + ' but the document has ' + pages.length + ' pages');
+      var foot = page.querySelector('.foot, .footer-tag');
+      var fr = foot ? foot.getBoundingClientRect() : null;
+      var all = page.querySelectorAll('*');
+      for (var i = 0; i < all.length; i++) {
+        var el = all[i];
+        if (el.closest('[data-qa-skip]') || el.closest('.qa-stamp')) continue;
+        var rects = lineRects(el);
+        if (!rects.length) continue;
+        texts.push({ el: el, rects: rects });
+        for (var a = el.parentElement; a && (a === page || page.contains(a)); a = a.parentElement) {
+          if (clips(a)) {
+            var ar = a.getBoundingClientRect(), cut = 0;
+            rects.forEach(function (r) { var c = core(r, 0.15); cut = Math.max(cut, c.right - ar.right, c.bottom - ar.bottom, ar.left - c.left, ar.top - c.top); });
+            if (cut > TOL) { issues.push('CUT ' + name(el) + ' by ' + (cut * MM).toFixed(1) + ' mm (clipped by ' + (a === page ? 'the page' : name(a).split(' ')[0]) + ')'); flagged.push(el); break; }
+          }
+          if (a === page) break;
+        }
+        var frame = el.closest('.frame, .pad');
+        if (frame) {
+          var fs = getComputedStyle(frame), frb = frame.getBoundingClientRect().bottom - parseFloat(fs.paddingBottom || 0), low = 0;
+          rects.forEach(function (r) { low = Math.max(low, core(r, 0.2).bottom - frb); });
+          if (low > TOL) { issues.push('BELOW FRAME ' + name(el) + ' by ' + (low * MM).toFixed(1) + ' mm'); flagged.push(el); }
+        }
+        if (fr && !foot.contains(el)) {
+          var guard = { left: fr.left, right: fr.right, top: fr.top - 1 / MM, bottom: fr.bottom };
+          if (rects.some(function (r) { return inter(core(r, 0.2), guard) > 0; })) { issues.push('FOOTER ' + name(el) + ' touches the footer band'); flagged.push(el); }
+        }
+      }
+      for (var x = 0; x < texts.length; x++) for (var y = x + 1; y < texts.length; y++) {
+        var A = texts[x], B = texts[y];
+        if (A.el.contains(B.el) || B.el.contains(A.el)) continue;
+        var hit = A.rects.some(function (ra) { return B.rects.some(function (rb) {
+          var ca = core(ra, 0.25), cb = core(rb, 0.25);
+          return inter(ca, cb) > 0.2 * Math.min(area(ca), area(cb)); }); });
+        if (hit) { issues.push('OVERLAP ' + name(A.el) + ' x ' + name(B.el)); flagged.push(A.el, B.el); }
+      }
+      if (!issues.length) continue;
+      flagged.forEach(function (el) { if (el instanceof SVGElement) el.style.fill = '#E00020'; else { el.style.outline = '0.5mm solid #E00020'; el.style.outlineOffset = '0'; } });
+      var stamp = document.createElement('div');
+      stamp.className = 'qa-stamp';
+      stamp.setAttribute('style', 'position:absolute;left:2mm;top:2mm;z-index:2147483647;max-width:200mm;background:#FFFFFF;color:#C00018;border:0.5mm solid #E00020;font:600 6.6pt/1.35 monospace;padding:1.4mm 2.2mm;white-space:pre-wrap');
+      stamp.textContent = 'BULLSEYE-QA · ' + issues.length + ' issue(s)\n' + issues.slice(0, 8).join('\n') + (issues.length > 8 ? '\n...' : '');
+      page.appendChild(stamp);
+    }
+  }
+  /* measure only after every face in use has loaded: force layout so lazy faces start, then poll */
+  void document.body.offsetHeight;
+  var tries = 0;
+  (function settle() {
+    if (document.fonts && document.fonts.status !== 'loaded' && tries++ < 200) { setTimeout(settle, 50); return; }
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { setTimeout(run, 100); });
+  })();
+})();
+</script>
+</body>
+</html>

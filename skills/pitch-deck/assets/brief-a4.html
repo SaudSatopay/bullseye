@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VialWatch Concept Brief</title>
+<!--
+  BULLSEYE pitch-deck starter · A4 concept brief / proposal as code (route A: HTML + print CSS -> PDF)
+
+  VialWatch is a FICTIONAL sample product; every number is invented to show the layout.
+  A brief is read without a presenter: keep real prose, one visual per page ("a proposal, not an infographic").
+  Page grammar, every inner page:
+    mono secno "04 / SYSTEM ARCHITECTURE" -> two-line statement h1 with an accent span -> lead paragraph
+    -> ONE visual block -> navy takeaway band -> absolute footer tag (product · doc | NN · section)
+  Print rules this file follows:
+    - @page A4, margin 0; .page is 210 x 296 mm (1 mm under A4 so no page can spill onto a blank sheet);
+      a zero-blur box-shadow in the page colour seals that 1 mm so no strip of the desk colour prints
+    - vector only: inline SVG and CSS shapes; fill-opacity / stroke-opacity instead of element opacity;
+      no CSS or SVG filter, no blurred shadows, no mix-blend-mode
+    - static fonts only (a variable font prints as Type3); symbols the default subsets miss come from text=
+    - SVG text at least about 9 user units when a 720-unit-wide diagram spans the 178 mm text column (about 6 pt)
+    - every number typed: MEASURED, SOURCED, SIMULATED, PROJECTED, TARGET, ILLUSTRATIVE
+    - footer tags number themselves (CSS counters); edit --product, --doc and --total only
+  Render: node render-pdf.mjs brief-a4.html --out out/Brief.pdf --expect-pages 8   (then finalize-pdf.py, qa-pdf.py)
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&text=%E2%89%A4%E2%89%A5%E2%89%88%E2%82%B9%E2%86%92&display=swap">
+<style>
+  :root {
+    --product: "VIALWATCH";
+    --doc: "Concept brief";
+    --total: "08";
+
+    /* roles: navy carries the cover and the takeaway bands, paper carries the reading */
+    --navy: #0B1D2A; --navy-2: #12293A; --navy-3: #1D3B52; --navy-ink: #E6EEF2; --navy-ink-2: #9FB4C3;
+    --paper: #F5F3EC; --paper-2: #ECE8DD; --line: #D6D1C4;
+    --ink: #17202A; --ink-2: #44505C; --muted: #77818B;
+    --accent: #1D58A6;          /* ballpoint blue: the brand on paper */
+    --accent-soft: #D7E4F3;
+    --frost: #8FD3F4;           /* the same brand on navy */
+    --trap: #B8382B;            /* the misleading number, the failure */
+    --truth: #1E7A4E;           /* proven, measured, clear */
+    --open: #A86300;            /* open risk, uncertain */
+    --model: #6447CF;           /* model output */
+
+    --font-display: "Barlow Semi Condensed", "Bahnschrift", "Arial Narrow", sans-serif;
+    --font-body: "Spectral", Georgia, "Times New Roman", serif;
+    --font-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4; margin: 0; }
+  html, body { background: #33373D; }
+  @media print { html, body { background: var(--paper); } }
+  body { font-family: var(--font-body); counter-reset: sheet; }
+  .page { --pg: var(--paper); position: relative; width: 210mm; height: 296mm; overflow: hidden; page-break-after: always;
+          background: var(--pg); color: var(--ink); box-shadow: 0 1.5mm 0 0 var(--pg); counter-increment: sheet; }
+  .page:last-child { page-break-after: auto; }
+  @media screen { .page { margin: 0 auto 8mm; } body { padding: 8mm 0; } }
+  .pad { position: absolute; inset: 0; padding: 17mm 16mm 21mm; display: flex; flex-direction: column; }
+  .push { margin-top: auto; }
+
+  /* ---------------------------------------------------------------- page grammar */
+  .secno { font: 600 8.6pt/1 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .secno b { color: var(--accent); font-weight: 600; }
+  h1.sec { font: 800 30pt/.98 var(--font-display); letter-spacing: -.01em; margin-top: 3.4mm; color: var(--navy); }
+  h1.sec .em { color: var(--accent); }
+  .rule { width: 15mm; height: .9mm; background: var(--accent); margin-top: 4.4mm; }
+  .lead { font: 400 11pt/1.55 var(--font-body); color: #2E3843; margin-top: 4.6mm; max-width: 168mm; }
+  .lead b { font-weight: 600; color: var(--ink); }
+  .take { background: var(--navy); color: var(--navy-ink); padding: 6mm 7mm; }
+  .take .lbl { font: 600 7.6pt/1 var(--font-mono); letter-spacing: .24em; text-transform: uppercase; color: var(--frost); }
+  .take p { font: 400 12.4pt/1.5 var(--font-body); margin-top: 2.6mm; }
+  .take p b { color: var(--frost); font-weight: 500; }
+  .footer-tag { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; justify-content: space-between;
+                border-top: .3mm solid var(--line); padding-top: 3mm; font: 500 7pt/1 var(--font-mono); letter-spacing: .14em;
+                text-transform: uppercase; color: var(--muted); }
+  .footer-tag .l::before { content: var(--product) "  ·  " var(--doc); }
+  .footer-tag .l { color: var(--muted); }
+  .footer-tag .r::after { content: "  ·  " counter(sheet, decimal-leading-zero) " / " var(--total); }
+  .mono, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .nt { display: inline-flex; align-items: center; height: 4.2mm; padding: 0 1.6mm; border: .25mm solid var(--muted); color: var(--ink-2);
+        font: 600 6.2pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+  .nt.meas { border-color: var(--truth); color: var(--truth); }
+  .nt.sim { border-style: dashed; }
+  .nt.proj { border-style: dotted; }
+  .nt.tgt { border-color: var(--accent); color: var(--accent); }
+  .nt.ill { border-color: transparent; padding-left: 0; color: var(--muted); }
+  .h5 { font: 600 7.6pt/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+  svg text { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------------------------------------------------------------- cover */
+  .cover { --pg: var(--navy); color: var(--navy-ink); }
+  .cover .pad { padding: 18mm 16mm 16mm; }
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; font: 600 7.8pt/1.4 var(--font-mono); letter-spacing: .2em;
+               text-transform: uppercase; color: var(--navy-ink-2); position: relative; z-index: 2; }
+  .badge { color: var(--frost); border: .3mm solid var(--navy-3); padding: 2.2mm 3mm; }
+  .mark { position: absolute; right: -38mm; top: 22mm; width: 190mm; height: 190mm; z-index: 1; }
+  .wordmark { margin-top: auto; position: relative; z-index: 2; }
+  .wordmark .kick { font: 600 9.4pt/1 var(--font-mono); letter-spacing: .3em; text-transform: uppercase; color: var(--frost); display: flex; align-items: center; gap: 4mm; }
+  .wordmark .kick::before { content: ""; width: 14mm; height: .6mm; background: var(--frost); }
+  .wordmark .mk { margin-top: 5mm; font: 800 70pt/.86 var(--font-display); letter-spacing: -.02em; color: #FFFFFF; }
+  .wordmark .mk b { color: var(--frost); font-weight: 800; }
+  .wordmark .tagline { margin-top: 4mm; font: 600 15pt/1.2 var(--font-display); color: var(--frost); }
+  .manifesto { margin-top: 7mm; max-width: 156mm; font: 400 12pt/1.6 var(--font-body); color: #CFDCE5; }
+  .manifesto b { color: #FFFFFF; font-weight: 500; }
+  .cstats { display: flex; gap: 9mm; margin-top: 9mm; position: relative; z-index: 2; }
+  .cstats .n { font: 800 22pt/1 var(--font-display); color: var(--frost); }
+  .cstats .l { margin-top: 1.8mm; max-width: 46mm; font: 500 7.2pt/1.45 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--navy-ink-2); }
+  .cstats .nt { margin-top: 1.8mm; color: var(--navy-ink-2); border-color: var(--navy-3); }
+  .cover-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; margin-top: 11mm; border-top: .3mm solid var(--navy-3); padding-top: 4.4mm;
+                font: 500 7.6pt/1.5 var(--font-mono); letter-spacing: .04em; color: var(--navy-ink-2); position: relative; z-index: 2; }
+  .cover-foot b { color: var(--frost); font-weight: 600; }
+  .cover-foot .ps { text-align: right; max-width: 70mm; }
+
+  /* ---------------------------------------------------------------- problem */
+  .nightviz { margin-top: 6mm; background: var(--navy); padding: 5mm 6mm 4.4mm; color: var(--navy-ink); }
+  .nightviz .top { display: flex; justify-content: space-between; font: 600 7pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--navy-ink-2); }
+  .nightviz svg { display: block; width: 100%; height: auto; margin-top: 3mm; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin-top: 6mm; }
+  .card { border: .3mm solid var(--line); border-top: .9mm solid var(--trap); background: var(--paper-2); padding: 4.4mm 4.4mm 4mm; }
+  .card .n { font: 800 24pt/1 var(--font-display); color: var(--navy); }
+  .card .n small { font-size: 12pt; color: var(--ink-2); margin-left: .8mm; }
+  .card .l { margin-top: 2.4mm; font: 500 7.4pt/1.45 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+  .card .nt { margin-top: 2.6mm; }
+  .anat { margin-top: 6mm; }
+  .flowrow { display: flex; align-items: stretch; gap: 2.4mm; margin-top: 3mm; }
+  .fcell { flex: 1; border: .3mm solid var(--line); border-top: .9mm solid var(--navy); background: var(--paper-2); padding: 3.4mm 3.2mm; }
+  .fcell .fi { font: 600 7.6pt/1 var(--font-mono); color: var(--accent); }
+  .fcell .ft { margin: 1.8mm 0 1.4mm; font: 700 11pt/1.05 var(--font-display); color: var(--navy); }
+  .fcell .fd { font: 400 8.8pt/1.38 var(--font-body); color: #3A4450; }
+  .fcell.bad { border-top-color: var(--trap); }
+  .farrow { align-self: center; font: 600 12pt/1 var(--font-mono); color: var(--accent); }   /* the display face has no arrow glyph */
+
+  /* ---------------------------------------------------------------- product */
+  .ui { margin-top: 6mm; background: #0B151C; border: .3mm solid #22333F; color: #E6EEF2; }
+  .ui-bar { display: flex; justify-content: space-between; align-items: center; padding: 2.8mm 4mm; border-bottom: .3mm solid #22333F;
+            font: 600 7pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: #9FB4C3; }
+  .ui-bar .ill { color: #8FD3F4; border: .25mm solid #2E4D63; padding: 1mm 1.8mm; letter-spacing: .1em; }
+  .ui-body { display: grid; grid-template-columns: 1.4fr 1fr; }
+  .ui-main { padding: 5mm 5mm 4.6mm; }
+  .ui-side { padding: 5mm 4.6mm; background: #08111A; border-left: .3mm solid #22333F; display: flex; flex-direction: column; gap: 4mm; }
+  .ui-acct { display: flex; justify-content: space-between; align-items: flex-start; gap: 4mm; }
+  .ui-acct .id { font: 700 13pt/1.1 var(--font-display); color: #FFFFFF; }
+  .ui-acct .meta { margin-top: 1.2mm; font: 500 7.2pt/1.5 var(--font-mono); color: #9FB4C3; text-transform: uppercase; letter-spacing: .04em; }
+  .ui-badge { border: .4mm solid #F5B544; background: #2A2213; padding: 2.4mm 4.4mm; text-align: center; }
+  .ui-badge .sc { font: 800 21pt/1 var(--font-display); color: #FFFFFF; }
+  .ui-badge .lv { margin-top: 1.2mm; font: 600 6.8pt/1 var(--font-mono); letter-spacing: .14em; color: #F5B544; }
+  .ui-h { margin: 5mm 0 2.8mm; font: 600 7pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: #8FD3F4; }
+  .ui-row { margin-bottom: 2.6mm; }
+  .ui-row .rl { display: flex; justify-content: space-between; gap: 3mm; font: 500 7.6pt/1.2 var(--font-mono); color: #DCE6EC; margin-bottom: 1.2mm; }
+  .ui-row .rl .v { color: #8FD3F4; font-weight: 600; }
+  .ui-row .src { display: inline-block; width: 2mm; height: 2mm; margin-right: 1.6mm; vertical-align: .1mm; }
+  .src.real { background: #43D697; }
+  .src.prod { border: .3mm solid #8FD3F4; }
+  .ui-row .rb { height: 2mm; background: #1D2E39; }
+  .ui-row .rb i { display: block; height: 100%; background: #8FD3F4; }
+  .ui-legend { display: flex; gap: 6mm; margin-top: 3.4mm; font: 500 6.8pt/1.3 var(--font-mono); color: #9FB4C3; }
+  .ui-legend span { display: inline-flex; align-items: center; gap: 1.6mm; }
+  .ui-legend i { display: inline-block; width: 2mm; height: 2mm; }
+  .ui-rec { border: .3mm solid #2E4D63; background: #12293A; padding: 4mm; }
+  .ui-rec .t { font: 600 6.8pt/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: #F5B544; }
+  .ui-rec .a { margin: 2.2mm 0 1.6mm; font: 800 13pt/1.1 var(--font-display); color: #FFFFFF; }
+  .ui-rec .s { font: 500 7pt/1.5 var(--font-mono); color: #9FB4C3; }
+  .ui-btns { display: flex; gap: 2.2mm; margin-top: 3.4mm; }
+  .ui-btn { flex: 1; text-align: center; padding: 2.2mm 0; font: 700 8pt/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase; border: .3mm solid #2E4D63; color: #CFDCE5; }
+  .ui-btn.pri { background: #F5B544; border-color: #F5B544; color: #0B151C; }
+  .ui-log { border: .3mm solid #22333F; padding: 3.6mm; font: 500 7pt/1.65 var(--font-mono); color: #9FB4C3; flex: 1; }
+  .ui-log b { color: #E6EEF2; font-weight: 600; }
+  .ui-foot { display: flex; justify-content: space-between; padding: 2.4mm 4mm; border-top: .3mm solid #22333F; font: 500 6.6pt/1 var(--font-mono); letter-spacing: .06em; color: #77909F; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin-top: 5mm; }
+  .tile { border: .3mm solid var(--line); border-left: .9mm solid var(--accent); background: var(--paper-2); padding: 3.6mm 4mm; }
+  .tile .t { font: 700 11.4pt/1.1 var(--font-display); color: var(--navy); }
+  .tile .s { margin-top: 1.4mm; font: 400 9pt/1.42 var(--font-body); color: #3A4450; }
+
+  /* ---------------------------------------------------------------- how it works */
+  .archsvg { margin-top: 6mm; }
+  .archsvg svg { display: block; width: 100%; height: auto; }
+  .lat { margin-top: 5mm; }
+  .lat .bar { display: grid; grid-template-columns: 2.4fr 1.45fr 1.15fr 1.4fr 1.8fr; height: 8.4mm; border: .3mm solid var(--navy); }
+  .lat .seg { display: flex; align-items: center; justify-content: center; font: 600 6.8pt/1 var(--font-mono); color: #FFFFFF; background: var(--navy); border-right: .3mm solid var(--paper); white-space: nowrap; }
+  .lat .seg.m { background: var(--model); }
+  .lat .seg.d { background: var(--accent); }
+  .lat .seg:last-child { border-right: 0; }
+  .lat .cap { display: flex; justify-content: space-between; margin-top: 1.6mm; font: 600 6.8pt/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2); }
+  .trace { margin-top: 5mm; border: .3mm solid var(--line); background: var(--paper-2); padding: 3.4mm 4.4mm; font: 500 7.8pt/1.75 var(--font-mono); color: var(--ink-2); }
+  .trace .h5 { margin-bottom: 1.6mm; }
+  .trace .t { display: inline-block; width: 26mm; color: var(--muted); }
+  .trace b { color: var(--navy); font-weight: 600; }
+  .trace .m { color: var(--model); font-weight: 600; }
+  .trace .ok { color: var(--truth); font-weight: 600; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; margin-top: 6mm; }
+  .three .h5 { margin-bottom: 2.2mm; }
+  .three p { font: 400 9.6pt/1.5 var(--font-body); color: #2E3843; }
+  .three p b { font-weight: 600; color: var(--ink); }
+
+  /* ---------------------------------------------------------------- proof */
+  .steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.6mm; margin-top: 6mm; }
+  .stp { border: .3mm solid var(--line); background: var(--paper-2); padding: 4mm 4.2mm; }
+  .stp .tag { font: 600 6.8pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .stp h4 { margin: 2mm 0 1.4mm; font: 700 11.4pt/1.1 var(--font-display); color: var(--navy); }
+  .stp .v { font: 800 17pt/1 var(--font-display); color: var(--navy); }
+  .stp .v.bad { color: var(--trap); }
+  .stp .v.good { color: var(--truth); }
+  .stp p { margin-top: 1.6mm; font: 400 8.8pt/1.42 var(--font-body); color: #3A4450; }
+  .proof { display: flex; gap: 7mm; align-items: center; margin-top: 4.4mm; background: var(--navy); color: #FFFFFF; padding: 6mm; }
+  .proof .n { font: 800 40pt/.9 var(--font-display); color: var(--frost); letter-spacing: -.02em; }
+  .proof .n small { font-size: 20pt; color: #FFFFFF; }
+  .proof .sub { margin-top: 1.4mm; font: 700 12pt/1.2 var(--font-display); }
+  .proof .meta { margin-top: 2.8mm; font: 500 7.6pt/1.55 var(--font-mono); letter-spacing: .05em; color: var(--navy-ink-2); }
+  .proof .nt { margin-top: 2.6mm; color: #9FE7C3; border-color: #3E8A66; }
+  .proof .chart { flex: none; }
+  .jp { display: grid; grid-template-columns: 1.15fr 1fr; gap: 4.4mm; margin-top: 4.4mm; }
+  .jpbox { border: .3mm solid var(--line); border-top: .9mm solid var(--accent); background: var(--paper-2); padding: 3.6mm 4.2mm; }
+  .opm { width: 100%; border-collapse: collapse; margin-top: 2.6mm; font-family: var(--font-mono); }
+  .opm th { font: 500 6.4pt/1.2 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); text-align: right; padding: 0 0 1.8mm; }
+  .opm th:first-child, .opm td:first-child { text-align: left; }
+  .opm td { font: 500 8.6pt/1 var(--font-mono); color: var(--navy); text-align: right; padding: 1.8mm 0; border-top: .3mm solid var(--line); }
+  .opm td:first-child { color: var(--accent); font-weight: 600; }
+  .opm tr.hi td { font-weight: 700; }
+  .opcap, .fdcap { margin-top: 2.6mm; font: 400 8.2pt/1.42 var(--font-body); color: #3A4450; }
+  .opcap b, .fdcap b { font-weight: 600; color: var(--ink); }
+  .fd .row { margin-top: 2.8mm; }
+  .fd .lab { display: flex; justify-content: space-between; font: 500 7.4pt/1.2 var(--font-mono); color: #3A4450; margin-bottom: 1.2mm; }
+  .fd .lab b { font: 800 11pt/1 var(--font-display); color: var(--navy); }
+  .fd .track { height: 5mm; background: var(--paper); border: .3mm solid var(--line); }
+  .fd .fill { height: 100%; background: #6D7F8F; }
+  .fd .fill.ours { background: var(--accent); }
+
+  /* ---------------------------------------------------------------- feasibility */
+  .risk2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4.4mm; margin-top: 6mm; }
+  .rcol { border: .3mm solid var(--line); background: var(--paper-2); padding: 4mm 4.4mm; }
+  .rcol.proven { border-left: .9mm solid var(--truth); }
+  .rcol.open { border-left: .9mm solid var(--open); }
+  .rcol .rh { font: 600 7.2pt/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3mm; }
+  .rcol.proven .rh { color: var(--truth); } .rcol.open .rh { color: var(--open); }
+  .rcol li { list-style: none; position: relative; padding-left: 4.6mm; margin-bottom: 2.4mm; font: 400 9pt/1.42 var(--font-body); color: #2E3843; }
+  .rcol li:last-child { margin-bottom: 0; }
+  .rcol li b { font-weight: 600; color: var(--ink); }
+  .rcol li::before { content: ""; position: absolute; left: 0; top: 1.4mm; width: 2.2mm; height: 2.2mm; }
+  .rcol.proven li::before { background: var(--truth); }
+  .rcol.open li::before { border: .35mm solid var(--open); }
+  .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5.4mm; margin-top: 6mm; }
+  .rst { position: relative; border: .3mm solid var(--line); border-top: .9mm solid var(--accent); background: var(--paper-2); padding: 3.6mm 3.6mm 4mm; display: flex; flex-direction: column; }
+  .rst:not(:last-child)::after { content: ""; position: absolute; right: -4.2mm; top: 6.4mm; border-left: 2.2mm solid var(--accent); border-top: 1.6mm solid transparent; border-bottom: 1.6mm solid transparent; }
+  .rst .rno { width: 6.6mm; height: 6.6mm; border-radius: 50%; background: var(--accent); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font: 800 9pt/1 var(--font-display); }
+  .rst .wk { margin-top: 2.4mm; font: 600 6.6pt/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .rst h4 { margin: 1.6mm 0 1.6mm; font: 700 11pt/1.1 var(--font-display); color: var(--navy); }
+  .rst p { font: 400 8.6pt/1.4 var(--font-body); color: #3A4450; margin-bottom: 3mm; }
+  .rst .gate { margin-top: auto; border-left: .5mm solid var(--accent); padding-left: 2.2mm; font: 500 6.8pt/1.4 var(--font-mono); color: var(--navy); }
+  .rst .gate b { color: var(--accent); }
+  .principles { display: flex; flex-wrap: wrap; gap: 2.2mm; margin-top: 5mm; }
+  .principles span { font: 500 7.4pt/1 var(--font-mono); color: var(--navy); background: var(--paper-2); border: .3mm solid var(--line); border-left: .6mm solid var(--accent); padding: 2.2mm 2.8mm; }
+
+  /* ---------------------------------------------------------------- competitive edge */
+  .cmp { margin-top: 6mm; }
+  .cmp table { width: 100%; border-collapse: collapse; }
+  .cmp th, .cmp td { text-align: center; padding: 3.2mm 1.4mm; border-bottom: .3mm solid var(--line); }
+  .cmp th { font: 500 6.8pt/1.25 var(--font-mono); letter-spacing: .02em; text-transform: uppercase; color: var(--muted); vertical-align: bottom; }
+  .cmp th.rowh, .cmp td.rowh { text-align: left; }
+  .cmp td.rowh { font: 700 10pt/1.1 var(--font-display); color: var(--navy); }
+  .cmp td.rowh span { display: block; margin-top: .8mm; font: 400 6.6pt/1.3 var(--font-mono); color: var(--muted); }
+  .cmp tr.me td { background: var(--navy); }
+  .cmp tr.me td.rowh { color: #FFFFFF; }
+  .cmp tr.me td.rowh span { color: var(--frost); }
+  .rate { display: inline-block; width: 3.6mm; height: 3.6mm; border-radius: 50%; vertical-align: middle; }   /* full / partial / none, drawn in CSS: no glyph to lose */
+  .rate.y { background: var(--accent); }
+  .rate.p { background: linear-gradient(90deg, var(--accent) 50%, transparent 50%); border: .45mm solid var(--accent); }
+  .rate.n { border: .35mm solid #A7ADB2; }
+  .cmp tr.me .rate.y { background: var(--frost); }
+  .legend { display: flex; gap: 6mm; margin-top: 3mm; font: 500 7pt/1 var(--font-mono); color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 1.8mm; }
+  .legend .rate { width: 2.8mm; height: 2.8mm; }
+  .note { margin-top: 5mm; font: 400 9.4pt/1.5 var(--font-body); color: #2E3843; }
+  .note b { font-weight: 600; color: var(--ink); }
+  .prior { margin-top: 5mm; border: .3mm solid var(--line); border-left: .9mm solid var(--open); background: var(--paper-2); padding: 3.6mm 4.4mm; }
+  .prior .h5 { color: var(--open); }
+  .prior p { margin-top: 2mm; font: 400 9.2pt/1.45 var(--font-body); color: #2E3843; }
+
+  /* ---------------------------------------------------------------- impact + back */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.6mm; margin-top: 6mm; }
+  .mx { border: .3mm solid var(--line); border-left: .9mm solid var(--accent); background: var(--paper-2); padding: 3.6mm 4mm; }
+  .mx .n { font: 800 22pt/1 var(--font-display); color: var(--navy); }
+  .mx .n .cur { font: 600 15pt/1 var(--font-body); margin-right: .6mm; }
+  .mx .l { margin-top: 1.8mm; font: 500 7pt/1.4 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); }
+  .mx .nt { margin-top: 2.2mm; }
+  .notyet { margin-top: 3.6mm; font: 400 9.2pt/1.45 var(--font-body); color: #2E3843; }
+  .notyet b { font-weight: 600; color: var(--open); }
+  .types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2mm 5mm; margin-top: 4.4mm; }
+  .types div { font: 400 8.4pt/1.35 var(--font-body); color: #3A4450; }
+  .types .nt { margin-right: 1.6mm; }
+  .closing { margin-top: 5mm; background: var(--accent); color: #FFFFFF; padding: 6.6mm 7mm; }
+  .closing p { font: 700 14pt/1.3 var(--font-display); }
+  .team4 { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 5mm; }
+  .mem { border: .3mm solid var(--line); border-left: .9mm solid var(--accent); padding: 3.4mm 4mm; }
+  .mem .nm { font: 700 11pt/1 var(--font-display); color: var(--navy); }
+  .mem .rl { margin-top: 1.4mm; font: 500 7pt/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .refs { margin-top: 5mm; }
+  .refs .row { font: 400 7.6pt/1.52 var(--font-mono); color: var(--ink-2); margin-bottom: 1.8mm; }
+  .refs .rk { color: var(--accent); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-right: 2.4mm; }
+  .refs .row b { color: var(--navy); font-weight: 600; }
+  .endstamp { display: flex; justify-content: center; margin-top: 5mm; }
+  .endstamp span { display: inline-flex; align-items: center; gap: 3mm; border: .4mm solid var(--accent); color: var(--navy); padding: 2.6mm 7mm;
+                   font: 800 10pt/1 var(--font-display); letter-spacing: .28em; text-transform: uppercase; }
+  .endstamp span::before, .endstamp span::after { content: ""; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ============================== 1 · COVER ============================== -->
+<section class="page cover">
+  <svg class="mark" viewBox="0 0 400 400" fill="none" aria-hidden="true" data-qa-skip>
+    <!-- motif: the vaccine vial monitor, a square inside a circle, with a temperature trace through it -->
+    <g stroke="#8FD3F4">
+      <circle cx="200" cy="200" r="70" stroke-opacity=".35" stroke-width="1.4"/>
+      <circle cx="200" cy="200" r="120" stroke-opacity=".22" stroke-width="1"/>
+      <circle cx="200" cy="200" r="170" stroke-opacity=".14" stroke-width="1"/>
+      <rect x="170" y="170" width="60" height="60" stroke-opacity=".5" stroke-width="1.4"/>
+    </g>
+    <polyline points="20,262 90,258 150,246 200,214 250,170 310,110 380,58" stroke="#8FD3F4" stroke-opacity=".55" stroke-width="2" stroke-dasharray="6 5"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#E0675A" stroke-opacity=".45" stroke-width="1" stroke-dasharray="3 4"/>
+    <circle cx="200" cy="214" r="5" fill="#8FD3F4" fill-opacity=".8"/>
+  </svg>
+  <div class="pad">
+    <div class="cover-top">
+      <span>{{EVENT}} · {{TRACK}}<br>{{DATE}}</span>
+      <span class="badge">Concept brief · DOC VW-02 · REV 0.1</span>
+    </div>
+    <div class="wordmark">
+      <div class="kick">Fictional sample · every value invented</div>
+      <div class="mk">VIAL<b>WATCH</b></div>
+      <div class="tagline">Every dose, kept cold. Even at 02:10.</div>
+      <p class="manifesto">A rural clinic keeps a month of vaccines in one fridge. When it fails at night, nobody knows until the morning log. <b>VialWatch reads every fridge every minute, forecasts a failure 45 minutes before the vials warm, and calls the one nurse who can fix it.</b> The model forecasts; a person decides; every call is logged per vial.</p>
+    </div>
+    <div class="cstats">
+      <div><div class="n">1 in 4</div><div class="l">clinic fridges with an excursion last quarter</div><span class="nt">Sourced · {{SOURCE}}</span></div>
+      <div><div class="n">7.3 hrs</div><div class="l">median time from a failure to someone noticing</div><span class="nt">Sourced · {{SOURCE}}</span></div>
+      <div><div class="n">45 min</div><div class="l">warning before 8 °C, declared before we build</div><span class="nt tgt">Target</span></div>
+    </div>
+    <div class="cover-foot">
+      <div><b>{{TEAM}}</b> · {{NAME 1}} · {{NAME 2}} · {{NAME 3}}</div>
+      <div class="ps">{{PROBLEM STATEMENT, AS THE ORGANISER WROTE IT}}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 2 · PROBLEM ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>01</b> / THE PROBLEM</div>
+    <h1 class="sec">The paper log sees one number.<br><span class="em">The vials lived the whole night.</span></h1>
+    <div class="rule"></div>
+    <p class="lead">Rural clinics keep a month of vaccines in a single fridge and check it twice a day by hand. A compressor that fails at 02:10 warms the vials for seven hours before anyone looks. <b>The fridge had the data every minute; nothing was listening.</b></p>
+    <div class="nightviz">
+      <div class="top"><span>Fridge C-14 · one night, reconstructed</span><span>What the log saw: one reading</span></div>
+      <svg viewBox="0 0 720 220" aria-label="A night of fridge temperatures with the single morning log reading marked">
+        <rect x="60" y="134" width="640" height="54" fill="#8FD3F4" fill-opacity=".08"/>
+        <line x1="60" y1="134" x2="700" y2="134" stroke="#E0675A" stroke-width="1.4" stroke-dasharray="6 5"/>
+        <text x="66" y="127" fill="#E0675A" font-size="11" font-weight="600">8 °C</text>
+        <text x="66" y="182" fill="#77909F" font-size="11">2 °C</text>
+        <path d="M60 165 L180 166 L230 163 L262 140 L300 112 L360 84 L430 62 L500 48 L560 41 L640 37 L700 36" fill="none" stroke="#8FD3F4" stroke-width="2.6" stroke-linejoin="round"/>
+        <polygon points="266,134 300,112 360,84 430,62 500,48 560,41 640,37 700,36 700,134" fill="#E0675A" fill-opacity=".14"/>
+        <line x1="580" y1="20" x2="580" y2="196" stroke="#F5B544" stroke-width="1.2" stroke-dasharray="3 4"/>
+        <circle cx="580" cy="40" r="6" fill="#F5B544"/>
+        <text x="572" y="26" text-anchor="end" fill="#F5B544" font-size="11.5" font-weight="700">09:30 · LOGGED 17.2 °C</text>
+        <text x="300" y="70" fill="#FFB0A6" font-size="11.5" font-weight="600">7 H 20 MIN ABOVE 8 °C, UNSEEN</text>
+        <text x="262" y="156" fill="#9FB4C3" font-size="11">02:10 RELAY STUCK</text>
+        <g fill="#77909F" font-size="11"><text x="60" y="214">00:00</text><text x="273" y="214" text-anchor="middle">04:00</text><text x="487" y="214" text-anchor="middle">08:00</text><text x="700" y="214" text-anchor="end">12:00</text></g>
+      </svg>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="n">1 in 4</div><div class="l">clinic fridges logged at least one excursion last quarter</div><span class="nt">Sourced · {{SOURCE, YEAR}}</span></div>
+      <div class="card"><div class="n">7.3<small>hrs</small></div><div class="l">median time from a failure to someone noticing</div><span class="nt">Sourced · {{SOURCE, YEAR}}</span></div>
+      <div class="card"><div class="n">18<small>%</small></div><div class="l">of doses discarded for heat exposure in the worst districts</div><span class="nt">Sourced · {{SOURCE, YEAR}}</span></div>
+    </div>
+    <div class="anat">
+      <div class="h5">Anatomy of a lost night</div>
+      <div class="flowrow">
+        <div class="fcell"><div class="fi">02:10</div><div class="ft">Relay sticks</div><div class="fd">The compressor stops; no alarm on the fridge.</div></div>
+        <div class="farrow">→</div>
+        <div class="fcell"><div class="fi">03:40</div><div class="ft">Vials warm</div><div class="fd">12.9 °C, nobody on site, nothing listening.</div></div>
+        <div class="farrow">→</div>
+        <div class="fcell bad"><div class="fi">06:15</div><div class="ft">Over the limit</div><div class="fd">140 vials above 8 °C for hours.</div></div>
+        <div class="farrow">→</div>
+        <div class="fcell bad"><div class="fi">09:30</div><div class="ft">Discarded</div><div class="fd">The nurse reads the log; reorder takes two weeks.</div></div>
+      </div>
+    </div>
+    <div class="take push">
+      <div class="lbl">The gap</div>
+      <p>The registry knows how many vials a clinic holds. <b>Nobody knows how warm they are</b>, and the one person who could act is asleep, uninformed.</p>
+    </div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">01 · The problem</span></div>
+</section>
+
+<!-- ============================== 3 · PRODUCT ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>02</b> / THE PRODUCT</div>
+    <h1 class="sec">One console that ranks every fridge,<br><span class="em">and says when it is unsure.</span></h1>
+    <div class="rule"></div>
+    <p class="lead">The district nurse sees every fridge ranked by the risk of an excursion. Each rank shows its reasons, and an ambiguous curve goes to a person, never to an automatic action. <b>Below 0.70 confidence, VialWatch asks.</b></p>
+    <div class="ui">
+      <div class="ui-bar"><span>VialWatch · district console · fridge B-07</span><span class="ill">Illustrative · full-platform view</span></div>
+      <div class="ui-body">
+        <div class="ui-main">
+          <div class="ui-acct">
+            <div><div class="id">B-07 · Clinic 11</div><div class="meta">7.4 °C · door opened 06:58 · 214 vials</div></div>
+            <div class="ui-badge"><div class="sc">0.58</div><div class="lv">ASK A PERSON</div></div>
+          </div>
+          <div class="ui-h">Why this rank</div>
+          <div class="ui-row"><div class="rl"><span><i class="src real"></i>Rise of 3.1 °C in one minute</span><span class="v">+0.21</span></div><div class="rb"><i style="width:72%"></i></div></div>
+          <div class="ui-row"><div class="rl"><span><i class="src real"></i>Door contact open</span><span class="v">−0.18</span></div><div class="rb"><i style="width:62%"></i></div></div>
+          <div class="ui-row"><div class="rl"><span><i class="src real"></i>Compressor duty cycle normal</span><span class="v">−0.09</span></div><div class="rb"><i style="width:34%"></i></div></div>
+          <div class="ui-row"><div class="rl"><span><i class="src prod"></i>Restock scheduled today (registry)</span><span class="v">−0.07</span></div><div class="rb"><i style="width:26%"></i></div></div>
+          <div class="ui-legend"><span><i class="src real" style="background:#43D697"></i>works on sensor data today</span><span><i class="src prod" style="border:.3mm solid #8FD3F4"></i>needs a production feed</span></div>
+        </div>
+        <div class="ui-side">
+          <div class="ui-rec">
+            <div class="t">Recommendation</div>
+            <div class="a">Two stories fit the curve</div>
+            <div class="s">Restock (door) or failure (compressor) · forecast band crosses 8 °C in 40% of runs</div>
+            <div class="ui-btns"><span class="ui-btn pri">Restocking</span><span class="ui-btn">Move vials</span></div>
+          </div>
+          <div class="ui-log"><b>06:59</b> ranked 0.58 · asked nurse<br><b>07:01</b> nurse: restocking, door closes 07:04<br><b>07:12</b> back to 4.6 °C · no action · logged</div>
+        </div>
+      </div>
+      <div class="ui-foot"><span>Rules decide who is called · the model only ranks</span><span>Every decision written to the vial log</span></div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="t">Rank, with reasons</div><div class="s">Every score shows the signals behind it, so a nurse can disagree with it in seconds.</div></div>
+      <div class="tile"><div class="t">Doubt, out loud</div><div class="s">When two stories fit the curve it asks a person instead of guessing.</div></div>
+      <div class="tile"><div class="t">A log per vial</div><div class="s">Minutes above 8 °C, who was called, what they chose, ready for the discard decision.</div></div>
+    </div>
+    <div class="take push">
+      <div class="lbl">One system</div>
+      <p>Sense, forecast, ask, record: <b>the closed loop that turns a fridge's data into one person's decision</b>, without taking the decision away from her.</p>
+    </div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">02 · The product</span></div>
+</section>
+
+<!-- ============================== 4 · HOW IT WORKS ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>03</b> / SYSTEM ARCHITECTURE</div>
+    <h1 class="sec">Five layers,<br><span class="em">one phone call.</span></h1>
+    <div class="rule"></div>
+    <p class="lead">Everything that must work at 02:10 runs on a ₹3,000 gateway in the clinic: no Wi-Fi, no cloud and no model on the critical path. <b>The model forecasts; deterministic rules decide who is called.</b></p>
+    <div class="archsvg">
+      <svg viewBox="0 0 720 300" aria-label="Architecture: sensors to gateway layers to notifications, with planned parts dashed">
+        <rect x="6" y="6" width="708" height="214" rx="4" fill="none" stroke="#1D58A6" stroke-width="1.4" stroke-dasharray="7 5"/>
+        <text x="18" y="26" fill="#1D58A6" font-size="10.5" font-weight="600" letter-spacing="1.5">IN THE CLINIC · RUNS OFFLINE</text>
+        <g font-size="10.5">
+          <rect x="20" y="44" width="120" height="58" fill="#ECE8DD" stroke="#D6D1C4"/>
+          <text x="32" y="66" fill="#0B1D2A" font-weight="700" font-size="12">LoRa sensors</text><text x="32" y="84" fill="#44505C">probe + door contact</text><text x="32" y="98" fill="#44505C">every 60 s</text>
+          <rect x="20" y="122" width="120" height="58" fill="#ECE8DD" stroke="#D6D1C4"/>
+          <text x="32" y="144" fill="#0B1D2A" font-weight="700" font-size="12">Fridge relay</text><text x="32" y="162" fill="#44505C">compressor duty</text><text x="32" y="176" fill="#44505C">current clamp</text>
+        </g>
+        <path d="M140 73 H176 M140 151 H160 V96 H176" fill="none" stroke="#1D58A6" stroke-width="1.6"/>
+        <polygon points="176,68 186,73 176,78" fill="#1D58A6"/><polygon points="176,91 186,96 176,101" fill="#1D58A6"/>
+        <rect x="188" y="40" width="388" height="168" fill="#0B1D2A"/>
+        <text x="202" y="60" fill="#8FD3F4" font-size="10.5" font-weight="600" letter-spacing="1.5">CLINIC GATEWAY · ₹3,000 · 7-DAY BUFFER</text>
+        <g font-size="10.5">
+          <rect x="202" y="74" width="114" height="118" fill="#12293A" stroke="#1D3B52"/>
+          <text x="214" y="96" fill="#FFFFFF" font-weight="700" font-size="12.5">1 · Clean</text><text x="214" y="116" fill="#9FB4C3">door vs drift</text><text x="214" y="132" fill="#9FB4C3">gaps, spikes</text><text x="214" y="176" fill="#43D697">RULES</text>
+          <rect x="328" y="74" width="114" height="118" fill="#12293A" stroke="#6447CF"/>
+          <text x="340" y="96" fill="#FFFFFF" font-weight="700" font-size="12.5">2 · Forecast</text><text x="340" y="116" fill="#9FB4C3">45 min ahead</text><text x="340" y="132" fill="#9FB4C3">80% band</text><text x="340" y="176" fill="#B59CFF">MODEL</text>
+          <rect x="454" y="74" width="110" height="118" fill="#12293A" stroke="#8FD3F4"/>
+          <text x="466" y="96" fill="#FFFFFF" font-weight="700" font-size="12.5">3 · Decide</text><text x="466" y="116" fill="#9FB4C3">who, when</text><text x="466" y="132" fill="#9FB4C3">escalation</text><text x="466" y="176" fill="#43D697">RULES</text>
+        </g>
+        <path d="M316 133 H328 M442 133 H454" stroke="#8FD3F4" stroke-width="1.6"/>
+        <path d="M576 124 H612" stroke="#1D58A6" stroke-width="1.6"/><polygon points="612,119 622,124 612,129" fill="#1D58A6"/>
+        <rect x="624" y="74" width="80" height="100" fill="#ECE8DD" stroke="#D6D1C4"/>
+        <text x="634" y="96" fill="#0B1D2A" font-weight="700" font-size="12">4 · Call</text><text x="634" y="116" fill="#44505C" font-size="10.5">SMS, then</text><text x="634" y="131" fill="#44505C" font-size="10.5">voice, then</text><text x="634" y="146" fill="#44505C" font-size="10.5">supervisor</text>
+        <rect x="188" y="236" width="248" height="52" rx="3" fill="none" stroke="#77818B" stroke-width="1.2" stroke-dasharray="5 4"/>
+        <text x="200" y="257" fill="#44505C" font-weight="700" font-size="11.5">5 · Prove (planned)</text><text x="200" y="276" fill="#77818B" font-size="10.5">per-vial log synced to the registry</text>
+        <rect x="456" y="236" width="248" height="52" rx="3" fill="none" stroke="#77818B" stroke-width="1.2" stroke-dasharray="5 4"/>
+        <text x="468" y="257" fill="#44505C" font-weight="700" font-size="11.5">District console (planned)</text><text x="468" y="276" fill="#77818B" font-size="10.5">ranks 120 clinics in one view</text>
+        <path d="M382 208 V236 M664 174 V236" stroke="#77818B" stroke-width="1.2" stroke-dasharray="3 3"/>
+      </svg>
+    </div>
+    <div class="lat">
+      <div class="bar"><div class="seg">Read · ≤ 60 s</div><div class="seg m">Forecast · 40 ms</div><div class="seg d">Rules · 5 ms</div><div class="seg">SMS · ~8 s</div><div class="seg">Voice · ~30 s</div></div>
+      <div class="cap"><span>Latency budget: reading to a ringing phone</span><span>Under 2 min · target</span></div>
+    </div>
+    <div class="trace">
+      <div class="h5">One reading becomes one call · trace from a test run (illustrative)</div>
+      <div><span class="t">02:10:00.000</span><b>C-14 reads 8.4 °C</b> · door closed · compressor duty 0%</div>
+      <div><span class="t">02:10:00.041</span><span class="m">forecast: crosses 8 °C now, 11.2 °C by 03:00</span> (band 10.1 to 12.6)</div>
+      <div><span class="t">02:10:00.046</span>rule R2 fires: above limit and rising, door closed · call the nurse on duty</div>
+      <div><span class="t">02:10:08.300</span>SMS delivered · 02:10:38.900 <span class="ok">voice call answered</span> · logged to 214 vials</div>
+    </div>
+    <div class="three">
+      <div><div class="h5">Works offline</div><p>The gateway forecasts and calls over a SIM. <b>Venue Wi-Fi, cloud outages and power cuts</b> (7 days of buffer) do not stop a call.</p></div>
+      <div><div class="h5">Rules decide</div><p>A wrong forecast can change a ranking, <b>never skip a call</b>: the 8 °C rule fires whatever the model says.</p></div>
+      <div><div class="h5">Cheap to copy</div><p><b>₹900 per fridge, ₹3,000 per clinic</b>, open firmware and no per-seat licence; a district rolls out without procurement.</p></div>
+    </div>
+    <div class="take push">
+      <div class="lbl">Why it holds up</div>
+      <p>The parts that must not fail are boring on purpose: <b>a sensor, a SIM, a rule.</b> The model makes the warning earlier; it is never the only thing between a vial and a phone call.</p>
+    </div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">03 · Architecture</span></div>
+</section>
+
+<!-- ============================== 5 · TECHNICAL PROOF ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>04</b> / TECHNICAL PROOF</div>
+    <h1 class="sec">We found the trap<br><span class="em">before the judges could.</span></h1>
+    <div class="rule"></div>
+    <p class="lead">Fridge failures are rare: a model that never raises an alert is right 99.4% of the minutes. <b>Accuracy is the trap; recall at a fixed false-alert budget is the measure.</b> We scored every number below with the scripts in the repository.</p>
+    <div class="steps3">
+      <div class="stp"><div class="tag">Step 1 · the trap</div><h4>A dazzling first score</h4><div class="v bad">99.4%</div><p>Accuracy of a model that never alerts. It catches zero failures.</p></div>
+      <div class="stp"><div class="tag">Step 2 · the audit</div><h4>The label leaked</h4><div class="v" style="font-size:12.5pt">door minutes</div><p>Our first labels came from the door sensor, so the model learnt the door. We relabelled from the compressor log.</p></div>
+      <div class="stp"><div class="tag">Step 3 · the truth</div><h4>Leak-free, held out</h4><div class="v good">0.91 recall</div><p>At one false alert per fridge-week, on 30 failure days the model never saw.</p></div>
+    </div>
+    <div class="proof">
+      <div>
+        <div class="n">27<small>/30</small></div>
+        <div class="sub">failure days caught, 52 min before 8 °C</div>
+        <div class="meta">RECALL 0.91 · 95% CI 0.78–0.97 (2,000 BOOTSTRAP RESAMPLES)<br>0.6 FALSE ALERTS PER FRIDGE-WEEK · 2 UNSEEN FRIDGE MODELS</div>
+        <span class="nt meas">Measured · eval/score.py</span>
+      </div>
+      <div class="chart">
+        <svg width="62mm" viewBox="0 0 220 150" aria-label="Recall against false alerts per week, with the operating point marked">
+          <line x1="34" y1="14" x2="34" y2="118" stroke="#33506F"/><line x1="34" y1="118" x2="210" y2="118" stroke="#33506F"/>
+          <polyline points="34,104 52,64 70,40 100,26 140,20 210,16" fill="none" stroke="#8FD3F4" stroke-width="2.2"/>
+          <polyline points="34,112 70,96 110,78 160,58 210,44" fill="none" stroke="#77909F" stroke-width="1.4" stroke-dasharray="4 3"/>
+          <line x1="70" y1="118" x2="70" y2="40" stroke="#F5B544" stroke-width=".9" stroke-dasharray="2 2"/>
+          <circle cx="70" cy="40" r="3.6" fill="#F5B544"/>
+          <text x="78" y="38" fill="#FFFFFF" font-size="10" font-weight="600">1/WK → 0.91</text>
+          <text x="150" y="72" fill="#77909F" font-size="9">RATE RULE</text>
+          <text x="30" y="20" text-anchor="end" fill="#9FB4C3" font-size="9">1.0</text><text x="30" y="121" text-anchor="end" fill="#9FB4C3" font-size="9">0</text>
+          <text x="122" y="136" text-anchor="middle" fill="#9FB4C3" font-size="9">FALSE ALERTS / FRIDGE-WEEK</text>
+        </svg>
+      </div>
+    </div>
+    <div class="jp">
+      <div class="jpbox">
+        <div class="h5">Operating points: the nurse's budget sets the threshold</div>
+        <table class="opm">
+          <tr><th>Threshold</th><th>Alerts / wk</th><th>Recall</th><th>Warning</th></tr>
+          <tr><td>conf ≥ 0.90</td><td>0.3</td><td>0.71</td><td>61 min</td></tr>
+          <tr class="hi"><td>conf ≥ 0.70</td><td>0.6</td><td>0.91</td><td>52 min</td></tr>
+          <tr><td>conf ≥ 0.50</td><td>2.4</td><td>0.97</td><td>44 min</td></tr>
+        </table>
+        <p class="opcap">At <b>0.70</b> a nurse gets an alert every ten days and <b>9 failures in 10</b> are caught with time to act.</p>
+      </div>
+      <div class="jpbox">
+        <div class="h5">Against the practice clinics use today</div>
+        <div class="fd">
+          <div class="row"><div class="lab"><span>Fixed 8 °C alarm (same days)</span><b>0.52</b></div><div class="track"><div class="fill" style="width:52%"></div></div></div>
+          <div class="row"><div class="lab"><span>Rate-of-change rule</span><b>0.71</b></div><div class="track"><div class="fill" style="width:71%"></div></div></div>
+          <div class="row"><div class="lab"><span>VialWatch, leak-free</span><b>0.91</b></div><div class="track"><div class="fill ours" style="width:91%"></div></div></div>
+        </div>
+        <p class="fdcap"><b>1.75× the recall</b> of the alarm clinics already own, through the same scoring script.</p>
+      </div>
+    </div>
+    <div class="take push">
+      <div class="lbl">Checked, not claimed</div>
+      <p>Leak audit first, held-out days second, an interval on the headline third. <b>Every figure on this page reruns from one command.</b></p>
+    </div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">04 · Technical proof</span></div>
+</section>
+
+<!-- ============================== 6 · FEASIBILITY + ROADMAP ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>05</b> / FEASIBILITY &amp; ROADMAP</div>
+    <h1 class="sec">Proven where it matters,<br><span class="em">honest about the rest.</span></h1>
+    <div class="rule"></div>
+    <p class="lead">The hardest risk, catching failures early without drowning nurses in alerts, is retired on held-out data. <b>What remains open is listed with the step that closes it.</b></p>
+    <div class="risk2">
+      <div class="rcol proven"><div class="rh">Proven now</div><ul>
+        <li><b>Recall 0.91 at 0.6 alerts / week</b> on 30 held-out failure days.</li>
+        <li><b>Offline call path:</b> gateway to SMS to voice, tested with the network off.</li>
+        <li><b>Leak audit</b> done; labels from the compressor log, not the door.</li>
+        <li><b>Latency:</b> 35 s median from reading to ringing phone.</li></ul></div>
+      <div class="rcol open"><div class="rh">Open risks</div><ul>
+        <li><b>Few real failures:</b> 30 days, wide interval; pilot data narrows it.</li>
+        <li><b>Sensor drift in the field:</b> monthly calibration check in phase 2.</li>
+        <li><b>Nurse response rate:</b> measured in the pilot, not assumed.</li>
+        <li><b>Registry access:</b> needs the state's API key; manual import until then.</li></ul></div>
+    </div>
+    <div class="roadmap">
+      <div class="rst"><span class="rno">1</span><div class="wk">Weeks 0–4</div><h4>Shadow pilot</h4><p>Three clinics; alerts go to us, not to nurses. Compare with the paper log.</p><div class="gate"><b>Gate:</b> recall ≥ 0.85 on live failures</div></div>
+      <div class="rst"><span class="rno">2</span><div class="wk">Weeks 5–12</div><h4>Nurses on call</h4><p>Real calls, one district; measure response time and false-alert fatigue.</p><div class="gate"><b>Gate:</b> ≤ 1 alert / week held</div></div>
+      <div class="rst"><span class="rno">3</span><div class="wk">Months 4–9</div><h4>District console</h4><p>120 clinics ranked in one view; supervisor escalation tier.</p><div class="gate"><b>Gate:</b> 0 unseen nights</div></div>
+      <div class="rst"><span class="rno">4</span><div class="wk">Year 1</div><h4>State rollout</h4><p>Registry sync, per-vial discard decisions, procurement-free kits.</p><div class="gate"><b>Gate:</b> loss rate halved, audited</div></div>
+    </div>
+    <div class="principles">
+      <span>Offline first</span><span>Rules decide, model advises</span><span>A person signs every discard</span><span>Every call logged</span><span>Open firmware</span>
+    </div>
+    <div class="take push">
+      <div class="lbl">Feasibility</div>
+      <p>Hardware that costs <b>₹900 a fridge</b>, software that runs on a gateway, and a pilot that measures the open risks <b>before anyone depends on it.</b></p>
+    </div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">05 · Feasibility</span></div>
+</section>
+
+<!-- ============================== 7 · COMPETITIVE EDGE ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>06</b> / COMPETITIVE EDGE</div>
+    <h1 class="sec">Fair to the alternatives,<br><span class="em">clear about the gap.</span></h1>
+    <div class="rule"></div>
+    <p class="lead">Every alternative below is rated from its own public material, at its strongest. <b>We name the closest prior art ourselves</b>, so the judges do not have to.</p>
+    <div class="cmp">
+      <table>
+        <tr><th class="rowh">Approach</th><th>Warns before<br>the limit</th><th>Works<br>offline</th><th>Calls a<br>person</th><th>Per-vial<br>record</th><th>Cost per<br>fridge</th></tr>
+        <tr><td class="rowh">Paper log<span>read twice a day</span></td><td><i class="rate n"></i></td><td><i class="rate y"></i></td><td><i class="rate n"></i></td><td><i class="rate p"></i></td><td><i class="rate y"></i></td></tr>
+        <tr><td class="rowh">Threshold alarm logger<span>beeps at 8 °C</span></td><td><i class="rate n"></i></td><td><i class="rate y"></i></td><td><i class="rate p"></i></td><td><i class="rate p"></i></td><td><i class="rate y"></i></td></tr>
+        <tr><td class="rowh">Cloud IoT dashboard<span>generic sensors</span></td><td><i class="rate p"></i></td><td><i class="rate n"></i></td><td><i class="rate p"></i></td><td><i class="rate n"></i></td><td><i class="rate p"></i></td></tr>
+        <tr><td class="rowh">Remote monitoring device<span>{{CLOSEST PRIOR ART}}</span></td><td><i class="rate p"></i></td><td><i class="rate p"></i></td><td><i class="rate y"></i></td><td><i class="rate p"></i></td><td><i class="rate n"></i></td></tr>
+        <tr class="me"><td class="rowh">VialWatch<span>forecast · offline · calls</span></td><td><i class="rate y"></i></td><td><i class="rate y"></i></td><td><i class="rate y"></i></td><td><i class="rate y"></i></td><td><i class="rate y"></i></td></tr>
+      </table>
+      <div class="legend"><span><i class="rate y"></i>full</span><span><i class="rate p"></i>partial</span><span><i class="rate n"></i>none</span><span>· rated {{DATE}} from public product pages</span></div>
+    </div>
+    <p class="note"><b>Where the others are better:</b> remote monitoring devices are certified, field-proven and already bought by some programmes. VialWatch is a prototype; its edge is the <b>forecast and the phone call</b>, not the sensor.</p>
+    <div class="prior">
+      <div class="h5">Closest prior art, named by us</div>
+      <p>{{CLOSEST PRIOR ART}} sends SMS alerts when a fridge crosses its limit. VialWatch adds the 45-minute forecast, the doubt routing and the per-vial log, and <b>can ingest its alerts</b> rather than replace it.</p>
+    </div>
+    <div class="take push">
+      <div class="lbl">The unclaimed seat</div>
+      <p>Everyone reports the excursion after it happens. <b>Nobody calls the nurse before the vials warm</b>, at a price a district can pay without procurement.</p>
+    </div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">06 · Competitive edge</span></div>
+</section>
+
+<!-- ============================== 8 · IMPACT + SOURCES ============================== -->
+<section class="page">
+  <div class="pad">
+    <div class="secno"><b>07</b> / IMPACT · SOURCES · METHODS</div>
+    <h1 class="sec">Counted, and<br><span class="em">how we know.</span></h1>
+    <div class="metrics">
+      <div class="mx"><div class="n">−96%</div><div class="l">vials lost to night excursions, 400 simulated clinic-years</div><span class="nt sim">Simulated · sim/clinic.py</span></div>
+      <div class="mx"><div class="n"><span class="cur">₹</span>2.1 L</div><div class="l">saved per district per year, only if the simulated rate holds</div><span class="nt proj">Projected</span></div>
+      <div class="mx"><div class="n">45 min</div><div class="l">warning before 8 °C, measured live on held-out days</div><span class="nt tgt">Target</span></div>
+    </div>
+    <p class="notyet"><b>Not yet counted:</b> nurse hours saved on paper logs, fewer cancelled immunisation sessions, trust in the cold chain. We will not put a number on these until we have measured them.</p>
+    <div class="types">
+      <div><span class="nt meas">Measured</span>our scripts, real data</div>
+      <div><span class="nt">Sourced</span>cited below</div>
+      <div><span class="nt sim">Simulated</span>script, seeds stated</div>
+      <div><span class="nt proj">Projected</span>derived; says what it needs</div>
+      <div><span class="nt tgt">Target</span>declared now, measured live</div>
+      <div><span class="nt ill">Illustrative</span>UI values, not evidence</div>
+    </div>
+    <div class="closing"><p>Every dose, kept cold. Shortlist VialWatch and we bring three clinics' fridges, live, to the finale.</p></div>
+    <div class="team4">
+      <div class="mem"><div class="nm">{{NAME 1}}</div><div class="rl">{{ROLE 1}}</div></div>
+      <div class="mem"><div class="nm">{{NAME 2}}</div><div class="rl">{{ROLE 2}}</div></div>
+      <div class="mem"><div class="nm">{{NAME 3}}</div><div class="rl">{{ROLE 3}}</div></div>
+      <div class="mem"><div class="nm">{{NAME 4}}</div><div class="rl">{{ROLE 4}}</div></div>
+    </div>
+    <div class="refs">
+      <div class="row"><span class="rk">Sources</span>{{SOURCE 1, YEAR, URL}} · {{SOURCE 2, YEAR, URL}} · {{SOURCE 3, YEAR, URL}}</div>
+      <div class="row"><span class="rk">Methods</span><b>eval/score.py</b> (recall, false alerts, bootstrap CI), <b>sim/thermal.py</b> and <b>sim/clinic.py</b> (seeds 1–5), <b>bench/latency.py</b>: each reproducible from runnable scripts in the repository.</div>
+      <div class="row"><span class="rk">Note</span>VialWatch is a fictional sample product; the console is a concept mock-up and every value in this brief is invented to show the layout.</div>
+    </div>
+    <div class="endstamp push"><span>VialWatch · DOC VW-02</span></div>
+  </div>
+  <div class="footer-tag"><span class="l"></span><span class="r">07 · Impact &amp; sources</span></div>
+</section>
+
+<!-- QA probe: identical to the deck starter's. Runs only with ?qa=1 (render-pdf.mjs --qa). -->
+<script>
+(function () {
+  if (!/[?&]qa=1\b/.test(location.search)) return;
+  var MM = 25.4 / 96, TOL = 0.6 / MM;
+  function lineRects(el) {
+    var out = [];
+    if (el instanceof SVGElement) { if (el.tagName === 'text') { var b = el.getBoundingClientRect(); if (b.width && b.height) out.push(b); } return out; }
+    for (var i = 0; i < el.childNodes.length; i++) {
+      var n = el.childNodes[i];
+      if (n.nodeType !== 3 || !n.textContent.trim()) continue;
+      var r = document.createRange(); r.selectNodeContents(n);
+      var list = r.getClientRects();
+      for (var j = 0; j < list.length; j++) if (list[j].width > 0.5 && list[j].height > 0.5) out.push(list[j]);
+    }
+    return out;
+  }
+  function core(r, k) { var h = r.bottom - r.top; return { left: r.left, right: r.right, top: r.top + h * k, bottom: r.bottom - h * k }; }
+  function area(r) { return Math.max(0, r.right - r.left) * Math.max(0, r.bottom - r.top); }
+  function inter(a, b) {
+    var w = Math.min(a.right, b.right) - Math.max(a.left, b.left), h = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+    return w > 0 && h > 0 ? w * h : 0;
+  }
+  function name(el) {
+    var c = (el.getAttribute('class') || '').split(/\s+/)[0];
+    var t = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 26);
+    return el.tagName.toLowerCase() + (c ? '.' + c : '') + ' "' + t + '"';
+  }
+  function clips(el) {
+    if (el.tagName.toLowerCase() === 'svg') return getComputedStyle(el).overflow !== 'visible';
+    var s = getComputedStyle(el); return /hidden|clip/.test(s.overflowX + ' ' + s.overflowY);
+  }
+  function run() {
+    var pages = document.querySelectorAll('.page');
+    var total = getComputedStyle(document.documentElement).getPropertyValue('--total').replace(/["'\s]/g, '');
+    for (var p = 0; p < pages.length; p++) {
+      var page = pages[p], issues = [], flagged = [], texts = [];
+      if (p === 0 && total && Number(total) !== pages.length) issues.push('FOLIO --total is ' + total + ' but the document has ' + pages.length + ' pages');
+      var foot = page.querySelector('.foot, .footer-tag');
+      var fr = foot ? foot.getBoundingClientRect() : null;
+      var all = page.querySelectorAll('*');
+      for (var i = 0; i < all.length; i++) {
+        var el = all[i];
+        if (el.closest('[data-qa-skip]') || el.closest('.qa-stamp')) continue;
+        var rects = lineRects(el);
+        if (!rects.length) continue;
+        texts.push({ el: el, rects: rects });
+        for (var a = el.parentElement; a && (a === page || page.contains(a)); a = a.parentElement) {
+          if (clips(a)) {
+            var ar = a.getBoundingClientRect(), cut = 0;
+            rects.forEach(function (r) { var c = core(r, 0.15); cut = Math.max(cut, c.right - ar.right, c.bottom - ar.bottom, ar.left - c.left, ar.top - c.top); });
+            if (cut > TOL) { issues.push('CUT ' + name(el) + ' by ' + (cut * MM).toFixed(1) + ' mm (clipped by ' + (a === page ? 'the page' : name(a).split(' ')[0]) + ')'); flagged.push(el); break; }
+          }
+          if (a === page) break;
+        }
+        var frame = el.closest('.frame, .pad');
+        if (frame) {
+          var fs = getComputedStyle(frame), frb = frame.getBoundingClientRect().bottom - parseFloat(fs.paddingBottom || 0), low = 0;
+          rects.forEach(function (r) { low = Math.max(low, core(r, 0.2).bottom - frb); });
+          if (low > TOL) { issues.push('BELOW FRAME ' + name(el) + ' by ' + (low * MM).toFixed(1) + ' mm'); flagged.push(el); }
+        }
+        if (fr && !foot.contains(el)) {
+          var guard = { left: fr.left, right: fr.right, top: fr.top - 1 / MM, bottom: fr.bottom };
+          if (rects.some(function (r) { return inter(core(r, 0.2), guard) > 0; })) { issues.push('FOOTER ' + name(el) + ' touches the footer band'); flagged.push(el); }
+        }
+      }
+      for (var x = 0; x < texts.length; x++) for (var y = x + 1; y < texts.length; y++) {
+        var A = texts[x], B = texts[y];
+        if (A.el.contains(B.el) || B.el.contains(A.el)) continue;
+        var hit = A.rects.some(function (ra) { return B.rects.some(function (rb) {
+          var ca = core(ra, 0.25), cb = core(rb, 0.25);
+          return inter(ca, cb) > 0.2 * Math.min(area(ca), area(cb)); }); });
+        if (hit) { issues.push('OVERLAP ' + name(A.el) + ' x ' + name(B.el)); flagged.push(A.el, B.el); }
+      }
+      if (!issues.length) continue;
+      flagged.forEach(function (el) { if (el instanceof SVGElement) el.style.fill = '#E00020'; else { el.style.outline = '0.5mm solid #E00020'; el.style.outlineOffset = '0'; } });
+      var stamp = document.createElement('div');
+      stamp.className = 'qa-stamp';
+      stamp.setAttribute('style', 'position:absolute;left:2mm;top:2mm;z-index:2147483647;max-width:190mm;background:#FFFFFF;color:#C00018;border:0.5mm solid #E00020;font:600 6.6pt/1.35 monospace;padding:1.4mm 2.2mm;white-space:pre-wrap');
+      stamp.textContent = 'BULLSEYE-QA · ' + issues.length + ' issue(s)\n' + issues.slice(0, 8).join('\n') + (issues.length > 8 ? '\n...' : '');
+      page.appendChild(stamp);
+    }
+  }
+  /* measure only after every face in use has loaded: force layout so lazy faces start, then poll */
+  void document.body.offsetHeight;
+  var tries = 0;
+  (function settle() {
+    if (document.fonts && document.fonts.status !== 'loaded' && tries++ < 200) { setTimeout(settle, 50); return; }
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { setTimeout(run, 100); });
+  })();
+})();
+</script>
+</body>
+</html>
