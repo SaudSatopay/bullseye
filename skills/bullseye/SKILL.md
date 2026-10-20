@@ -135,6 +135,7 @@ The full set installs with `npx skills add SaudSatopay/bullseye` (Claude Code, C
 - `references/arsenal.md`: the tools, skills, MCP servers, libraries, data sources and hosts this playbook uses, with when and how to use each.
 - `references/session-continuity.md`: handoffs, next-session prompts, master plans and code maps for long or multi-agent builds.
 - `assets/BULLSEYE.template.md`: the control file.
+- `assets/BULLSEYE.example.md`: a filled control file, 30 hours into a fictional 48-hour event. Read it once to see the level of detail each section needs.
 - `assets/AGENTS.project.md`: the rules block for the project's `AGENTS.md`.
 - `assets/NEXT-SESSION.prompt.md`: paste-in prompt to resume in a fresh session or another tool.
 - `assets/MASTER-PLAN.template.md`: a strategy brief for multi-week events when the plan must change direction.

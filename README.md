@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="assets/brand/banner.png" alt="BULLSEYE: an archery target. Default agent output lands scattered in the 5 ring; a BULLSEYE flight groups in the gold 10 ring. Tagline: your coding agent ships a finished, judge-ready hackathon project instead of AI slop." width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/banner-dark.png">
+    <img src="assets/brand/banner.png" alt="BULLSEYE: an archery target. Default agent output lands scattered in the 5 ring; a BULLSEYE flight groups in the gold 10 ring. Tagline: your coding agent ships a finished, judge-ready hackathon project instead of AI slop." width="100%">
+  </picture>
 </p>
 
 <p align="center">

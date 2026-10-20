@@ -157,3 +157,20 @@ Install commands, working code, budgets and fallbacks for the WebGL moments (3D 
 - Theme shadcn (or the project's kit) through the tokens before using a single component. The stock look is the tell.
 - Pull complex pieces from registries (Watermelon, Magic UI, react-bits, Aceternity) rather than building them, then restyle them to the tokens. One effect from these kits per page, not a collage.
 - Prefer the framework's primitives for images, fonts, links and metadata; they carry performance and SEO for free.
+
+## Enforce it in code
+
+A design system that lives only in DESIGN.md erodes one late-night commit at a time. Turn the rules that matter into tests that run with the rest of the suite:
+
+- **Tokens test:** fail on a literal `#rrggbb` or numeric `rgba(` outside the token file, on arbitrary pixel utilities (`text-[13px]`, `p-[7px]`), and on any text colour under 4.5:1 against its surface.
+- **Motion test:** keyframes may animate only `transform`, `opacity`, `clip-path` or `stroke-dashoffset`, and never `opacity` together with a fill mode that can leave content invisible if the animation does not run.
+- **Parity test:** every translation table has the same keys and no empty strings, when the product ships more than one language.
+- **Prove the guards bite:** each guard test must fail on a planted offence before it is trusted. A guard that reads empty strings passes everything.
+
+Some rules cannot be tested and must be remembered:
+
+- Nothing that must be read starts at opacity 0. Hidden tabs suspend `requestAnimationFrame`, so a reveal that never runs leaves the page blank; entrances animate transform only, and numbers that matter snap to their final value on a timer if the animation has not finished.
+- A redesign re-shoots the README screenshots, the GIF and the OG image in the same change. Stale media reads as a different product.
+- When a design skill or an audit recommends something that contradicts DESIGN.md, record it as waived, with the reason, under Decisions. Do not quietly comply and do not quietly ignore it.
+
+These come from builds where each one went wrong once: a dark-glass first version replaced wholesale, guard tests that passed because they read nothing, a risk dial that rendered 0 in a hidden tab, and README media that described the product before its redesign.

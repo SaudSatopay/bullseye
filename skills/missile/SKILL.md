@@ -16,7 +16,7 @@ Fire it at a folder. Whatever is there, a blank directory with an idea or a repo
 
 Read `references/flight.md` before doing anything. This file is the summary; that file is the procedure.
 
-**Inside a hackathon.** When the sibling skill `bullseye` runs the event, the missile is the Polish phase: it owns product craft (the ten dimensions below), while `judge-panel` scores contest fit against the event's own rubric and `prove-it` owns every number. Read `BULLSEYE.md` first: its Contract, Thesis and golden path are the target, and its owner checklist covers the human-only actions that otherwise hold `shipped` at 6. On a deadline, scale the iteration cap to the time left; never skip Impact.
+**Inside a hackathon.** When the sibling skill `bullseye` runs the event, the missile is the Polish phase: it owns product craft (the ten dimensions below), while `judge-panel` scores contest fit against the event's own rubric and `prove-it` owns every number. Read `BULLSEYE.md` first: its Contract, Thesis and golden path are the target, and its owner checklist covers the human-only actions that otherwise hold `shipped` at 6. On a deadline, scale the iteration cap to the time left; never skip Impact. In a hackathon the release tag is the submission tag that `submission-pack` sets on the submitted commit; do not add a second one.
 
 ## Arguments
 

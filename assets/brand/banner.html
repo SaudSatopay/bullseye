@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=1280">
 <title>BULLSEYE banner</title>
-<!-- Source of assets/brand/banner.png. Render with: python -I scripts/render-banner.py -->
+<!-- Source of assets/brand/banner.png and banner-dark.png (open with ?theme=dark). Render both with: python -I scripts/render-banner.py -->
+<script>if (new URLSearchParams(location.search).get('theme') === 'dark') document.documentElement.dataset.theme = 'dark';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
@@ -24,6 +25,14 @@
     --display: "Barlow Condensed", "Arial Narrow", sans-serif;
     --body: "Instrument Sans", system-ui, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  /* Dark variant for GitHub's dark theme: the page inverts, the target face does not (it is a physical object). */
+  :root[data-theme="dark"] {
+    --paper: oklch(0.175 0.014 260);
+    --paper-deep: oklch(0.225 0.016 260);
+    --ink: oklch(0.965 0.006 95);
+    --ink-soft: oklch(0.76 0.012 95);
+    --line: oklch(0.45 0.012 260);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1280px; height: 640px; overflow: hidden; background: var(--paper); }
@@ -75,7 +84,7 @@
       <circle cx="-150" cy="138" r="8"/>
     </g>
     <!-- Where a BULLSEYE flight lands: grouped inside the 10 ring. -->
-    <g fill="var(--ink)" stroke="var(--ring-gold)" stroke-width="2.5">
+    <g fill="var(--ring-black)" stroke="var(--ring-gold)" stroke-width="2.5">
       <circle cx="-10" cy="-6" r="8.5"/>
       <circle cx="8" cy="10" r="8.5"/>
       <circle cx="13" cy="-13" r="8.5"/>
@@ -89,7 +98,7 @@
     <p class="chain"><b>Decode the brief<span>→</span></b><b>Build the demo path<span>→</span></b><b>Prove every claim<span>→</span></b><b>Simulate the judges<span>→</span></b><b>Ship the package</b></p>
     <div class="key">
       <span><svg width="16" height="16" viewBox="-8 -8 16 16"><circle r="6" fill="var(--ring-white)" stroke="var(--ring-black)" stroke-width="2"/></svg>default agent output: 5–6</span>
-      <span><svg width="16" height="16" viewBox="-8 -8 16 16"><circle r="6" fill="var(--ink)" stroke="var(--ring-gold)" stroke-width="2"/></svg>a BULLSEYE flight: 9–10</span>
+      <span><svg width="16" height="16" viewBox="-8 -8 16 16"><circle r="6" fill="var(--ring-black)" stroke="var(--ring-gold)" stroke-width="2"/></svg>a BULLSEYE flight: 9–10</span>
     </div>
   </div>
 </body>
