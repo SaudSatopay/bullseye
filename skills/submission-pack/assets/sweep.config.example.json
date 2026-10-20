@@ -1,0 +1,47 @@
+{
+  "//": "Copy to sweep.config.json at the project root; final-sweep.mjs reads it from there. Every key is optional. Keys starting with // are comments.",
+
+  "// requireSections": "README headings the event or the rubric demands; a heading containing these words passes. Use an object, {\"README.md\": [...], \"docs/judging.md\": [...]}, for other files.",
+  "requireSections": ["For judges", "Evidence", "Run it locally", "Team and AI assistance"],
+
+  "// facts": "The facts file prove-it writes. Default: claims.json's facts path, then facts.json, data/facts.json, docs/facts.json.",
+  "facts": "facts.json",
+
+  "// counts": "Extra count rules. Each capture group is compared with the fact path at the same position. Tests and claims are built in.",
+  "counts": [
+    { "pattern": "(\\d[\\d,]*) held-out questions", "fact": "eval.heldOut" },
+    { "pattern": "(\\d+) of (\\d+) closures agree", "fact": ["proof.agree", "proof.closures"], "files": ["README.md", "docs/**/*.md"] }
+  ],
+
+  "// maxFileMB": "Upload caps from the event's rules. A number is an error when exceeded; {\"mb\": 5, \"level\": \"WARN\"} only warns.",
+  "maxFileMB": {
+    "deck/*.pdf": 10,
+    "deck/*.pptx": 20,
+    "docs/images/*.gif": { "mb": 5, "level": "WARN" }
+  },
+
+  "// judgeFiles": "More files judges read, checked like README.md (placeholders are errors there).",
+  "judgeFiles": ["docs/judging.md"],
+
+  "// processPolicy": "private or public. Default: the process: line of BULLSEYE.md.",
+  "processPolicy": "private",
+
+  "// processFiles": "Extra process files that must not be tracked under private. A leading / anchors a pattern to the project root.",
+  "processFiles": ["/NOTES.md"],
+
+  "// ignore": "Paths the sweep never reads: vendored code, raw data.",
+  "ignore": ["vendor/**", "data/raw/**"],
+
+  "// allow": "Regular expressions; a finding whose line matches one is dropped. Prefer a sweep-ignore comment on the line itself.",
+  "allow": ["lorem ipsum generator"],
+
+  "// allowHttp": "http:// links you checked and that have no https version.",
+  "allowHttp": ["http://web.mta.info/"],
+
+  "// hypeWords and allowWords": "Words added to, or removed from, the hype list.",
+  "hypeWords": ["magical"],
+  "allowWords": [],
+
+  "// strictProse": "true makes em dashes in judge-facing prose errors, like --strict-prose.",
+  "strictProse": false
+}

@@ -79,7 +79,7 @@ const git = {
 // ---------- package ----------
 const pkg = readJSON(path.join(appRoot, 'package.json'));
 const deps = { ...(pkg?.dependencies || {}), ...(pkg?.devDependencies || {}) };
-const pm = existsA('pnpm-lock.yaml') ? 'pnpm' : existsA('bun.lock') || existsA('bun.lockb') ? 'bun' : existsA('yarn.lock') ? 'yarn' : existsA('package-lock.json') ? 'npm' : pkg ? 'pnpm (no lockfile)' : null;
+const pm = existsA('pnpm-lock.yaml') ? 'pnpm' : existsA('bun.lock') || existsA('bun.lockb') ? 'bun' : existsA('yarn.lock') ? 'yarn' : existsA('package-lock.json') ? 'npm' : pkg ? 'npm (no lockfile)' : null;
 const frameworks = [
   ['next', 'Next.js'], ['nuxt', 'Nuxt'], ['@sveltejs/kit', 'SvelteKit'], ['astro', 'Astro'], ['@remix-run/react', 'Remix'], ['react-router', 'React Router'],
   ['expo', 'Expo'], ['react-native', 'React Native'], ['@angular/core', 'Angular'], ['vite', 'Vite'], ['gatsby', 'Gatsby'], ['react', 'React'], ['vue', 'Vue'], ['svelte', 'Svelte'], ['solid-js', 'Solid'],
@@ -136,7 +136,7 @@ for (const f of files) {
   const ext = path.extname(f).toLowerCase();
   byExt[ext] = (byExt[ext] || 0) + 1;
   if (/\.(png|jpe?g|webp|avif|gif|svg)$/.test(ext)) images++;
-  if (/\.(test|spec)\.[tj]sx?$/.test(f) || /__tests__/.test(f)) tests++;
+  if (/\.(test|spec)\.[cm]?[tj]sx?$/.test(f) || /__tests__/.test(f) || /^test_.*\.py$|_test\.(py|go)$/.test(path.basename(f))) tests++;
   if (!CODE_EXT.has(ext) || ext === '.json' || ext === '.md') continue;
   const text = readText(f, 300000);
   loc += text.split('\n').length;

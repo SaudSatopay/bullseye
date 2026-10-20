@@ -78,7 +78,7 @@ A fresh session must be able to continue from `## Handoff` alone. When the user 
 ## Start a new event
 
 1. Create `BULLSEYE.md` in the project root from `assets/BULLSEYE.template.md`. Fill the title, the status line and what is already known.
-2. Decide the process policy with the user in one question (default **private**): private keeps `BULLSEYE.md`, `MISSILE.md`, `PRODUCT.md`, `DESIGN.md`, judge prompts and `.claude/` out of the public repo, because a real jury never sees how you planned to be judged; `CLAIMS.md` and `LIMITS.md` stay public. Append `assets/gitignore-process.txt` to `.gitignore` when private.
+2. Decide the process policy with the user in one question (default **private**): private keeps `BULLSEYE.md`, `MISSILE.md`, `PRODUCT.md`, `DESIGN.md`, the pitch and form prep, judge prompts and `.claude/` out of the public repo, because a real jury never sees how you planned to be judged; `CLAIMS.md` and `LIMITS.md` stay public. Append `assets/gitignore-process.txt` to `.gitignore` when private.
 3. Add the project rules block from `assets/AGENTS.project.md` to the project's `AGENTS.md` (create it if missing). For Claude Code, make `CLAUDE.md` contain `@AGENTS.md` on its own line. Never overwrite existing content; append under a `## Bullseye` heading.
 4. Decide the commit attribution policy before the first commit. Some events forbid AI co-author trailers and some require AI disclosure; record the choice under Decisions.
 5. Hand the owner checklist to the user in one message (accounts, keys, repo visibility, `gh auth` scopes, judge access, video hosting). These are the actions an agent cannot take and the ones that most often cap the final score.

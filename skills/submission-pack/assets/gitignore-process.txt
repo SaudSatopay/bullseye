@@ -1,0 +1,39 @@
+# BULLSEYE process files: kept on disk, never pushed (BULLSEYE.md says "process: private").
+# Paste this block into .gitignore and into .vercelignore (or your host's ignore file).
+# CLAIMS.md and LIMITS.md stay public: they are the evidence judges are meant to read.
+# To keep a file local without naming it in the public .gitignore, list it in .git/info/exclude instead.
+BULLSEYE.md
+MISSILE.md
+PRODUCT.md
+DESIGN.md
+AGENT-DESIGN.md
+HANDOFF*.md
+NEXT-SESSION*.md
+NEXT_SESSION*.md
+MASTER-PLAN*.md
+QA-BANK.md
+RUNSHEET.md
+PITCH-SCRIPT.md
+PREFLIGHT.md
+idea/SPINE.md
+judging/
+brief/
+.missile/
+.claude/
+
+# Submission prep: paste-ready form answers, the team's Q&A briefing, blog drafts (the published post is the public copy).
+SUBMISSION.md
+BRIEFING.md
+idea/SUBMISSION-FORM.md
+docs/blog*.md
+
+# Keys and local environment: only .env.example is committed.
+.env
+.env.*
+!.env.example
+keys.env
+*.pem
+
+# Optional, decide per event:
+# CLAUDE.md and AGENTS.md, when they hold strategy or judge notes; keep them when the event asks to see agent instructions.
+# film/, a video project with large renders.

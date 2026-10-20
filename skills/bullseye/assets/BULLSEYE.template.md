@@ -4,7 +4,7 @@ status: phase=intake step=0 updated={{ISO timestamp}} next="Decode the brief (br
 deadline: label="{{what}}" official="{{deadline in the organiser's zone}}" yours="{{same moment on your clock}}" internal="{{official minus buffer}}" buffer={{24h}} tminus="{{T-…}}" asof={{ISO}}
 <!-- Generated, never typed: node <brief-decoder>/scripts/tminus.mjs "<label>=<deadline with zone>" --buffer 24h --line -->
 
-process: {{private | public}} <!-- private: this file, MISSILE.md, PRODUCT.md, DESIGN.md, judging/ stay gitignored. CLAIMS.md and LIMITS.md are always public. -->
+process: {{private | public}} <!-- private: the process block in .gitignore keeps this file, MISSILE.md, PRODUCT.md, DESIGN.md, the pitch and form prep, judging/ and brief/ local. CLAIMS.md and LIMITS.md are always public. -->
 
 <!--
 This is the control file for one hackathon. Every BULLSEYE skill reads it first and writes its own section.

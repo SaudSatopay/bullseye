@@ -111,7 +111,7 @@ For the duration of a flight this procedure takes precedence over other workflow
 
 ## Files the missile owns
 
-`MISSILE.md` (target, plan, scoreboard, iteration log, decisions, remaining gaps; committed), `.missile/` (recon, shots, Lighthouse, checks, scorecards; gitignored), `PRODUCT.md`, `DESIGN.md`, the `## Missile` block in `CLAUDE.md`, `.claude/launch.json`.
+`MISSILE.md` (target, plan, scoreboard, iteration log, decisions, remaining gaps; committed, unless a hackathon's `BULLSEYE.md` says `process: private`), `.missile/` (recon, shots, Lighthouse, checks, scorecards; gitignored), `PRODUCT.md`, `DESIGN.md`, the `## Missile` block in `CLAUDE.md`, `.claude/launch.json`.
 
 ## Reference map
 
