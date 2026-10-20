@@ -2,7 +2,7 @@
 
 A deck is checked like code: every change is rendered and looked at before it counts. Pages are fixed-size and `overflow: hidden`, so a layout bug does not push content to a new page; it cuts it off silently. An agent cannot read a PDF but can read a PNG, so the loop turns pages into images and looks at them.
 
-> Field note (MuleShot · BOI × IIT Hyderabad 2026): footer collisions happened twice after content grew (a STACK line on one page, a callout on another), and both were found only by rendering the bottom 30% of the changed pages at 2.6× and looking. The proposal stayed under its 1 MB cap because every pass ended with a size gate.
+> Field note (MuleShot · BOI × IIT Hyderabad 2026): footer collisions happened twice after content grew (a STACK line on one page, a callout on another), and both were caught by rendering the bottom 30% of the changed pages at 2.6× and looking. The proposal stayed under its 1 MB cap because every pass ended with a size gate.
 
 ## The loop
 

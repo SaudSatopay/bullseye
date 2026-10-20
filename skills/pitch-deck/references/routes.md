@@ -16,7 +16,7 @@ Pick the route from the Contract before you design anything. A route decides the
 | Anonymity | rules that forbid names, logos or citations | metadata sweep, below |
 | Light or dark | print and reading on paper: light; projection: dark is fine | the design system |
 
-> Field note (SBI Saarthi · SBI Hackathon @ GFF 2026): the first proposal was a dark design; it was redesigned as a light print system before submission because it would be read and printed as a document. Decide light or dark from how the file will be read.
+> Field note (SBI Saarthi · SBI Hackathon @ GFF 2026): the idea deck was a dark editorial design, while the 11-page proposal was a light A4 document with a dark cover. Decide light or dark from how each file will be read.
 
 ## The four routes
 
@@ -61,7 +61,7 @@ Font sets in the starter: `windows` (Bahnschrift SemiBold Condensed, Segoe UI, C
 3. Keep every branded header, footer and cover element untouched, keep the template's section order and wording (use them as your kickers), and add the sections judges reward after the required ones. The content rules are in the sibling skill `idea-round` (`../idea-round/references/organizer-templates.md`; install the full set with `npx skills add SaudSatopay/bullseye` if missing).
 4. `pptx_kit.py check deck/out/Filled.pptx --require-notes --require-embedded-fonts`, then render with PowerPoint and look at every slide.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): right-to-left lines were written with negative `cx` values. python-pptx loaded the file without complaint and PowerPoint opened it with a Repair prompt. `pptx_kit.py check` scans every slide, layout and master for negative extents; run it before anyone opens the file.
+> Field note (Trinetra · ET AI Hackathon 2.0): a pptxgenjs script wrote right-to-left lines with negative `cx` values. python-pptx loaded the file without complaint and PowerPoint opened it with a Repair prompt. `pptx_kit.py check` scans every slide, layout and master for negative extents; run it before anyone opens the file.
 
 ## Route D · image per slide
 
@@ -90,4 +90,4 @@ The official submission is often a different format from the presentation deck (
 - **Size limits.** Subset fonts (`finalize-pdf.py`), JPEG the photos and screenshots at the size they are shown, drop raster textures, and remove filters. Chrome embeds every web font in full: subsetting took a 10-page proposal from 1060 KB to 603 KB with no visual change (MuleShot).
 - **Metadata.** Chrome copies `<title>` into the PDF title (or the file name when there is none) and writes its user agent as the creator. python-pptx's default template carries its own author in `last_modified_by`. For anonymous rounds: `finalize-pdf.py --strip-metadata --title "..."`; for PPTX set `prs.core_properties.author` and `last_modified_by` (the starters and `pages-to-pptx.py` leave them empty).
 - **Negative extents in PPTX** open with a Repair prompt; with PowerPoint automation the prompt can block a script that opens the file without a window. Run `pptx_kit.py check` first.
-- **Keep every generator and its inputs in the project** (`deck/`), never only in a session scratchpad. The Round-2 deck script of FLOODLIGHT, the image-PPTX builder and template inputs of ORCA at Vibeathon, and SURYA's generator were all lost that way. If the competition repo keeps process files private, gitignore `deck/` but keep it on disk in the project.
+- **Keep every generator and its inputs in the project** (`deck/`), never only in a session scratchpad. FLOODLIGHT's Round 2 deck script and ORCA's Vibeathon template inputs sat in a session scratchpad, and neither ORCA's image-PPTX builder nor SURYA's generator is in its project folder. If the competition repo keeps process files private, gitignore `deck/` but keep it on disk in the project.

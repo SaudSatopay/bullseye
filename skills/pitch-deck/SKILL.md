@@ -102,7 +102,7 @@ Keep every generator and its inputs in the project's `deck/` folder (HTML, scrip
 
 **Gate:** the cut passes steps 4 to 6; the rebuild commands run from a clean checkout.
 
-> Field note (ORCA · Vibeathon 2026): the image-per-slide PPTX builder and the template filler's inputs lived only in a session scratchpad and were gone when the next round needed them. FLOODLIGHT's Round 2 deck script at MUSA CodeX and SURYA's generator went the same way. A deck you cannot rebuild cannot be fixed at 23:40.
+> Field note (ORCA · Vibeathon 2026): the Stage 2 template filler read its template copy and diagram images from a session scratchpad, and the image-per-slide PPTX has no builder in the project folder. FLOODLIGHT's Round 2 deck script at MUSA CodeX also sat in a scratchpad, and SURYA's folder holds the finished deck but no generator. A deck you cannot rebuild cannot be fixed at 23:40.
 
 ### 8. Record
 

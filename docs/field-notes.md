@@ -103,7 +103,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 
 ### WasteOS · 2nd OneEarth International Hackathon 2026
 - **Built:** a pitch for an operating system for urban waste, with a deck and a 100-second launch film generated entirely from code.
-- **Steal this:** every number typed as sourced, simulated, projected, target or illustrative; real OpenStreetMap data for the route map and the digital twin; a voiceover verified by transcription until word-perfect; the organiser's five-slide format produced separately from the longer talk.
+- **Steal this:** every number typed as sourced, simulated, projected, target or illustrative; real OpenStreetMap data for the route map and the digital twin; a voiceover verified by transcription until word-perfect; the organiser's five-slide format planned as a separate cut from the longer talk.
 
 ### Fineprint · Paytm Build for India AI Hackathon
 - **Built:** a pitch for an agentic health-insurance claims companion.
@@ -112,7 +112,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 ### Project SURYA · ISRO Bharatiya Antariksh Hackathon 2026
 - **Built:** an idea submission for solar-flare forecasting from Aditya-L1 data.
 - **Steal this:** honour the template, then out-build it: the organiser's art and section order kept exactly, then validation against named baselines, data availability, risks, roadmap and a lean budget added.
-- **Scar:** the deck's generator script was not saved. Keep every generator in the repository.
+- **Scar:** the folder holds the finished deck and its PDF but no generator script. Keep every generator in the repository.
 
 ## Contribution events
 

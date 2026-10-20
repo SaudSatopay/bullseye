@@ -33,7 +33,7 @@ When the rules say the template is mandatory, use the first or second route. The
 
 - **Template:** 10 slides at 10 × 5.625 in in Google Sans; every slide a full-bleed branded image plus prompt text.
 - **Sections:** cover fields (Team Name, Team Leader, Problem Statement) · team table · opportunity ("How different ... How will it solve ... USP") · features (asks for visual representations) · process flow or use case · wireframes (optional) · architecture · technologies · estimated cost (optional) · closing.
-- **What SURYA did:** rebuilt in code at the exact size and reused the three background images byte-for-byte; kept every section with its name as the kicker; grew from 10 to 16 slides with an AI and model core, a data foundation ("pre-train now, de-risk data access"), validation, impact and a roadmap tied to the event's dates. The validation slide charted named baselines with the target labelled as a target (Persistence 0.18, Climatology 0.31, "SURYA (target)" 0.82) above a risks table. The optional cost slide became a budget, "PROTOTYPE TOTAL ₹ 11k – 28k", "Lean by design". Pain: the generator was never saved.
+- **What SURYA did:** rebuilt in code at the exact size and reused the three background images byte-for-byte; kept every section with its name as the kicker; grew from 10 to 16 slides with an AI and model core, a data foundation ("pre-train now, de-risk data access"), validation, impact and a roadmap tied to the event's dates. The validation slide charted named baselines with the target labelled as a target (Persistence 0.18, Climatology 0.31, "SURYA (target)" 0.82) above a risks table. The optional cost slide became a budget, "PROTOTYPE TOTAL ₹ 11k – 28k", "Lean by design". Pain: the project folder holds the finished deck but no generator.
 
 ### Indian bank template (IDBI Innovate, 14 slides)
 
@@ -92,5 +92,5 @@ When the slide count is capped, put the extra sections in the allowed appendix p
 - **Art:** organiser logos and glow images sit in the sample file; unzip the PPTX and take them from `ppt/media/`.
 - **Z-order:** a photo placed late covers the template's logos; send it behind the template art.
 - **Prompt text:** blank it, or it shows through or overlaps your content.
-- **Generators:** keep the deck builder and its inputs in the repo. SURYA's generator was never saved, and ORCA's Vibeathon image-PPTX builder and template-fill script lived only in a session scratchpad.
+- **Generators:** keep the deck builder and its inputs in the repo. SURYA's folder holds the finished deck but no generator, and ORCA's Vibeathon template filler read its inputs from a session scratchpad.
 - **Identity versus anonymity:** a template that asks for team details in an anonymous round is a question for the organisers, in writing.

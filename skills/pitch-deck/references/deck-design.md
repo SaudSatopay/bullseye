@@ -84,10 +84,10 @@ Write the headline as the claim the page proves, in two beats, the second in the
 
 **Competitor matrix**, rated fairly: ● full, ◐ partial, ○ none, drawn as CSS shapes rather than glyphs so subsetting cannot drop them; your own row highlighted; the closest prior art named by you; one sentence on where the others are better. MuleShot rated rules engines, enterprise AML suites and the regulator's own tool "fair, not strawmanned". The brief starter's page 7 implements it.
 
-**Quadrant chart** ("only one corner does it all"): two axes that matter to this jury, competitors placed honestly, your product alone in the corner the problem needs. SBI Saarthi drew it as a Mermaid `quadrantChart` in the README and as shapes in the deck.
+**Quadrant chart** ("only one corner does it all"): two axes that matter to this jury, competitors placed honestly, your product alone in the corner the problem needs. SBI Saarthi drew it as a Mermaid `quadrantChart` in the README.
 
 ## Slide count discipline
 
 One idea per slide; merge before you add. Trinetra's deck grew from 10 to 21 slides and was tightened to 16 by merging. For a surprise-challenge round, ORCA at Vibeathon told "the project in 3, the hackathon day in 11". The organiser's official cut is a separate file with its own count (see routes.md).
 
-> Field note (WasteOS · OneEarth International Hackathon 2026): the 16-slide presentation and the official 5-slide submission were different files with different rules (slide count, 10 MB, embedded fonts, naming). The README planned the cut from specific slides of the long deck, so one source fed both.
+> Field note (WasteOS · OneEarth International Hackathon 2026): the 16-slide presentation and the official 5-slide submission were different files with different rules (slide count, 10 MB, embedded fonts, naming). The README planned the cut from specific slides of the long deck, so one source would feed both.

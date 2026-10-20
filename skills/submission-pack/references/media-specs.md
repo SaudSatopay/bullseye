@@ -138,7 +138,7 @@ python "<submission-pack>/scripts/qr.py" "Live demo=https://<live-host>" "Code=h
 - Use them on the last slide of a demo deck, a booth card and a poster. Not in an idea-stage PDF: MuleShot rejected one there as a gimmick.
 - Error correction M on screens, Q on print. Dark on light only (the script refuses inverted colours); at least 2.5 cm wide on paper.
 - `--verify` decodes each PNG with OpenCV when it is installed. Then scan each code with two phones from about 2 m, the distance from a judge's seat to a screen.
-- Keep the generator and its inputs in the repo: FLOODLIGHT's QR images survived, but the script that made them was lost with a scratchpad.
+- Keep the generator and its inputs in the repo: FLOODLIGHT's QR images are in the project, but no script that made them is.
 
 ## 9. Titles, descriptions and icons
 
