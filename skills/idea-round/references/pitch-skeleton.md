@@ -40,6 +40,8 @@ A judge who reads only the headlines should still get this argument.
 | Money | "An ignored pothole is a 6× invoice." | CrackWatch |
 | Rule as product | "Floors that only raise." | ORCA |
 
+Real photographs carry at least three of the parts below: the place (often the cover), the problem and the people. Your own photos come first; the sources, licences, credit chips and the check that enforces them are in the sibling pitch-deck skill (`references/deck-design.md`, Photos).
+
 ## The 14 parts
 
 ### 1. Cover

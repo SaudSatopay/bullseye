@@ -1,6 +1,6 @@
 ---
 name: pitch-deck
-description: Build decks, concept briefs and proposals as code and QA them like code (HTML with print CSS to PDF by default, editable PPTX via pptxgenjs, organiser templates filled with python-pptx, or an image-per-slide PPTX from the PDF). Scripts render with headless Chrome, subset fonts, gate file size, turn pages into PNGs to look at, and check glyphs, AI tells and PPTX repair errors. Use when the user says "make the deck", "pitch deck", "slides", "concept brief", "proposal PDF", "fill the organiser's template", "export to PPTX", "the PDF is too big" or "fonts not embedded".
+description: Build decks, concept briefs and proposals as code, with real, credited photographs, and QA them like code (HTML with print CSS to PDF by default, editable PPTX via pptxgenjs, organiser templates filled with python-pptx, or an image-per-slide PPTX from the PDF). Scripts render with headless Chrome, subset fonts, gate file size, turn pages into PNGs to look at, and check glyphs, AI tells and PPTX repair errors. Use when the user says "make the deck", "pitch deck", "slides", "concept brief", "proposal PDF", "fill the organiser's template", "export to PPTX", "the PDF is too big" or "fonts not embedded".
 argument-hint: "[deck|brief|template|pptx|cut] [path]"
 license: MIT
 metadata:
@@ -46,9 +46,9 @@ Reuse the product's tokens so the brand carries from app to deck, banner, OG ima
 - three type roles: condensed display caps, a body sans or serif, and mono for every number, label, chip and footer, with tabular figures; static font files only, because a variable web font prints as Type3;
 - colour is meaning, written down next to the tokens (accent is the brand; ok, warn, crit and model are status only), and tokens are named by role, never by hue;
 - one motif taken from the product, and engineering furniture: a document id and revision on the cover, `NN / TT` on every page, a product and event footer, kickers `0N · NAME`;
-- real photographs only, credited on the image, with the grade baked into the JPEG; diagrams as inline SVG or native shapes.
+- **real photographs on every deck, at least three:** the place, the problem and the people, each credited on the image with the grade baked into the JPEG (sources, licences and placement in `references/deck-design.md`, Photos); diagrams as inline SVG or native shapes, and product screens as real screenshots.
 
-**Gate:** the token block uses role names and carries the colour-meaning table; the fonts are static and the symbols the copy uses exist in them.
+**Gate:** the token block uses role names and carries the colour-meaning table; the fonts are static and the symbols the copy uses exist in them; the photographs are chosen, their licences read and their credits written into `photo-credits.json`.
 
 ### 3. Build from the starter
 
@@ -59,7 +59,7 @@ Copy the starter into the project's `deck/` folder and replace the sample conten
 - Every number carries its label (MEASURED, SOURCED, SIMULATED, PROJECTED, TARGET, ILLUSTRATIVE) and every feature its status chip (IMPLEMENTED, PROTOTYPED, SIMULATED, FUTURE), at the level the build can honestly claim today.
 - PPTX routes: speaker notes on every slide (`deck.pptx.mjs` refuses to build without them; `pptx_kit.set_notes`; `notes.json` for route D).
 
-**Gate:** every number on every page has a label, and every placeholder left is one the team still has to fill (team names, contacts, sources).
+**Gate:** every number on every page has a label, every photo slot (`data-photo-slot`) holds a real photograph (`figure.photo` with its credit chip), and every placeholder left is one the team still has to fill (team names, contacts, sources).
 
 ### 4. Render
 
@@ -92,7 +92,7 @@ Open every PNG it lists and look: the contact sheet first, the stitched footer s
 
 PPTX routes: `python "${CLAUDE_SKILL_DIR}/scripts/pptx_kit.py" check deck/out/Deck.pptx --require-notes` (negative extents, off-slide shapes, empty placeholders, notes, embedded fonts). On Windows with PowerPoint run the overflow check and the PNG render from `references/powerpoint-com.md` and look at every slide; with LibreOffice convert to PDF and use `qa-pdf.py`; with neither, use route D or render on another machine.
 
-**Gate:** the probe is silent, no glyph falls back, the tells pass, and every page has been looked at once after the last change. Then render the deliverable without `--qa`, with `--strict` (fails on any `{{placeholder}}` left), finalize it and run `qa-pdf.py --sheet --tells` on that exact file.
+**Gate:** the probe is silent, no glyph falls back, the tells pass, and every page has been looked at once after the last change. Then render the deliverable without `--qa`, with `--strict` (fails on any `{{placeholder}}` left, an empty photo slot, or fewer real, credited photos than the deck requires), finalize it and run `qa-pdf.py --sheet --tells` on that exact file.
 
 ### 7. Cut, name and keep the generator
 
@@ -131,7 +131,7 @@ In the user's project: `deck/deck.html` or `deck/brief.html` (route A), `deck/de
 - No visible em dashes, hype words or exclamation marks in anything a judge reads (`--tells`).
 - No CSS or SVG `filter`, no blurred `box-shadow` or `text-shadow`, no element `opacity` or `mix-blend-mode` in print: rgba fills and `fill-opacity` instead.
 - Static fonts only for PDFs; check every symbol you use with `--glyphs`.
-- Real, credited photos only; no AI-generated imagery; an honest placeholder beats a fake.
+- Real photographs in every deck, at least three, each credited on the image; never AI-generated imagery or a stock photo that implies what you do not have. Only a photo of something that does not exist yet stays a labelled placeholder.
 - Never ship a placeholder: the final render uses `--strict`.
 - PPTX files pass `pptx_kit.py check` before anyone opens them; PowerPoint automation never quits a PowerPoint that has the user's documents open.
 - Keep generators and inputs in the project, and one source of content for every format, so the deck, brief, form answers and README carry the same numbers.

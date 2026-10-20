@@ -49,7 +49,18 @@ Number labels, in this order: MEASURED, SOURCED, SIMULATED, PROJECTED, TARGET, I
 
 ## Photos
 
-- Real photographs only (Wikimedia Commons, NASA, OpenStreetMap renders, your own); no AI-generated imagery, and no stock photo that implies hardware you do not have. WasteOS left a dashed frame reading "PROTOTYPE PHOTO GOES HERE" rather than fake one.
+Real photographs are the default for every deck, not a finishing touch: they make a deck read as a real problem in a real place instead of a template, and a jury remembers the photo after it forgets the chart.
+
+- **Where they go: at least three per deck.** The place where the problem happens (the cover, or the cover's ground with the panel over it), the problem itself (the thing that breaks, the paper log, the queue), and the people (the user at work, the team at the venue). Product screens are real screenshots of the build: they show the product and do not count as photographs of the problem. `render-pdf.mjs` counts them.
+- **Where they come from, best first:** your own photos (the site visit, the venue, the hardware on the desk); the organiser's own media; public-domain and open archives (Wikimedia Commons with its licence filter, NASA, government press and public-health libraries such as CDC PHIL); free-licence libraries (Unsplash, Pexels) only for scene-setting, never for the people, the customers or the hardware the story claims. Read the licence on the file's own page, not on a search result, and keep share-alike terms in mind.
+- **Never** AI-generated imagery, a stock photo that implies hardware, customers or a pilot you do not have, or an identifiable person presented as your user without their consent. A photo of something that does not exist yet (the prototype, the installed sensor) stays an honest, labelled placeholder until it does: WasteOS left a dashed frame reading "PROTOTYPE PHOTO GOES HERE" rather than fake one.
+- **Resolution and weight.** Export each photo at the size it is shown (about 2,000 px on the long side for a full slide, half that for a panel), as a JPEG around quality 80, so a deck of photographs still meets a 1 MB or 10 MB cap after `finalize-pdf.py`.
+- **The check.** `render-pdf.mjs` counts a photograph by its credit chip (`class="credit"` with text starting "Photo:") or a `data-photo-credit` attribute, and an unfilled slot by `data-photo-slot`. A 16:9 deck needs three unless `<meta name="min-photos">` says otherwise, and `--strict` fails below the minimum or on an empty slot.
+
+> Field note (ORCA · SIH 2026): every photograph in the idea deck had an entry in `photo-credits.json` (CC BY-SA 4.0, CC BY 2.0, CC0 and CC BY-SA 3.0 among them) and a credit chip on the slide that used it.
+
+> Field note (WasteOS · OneEarth International Hackathon 2026): the launch film used 21 credited real photographs from its credits file, and its README said it plainly: no AI-generated imagery.
+
 - Bake the grade into the JPEG (crop to the slot's aspect, grade, darken a ramp where text sits) with a script such as WasteOS's `prepare_assets.py`. A CSS `filter` on a photo prints the photo as a second, larger bitmap; Fineprint's README carried the rule "don't add CSS filter on photos".
 - **On-image credit chips.** Every photo carries its credit on the image: a tiny mono line in the bottom-right corner, `PHOTO: ARTIST · SOURCE · LICENCE`, about 6 pt, kept clear of the page number and the footer. What the photo shows goes in a separate caption chip at the bottom-left: mono caps on a dark plate with an accent left border ("RED BULL RING · 2023 · THE KERBS WHERE 1,200 CALLS WERE MADE BY EYE"). The back page or appendix repeats every credit in one line.
 - **Ledger.** Keep `deck/assets/photo-credits.json` from `assets/photo-credits.template.json`: `local`, `source_url`, `license`, `artist`, `used_on`, `credit_line`. Check the licence allows reuse and keep share-alike terms in mind before the deck goes public.

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="min-photos" content="3">
 <title>VialWatch Sample Deck</title>
 <!--
   BULLSEYE pitch-deck starter · 16:9 deck as code (route A: HTML + print CSS -> PDF)
@@ -224,6 +225,14 @@
              font: 500 7pt/1.5 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; padding: 2mm 3mm; text-align: left; max-width: 84mm; }
   .capchip b { color: var(--accent); font-weight: 600; }
   .credit { position: absolute; right: 4mm; bottom: 3.6mm; font: 500 6pt/1 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); }
+  /* A real photograph replaces a .slot: a graded JPEG (crop, grade and the dark ramp under the caption baked in, never a CSS
+     filter), a caption chip saying what it shows, and a credit chip that render-pdf.mjs counts. Markup:
+     <figure class="photo"><img src="assets/photos/clinic-07-graded.jpg" alt="what the photo shows">
+       <figcaption class="capchip"><b>Clinic 07</b> · where the log is read at 09:30</figcaption>
+       <span class="credit">Photo: Artist · Source · Licence</span></figure> */
+  .photo { position: relative; flex: 1; overflow: hidden; margin: 0; background: var(--ink); }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .photo .credit { color: rgba(245, 248, 250, .82); }
 
   /* ---------------------------------------------------------------- solution */
   .journey { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8mm; margin-top: 8mm; }
@@ -461,6 +470,9 @@
   <h1>Vial<br><em>Watch</em></h1>
   <p class="sub">It reads every vaccine fridge every minute, <b>forecasts a failure before the vials warm</b>, and wakes the one nurse who can fix it. Built for clinics with one fridge and no night shift.</p>
 
+  <!-- REAL PHOTOGRAPHS: this deck needs at least three (meta min-photos), each a figure.photo with its credit chip.
+       Photo 1: the place or the people of the problem, here or as the cover's ground with the panel over it.
+       Photo 2: the problem slide (the fridge, the log, the night). Photo 3: the slot on the gap slide. -->
   <!-- product-derived hero: the reading, the forecast, the moment it acts. Labelled illustrative. -->
   <div class="hero">
   <div class="panel">
@@ -556,10 +568,10 @@
         <div class="band push"><p>The registry knows how many vials a clinic holds. <b>Nobody knows how warm they are.</b></p></div>
       </div>
       <div>
-        <div class="slot">
+        <div class="slot" data-photo-slot>
           <div class="corners"><i></i><i></i><i></i><i></i></div>
           <div class="h">Photo slot</div>
-          <p>A real, credited photo: a clinic fridge with its paper log taped to the door. Grade baked into the JPEG, a dark ramp baked in under the caption. Never a stock or generated image.</p>
+          <p>Replace this slot with a real photograph (figure.photo): a clinic fridge with its paper log taped to the door. Grade baked into the JPEG, a dark ramp baked in under the caption. Never a generated image.</p>
           <div class="capchip"><b>Clinic 07, {{DISTRICT}}</b> · where the log is still read at 09:30</div>
           <span class="credit">Photo: {{ARTIST}} · {{SOURCE}} · {{LICENCE}}</span>
         </div>

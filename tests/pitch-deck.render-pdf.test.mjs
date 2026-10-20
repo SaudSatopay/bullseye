@@ -102,3 +102,42 @@ test('lists leftover placeholders, and --strict makes them a failure', (t) => {
   const strict = run(input, '--strict', '--out', path.join(tmp, 'ph2.pdf'));
   assert.equal(strict.status, 1);
 });
+
+const credit = (who) => `<span class="credit">Photo: ${who} · Wikimedia Commons · CC0</span>`;
+
+test('a 16:9 deck needs three real, credited photos: --strict fails without them, --min-photos 0 lifts it', (t) => {
+  if (!browser) return t.skip('no Chrome, Edge or Chromium found');
+  const input = write('no-photos.html', page());
+  const draft = run(input, '--out', path.join(tmp, 'np.pdf'));
+  assert.equal(draft.status, 0, draft.stderr);
+  assert.match(draft.stdout, /photos:\s+0 real, credited · 0 empty slot\(s\) · minimum 3 \(16:9 deck default\)/);
+  assert.match(draft.stderr, /0 real, credited photo\(s\) where 3 are required/);
+  const strict = run(input, '--strict', '--out', path.join(tmp, 'np2.pdf'));
+  assert.equal(strict.status, 1);
+  assert.match(strict.stderr, /FAILED .*where 3 are required/);
+  const lifted = run(input, '--strict', '--min-photos', '0', '--out', path.join(tmp, 'np3.pdf'));
+  assert.equal(lifted.status, 0, lifted.stderr);
+});
+
+test('counts credit chips and data-photo-credit, skips pending chips, and fails on an empty data-photo-slot', (t) => {
+  if (!browser) return t.skip('no Chrome, Edge or Chromium found');
+  const pending = write('pending.html', page('190.5mm', [credit('A'), credit('B'), '<span class="credit">Photo: {{ARTIST}}</span>']));
+  const draft = run(pending, '--out', path.join(tmp, 'pe.pdf'));
+  assert.match(draft.stdout, /photos:\s+2 real, credited/);
+  const three = page('190.5mm', [credit('A') + credit('B'), '<figure data-photo-credit="C · own photo · CC BY 4.0"></figure>'])
+    .replace('<title>', '<meta name="min-photos" content="3"><title>');
+  const ok = run(write('three.html', three), '--strict', '--out', path.join(tmp, 'th.pdf'));
+  assert.equal(ok.status, 0, ok.stderr);
+  assert.match(ok.stdout, /3 real, credited · 0 empty slot\(s\) · minimum 3 \(<meta name="min-photos">\)/);
+  const slot = run(write('slot.html', three.replace('<section class="page">', '<section class="page"><div data-photo-slot></div>')), '--strict', '--out', path.join(tmp, 'sl.pdf'));
+  assert.equal(slot.status, 1);
+  assert.match(slot.stderr, /1 photo slot\(s\) still empty/);
+});
+
+test('an A4 document needs no photos unless it asks for them', (t) => {
+  if (!browser) return t.skip('no Chrome, Edge or Chromium found');
+  const a4 = page('297mm', ['One']).replace('size:338.667mm 190.5mm', 'size:210mm 297mm').replace('width:338.667mm', 'width:210mm');
+  const r = run(write('a4.html', a4), '--strict', '--out', path.join(tmp, 'a4.pdf'));
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /photos:\s+0 real, credited · 0 empty slot\(s\) · minimum 0 \(default\)/);
+});

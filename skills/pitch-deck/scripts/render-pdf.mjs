@@ -16,6 +16,9 @@
 //   - the script waits for the browser to exit, checks the PDF is real, counts its pages and compares
 //     them with the number of .page elements in the HTML (an extra page means a page spilled)
 //   - {{placeholders}} left in the HTML are listed; --strict makes them a failure (final render)
+//   - real photographs are counted by their credit chips ("Photo: ARTIST · SOURCE · LICENCE", class
+//     "credit" or a data-photo-credit attribute) and empty slots by data-photo-slot; a 16:9 deck needs
+//     at least 3 unless <meta name="min-photos"> or --min-photos says otherwise, and --strict fails below it
 //   - --facts replaces {{fact:path.to.value}} tokens from a JSON file, so numbers come from data
 //   - --qa opens the file with ?qa=1 so the starter's in-page probe outlines clipped or colliding
 //     elements in red and stamps a list on the page (look at the PNGs from qa-pdf.py)
@@ -40,7 +43,10 @@ const HELP = `render-pdf.mjs · HTML to PDF with headless Chrome / Edge / Chromi
   --expect-pages <n>     fail unless the PDF has exactly n pages
   --facts <json>         replace {{fact:a.b.c}} tokens with values from this JSON before printing
   --qa                   open with ?qa=1 so the in-page probe flags clipped / colliding elements
-  --strict               fail when {{placeholders}} are left in the HTML (use for the final render)
+  --strict               fail when {{placeholders}} are left in the HTML, a photo slot is empty, or
+                         there are fewer real, credited photos than required (use for the final render)
+  --min-photos <n>       credited photos required (default: <meta name="min-photos">, else 3 for a
+                         16:9 deck and 0 for other page sizes)
   --timeout <ms>         kill the browser after this long (default: budget + 90000)
   --which                print the browser that would be used, then exit
   --help                 this text
@@ -68,6 +74,7 @@ function parseArgs(argv) {
       case '--timeout': opts.timeout = int(val(), a); break;
       case '--qa': opts.qa = true; break;
       case '--strict': opts.strict = true; break;
+      case '--min-photos': opts.minPhotos = int(val(), a); break;
       case '--which': opts.which = true; break;
       default:
         if (a.startsWith('--')) usage(`unknown option ${a}`);
@@ -195,6 +202,36 @@ function countPageElements(html) {
   }
   return n;
 }
+// Real photographs: each one carries a credit chip whose text starts with "Photo" (class "credit"), or a
+// data-photo-credit attribute. A chip that still holds a {{placeholder}} is not a photo yet. An element with
+// data-photo-slot is a slot nobody has filled. The chip is plain text, as the starters write it.
+function photoCheck(html) {
+  const visible = stripNonVisible(html);
+  let credited = 0;
+  let pending = 0;
+  for (const m of visible.matchAll(/<[a-z][\w-]*\b([^>]*)>([^<]*)/gi)) {
+    const attrs = m[1];
+    const text = m[2].trim();
+    const byAttr = /\bdata-photo-credit\b/i.test(attrs);
+    const byClass = /\bclass\s*=\s*["'][^"']*\bcredit\b/i.test(attrs) && /^photo\b/i.test(text);
+    if (!byAttr && !byClass) continue;
+    if (/\{\{/.test(text) || /\{\{/.test(attrs)) pending++;
+    else credited++;
+  }
+  const slots = (visible.match(/<[a-z][\w-]*\b[^>]*\bdata-photo-slot\b/gi) || []).length;
+  const meta = visible.match(/<meta\b[^>]*\bname\s*=\s*["']min-photos["'][^>]*>/i);
+  const metaMin = meta && meta[0].match(/\bcontent\s*=\s*["'](\d+)["']/i);
+  return { credited, pending, slots, metaMin: metaMin ? Number(metaMin[1]) : null, deck: isWidescreen(visible) };
+}
+// True when the CSS @page size is 16:9 (a slide deck), in any unit the two lengths share.
+function isWidescreen(css) {
+  const size = css.match(/@page\b[^{]*\{[^}]*\bsize\s*:\s*([^;}]+)/i);
+  if (!size) return false;
+  const units = { mm: 1, cm: 10, in: 25.4, pt: 25.4 / 72, px: 25.4 / 96 };
+  const lengths = [...size[1].matchAll(/([\d.]+)\s*(mm|cm|in|pt|px)/gi)].map((l) => Number(l[1]) * units[l[2].toLowerCase()]);
+  if (lengths.length !== 2 || !lengths[1]) return false;
+  return Math.abs(lengths[0] / lengths[1] - 16 / 9) < 0.03;
+}
 function placeholders(html) {
   const found = new Set();
   for (const m of stripNonVisible(html).matchAll(/\{\{[^{}\n]{1,80}\}\}/g)) found.add(m[0]);
@@ -289,6 +326,21 @@ if (left.length) {
   const shown = left.slice(0, 12).join('  ');
   const msg = `${left.length} placeholder(s) left in the HTML: ${shown}${left.length > 12 ? '  ...' : ''}`;
   if (opts.strict) { cleanup(); fail(msg, 'replace every {{...}} before the final render (or drop --strict while drafting)'); }
+  console.error(`render-pdf: warn · ${msg}`);
+}
+const photos = photoCheck(html);
+const minPhotos = opts.minPhotos ?? photos.metaMin ?? (photos.deck ? 3 : 0);
+const minFrom = opts.minPhotos !== undefined ? '--min-photos' : photos.metaMin !== null ? '<meta name="min-photos">' : photos.deck ? '16:9 deck default' : 'default';
+console.log(`render-pdf · photos:  ${photos.credited} real, credited · ${photos.slots} empty slot(s) · minimum ${minPhotos} (${minFrom})`);
+const photoProblems = [];
+if (photos.slots) photoProblems.push(`${photos.slots} photo slot(s) still empty (data-photo-slot)`);
+if (photos.credited < minPhotos) photoProblems.push(`${photos.credited} real, credited photo(s) where ${minPhotos} are required`);
+if (photoProblems.length) {
+  const msg = photoProblems.join('; ');
+  if (opts.strict) {
+    cleanup();
+    fail(msg, 'put a real photograph in every slot with its "Photo: ARTIST · SOURCE · LICENCE" chip; use --min-photos 0 only for a document that cannot carry photos');
+  }
   console.error(`render-pdf: warn · ${msg}`);
 }
 
