@@ -98,7 +98,7 @@ Either route: record each beat's clip the day its feature lands, and keep beats 
 
 Gate: a clip (or a route A run) for every beat, no dev indicator in any frame, `timing.json` kept next to the clips.
 
-> Field note (Detour · Graph Hacks 2026): The demo was recorded by a Playwright script that drew captions into the page in the app's own type and colours, pointer-events off so they never blocked a click, then encoded H.264 with `+faststart`. Re-recording after a fix took one command.
+> Field note (Detour · Graph Hacks 2026): The demo recorder was a Playwright script that drew captions into the page in the app's own type and colours, pointer-events off so they never blocked a click, then encoded H.264 with `+faststart`. Re-recording after a fix took one command.
 
 ### 5. Voiceover
 

@@ -128,4 +128,4 @@ The policy is set at intake in BULLSEYE.md (`process: private` by default): a re
 
 ## 11. Claims that match the code
 
-Every number comes from facts.json and a command that re-measures it (sibling skill prove-it); sample, simulated, projected and illustrative numbers carry their label where they appear. Before the tag, audit claims against the code, not just the documents: NAADI's README and deck promised "a replayable agentic run with real pipeline timings" while the code hardcoded the millisecond values. A claim the code cannot back is a correction waiting to happen.
+Every number comes from facts.json and a command that re-measures it (sibling skill prove-it); sample, simulated, projected and illustrative numbers carry their label where they appear. Before the tag, audit claims against the code, not just the documents: NAADI's README promised "a replayable agentic run with real pipeline timings" while the code hardcoded the millisecond values. A claim the code cannot back is a correction waiting to happen.

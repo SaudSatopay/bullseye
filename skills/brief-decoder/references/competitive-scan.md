@@ -84,7 +84,7 @@ Organisers say this out loud. Graph Hacks: "If the product still works without F
 
 List where the build runs (hosting, database, models), the free tiers and their limits, and every action that needs the owner: accounts, keys, billing, repo visibility, CI token scopes, video hosting. Put them in `## Owner checklist` on day 1.
 
-> Field note (Detour · Graph Hacks 2026): The "shipped" score sat at 6 for six critic iterations because its fixes needed the owner: production keys, a tag, a public repo, analytics, a token with workflow scope.
+> Field note (Detour · Graph Hacks 2026): The "shipped" score stayed at 6 or 7 for seven critic iterations because its fixes needed the owner: production keys, a tag, a public repo, analytics, a token with workflow scope.
 
 ## Side prizes and the blog field
 

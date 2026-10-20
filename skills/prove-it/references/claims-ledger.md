@@ -98,7 +98,7 @@ Start from [CLAIMS.template.md](../assets/CLAIMS.template.md). One row per headl
 
 Then three short sections: **Beyond the README** (claims the deck, video, proof page or code comments make), **Not recomputable elsewhere** (with the invariant re-checked instead: "throughput depends on the machine; `--bench` reruns it and requires 0 errors and tenant isolation"), and **Tolerances** (why two programs may disagree, by how much, where it is enforced).
 
-> Field note (Detour · Graph Hacks 2026): CLAIMS.md mapped each README headline number (16 checks in `pnpm judge`) to the FalkorDB tool that measured it, an independent NetworkX program that recomputed it, and the test that pinned it. Its Tolerances paragraph named every allowed gap: riders within 1.5 because one side rounds, identical sets, percentages within 1 point, and tie-breaks between equally fast paths.
+> Field note (Detour · Graph Hacks 2026): CLAIMS.md mapped each README headline number (16 checks in `pnpm judge`) to the FalkorDB tool that measured it, an independent NetworkX program that recomputed it (all but the memory and throughput claims), and the test that pinned it. Its Tolerances paragraph named every allowed gap: riders within 1.5 because one side rounds, identical sets, percentages within 1 point, and tie-breaks between equally fast paths.
 
 ## claims.json: the executable ledger
 

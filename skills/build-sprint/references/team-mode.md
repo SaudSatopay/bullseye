@@ -169,7 +169,7 @@ SCOPE AND RULES:
 - Done: ask the glue lane to deploy, then walk golden-path beats 1 to 3 at phone width.
 ```
 
-> Field note (Dhaal · MUJ HackX 4.0): this brief, written as "suraksha poster, not SaaS dashboard" with its banned list and a visual-only scope, went out at hours 9 to 10 of the overnight build: the hazard-notice verdict card with its stamp seal, the poster landing and check screens, the war-room console, all with zero logic changes and the golden-path beats re-walked.
+> Field note (Dhaal · MUJ HackX 4.0): this brief, written as "suraksha poster, not SaaS dashboard" with its banned list and a visual-only scope, went out in the task board's H9 to H10 slot, about four and a half hours after check-in: the hazard-notice verdict card with its stamp seal, the poster landing and check screens, the war-room console, all with zero logic changes and the golden-path beats re-walked.
 
 ## 9. Roles, sleep and the last hours
 

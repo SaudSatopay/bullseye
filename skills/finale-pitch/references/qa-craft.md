@@ -41,7 +41,7 @@ Stay calm, concede what is true, and pivot to what is strong. "Yes, the model is
 - Every answer points at something committed: a file, a test, a command. If it is not in the repo, it is a plan, and you say "plan".
 - Keep one dense line of numbers at a glance at the top of the bank, for example: `4 tables · 1 agent · 2 functions · 1 workflow · 0 servers · severity 78 (pothole) and 39 (hairline) on live runs`.
 
-> Field note (NAADI · IDBI Innovate 2026): The README and deck promised "a replayable agentic run with real pipeline timings", but the code replayed fixed millisecond values. A judge's "are those timings real?" would have had only one honest answer. Check every claim in the bank against the code before the round.
+> Field note (NAADI · IDBI Innovate 2026): The README promised "a replayable agentic run with real pipeline timings", but the code replayed fixed millisecond values. A judge's "are those timings real?" would have had only one honest answer. Check every claim in the bank against the code before the round.
 
 ## Hostile patterns and answer shapes
 

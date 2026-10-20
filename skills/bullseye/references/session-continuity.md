@@ -24,9 +24,9 @@ Taken from the handoffs that worked across long builds:
 8. **Verified stats and do-not-claim rules:** the numbers that may appear in public, and the claims that must not.
 9. **Review history (already addressed, do not undo):** accepted decisions from judge rounds and reviews, so a fresh session does not re-litigate them.
 
-> Field note (FaceAttend · NHAI Hackathon 2025): the handoff opened with "Read top-to-bottom; everything a new session needs is here", listed environment gotchas (the build tool to use, a toolchain version that was too new, a command whose piped output masked exit codes), the bugs already fixed, an honest self-score per judging criterion, and next tasks with acceptance criteria. The next four commits each raised a named criterion.
+> Field note (FaceAttend · NHAI Hackathon 2025): the handoff opened with "Read top-to-bottom; everything a new session needs is here", listed environment gotchas (the build tool to use, a toolchain version that was too new, a command whose piped output masked exit codes), the bugs already fixed, an honest self-score per judging criterion, and next tasks with acceptance criteria. Three of the next four task commits named the criterion they raised.
 
-> Field note (MuleShot · BOI × IIT Hyderabad 2026): dated status blocks recorded each pass with the file size, the QA done and an estimated rating, plus a "Review history (already addressed, don't undo)" list and a "Render and QA pipeline (these gotchas cost time)" section.
+> Field note (MuleShot · BOI × IIT Hyderabad 2026): dated status blocks recorded each pass with the file size and the QA done, some with an estimated rating, plus a "Review history (already addressed, don't undo)" list and a "Render and QA pipeline (these gotchas cost time)" section.
 
 ## Paste-in prompts for a fresh session
 

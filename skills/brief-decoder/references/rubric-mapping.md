@@ -76,7 +76,7 @@ How to read a rubric, what evidence wins each common criterion, the weight sets 
 | {{Innovation}} | {{30}} | {{7.5}} | {{liveness is a single layer}} | {{Add a passive anti-spoof layer and its eval (Innovation)}} |
 | {{Scalability}} | {{20}} | {{7}} | {{no evidence across conditions}} | {{Add a diverse-conditions robustness eval (Scalability)}} |
 
-> Field note (FaceAttend · NHAI Hackathon 2025): The handoff self-scored about 82–90 of 100 against Innovation 30, Feasibility 30, Scalability 20 and Presentation 20 and named the weak spots. The next tasks shipped as commits named after the criterion they raised, such as "Add int8 quantization demo (Innovation/compression)".
+> Field note (FaceAttend · NHAI Hackathon 2025): The handoff self-scored about 82–90 of 100 against Innovation 30, Feasibility 30, Scalability 20 and Presentation 20 and named the weak spots. Three of the next four tasks shipped as commits named after the criterion they raised, such as "Add int8 quantization demo (Innovation/compression)".
 
 ## 7. Where the rubric map is used later
 

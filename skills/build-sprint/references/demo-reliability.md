@@ -56,7 +56,7 @@ export async function replay(id: string, emit: Emit, signal?: AbortSignal) {
 }
 ```
 
-> Field note (Detour · Graph Hacks 2026): live, scripted and recorded runs were each named in the stream's first event and shown as amber chips ("SCRIPTED · NO MODEL"); a six-model free chain plus the scripted procedure kept the control room answering through spent quotas and a database outage.
+> Field note (Detour · Graph Hacks 2026): live, scripted and recorded runs were each named in the stream's first event and shown as a chip, amber for "SCRIPTED · NO MODEL"; a six-model free chain plus the scripted procedure kept the control room answering through spent quotas, and the recorded run covered a database outage.
 
 ## 3. Replay on the same event contract
 

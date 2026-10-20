@@ -41,10 +41,10 @@ Seen in ET AI Hackathon 2.0 (Trinetra), and in several events on the builder's t
 
 Seen in IDBI Innovate 2026 (NAADI).
 
-- Demo video at most 3:00. NAADI's demo script opened with "Hack2skill requires ≤ 3:00 … do not submit 3:15" after a 3:15 cut had to be redone.
+- Demo video at most 3:00. NAADI's demo script opened with "Hack2skill requires ≤ 3:00 … do not submit 3:15" once its 3:15 master needed a cut.
 - A mandatory organiser template PPTX. NAADI filled it with python-pptx and left every branded header, footer and cover element untouched (depth in the sibling skill `pitch-deck`).
 
-> Field note (NAADI · IDBI Innovate 2026): The rework shows in the history: a 3:15 script cut to 3:00 once the limit was noticed, and a commit titled "fix(submission deck): drop video reference, clear template prompt overlap". Read platform limits before writing any artefact.
+> Field note (NAADI · IDBI Innovate 2026): The rework shows in the history: a 3:15 script that gained a 2:00 cut and a "do not submit 3:15" warning once the limit was noticed, and a commit starting "fix(submission deck): drop video reference, clear template prompt overlap". Read platform limits before writing any artefact.
 
 ## HackCulture
 

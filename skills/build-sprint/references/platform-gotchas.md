@@ -13,7 +13,7 @@ Each row cost a real build real hours. Read the sections for your stack on day 1
 | `.env` files or private notes ship with the deployment | the deploy uploads the working tree | mirror `.gitignore` in `.vercelignore`: every `.env*`, process notes, `.claude/`, scratch folders |
 | A clean clone fails where your tree passes | your tree has files a clone does not | run a fresh-clone build before submitting, and fix it until it prints zero warnings |
 
-> Field note (Detour · Graph Hacks 2026): the first production build failed because Tailwind's Turbopack loader made the bundler read the whole root, including about 1,059 files in the host's in-project package store, and the warnings overflowed the 4 MB log limit. Switching to the PostCSS integration and pinning the framework fixed it 13 minutes after the failure.
+> Field note (Detour · Graph Hacks 2026): the first production build failed because Tailwind's Turbopack loader made the bundler read the whole root, including at least 1,059 files in the host's in-project package store, and the warnings overflowed the 4 MB log limit. Switching to the PostCSS integration fixed the build 13 minutes after the failure; pinning the framework preset a few minutes later fixed the 404 that followed.
 
 ## 2. Hosting and access
 

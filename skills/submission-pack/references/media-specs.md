@@ -24,7 +24,7 @@ Paths like `<submission-pack>/scripts/qr.py` mean this skill's folder (`${CLAUDE
 | Where | Cap | What happened |
 |---|---|---|
 | Devpost hackathons | demo video as a YouTube or Vimeo link, usually under 3:00; OpenAI Build Week: under 3 minutes, public, with audio | StorePilot's checklist: "Video < 3:00, audio narration, uploaded public on YouTube, link works incognito" |
-| Hack2skill (IDBI Innovate) | video at most 3:00 | NAADI's script ran 3:15 and was cut; its demo script opens with "do not submit 3:15" |
+| Hack2skill (IDBI Innovate) | video at most 3:00 | NAADI's script ran 3:15 and needed a cut; its demo script opens with "do not submit 3:15" |
 | hackculture.io (NABARD) | PDF upload under 10 MB | DhanDrishti's deck went over; JPEG screenshots and no raster grain brought it under |
 | Smart India Hackathon | idea PDF at most 10 MB; title at most 100 characters, description 50,000, abstract 10,000 | ORCA's form copy carries the budgets in each heading |
 | BOI × IIT Hyderabad, round 1 | idea PDF at most 1 MB | MuleShot subset its fonts: 1060 KB to 603 KB with no visual change; 698 KB final |

@@ -84,4 +84,4 @@ These are the actions an agent cannot take. Hand them to the user on day 1, in o
 9. Approve the commit attribution policy.
 10. Plan the release tag for the submission commit.
 
-> Field note (Detour · Graph Hacks 2026): the "shipped" score sat at 6 for six iterations because production keys, the release tag, analytics and the CI token scope all needed the owner. None of it was code.
+> Field note (Detour · Graph Hacks 2026): the "shipped" score stayed at 6 or 7 for seven iterations because production keys, the release tag, analytics and the CI token scope all needed the owner. None of it was code.

@@ -7,7 +7,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 ### Detour · Graph Hacks 2026 (WeMakeDevs × FalkorDB)
 - **Built:** agents on a graph of the New York subway that answer what the network can still carry when a line breaks, using max flow, min cut and forked graphs to test shuttle plans. Two people, about 52 hours, 100 commits to the submission tag.
 - **Steal this:** four parallel research passes before the idea, including a scan of about 351 competitor repositories; roughly a fifth cloned the organiser's sample app, so the concept moved to a problem where the algorithm is the product. The organiser's own test ("if the product still works without FalkorDB, the graph counts as decoration") was answered head-on in the README.
-- **Scar:** the "shipped" score sat at 6 for six iterations because keys, the release tag, analytics and the CI token scope all needed the owner. Hence the day-1 owner checklist.
+- **Scar:** the "shipped" score stayed at 6 or 7 for seven iterations because keys, the release tag, analytics and the CI token scope all needed the owner. Hence the day-1 owner checklist.
 
 ### Trinetra · ET AI Hackathon 2.0
 - **Built:** an industrial-safety engine that catches the dangerous combination no single sensor flags ("three green lights, one lethal combination"), with a control-room interface, solo. Passed Phase 1; Phase 2 submitted.
@@ -56,11 +56,11 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 ### NAADI · IDBI Innovate 2026 and DhanDrishti · NABARD Hackathon 2026
 - **Built:** a financial-health score for small businesses (NAADI) and a rural cash-flow forecast with early warnings (DhanDrishti).
 - **Steal this:** precompute model outputs into JSON so the console is static and cannot fail live; "the LLM writes prose, never numbers"; a "why teams lose this track, and how we win it" table in the pitch.
-- **Scar:** a platform video cap (3:00) and a PDF size cap (10 MB) were noticed late, forcing re-cuts. Read the limits before making artifacts.
+- **Scar:** a platform video cap (3:00) and a PDF size cap (10 MB) were noticed late: the video script needed a shorter cut, and a deck PDF that grew to 45 MB in an HTML rebuild had to be recompressed under 10 MB. Read the limits before making artifacts.
 
 ### FaceAttend · NHAI Hackathon 2025
 - **Built:** offline face recognition with liveness checks for remote highway sites: a mobile app, a Python proof of concept with benchmarks, and a sync server.
-- **Steal this:** a handoff that scored the build honestly against each criterion and named the next tasks after the criterion they would raise; benchmarks measured under eleven degraded capture conditions.
+- **Steal this:** a handoff that scored the build honestly against each criterion and named most of the next tasks after the criterion they would raise; benchmarks measured under eleven degraded capture conditions.
 - **Scar:** release-only bugs on deadline day (a startup blocked on fonts, an entrance animation hiding a whole screen, a pixel-scaling bug that made every face match). Build the release artifact on a real device on day one.
 
 ## Proof: numbers that survive a skeptic

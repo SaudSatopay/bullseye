@@ -16,7 +16,7 @@ Pace is about 140 words a minute. A live demo spends a third or more of the slot
 
 Where these come from: the 5-minute shape is Dhaal's budget at MUJ HackX 4.0; the 4:30 shape is FLOODLIGHT's Round 2 script; the 20-minute call is CrackWatch's top-25 judging call; the 10-minute order is the skeleton the builder's 12 to 17 slide decks followed. The 3-minute shape is the 5-minute one with the architecture reduced to one sentence.
 
-> Field note (Dhaal · MUJ HackX 4.0): The 5-minute script gave the live demo 3:00 of the slot and spent 35 seconds on architecture and honesty: "The AI narrates the verdict; it can never change it."
+> Field note (Dhaal · MUJ HackX 4.0): The 5-minute script gave the live demo 3:00 of the slot and spent 35 seconds on architecture, honesty and the close: "The AI narrates the verdict; it can never change it."
 
 ## By jury
 

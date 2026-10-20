@@ -40,7 +40,7 @@ Each persona below has: the line to paste, what it rewards, the questions it ask
 
 **What loses them:** a GenAI feature in the spotlight while governance is a footnote; "freezes" or "blocks" where the honest verb is "recommends a hold"; accuracy on an imbalanced problem ("A model that calls everyone legitimate scores 99.1% accuracy and catches zero"); a mandate or regulation nobody verified.
 
-> Field note (MuleShot · BOI × IIT Hyderabad 2026): Acting on a judge critique, the proposal replaced the analyst cockpit's GenAI panel with a decision-governance panel (score, explain, maker-checker, audit log, "never auto-frozen") and demoted GenAI to one line that drafts the report for analyst review, because a banking jury scores governance.
+> Field note (MuleShot · BOI × IIT Hyderabad 2026): Acting on a mock-judge critique, the proposal replaced the analyst cockpit's GenAI panel with a decision-governance panel (score, explain, maker-checker, audit log, "never auto-frozen") and demoted GenAI to one line that drafts the report for analyst review, because a banking jury scores governance.
 
 ## Engineers
 

@@ -111,7 +111,7 @@ claims-check  claims.json  (facts: facts.json, 15 claims, 4 drift rules, --no-me
 
 **Gate:** it exits 0. Then change one README number on purpose, see it exit 1 with `MISMATCH` or `DRIFT`, and revert. A judge command that cannot fail is decoration.
 
-> Field note (Detour · Graph Hacks 2026): `pnpm judge` re-measured 16 README claims on FalkorDB and an independent NetworkX program and exited 1 on any mismatch, behind a README badge. It still missed a counting error, because the verifier had copied the same counting; a human reviewer found it after the deadline. Independent checks need independent semantics.
+> Field note (Detour · Graph Hacks 2026): `pnpm judge` re-measured 15 README claims on FalkorDB, checked most of them against an independent NetworkX program, and exited 1 on any mismatch, behind a README badge. It still missed a counting error, because the verifier had copied the same counting; a reviewer found it after the deadline, and the bus's load became the 16th claim. Independent checks need independent semantics.
 
 ### 5. Tests that pin the claims
 

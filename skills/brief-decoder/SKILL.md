@@ -58,7 +58,7 @@ Add `brief/` to `.gitignore` before the first file lands. Save page text to `bri
 
 Gate: all nine items are `read`, `not published` with the page you checked, or `behind login: asked user`.
 
-> Field note (Dhaal · MUJ HackX 4.0): Round 1 was a screen of LinkedIn, GitHub and registration answers, "a 70–90% cut that happens before any code is written". Reading the format first put the first days into profiles, not code.
+> Field note (Dhaal · MUJ HackX 4.0): Round 1 was a screen of LinkedIn, GitHub and registration answers, which the plan expected to be "a 70–90% cut that happens before any code is written". Reading the format first planned the first days around profiles, not code.
 
 ### 2. Write the Contract
 

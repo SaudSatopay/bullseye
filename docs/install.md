@@ -9,13 +9,14 @@ BULLSEYE is a set of Agent Skills plus five Claude Code subagents. Pick the rout
 /plugin install bullseye@bullseye
 ```
 
+- In a session, `/plugin install` opens the plugin's details; choose a scope to finish the install.
 - From a shell: `claude plugin marketplace add SaudSatopay/bullseye`, then `claude plugin install bullseye@bullseye`.
-- Recent Claude Code versions accept one step: `/plugin install bullseye --marketplace SaudSatopay/bullseye`.
+- Claude Code v2.1.275 and later accept one step: `/plugin install bullseye --marketplace SaudSatopay/bullseye`.
 - Pin a release: `/plugin marketplace add SaudSatopay/bullseye#v1.0.0`.
 - Skills are namespaced: `/bullseye:bullseye` (the flight director), `/bullseye:prove-it`, and so on. Plain-language requests ("use bullseye for this hackathon") trigger them too.
 - Subagents: `bullseye:missile-recon`, `bullseye:missile-critic`, `bullseye:missile-builder`, `bullseye:hackathon-judge`, `bullseye:claims-auditor`.
 - **Updating.** Third-party marketplaces do not auto-update by default. Turn it on under `/plugin` → Marketplaces, or run `claude plugin marketplace update bullseye` and `claude plugin update bullseye@bullseye`.
-- **Windows.** Git for Windows must be on `PATH` for `owner/repo` marketplace adds. If cloning over SSH fails, set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`.
+- **Windows.** Git for Windows must be on `PATH` for `owner/repo` marketplace adds. Claude Code falls back to HTTPS when an SSH clone fails; to skip SSH altogether (CI runners, containers, machines without an SSH key for github.com), set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`.
 
 ## Any agent that reads Agent Skills
 
@@ -65,6 +66,6 @@ Ask your agent: *"Which bullseye skills can you use, and what does each one do?"
 
 ## Remove
 
-- Claude Code plugin: `/plugin uninstall bullseye@bullseye`, then remove the marketplace with `/plugin marketplace remove bullseye`.
+- Claude Code plugin: `/plugin uninstall bullseye@bullseye`. Removing the marketplace with `/plugin marketplace remove bullseye` also uninstalls every plugin installed from it.
 - Skills CLI installs: delete the installed skill folders (for example `.claude/skills/<name>` or `.agents/skills/<name>`).
 - Clone: delete `.bullseye/`.

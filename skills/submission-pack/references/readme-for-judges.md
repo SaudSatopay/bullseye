@@ -4,7 +4,7 @@ A judge gives a README about two minutes. They decide on the first screen, click
 
 The structure comes from the builder's strongest READMEs: Detour (Graph Hacks 2026), SunPath (FlowZint AI Hackathon 2026), RegSutra (SEBI Securities Market TechSprint 2026) and FLOODLIGHT (MUSA CodeX 2026). `../assets/README.template.md` is the skeleton; this file explains it.
 
-> Field note (Detour · Graph Hacks 2026): At iteration 1 the README only described the product. The judge path, the Evidence table against baselines, the organisers' guidance point by point and "Where we lose" were added later, and they are what made it a judge's document.
+> Field note (Detour · Graph Hacks 2026): At iteration 1 the README described the product and its own checks. The judge path, the Evidence table against baselines, the organisers' guidance point by point and "Where we lose" were added after the deadline, and they are what made it a judge's document.
 
 ## 1. The order, and why
 

@@ -48,7 +48,7 @@ One facts file, written by the scripts that measure, feeds the README, deck, vid
 
 Label every number on the artifact: measured, sourced, simulated, projected, target or illustrative.
 
-> Field note (Detour · Graph Hacks 2026): one command re-measured all 16 README claims, checked that the README still contained each claim's text, compared it with an independent reimplementation, and failed on any mismatch.
+> Field note (Detour · Graph Hacks 2026): one command re-measured all 16 README claims, checked that the README still contained each claim's text, compared 13 of them with an independent reimplementation, and failed on any mismatch.
 
 > Field note (Bridge, kasauti, FLOODLIGHT, BIS Compass · four events): test counts drifted between README, deck, agent brief and video script (58 vs 59; 51 vs 65 vs 68; 11 vs 20 vs 22 vs 31; 30 vs 37). A single facts file and a pre-submit check catch that drift before it ships.
 
@@ -58,7 +58,7 @@ Every README gets an honest-limits section ("Where we lose", "Known limits"). Mo
 
 > Field note (Dhaal · MUJ HackX 4.0): a blind battery written by a session that could not read the repo was run once and published raw, misses included, before any tuning. Missed targets were reported as missed.
 
-> Field note (MuleShot · BOI × IIT Hyderabad 2026): a hard-critic review and a second model found a leak hidden by type coercion; the headline dropped from 96 percent to 90 percent, and the honest number became the stronger story.
+> Field note (MuleShot · BOI × IIT Hyderabad 2026): a second model found a leak hidden by type coercion; after the hardening pass the headline went from 96 percent to 90 percent, and the honest number became the stronger story.
 
 ## 8. One signature moment, from the subject's own world
 

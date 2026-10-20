@@ -115,7 +115,7 @@ The ten rules every skill enforces. [The evidence behind each one](skills/bullse
 A few of the builds this came from (the full set is in [docs/field-notes.md](docs/field-notes.md)):
 
 - **Trinetra** (ET AI Hackathon 2.0): eight fresh-context judge rounds moved the internal score from 7.3 to 8.5, and every finding was checked against the code before it was fixed.
-- **Detour** (Graph Hacks 2026): one command re-measured all 16 README claims against an independent reimplementation and failed on any drift; a scan of about 351 competitor repositories changed the idea on day 1.
+- **Detour** (Graph Hacks 2026): one command re-measured all 16 README claims, compared 13 of them with an independent reimplementation and failed on any drift; a scan of about 351 competitor repositories changed the idea before any code was written.
 - **ORCA** (Smart India Hackathon 2026, then Vibeathon Stage 2): a generic dark-glass UI replaced by a living nautical chart, with the design rules enforced by unit tests; at the surprise-challenge round, a brief handed over at 12:05 shipped by 14:50.
 - **MuleShot** (Bank of India × IIT Hyderabad): the idea proposal proved its core on the organiser's own data, and turned a leakage audit into the hero of the pitch.
 - **Dhaal** (MUJ HackX 4.0): three people, three agent sessions, one repo, 130 commits inside an 18-hour build window, with lanes, contract-first APIs and a blind evaluation published with its misses.
