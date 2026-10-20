@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>BULLSEYE README art</title>
+<!-- Source of the README boards in assets/readme/. Open with ?board=flight|deck|checks|control&theme=light|dark
+     (&slides=<folder URL> for the deck board). Render all of them with: python -I scripts/render-readme-art.py -->
+<script>
+  const q = new URLSearchParams(location.search);
+  if (q.get('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+  document.documentElement.dataset.board = q.get('board') || 'flight';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=block" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(0.972 0.008 95);
+    --paper-deep: oklch(0.935 0.012 95);
+    --card: oklch(0.992 0.004 95);
+    --ink: oklch(0.21 0.02 260);
+    --ink-soft: oklch(0.42 0.02 260);
+    --ink-faint: oklch(0.58 0.015 260);
+    --line: oklch(0.82 0.01 260);
+    --ring-white: oklch(0.995 0.002 95);
+    --ring-black: oklch(0.27 0.012 260);
+    --ring-blue: oklch(0.70 0.12 228);
+    --ring-red: oklch(0.64 0.19 25);
+    --ring-gold: oklch(0.88 0.155 95);
+    --gold-ink: oklch(0.62 0.13 85);
+    --term: oklch(0.17 0.014 260);
+    --term-line: oklch(0.30 0.014 260);
+    --term-ink: oklch(0.93 0.006 95);
+    --term-soft: oklch(0.68 0.012 260);
+    --ok: oklch(0.78 0.15 150);
+    --warn: oklch(0.83 0.14 80);
+    --bad: oklch(0.70 0.18 25);
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "Instrument Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  :root[data-theme="dark"] {
+    --paper: oklch(0.175 0.014 260);
+    --paper-deep: oklch(0.225 0.016 260);
+    --card: oklch(0.205 0.015 260);
+    --ink: oklch(0.965 0.006 95);
+    --ink-soft: oklch(0.76 0.012 95);
+    --ink-faint: oklch(0.60 0.012 260);
+    --line: oklch(0.38 0.012 260);
+    --gold-ink: oklch(0.86 0.15 92);
+    --term: oklch(0.13 0.012 260);
+    --term-line: oklch(0.32 0.014 260);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; background: var(--paper); }
+  body { font-family: var(--body); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .board { display: none; position: relative; width: 1280px; padding: 64px 72px 60px; overflow: hidden;
+           background: radial-gradient(1100px 600px at 100% 0%, var(--paper-deep), transparent 70%), var(--paper); }
+  :root[data-board="flight"] #flight, :root[data-board="deck"] #deck,
+  :root[data-board="checks"] #checks, :root[data-board="control"] #control { display: block; }
+
+  .kicker { font-family: var(--mono); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft);
+            display: flex; align-items: center; gap: 12px; }
+  .kicker i { display: inline-block; width: 28px; height: 2px; background: var(--ring-red); }
+  h2 { font-family: var(--display); font-weight: 800; font-size: 64px; line-height: .92; letter-spacing: -.005em; text-transform: uppercase;
+       margin-top: 16px; }
+  h2 em { font-style: normal; color: var(--ring-red); }
+  .sub { margin-top: 14px; font-size: 19px; line-height: 1.4; color: var(--ink-soft); max-width: 900px; }
+  .sub b { color: var(--ink); font-weight: 600; }
+
+  /* ------------------------------------------------------------ flight */
+  #flight { height: 770px; }
+  #flight .arc { position: absolute; left: 0; top: 214px; width: 1280px; height: 150px; overflow: visible; }
+  #flight .cols { position: absolute; left: 0; top: 362px; width: 1280px; height: 200px; }
+  #flight .col { position: absolute; width: 132px; transform: translateX(-50%); text-align: center; }
+  #flight .col .n { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; color: var(--ring-red); font-weight: 700; }
+  #flight .col .p { font-family: var(--display); font-weight: 800; font-size: 31px; line-height: 1; text-transform: uppercase; margin-top: 6px; }
+  #flight .col .s { font-family: var(--mono); font-size: 12px; color: var(--ink); margin-top: 8px; line-height: 1.45; }
+  #flight .col .o { font-size: 14px; line-height: 1.38; color: var(--ink-soft); margin-top: 8px; }
+  #flight .rail { position: absolute; left: 72px; right: 72px; top: 604px; height: 40px; border-top: 2px solid var(--ink); }
+  #flight .fileline { position: absolute; left: 72px; top: 668px; display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+  #flight .fileline b { background: var(--ink); color: var(--paper); font-weight: 700; font-size: 14px; letter-spacing: .04em; padding: 6px 12px; }
+  #flight .rail .tick { position: absolute; top: -6px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink);
+                        transform: translateX(-50%); }
+  #flight .rail .sec { position: absolute; top: 14px; transform: translateX(-50%); font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft);
+                       white-space: nowrap; letter-spacing: .02em; }
+  #flight .foot { position: absolute; left: 72px; right: 72px; bottom: 26px; display: flex; justify-content: space-between;
+                  font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); }
+  #flight .foot b { color: var(--ink); font-weight: 500; }
+
+  /* ------------------------------------------------------------ deck */
+  #deck .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 26px; margin-top: 34px; }
+  #deck figure { position: relative; }
+  #deck figure img { display: block; width: 555px; aspect-ratio: 16 / 9; border: 1px solid var(--line);
+                     box-shadow: 0 1px 0 var(--line), 0 18px 40px -22px oklch(0.2 0.02 260 / .55); }
+  #deck figcaption { display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--mono); font-size: 12.5px;
+                     letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+  #deck figcaption b { color: var(--ink); font-weight: 500; }
+  #deck .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .chip { font-family: var(--mono); font-size: 12.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink);
+          border: 1.5px solid var(--ink); padding: 6px 10px; }
+  .chip.hot { border-color: var(--ring-red); color: var(--ring-red); }
+
+  /* ------------------------------------------------------------ checks */
+  #checks .grid { display: grid; grid-template-columns: 640px 1fr; gap: 24px; margin-top: 32px; }
+  #checks .stack { display: grid; gap: 24px; align-content: start; }
+  .term { background: var(--term); border: 1px solid var(--term-line); border-radius: 10px; color: var(--term-ink); overflow: hidden;
+          box-shadow: 0 22px 44px -26px oklch(0.15 0.02 260 / .7); }
+  .term .bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; border-bottom: 1px solid var(--term-line);
+               font-family: var(--mono); font-size: 12px; color: var(--term-soft); letter-spacing: .03em; }
+  .term .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--term-line); }
+  .term .bar span { margin-left: 8px; }
+  .term .bar .what { margin-left: auto; color: var(--term-ink); }
+  .term pre { font-variant-ligatures: none; font-family: var(--mono); font-size: 12.6px; line-height: 1.62; padding: 14px 16px 16px; white-space: pre; }
+  .term .cmd { color: var(--term-ink); font-weight: 700; }
+  .term .dim { color: var(--term-soft); }
+  .term .ok { color: var(--ok); }
+  .term .warn { color: var(--warn); }
+  .term .bad { color: var(--bad); font-weight: 700; }
+  #checks .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 30px; }
+  #checks .note .t { font-family: var(--display); font-weight: 800; font-size: 25px; text-transform: uppercase; line-height: 1; }
+  #checks .note .t em { font-style: normal; color: var(--ring-red); }
+  #checks .note p { font-size: 15px; line-height: 1.45; color: var(--ink-soft); margin-top: 8px; }
+
+  /* ------------------------------------------------------------ control */
+  #control .wrap { display: grid; grid-template-columns: 812px 1fr; gap: 34px; margin-top: 30px; }
+  .doc { font-variant-ligatures: none; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 22px 24px 24px; font-family: var(--mono);
+         font-size: 12.4px; line-height: 1.72; color: var(--ink); box-shadow: 0 22px 44px -28px oklch(0.2 0.02 260 / .45); }
+  .doc .h1 { font-weight: 700; font-size: 14px; }
+  .doc .h3 { font-weight: 700; color: var(--ring-red); margin-top: 10px; }
+  .doc .k { color: var(--ring-red); font-weight: 700; }
+  .doc .v { color: var(--ink-soft); }
+  .doc .mark { background: oklch(0.88 0.155 95 / .35); outline: 1.5px solid var(--gold-ink); outline-offset: 1px; }
+  :root[data-theme="dark"] .doc .mark { background: oklch(0.88 0.155 95 / .16); }
+  .doc .row { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .doc .box { color: var(--ink-faint); }
+  .doc .done { color: var(--ok); }
+  :root:not([data-theme="dark"]) .doc .done { color: oklch(0.52 0.13 150); }
+  .callouts { display: grid; gap: 22px; align-content: start; padding-top: 6px; }
+  .callout { border-left: 3px solid var(--ring-red); padding: 2px 0 2px 16px; }
+  .callout .t { font-family: var(--mono); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); font-weight: 700; }
+  .callout p { font-size: 16px; line-height: 1.45; color: var(--ink-soft); margin-top: 6px; }
+  .callout code { font-family: var(--mono); font-size: 14px; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- ================================================================ FLIGHT -->
+<section class="board" id="flight">
+  <div class="kicker"><i></i>The flight</div>
+  <h2>Eight phases. One control file. <em>One target.</em></h2>
+
+  <svg class="arc" viewBox="0 0 1280 150" aria-hidden="true">
+    <!-- the arrow's trajectory: a shallow arc from the bow on the left into the gold on the right -->
+    <path d="M 70 118 Q 640 -46 1166 92" fill="none" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <!-- fletching at the start -->
+    <g transform="translate(70 118) rotate(-17)" stroke="var(--ring-red)" stroke-width="3" stroke-linecap="round" fill="none">
+      <path d="M -26 -9 L -6 0 L -26 9"/><path d="M -40 -9 L -20 0 L -40 9"/>
+    </g>
+    <!-- stations on the arc (x, y from the curve) -->
+    <g stroke="var(--ink)" stroke-width="2.5" fill="var(--paper)">
+      <circle cx="172" cy="91" r="9"/><circle cx="308" cy="62.3" r="9"/><circle cx="444" cy="42.3" r="9"/><circle cx="580" cy="31.3" r="9"/>
+      <circle cx="716" cy="29.3" r="9"/><circle cx="852" cy="36.9" r="9"/><circle cx="988" cy="54.2" r="9"/>
+    </g>
+    <circle cx="1124" cy="81.5" r="9" fill="var(--ring-gold)" stroke="var(--ring-black)" stroke-width="2.5"/>
+    <!-- the target -->
+    <g transform="translate(1196 100)">
+      <circle r="44" fill="var(--ring-white)" stroke="var(--line)" stroke-width="1.5"/>
+      <circle r="35" fill="var(--ring-black)"/>
+      <circle r="26" fill="var(--ring-blue)" stroke="var(--ring-black)" stroke-width="1"/>
+      <circle r="17" fill="var(--ring-red)" stroke="var(--ring-black)" stroke-width="1"/>
+      <circle r="8.5" fill="var(--ring-gold)" stroke="var(--ring-black)" stroke-width="1"/>
+      <g fill="var(--ring-black)" stroke="var(--ring-gold)" stroke-width="1.4">
+        <circle cx="-2" cy="-1" r="2.6"/><circle cx="3" cy="2.5" r="2.6"/><circle cx="2.5" cy="-3.5" r="2.6"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="cols">
+    <div class="col" style="left:172px"><div class="n">01</div><div class="p">Intake</div><div class="s">brief-decoder</div><div class="o">Every rule and limit in one contract, with a pass/fail gate</div></div>
+    <div class="col" style="left:308px"><div class="n">02</div><div class="p">Idea</div><div class="s">idea-round</div><div class="o">A brief, a deck and form answers that survive the cut</div></div>
+    <div class="col" style="left:444px"><div class="n">03</div><div class="p">Build</div><div class="s">build-sprint</div><div class="o">The demo path first, live on day 1, a demo that cannot die</div></div>
+    <div class="col" style="left:580px"><div class="n">04</div><div class="p">Polish</div><div class="s">missile</div><div class="o">A look from the subject's world, scored by a separate critic</div></div>
+    <div class="col" style="left:716px"><div class="n">05</div><div class="p">Prove</div><div class="s">prove-it</div><div class="o">Every number measured, labelled, re-checked by one command</div></div>
+    <div class="col" style="left:852px"><div class="n">06</div><div class="p">Judge</div><div class="s">judge-panel</div><div class="o">Fresh&#8209;context judges, every finding fact&#8209;checked</div></div>
+    <div class="col" style="left:988px"><div class="n">07</div><div class="p">Package</div><div class="s">submission-pack<br>demo-video<br>pitch-deck</div><div class="o">README, video, deck and a final sweep</div></div>
+    <div class="col" style="left:1124px"><div class="n">08</div><div class="p">Finale</div><div class="s">finale-pitch</div><div class="o">A runsheet, a Q&amp;A bank and a pre&#8209;flight</div></div>
+  </div>
+
+  <div class="rail">
+        <div class="tick" style="left:100px"></div><div class="sec" style="left:100px">Contract</div>
+    <div class="tick" style="left:236px"></div><div class="sec" style="left:236px">Thesis</div>
+    <div class="tick" style="left:372px"></div><div class="sec" style="left:372px">Plan</div>
+    <div class="tick" style="left:508px"></div><div class="sec" style="left:508px">Decisions</div>
+    <div class="tick" style="left:644px"></div><div class="sec" style="left:644px">Claims</div>
+    <div class="tick" style="left:780px"></div><div class="sec" style="left:780px">Judge rounds</div>
+    <div class="tick" style="left:916px"></div><div class="sec" style="left:916px">Submission</div>
+    <div class="tick" style="left:1052px"></div><div class="sec" style="left:1052px">Handoff · Log</div>
+  </div>
+
+  <div class="fileline"><b>BULLSEYE.md</b><span>the control file: read first by every session, written by every phase</span></div>
+
+  <div class="foot"><span><b>bullseye</b> sequences every phase and resumes any session</span><span><b>hackathon-tracker</b> keeps every event and deadline on your clock</span></div>
+</section>
+
+<!-- ================================================================ DECK -->
+<section class="board" id="deck">
+  <div class="kicker"><i></i>pitch-deck</div>
+  <h2>Decks built as code. <em>Checked like code.</em></h2>
+  <p class="sub">The 16:9 starter, rendered by <b>render-pdf.mjs</b>: every number labelled, every feature chipped, real photographs required, fonts subset and the file size gated before anything is uploaded. The product, VialWatch, is a fictional sample.</p>
+  <div class="grid">
+    <figure><img data-slide="01" alt="Cover slide"><figcaption><span><b>Slide 1</b> of 14 · Cover</span><span>Product-derived hero, illustrative label</span></figcaption></figure>
+    <figure><img data-slide="02" alt="Problem slide"><figcaption><span><b>Slide 2</b> of 14 · The problem</span><span>Three sourced numbers, one night</span></figcaption></figure>
+    <figure><img data-slide="09" alt="Results slide"><figcaption><span><b>Slide 9</b> of 14 · Results</span><span>Targets declared, then measured</span></figcaption></figure>
+    <figure><img data-slide="10" alt="Impact slide"><figcaption><span><b>Slide 10</b> of 14 · Impact</span><span>Counted, labelled, and not yet counted</span></figcaption></figure>
+  </div>
+  <div class="chips"><span class="chip">HTML to PDF</span><span class="chip">pptxgenjs</span><span class="chip">organiser templates</span><span class="chip">image PPTX</span><span class="chip hot">3 real photos, minimum</span><span class="chip">fonts subset</span><span class="chip">size gate</span><span class="chip">page PNGs</span></div>
+</section>
+
+<!-- ================================================================ CHECKS -->
+<section class="board" id="checks">
+  <div class="kicker"><i></i>Proof, judging, submission</div>
+  <h2>The checks that catch <em>the slips.</em></h2>
+  <p class="sub">Real output from the bundled scripts, trimmed to fit, run on a sample project with planted mistakes: a stale number, a judge's bad arithmetic and an unfinished submission. Each one is a slip a real entry shipped.</p>
+  <div class="grid">
+    <div class="stack">
+      <div class="term"><div class="bar"><i></i><i></i><i></i><span>prove-it</span><span class="what">claims-check.mjs</span></div>
+<pre><span class="cmd">$ node claims-check.mjs claims.json --no-measure</span>
+<span class="dim">claims-check  claims.json  (facts: facts.json, 4 claims, 1 drift rule)</span>
+
+  <span class="ok">ok</span>            tests        3           fact 3    README.md
+  <span class="ok">ok</span>            p95          &lt;= 200      fact 15   README.md
+  <span class="bad">MISSING-TEXT</span>  lead         6.2         fact 6.2  text not found in README.md
+  <span class="ok">ok</span>            nights       40          fact 40   README.md
+  <span class="bad">DRIFT</span>         drift:tests  "51 tests"  fact 3    idea/SUBMISSION-FORM.md:21
+
+3/4 claims ok, 1 stale number found. <span class="bad">FAIL</span></pre></div>
+      <div class="term"><div class="bar"><i></i><i></i><i></i><span>judge-panel</span><span class="what">judge-round.mjs</span></div>
+<pre><span class="cmd">$ node judge-round.mjs . judging/round-1/scorecard-adversarial.json</span>
+Round 1 · adversarial: weighted 7.03 · lowest Presentation 6.5
+Impact 7 · Use of open data 7.5 · Technical execution 7 · Presentation 6.5
+Findings: 1 high · 0 medium · 1 low · non-issues listed: 1
+<span class="warn">warn</span>  the judge stated a weighted total of 9.9;
+      the exact weights give 7.03 (recorded)
+<span class="dim">Stop rule: keep going</span>
+<span class="dim">Updated BULLSEYE.md (## Judge rounds, ## Log); wrote triage.md</span></pre></div>
+    </div>
+    <div class="term"><div class="bar"><i></i><i></i><i></i><span>submission-pack</span><span class="what">final-sweep.mjs</span></div>
+<pre><span class="cmd">$ node final-sweep.mjs . --run-gate</span>
+<span class="dim">mode: git, 22 files would be pushed
+requirements gate: 7 lines, 6 hard (3 open)</span>
+
+<span class="bad">ERROR</span>  requirements  BULLSEYE.md:59
+       R3 [hard] open: Demo video at most 3:00
+<span class="bad">ERROR</span>  requirements  BULLSEYE.md:61
+       R5 [hard] open: README describes how AI
+       assistants were used
+<span class="bad">ERROR</span>  placeholder   README.md:5
+       placeholder left: tideline.example.org
+<span class="dim">...</span>
+Requirements gate checks: judge each output
+  R3  $ ffprobe ... demo.mp4      pass: 180 or less
+      <span class="ok">| 10.766667</span>
+  R5  $ grep -in "AI assistance"  pass: a heading
+      <span class="ok">| 30:## AI assistance</span>
+
+<span class="dim">check          errors  warnings</span>
+requirements        3         1
+placeholder         1         0
+process-file        0         0
+history             0         0
+
+sweep: <span class="bad">FAIL</span>, 4 errors, 2 warnings</pre></div>
+  </div>
+  <div class="notes">
+    <div class="note"><div class="t">One facts file, <em>no drift</em></div><p>Every number in the README, deck, form and video is checked against the command that measured it.</p></div>
+    <div class="note"><div class="t">Judges recomputed, <em>never trusted</em></div><p>A scorecard is validated, re-weighted with the event's exact rubric and logged in BULLSEYE.md.</p></div>
+    <div class="note"><div class="t">The gate <em>before submit</em></div><p>Open hard requirements, placeholders, secrets and tracked process files fail the sweep.</p></div>
+  </div>
+</section>
+
+<!-- ================================================================ CONTROL -->
+<section class="board" id="control">
+  <div class="kicker"><i></i>The control file</div>
+  <h2>One file every session <em>reads first.</em></h2>
+  <p class="sub">BULLSEYE.md holds the contract, the thesis, the plan, the claims, the judge rounds and the handoff, so a new session, a teammate's agent or a different tool resumes exactly where the last one stopped. This one is the fictional worked example that ships with the skill.</p>
+  <div class="wrap">
+    <div class="doc">
+      <div class="h1"># BULLSEYE · Tideline · Coastal Data Hack 2026</div>
+      <div class="row mark"><span class="k">status:</span> phase=prove step=3 updated=2026-11-15T16:30+05:30 <span class="v">next="Wire claims-check into CI"</span></div>
+      <div class="row mark"><span class="k">deadline:</span> official="Sun 2026-11-15 23:59 America/New_York" yours="Mon 10:29 Asia/Kolkata" <span class="v">buffer=3h</span></div>
+      <div class="row"><span class="k">process:</span> private</div>
+      <div class="h3">### Requirements gate</div>
+      <div class="row mark"><span class="done">- [x]</span> R1 [hard] Both members meet the age rule <span class="v">· check: manual</span></div>
+      <div class="row"><span class="done">- [x]</span> R2 [hard] Every form answer within its limit <span class="v">· check: manual</span></div>
+      <div class="row"><span class="box">- [ ]</span> R3 [hard] Demo video at most 3:00 <span class="v">· check: cmd: ffprobe ... (pass: 180 or less)</span></div>
+      <div class="row"><span class="done">- [x]</span> R4 [hard] Repo public with an OSI licence <span class="v">· check: cmd: gh repo view</span></div>
+      <div class="row"><span class="box">- [ ]</span> R5 [hard] README describes how AI assistants were used</div>
+      <div class="h3">## Claims</div>
+      <div class="row">| "6 hours of warning" | 6.2 h median, 40 replayed nights | <span class="k">SIMULATED</span> | npm run eval:lead |</div>
+      <div class="row">| "47 tests"           | 51                               | <span class="k">MEASURED</span>  | npm test (README stale) |</div>
+      <div class="h3">## Judge rounds</div>
+      <div class="row mark">| R1 | adversarial  | 7.40         | Presentation 6     | 5 of 5 fixed |</div>
+      <div class="row">| R2 | verify-fixes | 7.90 (+0.50) | Use of open data 7 | 3 of 3 fixed |</div>
+      <div class="h3">## Handoff</div>
+      <div class="row"><span class="v">Next steps (exact): finish claims.json, run claims-check, judge round 3</span></div>
+    </div>
+    <div class="callouts">
+      <div class="callout"><div class="t">status</div><p>Where the flight is and the one next action. Every session starts by reading it.</p></div>
+      <div class="callout"><div class="t">deadline</div><p><code>tminus.mjs</code> writes it: the organiser's zone, your clock and an internal deadline with a buffer.</p></div>
+      <div class="callout"><div class="t">requirements gate</div><p>Every rule as a checkable line. The final sweep fails while a <code>[hard]</code> line is open.</p></div>
+      <div class="callout"><div class="t">judge rounds</div><p><code>judge-round.mjs</code> recomputes each score with the contract's exact weights.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // deck board: slide PNGs come from the folder passed as ?slides=<file URL>
+  const slides = q.get('slides');
+  if (slides) for (const img of document.querySelectorAll('img[data-slide]')) img.src = `${slides.replace(/\/$/, '')}/slide-${img.dataset.slide}.png`;
+</script>
+</body>
+</html>

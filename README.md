@@ -17,6 +17,16 @@
   <img alt="Works with Claude Code, Codex, Cursor, Gemini CLI" src="https://img.shields.io/badge/works%20with-Claude%20Code%2C%20Codex%2C%20Cursor%2C%20Gemini%20CLI-1f2937">
 </p>
 
+<p align="center">
+  <a href="#the-flight"><b>The flight</b></a> ·
+  <a href="#install"><b>Install</b></a> ·
+  <a href="#use-it"><b>Use it</b></a> ·
+  <a href="#what-you-get"><b>What you get</b></a> ·
+  <a href="#the-law"><b>The law</b></a> ·
+  <a href="#field-tested"><b>Field-tested</b></a> ·
+  <a href="docs/faq.md"><b>FAQ</b></a>
+</p>
+
 ---
 
 ## Why this exists
@@ -32,7 +42,30 @@ What changes when your agent follows it:
 - **It keeps the model away from the numbers.** The engine decides; the model narrates. Every figure comes from one facts file and is re-measured by one command.
 - **It designs from the subject's own world** instead of the default look, and polishes with a separate critic that scores screenshots and measurements, never the builder's story.
 - **It simulates the judges cold**, fact-checks their findings, and fixes what is real.
-- **It ships the whole package**: a README a judge can use in 60 seconds, paste-ready form answers, a deck rendered and checked like code, a demo video under the cap, and a finale runsheet rehearsed until boring.
+- **It ships the whole package**: a README a judge can use in 60 seconds, paste-ready form answers, a deck with real, credited photographs, rendered and checked like code, a demo video under the cap, and a finale runsheet rehearsed until boring.
+
+## The flight
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/flight-dark.png">
+  <img src="assets/readme/flight.png" alt="The flight: an arrow's arc through eight phases into a target. Intake (brief-decoder), Idea (idea-round), Build (build-sprint), Polish (missile), Prove (prove-it), Judge (judge-panel), Package (submission-pack, demo-video, pitch-deck) and Finale (finale-pitch), above a rail for BULLSEYE.md, the control file every phase reads and writes." width="100%">
+</picture>
+
+One control file, `BULLSEYE.md`, holds the contract, the thesis, the plan, the claims, the judge rounds and the handoff. Each phase is a skill that reads it and writes its own section.
+
+| Phase | Skill | What you get |
+|---|---|---|
+| Intake | [`brief-decoder`](skills/brief-decoder/SKILL.md) | Every rule, limit and criterion in one contract; the problem chosen for win probability; a competitive scan; the battle plan |
+| Idea gate | [`idea-round`](skills/idea-round/SKILL.md) | A concept brief, idea deck and form answers that survive a skeptical shortlist, with every number labelled |
+| Build | [`build-sprint`](skills/build-sprint/SKILL.md) | The golden path built first, deployed on day 1, with a demo layer that cannot die and AI features that are honest by construction |
+| Polish | [`missile`](skills/missile/SKILL.md) | A design system from the subject's own world, one signature moment, and a sense, score, fix loop until every craft dimension is at 9 |
+| Proof | [`prove-it`](skills/prove-it/SKILL.md) | A claims ledger, one facts file, a re-measure command, honest evals against real baselines, and a limits document |
+| Judging | [`judge-panel`](skills/judge-panel/SKILL.md) | Cold, fresh-context judge rounds against the event's own rubric, and mock Q&A rehearsal |
+| Package | [`submission-pack`](skills/submission-pack/SKILL.md), [`demo-video`](skills/demo-video/SKILL.md), [`pitch-deck`](skills/pitch-deck/SKILL.md) | A judge-first README, paste-ready answers, a final sweep that catches the slips, a scripted video, decks with real photographs, rendered and checked as code |
+| Finale | [`finale-pitch`](skills/finale-pitch/SKILL.md) | A runsheet with exact inputs, a timed script with a 90-second cut, a Q&A bank, and a pre-flight with a decision rule |
+| Portfolio | [`hackathon-tracker`](skills/hackathon-tracker/SKILL.md) | Every event you are in, deadlines in your time zone, verified statuses, and lessons kept |
+
+[`bullseye`](skills/bullseye/SKILL.md) is the flight director that sequences all of it. [docs/method.md](docs/method.md) explains the method for humans in ten minutes.
 
 ## Install
 
@@ -77,23 +110,24 @@ After that the session protocol does the rest: `next` does the next thing, `stat
 
 More prompts for every phase are in [docs/prompts.md](docs/prompts.md).
 
-## The flight
+## What you get
 
-One control file, `BULLSEYE.md`, holds the contract, the thesis, the plan, the claims, the judge rounds and the handoff. Each phase is a skill that reads it and writes its own section.
+Real artifacts, not a feature list. Every board below is rendered from the bundled starters and the scripts' own output by [`scripts/render-readme-art.py`](scripts/render-readme-art.py).
 
-| Phase | Skill | What you get |
-|---|---|---|
-| Intake | [`brief-decoder`](skills/brief-decoder/SKILL.md) | Every rule, limit and criterion in one contract; the problem chosen for win probability; a competitive scan; the battle plan |
-| Idea gate | [`idea-round`](skills/idea-round/SKILL.md) | A concept brief, idea deck and form answers that survive a skeptical shortlist, with every number labelled |
-| Build | [`build-sprint`](skills/build-sprint/SKILL.md) | The golden path built first, deployed on day 1, with a demo layer that cannot die and AI features that are honest by construction |
-| Polish | [`missile`](skills/missile/SKILL.md) | A design system from the subject's own world, one signature moment, and a sense, score, fix loop until every craft dimension is at 9 |
-| Proof | [`prove-it`](skills/prove-it/SKILL.md) | A claims ledger, one facts file, a re-measure command, honest evals against real baselines, and a limits document |
-| Judging | [`judge-panel`](skills/judge-panel/SKILL.md) | Cold, fresh-context judge rounds against the event's own rubric, and mock Q&A rehearsal |
-| Package | [`submission-pack`](skills/submission-pack/SKILL.md), [`demo-video`](skills/demo-video/SKILL.md), [`pitch-deck`](skills/pitch-deck/SKILL.md) | A judge-first README, paste-ready answers, a final sweep that catches the slips, a scripted video, decks rendered and QA'd as code |
-| Finale | [`finale-pitch`](skills/finale-pitch/SKILL.md) | A runsheet with exact inputs, a timed script with a 90-second cut, a Q&A bank, and a pre-flight with a decision rule |
-| Portfolio | [`hackathon-tracker`](skills/hackathon-tracker/SKILL.md) | Every event you are in, deadlines in your time zone, verified statuses, and lessons kept |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/deck-dark.png">
+  <img src="assets/readme/deck.png" alt="Four slides of the pitch-deck starter rendered to PDF: the cover with a temperature-forecast hero, the problem slide with three sourced numbers and a reconstructed night log, a results slide comparing targets with measurements, and an impact slide with simulated, projected and target numbers, each labelled." width="100%">
+</picture>
 
-[`bullseye`](skills/bullseye/SKILL.md) is the flight director that sequences all of it. [docs/method.md](docs/method.md) explains the method for humans in ten minutes.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/checks-dark.png">
+  <img src="assets/readme/checks.png" alt="Three terminals with real script output: claims-check failing on a stale test count and a missing claim, judge-round recomputing a judge's stated 9.9 as 7.03 with the exact rubric weights, and final-sweep failing on open hard requirements and a placeholder link." width="100%">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/control-dark.png">
+  <img src="assets/readme/control.png" alt="An excerpt of BULLSEYE.md with its status line, deadline line, requirements gate, claims table and judge rounds, beside four callouts that explain each part." width="100%">
+</picture>
 
 ## The law
 
@@ -127,7 +161,8 @@ skills/        twelve Agent Skills, one folder each (SKILL.md, references/, asse
 agents/        five Claude Code subagents: missile-recon, missile-critic, missile-builder,
                hackathon-judge, claims-auditor
 docs/          the method, field notes, install guide, prompt cookbook, FAQ
-scripts/       repository tooling (validator, banner render)
+assets/        the banner and the README boards, with the HTML each one is rendered from
+scripts/       repository tooling (validator, banner and README board renders)
 tests/         node:test suites for every bundled script
 ```
 

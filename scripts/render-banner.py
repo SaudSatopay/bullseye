@@ -1,10 +1,11 @@
 """Render assets/brand/banner.html to banner.png (light) and banner-dark.png (dark), 1280x640 at 2x.
 
 Usage: python -I scripts/render-banner.py
-Needs: pip install playwright && python -m playwright install chromium
+Needs: pip install playwright pillow && python -m playwright install chromium
 """
 from pathlib import Path
 
+from PIL import Image
 from playwright.sync_api import sync_playwright
 
 root = Path(__file__).resolve().parent.parent
@@ -20,5 +21,8 @@ with sync_playwright() as p:
         page.wait_for_timeout(400)
         page.screenshot(path=str(out), clip={"x": 0, "y": 0, "width": 1280, "height": 640})
         page.close()
+        # A 256-colour palette keeps the banner sharp at well under half the weight.
+        Image.open(out).convert("RGB").quantize(colors=256, method=Image.Quantize.MEDIANCUT,
+                                                dither=Image.Dither.FLOYDSTEINBERG).save(out, optimize=True)
         print(f"wrote {out.relative_to(root)} ({out.stat().st_size // 1024} KB)")
     browser.close()
