@@ -133,8 +133,8 @@ Required: the event's open feeds. If we removed them, the chart would show nothi
 
 | Round | Type | Date | Weighted score | Lowest criterion | Top finding | Fixed? |
 |---|---|---|---|---|---|---|
-| 1 | Adversarial | 2026-11-15 01:10 IST | 7.4 | Presentation (6) | The README describes the product instead of letting a judge run it in 60 seconds | yes, 1c9e3a7 |
-| 2 | Verify fixes | 2026-11-15 13:30 IST | 7.9 | Open data (7) | Feed timestamps were not shown next to the readings | yes, 77ab210 |
+| R1 | adversarial | 2026-11-15 | 7.40 | Presentation 6 | The README describes the product instead of letting a judge run it in 60 seconds (high) | 5 of 5 substantiated fixed, 1 non-issue · 1c9e3a7 |
+| R2 | verify-fixes | 2026-11-15 | 7.90 (+0.50) | Use of open data 7 | Feed timestamps were not shown next to the readings (medium) | 3 of 3 substantiated fixed · 77ab210 |
 
 ## Submission
 - [ ] README for judges · [ ] SUBMISSION.md · [ ] deck (not required) · [ ] video · [x] live URL · [x] repo public · [ ] tag

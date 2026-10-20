@@ -121,7 +121,13 @@ for (const route of routes) {
       const context = await browser.newContext({ viewport: { width, height }, colorScheme: scheme, deviceScaleFactor: 1 });
       const page = await context.newPage();
       const consoleErrors = [];
-      page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text().slice(0, 300)); });
+      // A failed resource load names no URL in its text, so append the console location's URL.
+      page.on('console', (m) => {
+        if (m.type() !== 'error') return;
+        const text = m.text();
+        const at = m.location()?.url;
+        consoleErrors.push((at && !text.includes(at) ? `${text} (${at})` : text).slice(0, 300));
+      });
       page.on('pageerror', (e) => consoleErrors.push(`uncaught: ${String(e.message).slice(0, 280)}`));
       const url = new URL(route, baseUrl).toString();
       const record = { route, url, width, scheme, status: null, overflow: null, consoleErrors, screenshot: null, note: '' };

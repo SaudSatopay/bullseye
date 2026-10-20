@@ -28,7 +28,7 @@ The video is often the only part of a project every judge watches end to end. Bu
 - `BULLSEYE.md` in the project root (template: [BULLSEYE.template.md](../bullseye/assets/BULLSEYE.template.md)): `## Contract` for the video rules, `## Thesis` for the one-liner and signature moment, `## Plan` for the golden path beats, `## Claims` for the headline numbers. Without it, read the event's rules page and write the video rules at the top of `docs/demo-script.md`.
 - `facts.json` and `CLAIMS.md` from the sibling skill [prove-it](../prove-it/SKILL.md) (install the full set with `npx skills add SaudSatopay/bullseye` if missing). Every number said or shown in the video comes from there.
 - A production build or the deployed URL, seeded demo data, and a reset control (a Reset demo button or a `?demo=reset` link).
-- Tools: ffmpeg and ffprobe on PATH; Node 20+ with Playwright in the project for route A; Python 3.10+ with `edge-tts` for a synthetic voice (`mutagen` optional).
+- Tools: ffmpeg and ffprobe on PATH; Node 20+ with Playwright for route A (the project's copy first, else `PLAYWRIGHT_MODULE` or a global install); Python 3.10+ with `edge-tts` for a synthetic voice (`mutagen` optional).
 
 ## Procedure
 

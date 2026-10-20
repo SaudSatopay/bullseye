@@ -13,13 +13,14 @@
 //   node record-demo.mjs --help
 //
 // Writes <out>/raw.webm, <out>/timing.json and, when ffmpeg is on PATH, <out>/demo.mp4 (default out: video/out).
-// Playwright is resolved from the project in the current directory: "playwright" first, then "@playwright/test".
+// Playwright is resolved from the project in the current directory ("playwright", then "@playwright/test"),
+// then from the PLAYWRIGHT_MODULE environment variable, then from a global npm install.
 // --dry-run validates the beats file and prints the plan without starting a browser.
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { spawnSync } from 'node:child_process';
+import { execSync, spawnSync } from 'node:child_process';
 
 const HELP = `record-demo.mjs: record a scripted demo with in-page captions, then encode H.264 MP4.
 
@@ -476,14 +477,38 @@ function devProbe() {
 
 // ---------------------------------------------------------------- recording
 
+// The project first, then PLAYWRIGHT_MODULE, then a global npm install (including the copy bundled with
+// @playwright/cli), so an agent that already has Playwright globally can record without a new dependency.
 function loadPlaywright() {
-  const req = createRequire(path.join(process.cwd(), 'noop.js'));
+  const candidates = [];
+  const fromProject = createRequire(path.join(process.cwd(), 'noop.js'));
   for (const name of ['playwright', '@playwright/test']) {
     try {
-      const mod = req(name);
-      if (mod && mod.chromium) return { mod, name };
+      candidates.push({ name, path: fromProject.resolve(name) });
     } catch (e) {
       if (e.code !== 'MODULE_NOT_FOUND') throw e;
+    }
+  }
+  if (process.env.PLAYWRIGHT_MODULE) candidates.push({ name: `PLAYWRIGHT_MODULE ${process.env.PLAYWRIGHT_MODULE}`, path: process.env.PLAYWRIGHT_MODULE });
+  if (!candidates.length) {
+    let root = null;
+    try {
+      root = execSync('npm root -g', { stdio: ['ignore', 'pipe', 'ignore'], timeout: 20000, windowsHide: true }).toString().trim();
+    } catch {
+      // npm is not on PATH
+    }
+    for (const sub of root ? ['playwright', '@playwright/test', '@playwright/cli/node_modules/playwright'] : []) {
+      const dir = path.join(root, sub);
+      if (fs.existsSync(path.join(dir, 'package.json'))) candidates.push({ name: `global ${sub}`, path: dir });
+    }
+  }
+  const load = createRequire(import.meta.url);
+  for (const c of candidates) {
+    try {
+      const mod = load(c.path);
+      if (mod && mod.chromium) return { mod, name: c.name };
+    } catch {
+      // try the next candidate
     }
   }
   return null;
@@ -491,7 +516,7 @@ function loadPlaywright() {
 
 function installHint() {
   return [
-    `Playwright is not installed in this project (looked for "playwright" and "@playwright/test" from ${process.cwd()}).`,
+    `Playwright was not found (looked in the project at ${process.cwd()}, PLAYWRIGHT_MODULE and the global npm folder).`,
     'Install it here, then run again:',
     '  npm i -D playwright && npx playwright install chromium',
     'With pnpm: pnpm add -D playwright && pnpm exec playwright install chromium',
