@@ -130,7 +130,7 @@ Every MEASURED claim and every capability claim gets a test whose name reads as 
 
 **Gate:** every ledger row names a test, and each new test was seen failing with its behaviour removed.
 
-> Field note (engram · CockroachDB × AWS Build with Agentic Memory): the race test asserted exactly one refund across 8 and 16 racing agents and also at least one serialization conflict: "zero 40001s -- the agents never actually raced, so this run is not evidence".
+> Field note (engram · CockroachDB × AWS Agentic Memory Hackathon): the race test asserted exactly one refund across 8 and 16 racing agents and also at least one serialization conflict: "zero 40001s -- the agents never actually raced, so this run is not evidence".
 
 ### 6. Evals
 

@@ -161,7 +161,7 @@ Then spend the runway on the ceiling the judges named:
 
 Do not build a bigger simulator of your own: "Bigger self-sim = production value, zero credibility gain." Never tune a threshold to the test to win a point back.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): After round 5 the judge called the engine "maxed for a hackathon": Business was gated on one thing the engine could not produce, external validity. The engine stayed frozen from then on, and the later gains came from evidence outside the code (a third-party dispersion-model exhibit, a practitioner's problem-validation quote) and from the pitch.
+> Field note (Trinetra · ET AI Hackathon 2.0): In the re-check that lifted the score to 7.9, the judge called the engine "maxed for a hackathon": Business was gated on one thing the engine could not produce, external validity. The engine stayed frozen from then on. A third-party dispersion-model exhibit left the score at 7.7 to 7.9, showcase work around the engine (fleet economics, latency percentiles, property tests) reached 8.0, and the blind run scored Business 8.5, which the builder credited to a practitioner's problem-validation quote and the pitch narrative.
 
 ### 7. Rehearse the Q&A
 

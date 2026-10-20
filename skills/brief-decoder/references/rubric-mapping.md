@@ -54,7 +54,7 @@ How to read a rubric, what evidence wins each common criterion, the weight sets 
 | Government panels (MSME, SIH) | Feasibility, cost within the cap, a deployment path, every form rule honoured | Missing documents, identity or citations where they are forbidden |
 | Automated scorers (Sigma Squad × BIS) | The metric on hidden inputs, then the manual criteria | Anything that can break the scored path |
 
-> Field note (Trinetra · ET AI Hackathon 2.0): The master plan called the code "essentially maxed" and the business score gated on the one thing the engine could not produce, external validity. The runway went to two real incidents reconstructed, a public dataset, a third-party physics model and one practitioner quote, each with its limits stated.
+> Field note (Trinetra · ET AI Hackathon 2.0): The master plan called the code "essentially maxed" and the business score gated on the one thing the engine could not produce, external validity. The external evidence was two real incidents reconstructed and a public dataset, built before the plan, then a third-party physics model and one practitioner quote, each with its limits stated.
 
 ## 5. When no rubric is published
 

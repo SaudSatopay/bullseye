@@ -45,7 +45,7 @@ Rules for every pass:
 - Write the submission copy at about hour 2 (one-liner, form answers, demo script outline) and refresh it in the polish pass. The copy then shapes the build instead of describing it afterwards.
 - Record screen clips as each feature lands, as separate clips. Leaving every recording to the last evening means recording tired, against whatever happens to work then.
 
-> Field note (VyaparAI · Global AI Hackathon with Qwen Cloud): the submission copy (form answers, demo script, blog post) was written at hour 2 of a 52-hour build, then each named pass appeared as its own commit: "Wow pass", "Stacked pass", "Full English parity", "Polish pass".
+> Field note (VyaparAI · Global AI Hackathon Series with Qwen Cloud): the submission copy (form answers, demo script, blog post) was written at hour 2 of a 52-hour build, then each named pass appeared as its own commit: "Wow pass", "Stacked pass", "Full English parity", "Polish pass".
 
 ## 3. Hour tables
 

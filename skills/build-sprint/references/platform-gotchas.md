@@ -27,7 +27,7 @@ Each row cost a real build real hours. Read the sections for your stack on day 1
 | A hosting trial expires mid-event | trials end on their own clock | note every trial's end at kickoff and keep a second host ready |
 | A free-tier database rejects a plain command with `NOPERM` | the free user lacks permission for some commands | on day 1, probe every command the app needs, on the actual free tier |
 
-> Field note (ORCA · SIH 2026): the polish loop's "shipped" score held at 6 because preview deployments returned HTTP 302 to strangers behind the host's login, and the public alias served an older bundle than the one being measured.
+> Field note (ORCA · SIH 2026): the polish loop's "shipped" score was capped at 6 (up from 4) because preview deployments returned HTTP 302 to strangers behind the host's login, and the public alias served an older bundle than the one being measured.
 
 ## 3. Model providers
 

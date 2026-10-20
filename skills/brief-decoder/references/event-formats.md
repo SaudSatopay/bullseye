@@ -6,7 +6,7 @@ The format decides the strategy before the problem statement does. Find the even
 |---|---|---|---|
 | 8 h onsite | Paytm Build for India (Fineprint) | The pre-built idea deck and a scope of one journey | Deck, data, sandbox access, an hour plan by clock time |
 | Overnight onsite, 18–36 h | MUJ HackX 4.0 (Dhaal), TrackShift finale (LINE MARSHAL), ISRO BAH finale (SURYA) | A narrow demo that never breaks, one wow, a rehearsed 5-minute story | War chest, rehearsed deploy, roles, sleep shifts |
-| Online, 48–72 h | Graph Hacks 2026 (Detour), Qwen Cloud hackathon (VyaparAI) | Proof and polish on a live URL, with the sponsor's tech load-bearing | Preview deploy within 2 h, submission copy at hour 2 |
+| Online, 48–72 h | Graph Hacks 2026 (Detour), Global AI Hackathon Series with Qwen Cloud (VyaparAI) | Proof and polish on a live URL, with the sponsor's tech load-bearing | Preview deploy within 2 h, submission copy at hour 2 |
 | Online, multi-week | ET AI Hackathon 2.0 Phase 2 (Trinetra), OpenAI Build Week (StorePilot) | Depth: evidence, external validity, judge rounds | A rubric-driven backlog, clips recorded as features land |
 | Idea round, then build | TrackShift, SIH (ORCA), BOI × IIT Hyderabad (MuleShot), MUSA CodeX (FLOODLIGHT), ISRO BAH (SURYA) | The idea gate, often a single-digit advance rate | The exact form fields, proof before pitch, an early v1 |
 | Profile shortlist | MUJ HackX 4.0 Round 1 | GitHub, LinkedIn and registration answers | A profile pass for every member |

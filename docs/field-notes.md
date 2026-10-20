@@ -20,7 +20,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 ### Smart Retrofit Kit · MSME Idea Hackathon 6.0
 - **Built:** a funding-programme idea submission for a plug-in kit that makes legacy machines smart.
 - **Steal this:** eligibility checked first, five decisions locked on day one, essays written to 91 to 97 percent of each field's character budget, an anonymisation pass that included file metadata.
-- **Scar:** the portal's sanitiser silently stripped percent signs, apostrophes and semicolons from stored answers. Write portal-safe text and read back what was stored.
+- **Scar:** the portal's sanitiser stripped percent signs, apostrophes and semicolons from stored answers, and the stored text could not be edited. Write portal-safe text and read back what was stored.
 
 ## Build: the demo path first, a demo that cannot die
 
@@ -69,7 +69,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 - **Built:** an offline retrieval system that finds the applicable standards for a product in under a second.
 - **Steal this:** the judge-scored entry point kept free of network and model calls and guarded by a test; six evaluation sets from different authors (organiser, generated with a leak filter, an independent agent, adversarial phrasing); every run saved by name; ablations with null results labelled; per-miss failure analysis; a one-command setup that scores itself on the judge's machine.
 
-### engram · CockroachDB × AWS
+### engram · CockroachDB × AWS Agentic Memory Hackathon
 - **Built:** a memory of record for agents that act, where the decision, the memory and the side effect commit in one transaction.
 - **Steal this:** README claims written as tests against the real database, with non-vacuity checks ("zero conflicts means the agents never raced, so this run is not evidence") and canary tests that pin known limits; a demo with a control group; a limits document that opens with what it previously got wrong about itself.
 

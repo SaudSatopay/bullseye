@@ -40,7 +40,7 @@ Attach a rubric target to each move ("Scalability 8 to 9") so the work stays aim
 
 When a long event reaches a strategic turn (for example, the judge says the code is maxed and the ceiling is external validity), write a master plan from `../assets/MASTER-PLAN.template.md`: the situation in one paragraph, what the score is anchored by, the guardrails that must hold, the work in order, the definition of done and the first action. Big items get their own work map with phases, an honesty boundary (real, overlaid, not claimed) and the pitfalls not to relapse into.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): the master plan stated that a bigger self-built simulator adds production value but zero credibility when you author both the data and the detector, and redirected the remaining weeks to real incidents, public datasets and a third-party physics model.
+> Field note (Trinetra · ET AI Hackathon 2.0): the master plan stated that a bigger self-built simulator adds production value but zero credibility when you author both the data and the detector, and redirected the remaining weeks to real-plant data or an attributable quote, a third-party physics model and the demo video.
 
 ## Code maps for agents joining an existing repo
 

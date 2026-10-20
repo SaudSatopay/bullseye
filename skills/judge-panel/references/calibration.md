@@ -15,7 +15,7 @@ A judge round is only useful if its numbers mean the same thing every time. This
 
 What a trajectory looks like: a first end-to-end build usually lands between 6.5 and 7.5. A round of fixing what a judge substantiated moves it by 0.1 to 0.4. It flattens out around 8 when what is left is not code.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): 7.3 → 7.6 → 7.7 → 7.9 → 8.0 across the informed rounds, then 8.5 from the blind final. Every step came from fixing what a judge had substantiated, never from arguing with a score.
+> Field note (Trinetra · ET AI Hackathon 2.0): 7.3 → 7.6 → 7.7 → 7.9 → 8.0 across the informed rounds, then 8.5 from the blind final. Most steps came from fixing what a judge had substantiated, never from arguing with a score.
 
 ## Inflation
 
@@ -62,7 +62,7 @@ Trust it when you can reproduce it: the file:line exists and says what the judge
 
 Doubt it when the judge did not run the app; the file:line is missing or says something else; the "bug" is a limitation the README already declares; it contradicts a test you can run; or it rests on a library behaviour the judge assumed without checking.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): One judge called a permit id "invented" (it was the scenario data's real id); another said a retry helper was unused (two panels call it). Each took minutes to check, went under non-issues and was left alone.
+> Field note (Trinetra · ET AI Hackathon 2.0): One judge called a permit id "invented" (it was the scenario data's real id); another said a retry helper was unused (two panels call it). Each was checked against the code, went under non-issues and was left alone.
 
 Severity, calibrated:
 - **high:** breaks the demo, a correctness or safety property, or a headline claim;

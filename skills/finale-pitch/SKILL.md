@@ -84,7 +84,7 @@ Copy [assets/PITCH-SCRIPT.template.md](assets/PITCH-SCRIPT.template.md).
 
 Gate: three timed run-throughs after the freeze, each inside the slot, and the 90-second cut timed once.
 
-> Field note (FLOODLIGHT · MUSA CodeX 2026): The Round 2 script ran about 4:30 at 140 words a minute, made the quiet day with zero alerts its own act ("THE PROOF"), opened the free host two minutes early because it sleeps, kept a local run as the fallback, and ended with a 90-second cut and a numbers cheat card. The project had qualified from Round 1.
+> Field note (FLOODLIGHT · MUSA CodeX 2026): The Round 2 script was planned section by section to about 4:30, made the quiet day with zero alerts its own act ("THE PROOF"), opened the free host two minutes early because it sleeps, kept a local run as the fallback, and ended with a 90-second cut and a numbers cheat card. The project had qualified from Round 1.
 
 ### 5. Build the Q&A bank and drill it
 

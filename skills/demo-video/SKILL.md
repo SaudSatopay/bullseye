@@ -66,7 +66,7 @@ Copy [assets/VIDEO-SCRIPT.template.md](assets/VIDEO-SCRIPT.template.md) to `docs
 
 Gate: `python "${CLAUDE_SKILL_DIR}/scripts/voiceover.py" docs/demo-script.md --dry-run` exits 0 (every line fits its window, no banned word, no placeholder) and every beat that states a number has a Source cell.
 
-> Field note (engram · CockroachDB × AWS Agentic Memory): The script budgeted 2:50 against a 3:00 cap and spent it on one argument: eight racing agents, one refund, then the control group's "0 × SQLSTATE 40001" held for a full beat. No schema, no architecture narration.
+> Field note (engram · CockroachDB × AWS Agentic Memory Hackathon): The script budgeted 2:50 against a 3:00 cap and spent it on one argument: eight racing agents, one refund, then the control group's "0 × SQLSTATE 40001" held for a full beat. No schema, no architecture narration.
 
 ### 3. Prepare the recording
 
@@ -161,7 +161,7 @@ Gate: every check passes and is written into the `## Log` block.
 
 Gate: the link plays logged out, and no placeholder is left anywhere.
 
-> Field note (VyaparAI · Qwen Cloud hackathon): SUBMISSION.md still held the video-link placeholder at the end of the build. Paste the link the moment the upload finishes, then open it logged out.
+> Field note (VyaparAI · Global AI Hackathon Series with Qwen Cloud): SUBMISSION.md still held the video-link placeholder at the end of the build. Paste the link the moment the upload finishes, then open it logged out.
 
 ### 10. Optional: launch film or trailer
 

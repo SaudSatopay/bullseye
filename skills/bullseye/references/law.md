@@ -40,7 +40,7 @@ Ship labelled modes (live, scripted on the same tools, recorded from a real run)
 
 > Field note (Detour · Graph Hacks 2026): three run modes, each labelled in the interface, plus a six-model free-tier chain that skipped spent models, kept the demo alive through quota exhaustion and a database outage.
 
-> Field note (ORCA · SIH 2026): several "the demo lied on stage" moments (a stale browser tab, a map provider that started demanding a key mid-rehearsal, animations that never ran in a hidden tab) became permanent rules: no-store HTML, keyless tiles, fail-safe timers, and nothing important that starts invisible.
+> Field note (ORCA · SIH 2026): several moments when the demo lied (a stale browser tab on stage, a map provider that started demanding a key mid-rehearsal, animations that never ran in a hidden tab) became permanent rules: no-store HTML, keyless tiles, fail-safe timers, and nothing important that starts invisible.
 
 ## 6. Every number is measured, labelled and identical everywhere
 
@@ -50,7 +50,7 @@ Label every number on the artifact: measured, sourced, simulated, projected, tar
 
 > Field note (Detour · Graph Hacks 2026): one command re-measured all 16 README claims, checked that the README still contained each claim's text, compared it with an independent reimplementation, and failed on any mismatch.
 
-> Field note (Bridge, kasauti, FLOODLIGHT, BIS Compass · four events): test counts drifted between README, deck, agent brief and video script (58 vs 59; 51 vs 65 vs 68; 11 vs 20 vs 22 vs 31; 30 vs 37). A single facts file and a pre-submit check make that impossible.
+> Field note (Bridge, kasauti, FLOODLIGHT, BIS Compass · four events): test counts drifted between README, deck, agent brief and video script (58 vs 59; 51 vs 65 vs 68; 11 vs 20 vs 22 vs 31; 30 vs 37). A single facts file and a pre-submit check catch that drift before it ships.
 
 ## 7. Say the limits out loud before judges find them
 
@@ -70,7 +70,7 @@ Choose a visual language native to the problem (a nautical chart for fishers, a 
 
 Paste the problem statement, rubric and repo into a fresh session with no memory of the build. Ask it to reproduce the numbers, read the code, run the app and try to break it. Verify each finding before fixing it, fix every substantiated one, record the non-issues, and rotate the next round onto the newest work. Finish with a blind round.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): eight judge rounds moved the score from 7.3 to 8.5. Some findings were wrong (an "invented" identifier was real), which is why every finding is checked against the code first.
+> Field note (Trinetra · ET AI Hackathon 2.0): eight judge prompts moved the score from 7.3 to 8.5. Some findings were wrong (an "invented" identifier was in the scenario data), which is why every finding is checked against the code first.
 
 ## 10. Submit early, tag it, never edit after the deadline
 
@@ -78,4 +78,4 @@ Submit with buffer (at least 30 minutes onsite, a day on government portals), re
 
 > Field note (Detour · Graph Hacks 2026): the README marked exactly what was submitted (a tag link) and what came later, and published a correction stating what the submitted version still got wrong.
 
-> Field note (Smart Retrofit Kit · MSME Idea Hackathon 6.0): the government portal's sanitiser silently stripped percent signs, apostrophes and semicolons from stored answers. Submitting early left time to read back what was stored.
+> Field note (Smart Retrofit Kit · MSME Idea Hackathon 6.0): the government portal's sanitiser stripped percent signs, apostrophes and semicolons from stored answers, and the stored text could not be edited. Submitting two days early meant the loss was found and recorded before the deadline.

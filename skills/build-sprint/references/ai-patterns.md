@@ -54,7 +54,7 @@ export async function extract(doc: string) {
 
 Show the rejected count in the trace. "Two extractions dropped: their quotes are not in the document" is a credibility moment, not a failure.
 
-> Field note (RegSutra · SEBI TechSprint 2026): every extracted obligation carried a required verbatim clause span, a model id and a confidence, and the demo script's line was "No span, no obligation." Checking the span against the source in code, as above, is what makes that line literally true.
+> Field note (RegSutra · SEBI TechSprint 2026): every extracted obligation carried a required verbatim clause span, a model id and a confidence, and the demo script's line was "No span, no obligation." RegSutra's schema required the span but no code checked it against the source. Checking it in code, as above, is what makes that line literally true.
 
 ### Numbers only from tools; the catalogue snaps money
 
@@ -291,7 +291,7 @@ def chat_json(system: str, user: str, *, model: str, extra: dict | None = None, 
 
 Print `llm_used`, `provider` and a budget counter on every output ("3 searches · model-assisted · 5.4 s"). A fallback nobody can see is a bug that passes every demo until the one that matters.
 
-> Field note (kasauti · SerpApi India Hackathon 2026): a free-tier model's thinking mode added 30 to 60 seconds per call, blew the timeout and silently fell back to rules. Turning thinking off took one check from 68 s to 12 s and confidence from 70% to 95%, and `llm_used` went onto every output.
+> Field note (kasauti · SerpApi India Hackathon 2026): a free-tier model's thinking mode added 30 to 60 seconds per call, blew the timeout and silently fell back to rules. Turning thinking off took one check from 68 s to 12 s and confidence from 70% to 95%. The `llm_used` flag on every output was true whenever a model was configured, so it never showed the fallback: a mode flag must record what actually ran.
 
 ## 12. The injection guard
 

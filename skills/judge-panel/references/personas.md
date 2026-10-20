@@ -23,7 +23,7 @@ Each persona below has: the line to paste, what it rewards, the questions it ask
 
 **The ladder they look for:** an arm's-length practitioner interview, then a design-partner letter of intent, then a paid pilot. Name the rung you are on and do not imply the next one. A quote from someone who confirms the problem is problem validation: not demand, not an endorsement of the product, not a customer.
 
-> Field note (Trinetra · ET AI Hackathon 2.0): With a founder and VC jury, Business held at 7 across the informed rounds because every exhibit was self-authored, and the judges named the ceiling as external validity. An early review's plan had already replaced a 116× per-incident ROI with an expected-value 7.7× at a stated 1-in-15-year probability.
+> Field note (Trinetra · ET AI Hackathon 2.0): With a founder and VC jury, Business held at 7 across the informed rounds because the core evaluation was self-authored and no real plant had supplied data, and the judges named the ceiling as external validity. An early review's plan had already replaced a 116× per-incident ROI with an expected-value 7.7× at a stated 1-in-15-year probability.
 
 ## Bankers and regulators
 
@@ -57,7 +57,7 @@ Each persona below has: the line to paste, what it rewards, the questions it ask
 
 **What loses them:** fixed pipeline stages sold as autonomous agents; a number with no command behind it; a demo that only runs on the presenter's laptop; a fallback that silently replaced the model and nothing on screen says so.
 
-> Field note (LINE MARSHAL · TrackShift Innovation Challenge 2026): The battle plan read the jury before the brief, race engineers, and wrote down the consequence: "technical hand-waving will be found out". Its answer was a thin working prototype even for the idea round: "Evidence beats promises, even at idea stage."
+> Field note (LINE MARSHAL · TrackShift Innovation Challenge 2026): The battle plan read the jury before the brief, race engineers, and wrote down the consequence: "technical hand-waving will be found out". Its answer was to plan a thin working prototype even for the idea round: "Evidence beats promises, even at idea stage."
 
 ## Scientists and domain experts
 
@@ -109,7 +109,7 @@ Each persona below has: the line to paste, what it rewards, the questions it ask
 
 **What loses them:** cloud-only dependencies; English-only screens; no cost estimate; a pilot claim with no named owner.
 
-> Field note (FLOODLIGHT · MUSA CodeX 2026): The Q&A ammo answered "3 a.m. with no reports" with the degraded mode (rain gauges plus the model still warn; diagnosing a blocked drain waits for observations) and a low-cost sensor per chronic choke point, and answered "business model" with a budget the city already spends, blindly.
+> Field note (FLOODLIGHT · MUSA CodeX 2026): The Q&A ammo answered "What happens when there are no citizen reports at 3 a.m.?" with the degraded mode (rain gauges plus the model still warn; diagnosing a blocked drain waits for observations) and a low-cost sensor per chronic choke point, and answered "What's the business/deployment model?" with a budget the city already spends, blindly.
 
 ## Every panel
 

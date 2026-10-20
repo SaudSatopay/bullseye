@@ -99,7 +99,7 @@ Gate: both themes show 0 Mermaid errors and 0 broken images; every deep link ope
 
 Gate: every R line has a row and a place; every number matches facts.json and the README; no placeholder is left.
 
-> Field note (CrackWatch · Gappy AI Hackathon 2026): The entry that reached the top 25 told its sponsor story as subtraction: ten platform primitives in a table, "Why this is meaningful use, not a wrapper", and a strikethrough line of everything the team did not have to build.
+> Field note (CrackWatch · Gappy AI Hackathon 2026): The entry that reached the top 25 told its sponsor story as subtraction: ten platform primitives in a table, "Why this is meaningful Lemma use, not a wrapper", and a strikethrough line of everything the team did not have to build.
 
 ### 4. Write BRIEFING.md: one page the team knows by heart
 
@@ -127,7 +127,7 @@ Re-shoot the README images, the OG card and the GIF in the same change as any re
 
 Gate: pasting the live URL into a chat shows the card; every image comes from the current production build; no dev indicator in any capture.
 
-> Field note (RegSutra · SEBI Securities Market TechSprint 2026): The first screenshot in the README was captured from the dev server, and the Next.js dev indicator sits over the sidebar footer in the image every judge sees first.
+> Field note (RegSutra · SEBI Securities Market TechSprint 2026): The first screenshot in the README was captured from the dev server, and the Next.js dev indicator sits over its sidebar footer, where every judge sees it.
 
 ### 6. Write the blog post (only for a blog prize or a write-up field)
 
@@ -158,7 +158,7 @@ Gate: the sweep's `secret`, `history`, `env-file`, `abs-path`, `process-file` an
 
 Gate: every link in the requirement table opened logged out, with the time it was checked written in BULLSEYE.md (Submission).
 
-> Field note (ORCA · SIH 2026): Its previews answered HTTP 302 to anyone not signed in to Vercel and the public alias served an older bundle, which held the critic's `shipped` score at 6 for the whole run.
+> Field note (ORCA · SIH 2026): Its previews answered HTTP 302 to anyone not signed in to Vercel and the public alias served an older bundle, which capped the critic's `shipped` score at 6 on its last scored pass.
 
 ### 9. Final sweep
 

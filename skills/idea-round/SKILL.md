@@ -232,7 +232,7 @@ Details and the seam slide: [references/multi-round.md](references/multi-round.m
 
 Gate: the next round's promises are in the spine, and the disclosure of existing work is on the artifact.
 
-> Field note (ORCA · Vibeathon 2026): the Stage 1 slide "Hand us any challenge. The crew absorbs it." listed six seams and an H0 to H12 playbook. ORCA reached Stage 2, where the mentor's challenge landed in those seams and went from brief to last commit in 2 h 45 min.
+> Field note (ORCA · Vibeathon 2026): the Stage 1 slide "Hand us any challenge. The crew absorbs it." listed six seams and an H0 to H12 playbook. ORCA reached Stage 2, where the mentor's challenge landed in those seams and went from brief to the shipped gate in 2 h 45 min.
 
 ### 11. Submit and record
 

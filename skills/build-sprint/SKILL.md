@@ -47,7 +47,7 @@ Every step ends at a gate. When the clock forces a move before a gate passes, wr
 
 Gate: `PRODUCT.md` exists, the judge is a named user, and every rehearsed scenario is listed.
 
-> Field note (ORCA · SIH 2026): the product file pinned five rehearsed scenarios with their numbers ("Goa 9 LOW, Mumbai 06:00 70 HIGH, Paradip 92 EXTREME"), and a smoke test asserted them on every change, so no edit could quietly move the demo.
+> Field note (ORCA · SIH 2026): the product file pinned five rehearsed scenarios with their numbers ("Goa 9 LOW, Mumbai 06:00 70 HIGH, Paradip 92 EXTREME"), and pytest asserted the exact scores on every change, so no edit could quietly move the demo.
 
 ### 1. Lock the golden path
 
@@ -58,7 +58,7 @@ Gate: `PRODUCT.md` exists, the judge is a named user, and every rehearsed scenar
 
 Gate: every beat maps to at least one plan item, the money shot and the negative beat are marked, and the cut line exists.
 
-> Field note (FLOODLIGHT · MUSA CodeX 2026): the "Quiet Tuesday" replay had to send zero alerts while still catching the one blocked drain. It was tested across 8 areas × 4 storms (32 replays), demoed live, and became the answer to the alert-fatigue question.
+> Field note (FLOODLIGHT · MUSA CodeX 2026): the "Quiet Tuesday" replay had to send zero alerts while still catching the one blocked drain. It was tested across 8 areas × 4 storms (32 replays), shown in the Round 2 demo video, and became the answer to the alert-fatigue question.
 
 ### 2. The engine decides, the model narrates
 
@@ -154,7 +154,7 @@ Gate: with the network off and no keys, the golden path runs end to end and ever
 
 > Field note (RegSutra · SEBI TechSprint 2026): one pipeline generator had one event contract and two backends, live with a key and a deterministic replay without one. The public deployment needed no environment variables, and the README could say "Judges reproduce the exact demo on any machine."
 
-> Field note (SunPath · FlowZint AI Hackathon 2026): failover with a 12-second start budget was verified live three ways: a blank key failed over, a real provider brownout failed over in 1.9 s, and production rode out the outage.
+> Field note (SunPath · FlowZint AI Hackathon 2026): failover was verified live three ways: a blank key failed over, a real provider brownout failed over in 1.9 s once the 12-second start budget was in place, and production rode out the outage.
 
 ### 7. AI features done right
 
@@ -174,7 +174,7 @@ Read [ai-patterns.md](references/ai-patterns.md) before writing any model call. 
 
 Gate: a test feeds a fabricated span, an invented number, an unknown id and an injected instruction, and each is rejected or labelled; every AI surface shows its provenance; trace timings are measured, not typed.
 
-> Field note (VyaparAI · Global AI Hackathon with Qwen Cloud): the money guard snapped every catalogue line to the catalogue's price, tax code and rate at the tool boundary: "The model only chooses the item and quantity. Kills price hallucination."
+> Field note (VyaparAI · Global AI Hackathon Series with Qwen Cloud): the money guard snapped every catalogue line to the catalogue's price, tax code and rate at the tool boundary: "The model only chooses the item and quantity. Kills price hallucination."
 
 ### 8. Named passes
 
@@ -194,7 +194,7 @@ Write the submission copy at about hour 2 (form answers, one-liner, demo script 
 
 Gate: the pass's Log block records what changed, how it was verified, and the numbers.
 
-> Field note (VyaparAI · Global AI Hackathon with Qwen Cloud): the 52-hour commit log reads core loop, deploy kit, a real function-calling agent with a trace UI, submission copy at hour 2, live on the sponsor's cloud with a proof screenshot, "Wow pass", "Stacked pass", "Full English parity", "Polish pass", then the diagram, thumbnail and gallery.
+> Field note (VyaparAI · Global AI Hackathon Series with Qwen Cloud): the 52-hour commit log reads core loop, deploy kit, a real function-calling agent with a trace UI, submission copy at hour 2, live on the sponsor's cloud with a proof screenshot, "Wow pass", "Stacked pass", "Full English parity", "Polish pass", then the diagram, thumbnail and gallery.
 
 ### 9. Commit discipline
 

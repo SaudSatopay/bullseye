@@ -2,7 +2,7 @@
 
 A 60 to 100 second film made from code: kinetic type, real product captures, a soundtrack and a narrator, all timed from one cue sheet. Budget a day or more. Make one only when the demo video is finished and the event rewards it: an idea round that accepts a video, a pitch that opens on a film, a booth loop, a launch post. If any of that is uncertain, polish the demo video instead.
 
-> Field note (WasteOS · OneEarth Hackathon 2026): The 100-second film shipped as two 1080p masters (male and female narrator), 720p copies of about 9 MB for chat, a music-only cut for a teammate narrating live, two SRT files and a 1280×720 thumbnail, all rebuilt by commands listed in its README.
+> Field note (WasteOS · OneEarth Hackathon 2026): The 100-second film shipped as two 1080p masters (male and female narrator), 720p copies of about 9 MB for chat, a music-only cut for a teammate narrating live, two SRT files and a 1280×720 thumbnail, with the films and captions rebuilt by commands listed in its README.
 
 ## Pick an engine
 

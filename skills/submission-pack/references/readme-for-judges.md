@@ -94,7 +94,7 @@ Two tables. The first maps each criterion, in the organiser's words, with its we
 - Show the negative case when the product has one (FLOODLIGHT's quiet day: zero alerts, the blocked drain still caught) and one phone shot.
 - After any redesign, re-shoot the README images, the OG card and the GIF in the same change.
 
-> Field note (RegSutra · SEBI Securities Market TechSprint 2026): The posture screenshot at the top of the README was captured from the dev server, so the Next.js dev indicator sits over the sidebar footer in the first image a judge sees.
+> Field note (RegSutra · SEBI Securities Market TechSprint 2026): The posture screenshot near the top of the README was captured from the dev server, so the Next.js dev indicator sits over the sidebar footer in the first screenshot a judge sees.
 
 ## 9. Diagrams
 

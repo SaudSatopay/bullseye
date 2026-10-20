@@ -25,7 +25,7 @@ One set written by the person who built the system measures that person's imagin
 | Judge-random and private simulation | random picks the way a judge would pick | held-out |
 | Frozen blind battery | a repo-blind session (below) | one run, published raw |
 
-> Field note (BIS Compass · Sigma Squad × BIS Hackathon 2026): six sets came from six authors, and the scored ones ranged from 88.89% Hit@3 on 18 LLM-written queries to 100% on the organisers' 10, with 92% on 25 slang, Hinglish and negation queries. The generator of the synthetic set dropped any query that leaked its own standard code.
+> Field note (BIS Compass · Sigma Squad × BIS Hackathon 2026): six sets came from at least three authors (the organisers, Gemini and Codex), and the scored ones ranged from 88.89% Hit@3 on 18 LLM-written queries to 100% on the organisers' 10, with 92% on 25 slang, Hinglish and negation queries. The generator of the synthetic set dropped any query that leaked its own standard code.
 
 ## Split before any run, with a seed
 

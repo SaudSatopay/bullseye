@@ -46,7 +46,7 @@ Start from [LIMITS.template.md](../assets/LIMITS.template.md). Its sections, fro
 - **What the demo does not prove.**
 - **Things we did not build**, "named so you can tell the difference between a decision and an oversight".
 
-> Field note (engram · CockroachDB × AWS Build with Agentic Memory): an earlier limits doc confessed no bugs, only flattering "learnings". A hostile review then found 12 bugs with file names, including a column the docs said existed and did not, and 11 citations to files that did not exist. The rewritten doc opens with what it got wrong about itself: "Honesty had been applied exactly where it would be graded."
+> Field note (engram · CockroachDB × AWS Agentic Memory Hackathon): an earlier limits doc confessed no bugs, only flattering "learnings". A hostile review then found 12 bugs with file names, including a column the docs said existed and did not, and 11 citations to files that did not exist. The rewritten doc opens with what it got wrong about itself: "Honesty had been applied exactly where it would be graded."
 
 ## The README's "Where we lose"
 

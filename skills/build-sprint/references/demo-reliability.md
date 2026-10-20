@@ -263,7 +263,7 @@ def spa(full_path: str) -> FileResponse:
 
 Hosted frameworks (Next.js on Vercel) get this right by default; verify with `demo-check.mjs` rather than assume.
 
-> Field note (ORCA · SIH 2026): a feature "missing" on stage was a stale tab running yesterday's bundle, and a later code review found that the SPA fallback could be walked up to the server's own source with an encoded `../`; both fixes are in the sketch above.
+> Field note (ORCA · SIH 2026 and Vibeathon 2026): a feature "missing" on stage was a stale tab running yesterday's bundle, and a later code review found that the SPA fallback could be walked up to the server's own source with an encoded `../`; both fixes are in the sketch above.
 
 ## 13. Map tiles, timers, visibility and motion
 

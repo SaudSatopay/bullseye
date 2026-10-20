@@ -8,7 +8,7 @@ The whole video is one argument: here is a bug you have, here is why you can't f
 
 Write the argument as one sentence at the top of the beat sheet before any beat. Every beat either moves that sentence forward or gets cut.
 
-> Field note (engram · CockroachDB × AWS Agentic Memory): The script opened on black with typed lines (an agent calls the payment API, then writes "refunded €42" to its vector store) and then "Those are two writes. They are not atomic." The product did not appear until the viewer already wanted it.
+> Field note (engram · CockroachDB × AWS Agentic Memory Hackathon): The script opened on black with typed lines (an agent calls the payment API, then writes "refunded €42" to its vector store) and then "Those are two writes. They are not atomic." The product did not appear until the viewer already wanted it.
 
 ## Beat patterns that worked
 
@@ -50,7 +50,7 @@ Name the one or two highlights and their timestamps at the top of the script, as
 - Say the number your run showed. "If your run shows 6 retries instead of 7, say six." Re-check every number against `facts.json` in QA; videos drift from READMEs when the code changes after recording.
 - Mode chips on screen (LIVE, SCRIPTED, RECORDED, cached) stay visible in the recording. They are a strength, not a flaw.
 
-> Field note (WasteOS · OneEarth Hackathon 2026): The narrator says "In simulation" before the 98% overflow figure, every overlay carries an ILLUSTRATIVE or SIMULATED chip, and the credits card says routes and results are simulated. The film uses only credited real photography.
+> Field note (WasteOS · OneEarth Hackathon 2026): The narrator says "In simulation" before the 98% overflow figure, every overlay carries an ILLUSTRATIVE, SIMULATED or PROTOTYPE chip, and the credits card says routes and results are simulated. The film uses only credited real photography.
 
 ## Legibility
 

@@ -154,7 +154,7 @@ Fill `## Thesis` from the template:
 
 Gate: a judge could check the one-liner; every criterion has a "why we win" line; out of scope is not empty.
 
-> Field note (LINE MARSHAL · TrackShift Innovation Challenge 2026): All three themes were written as pure F1 problems, but two of the six criteria were "nearly unscoreable for a pure F1 tool", so the plan built the F1 tool to the brief and showed the same engine on Indian roads.
+> Field note (LINE MARSHAL · TrackShift Innovation Challenge 2026): All three themes were written as pure F1 problems, but two of the six criteria were "nearly unscoreable for a pure F1 tool", so the plan specified the F1 tool to the brief and showed the same engine on Indian roads.
 
 > Field note (MuleShot · BOI × IIT Hyderabad 2026): For a banking jury the proposal weighted governance (maker-checker holds, audit logs, "never autonomous freeze") over GenAI flash, and positioned the product as a complement to the incumbent detector.
 

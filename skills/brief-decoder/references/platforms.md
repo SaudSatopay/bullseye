@@ -17,14 +17,14 @@ Answer every one in the Contract, with the page you checked:
 
 ## Devpost
 
-Seen in OpenAI Build Week (StorePilot), Slack Agent Builder Challenge (Bridge), the Qwen Cloud hackathon (VyaparAI).
+Seen in OpenAI Build Week (StorePilot), Slack Agent Builder Challenge (Bridge), the Global AI Hackathon Series with Qwen Cloud (VyaparAI).
 
 - Judging can run in stages. Build Week's Stage 1 checked fit and the required tech, pass or fail, before four equal criteria.
 - Build Week's requirements: a demo video under 3 minutes, public on YouTube, with audio; a public repo with a licence, or a private one shared with the testing accounts named in the rules; a README with setup, sample data, run instructions and a section describing the collaboration with the required tool; session IDs from that tool; judge access to a working project; a text description and a track.
 - After the deadline, the Slack Agent Builder Challenge's official update said: do not edit the project, because any change to the video, description, links or sandbox access can affect eligibility. The judges' accounts had to be active members of the sandbox workspace (accepted, not just invited) and stay in through judging.
 - Media seen: a thumbnail and gallery images at 1200×800 (VyaparAI), plus a screenshot proving the deployment ran on the sponsor's cloud.
 - Form fields seen (VyaparAI's paste-ready pack): elevator pitch, inspiration, what it does, how we built it, challenges, accomplishments, what we learned, what's next, built with, links.
-- Results came weeks later: the Slack challenge closed on 13 Jul and announced winners on 12 Aug.
+- Results came weeks later: the Slack challenge closed on 13 Jul and scheduled its results for 12 Aug.
 
 > Field note (Bridge · Slack Agent Builder Challenge): The tracker's only post-deadline action was a 2-minute check that the judges' accounts were accepted members of the sandbox workspace; after that, hands off the submission until results.
 

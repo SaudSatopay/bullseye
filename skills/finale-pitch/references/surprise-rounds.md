@@ -100,7 +100,7 @@ git diff --shortstat <start-commit>..HEAD -- . ":(exclude)*.lock" ":(exclude)dis
 git worktree add ../before <start-commit>   # run the old test suite there for the "before" count
 ```
 
-> Field note (ORCA · Vibeathon 2026): The proof slide showed the real pytest output with backend tests 174 to 284 and frontend tests 703 to 812, measured against the challenge's start commit, and the timeline slide was cut from the git log: 12:05 to 14:50, 27 commits.
+> Field note (ORCA · Vibeathon 2026): The proof slide showed the real pytest output with backend tests 174 to 284 and frontend tests 703 to 812, measured against the commit just before the gate work began, and the timeline slide was cut from the git log: 12:05 to 14:50, 27 commits.
 
 ## Onsite build finales without a surprise brief
 
