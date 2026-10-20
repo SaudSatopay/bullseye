@@ -158,7 +158,7 @@ const MUTATIONS = [
 // bytes, check the hash, and report "caught" or "MISSED".
 ```
 
-ORCA's design guard tests were vacuous at first: a `css: false` setting made the `?raw` imports they scanned empty, so they passed on any stylesheet. The fix was proving each guard fails on a real offence. The scripts in this skill were checked the same way: ten deliberate mutations, ten failing test runs.
+ORCA's design guard tests were vacuous at first: a `css: false` setting made the `?raw` imports they scanned empty, so they passed on any stylesheet. The fix was to let `?raw` CSS imports return text (`css.include`), then prove each guard fails on a real offence.
 
 ## 11. The negative-case matrix
 

@@ -14,7 +14,7 @@ Write the argument as one sentence at the top of the beat sheet before any beat.
 
 | Project | Length | Beats |
 |---|---|---|
-| engram | 2:50 | the bug → why you can't fix it in code → the race (typed live) → the control group → the audit → why the sponsor's database → one-line close |
+| engram | 2:50 target | the bug → why you can't fix it in code → the race (typed live) → the control group → the audit → why the sponsor's database → a short text close |
 | RegSutra | 2:53 | posture dashboard → the pipeline on a new circular (the killer feature) → the register it changed → tamper-evident audit → grounded Q&A → URL |
 | SunPath | 2:50 target | the funnel problem → the agent and its six tools → one sentence qualifies and sizes a system → an objection answered from an approved playbook → a quote built live → booking → an honest "not a fit" for a renter → the measured A/B eval |
 | NAADI | 3:00 cap | the book of loans → one thin-file borrower scored with a confidence band → explainability → a slider answered by the real model → the memo → a declined borrower compared → monitoring → URL |
@@ -85,5 +85,5 @@ Plan the short cut while writing the long one: name the beats that drop for a 2:
 - YouTube unlisted is the default: it plays everywhere, keeps captions, and allows chapters. Choose "not made for kids".
 - Drive needs "Anyone with the link" and a test in an incognito window; its preview player has no caption track, so burn captions in.
 - Direct uploads have size caps (50 MB at one portal): export a 720p copy and check its size.
-- Portals that demand a file instead of a link: ship a one-page PDF holding the link (BIS Compass kept a `demo_video_link.pdf` "for portals that demand specific formats").
+- Portals that demand a file instead of a link: ship a one-page PDF holding the link (BIS Compass kept a `demo_video_link.pdf` and a `.zip` copy "for portals that demand specific formats").
 - Test every link logged out, play it to the end, and paste it into the submission the moment the upload finishes.

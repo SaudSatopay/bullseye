@@ -200,7 +200,7 @@ Do not build a bigger simulator of your own: "Bigger self-sim = production value
 
 ## Reference map
 
-- [references/personas.md](references/personas.md): jury types, what each rewards, its typical questions and what loses it, plus the prepared hostile questions seen in the field with the answer shapes that held up. Read before choosing a persona and before the Q&A drill.
+- [references/personas.md](references/personas.md): jury types, what each rewards, its typical questions and what loses it, plus the prepared hostile questions seen in the field with the answer shapes prepared for them. Read before choosing a persona and before the Q&A drill.
 - [references/calibration.md](references/calibration.md): the bands, inflation, blind versus informed divergence, weighted-total arithmetic, reading "the biggest gap", when to trust a finding, how AI judges differ from human juries, and what a judge cannot see. Read before acting on a scorecard.
 - [assets/judge-adversarial.md](assets/judge-adversarial.md), [assets/judge-verify-fixes.md](assets/judge-verify-fixes.md), [assets/judge-newest-surface.md](assets/judge-newest-surface.md), [assets/judge-blind.md](assets/judge-blind.md): the round prompts, with `{{slots}}` that `evidence-pack.mjs` fills.
 - [assets/mock-qa.md](assets/mock-qa.md): the rehearsal judge prompt.

@@ -6,7 +6,7 @@ A judge sees the deck before the product. These rules come from the decks and br
 
 The brand propagates: app, deck, brief, banner, OG image, favicon and video share one token file. Copy the app's role tokens into the starter's `:root` (or the pptxgenjs `ROLE` table) instead of inventing a second palette. Name the world in one line at the top of the token block ("a cold room at night; the paper log it replaces"), because every later choice is checked against it.
 
-Name tokens by **role**, never by hue: `--accent`, `--crit`, `--ground`, not `--cyan`. Fineprint's palette was swapped from blue to red late and its `--cyan` token held a red from then on; a re-theme should be one table, not a hunt.
+Name tokens by **role**, never by hue: `--accent`, `--crit`, `--ground`, not `--cyan`. Fineprint's accent token is still named `--cyan` and holds a red (`#FF4155`); a re-theme should be one table, not a hunt.
 
 ## Grounds and rhythm
 
@@ -72,7 +72,7 @@ Write the headline as the claim the page proves, in two beats, the second in the
 
 ## Page recipes worth reusing
 
-**Results after the build** (BIS Compass): headline "Targets vs measurements: beaten by 2× to 11×". A table of metric, target, measured and a pill with the multiple of the target; ablation bars with the production configuration highlighted; an eval-sets table (set, size, author, result) showing sets written by different authors. The deck starter's slide 09 implements it.
+**Results after the build** (BIS Compass): eyebrow "Targets vs measurements" over the headline "All three targets: beaten by 2× to 11×". Tiles of metric, measured value and target, with a pill carrying the multiple of the target; ablation bars with the production configuration highlighted; an eval-sets table (set, size, author, result) showing sets written by different authors. The deck starter's slide 09 implements it.
 
 **Why teams lose this track, and how we win it** (NAADI's pitch notes): a two-column table, typical entry against ours, one row per trap.
 

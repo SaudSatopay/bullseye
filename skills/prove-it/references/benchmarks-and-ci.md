@@ -135,7 +135,7 @@ Start from [ci-claims.workflow.yml](../assets/ci-claims.workflow.yml). Its rules
 
 ## One live smoke run before submitting
 
-Fixtures freeze the world on the day you recorded them. Once, with real keys, on the deployed build, run the golden path end to end and print PASS or FAIL per step: the provider's response shape, the fallback chain, the real latency. kasauti's live checks caught what 68 offline tests could not: a search engine's response shape changed, and a model's slow "thinking" mode blew the timeout and fell back to rules silently. Bridge's live integration script drove the real modules against a real workspace, step by step. Use sentinel lines (`ALL_CHECKS_PASSED`, `LIVE_PROVIDER_OK`) so a script's success cannot be misread.
+Fixtures freeze the world on the day you recorded them. Once, with real keys, on the deployed build, run the golden path end to end and print PASS or FAIL per step: the provider's response shape, the fallback chain, the real latency. kasauti's live checks caught what its offline tests could not: a search engine's response shape changed, and a model's slow "thinking" mode blew the timeout and fell back to rules silently. Bridge's live integration script drove the real modules against a real workspace, step by step. Use sentinel lines (`ALL_CHECKS_PASSED`, `LIVE_PROVIDER_OK`) so a script's success cannot be misread.
 
 ## Fresh clone, second machine
 

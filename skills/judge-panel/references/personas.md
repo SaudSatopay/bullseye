@@ -125,9 +125,9 @@ Answer the AI question plainly: what the coding agent did, under whose direction
 
 ## Prepared hostile questions from the field
 
-These were written down before real judging calls. The right column is the answer shape that held up; fill in your own facts.
+These were written down before real judging calls. The right column is the answer shape that was prepared; fill in your own facts.
 
-| Question | Source | The answer shape that held up |
+| Question | Source | The answer shape prepared |
 |---|---|---|
 | "Where do the agents actually run? Show me they're real." | CrackWatch · Gappy AI Hackathon 2026 | Name the runtime in one sentence, then run one live from the terminal. Never describe what you can show. |
 | "What stops a wrong AI score from spending money?" | CrackWatch · Gappy AI Hackathon 2026 | The person who approves at the money step, a schema-constrained model output, and a deterministic function that recomputes the amount. |
@@ -140,7 +140,7 @@ These were written down before real judging calls. The right column is the answe
 | "What did the AI build? Say it plainly." | Detour · Graph Hacks 2026 | Plainly, matching the README's disclosure, then show you know every component. |
 | "Is this real data?" | FLOODLIGHT · MUSA CodeX 2026 | Three layers, each labelled: what is reconstructed from real events, what is live right now, what is scripted. |
 | "Why won't people ignore the alerts?" | FLOODLIGHT · MUSA CodeX 2026 | The quiet day: silence is a tested feature, so when it speaks it has earned belief. |
-| "How accurate is it, and against what baseline?" | FLOODLIGHT · MUSA CodeX 2026 | The model's job and the baseline it is measured against; a simple model that is wrong in a useful direction beats a precision claim you cannot back. |
+| "How accurate is the depth model?" | FLOODLIGHT · MUSA CodeX 2026 | The model's job (to be the baseline that blocked drains violate); a simple model that is wrong in a useful direction beats a precision claim you cannot back. |
 | "What happens at 3 a.m. with no reports coming in?" | FLOODLIGHT · MUSA CodeX 2026 | What degrades, what still works, and what restores it. |
 | "What's the business model? Who pays?" | FLOODLIGHT · MUSA CodeX 2026 | The budget line it replaces or makes smarter. |
 | "Why didn't you use ML?" | FLOODLIGHT · MUSA CodeX 2026 | Trust: an officer has to act on it at 2 a.m. "We'd rather be inspectable than impressive." |

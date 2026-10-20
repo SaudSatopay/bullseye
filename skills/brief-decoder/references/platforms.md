@@ -87,7 +87,7 @@ Seen in Graph Hacks 2026 (Detour) and Mergetober.
 
 ## Organiser templates, on any platform
 
-- Produce the organiser's format next to your own deck. WasteOS's official cut for OneEarth 2026 was 5 slides plus up to 3 appendix pages, at most 10 MB, fonts embedded, named `TeamName_Institution_ChallengeCategory.pptx`, while the presentation deck ran to 16 slides plus an appendix slide.
+- Produce the organiser's format next to your own deck. OneEarth 2026's official format was 5 slides plus up to 3 appendix pages, at most 10 MB, fonts embedded, named `TeamName_Institution_ChallengeCategory.pptx`, while WasteOS's presentation deck ran to 16 slides plus an appendix slide.
 - Keep every template section, in order, with its own wording. ISRO's BAH 2026 template was 10 Google-Slides-exported slides at 10 × 5.625 in; SURYA rebuilt it in code at that exact size and reused the template's backgrounds byte for byte.
 - Follow a sample's required flow exactly: FLOODLIGHT's MUSA CodeX deck followed the sample's 11-slide flow and opened with a "submission identity as required by the sample format" slide.
 

@@ -38,7 +38,7 @@ Engine-level rules from the projects: "the LLM writes prose, never numbers"; a n
 
 ## LIMITS.md
 
-Start from [LIMITS.template.md](../assets/LIMITS.template.md). Its sections, from engram's `docs/limits.md`:
+Start from [LIMITS.template.md](../assets/LIMITS.template.md). Its sections, from engram's `docs/limits.md` and the demo caveat in its README:
 
 - **§0 What this document got wrong about itself.** Written last, kept forever.
 - **Known limits**, each with a status: fundamental, fixable but not fixed, deliberate trade-off, demo affordance.
@@ -50,7 +50,7 @@ Start from [LIMITS.template.md](../assets/LIMITS.template.md). Its sections, fro
 
 ## The README's "Where we lose"
 
-A section in the README, linked from the top, listing results that went against you, with numbers, as specifically as the wins. Detour's listed a counting error fixed after the deadline ("The submitted v1.0.0 still has the error"), the free models, the model against plain rules, a ranking where a placebo memory beat its own memory (72% against 60%), the controller's plan choice (best on 11 of 15 closures, worst gap 33%), bus sizing that got worse on two lines, tie-breaks between equally fast paths, a 100% that measured templates rather than open language, and the free database's outages.
+A section in the README, linked from the top, listing results that went against you, with numbers, as specifically as the wins. Detour's listed a counting error fixed after the deadline ("The submitted v1.0.0 still has the error"), the free models, the model against plain rules, a ranking where a placebo memory beat its own memory (72% against 60%), the controller's plan choice (best on 11 of 15 closures, worst gap 33%), bus sizing that got worse on two corridors, tie-breaks between equally fast paths, a 100% that measured templates rather than open language, and the free database's outages.
 
 ## The negative case is half the proof
 
@@ -87,11 +87,11 @@ Never tune a threshold to the exhibit: "untuned" is the whole claim. If the lead
 
 ## Certify what you did not compute
 
-When a sponsor's algorithm or a third-party service returns an answer that is cheap to check, check it on every call, fall back to your own computation when the check fails, and say so in the output. Detour checked every `algo.maxFlow` answer with a max-flow/min-cut certificate (feasible, no augmenting path, value equals cut capacity) and recomputed with its own Dinic solver on failure; a reproduction showed the engine wrong on 13 of 100 random networks, and the certificate caught all 13. The team that first reported the engine bug was credited in the README, the model doc and the blog.
+When a sponsor's algorithm or a third-party service returns an answer that is cheap to check, check it on every call, fall back to your own computation when the check fails, and say so in the output. Detour checked every `algo.maxFlow` answer with a max-flow/min-cut certificate (feasible, no augmenting path, value equals cut capacity) and recomputed with its own Dinic solver on failure; a reproduction showed the engine wrong on 13 of 100 random networks, and the certificate caught all 13. The team that first reported the engine bug was credited in the model doc, the claims table and the proof page.
 
 ## Independent semantics for verifiers
 
-"An independent check needs independent semantics. Reimplementing the same spec catches typos, not wrong ideas." Detour's NetworkX verifier shared no code with the product and still agreed with a counting error, because it copied the same counting: both directions of a bus leg summed against one direction's capacity. A human reviewer found it after the deadline. Write the verifier's semantics from the problem statement, not from your implementation, ideally in a fresh session that has not read the product code, and add an adversarial reader on top.
+"An independent check needs independent semantics. Reimplementing the same spec catches typos, not wrong ideas." Detour's NetworkX verifier shared no code with the product and still agreed with a counting error, because it copied the same counting: both directions of a bus leg summed against one direction's capacity. A reviewer found it after the deadline. Write the verifier's semantics from the problem statement, not from your implementation, ideally in a fresh session that has not read the product code, and add an adversarial reader on top.
 
 ## Draft to final: the claim-change table
 

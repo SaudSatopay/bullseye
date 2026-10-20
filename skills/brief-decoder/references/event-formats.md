@@ -5,9 +5,9 @@ The format decides the strategy before the problem statement does. Find the even
 | Format | Seen in | What decides it | Front-load |
 |---|---|---|---|
 | 8 h onsite | Paytm Build for India (Fineprint) | The pre-built idea deck and a scope of one journey | Deck, data, sandbox access, an hour plan by clock time |
-| Overnight onsite, 18–36 h | MUJ HackX 4.0 (Dhaal), TrackShift finale (LINE MARSHAL), ISRO BAH finale (SURYA) | A narrow demo that never breaks, one wow, a rehearsed 5-minute story | War chest, rehearsed deploy, roles, sleep shifts |
-| Online, 48–72 h | Graph Hacks 2026 (Detour), Global AI Hackathon Series with Qwen Cloud (VyaparAI) | Proof and polish on a live URL, with the sponsor's tech load-bearing | Preview deploy within 2 h, submission copy at hour 2 |
-| Online, multi-week | ET AI Hackathon 2.0 Phase 2 (Trinetra), OpenAI Build Week (StorePilot) | Depth: evidence, external validity, judge rounds | A rubric-driven backlog, clips recorded as features land |
+| Overnight onsite, 18–36 h | MUJ HackX 4.0 (Dhaal), TrackShift finale plan (LINE MARSHAL), ISRO BAH finale plan (SURYA) | A narrow demo that never breaks, one wow, a rehearsed 5-minute story | War chest, rehearsed deploy, roles, sleep shifts |
+| Online, 48–72 h of build | Graph Hacks 2026 (Detour: a 4-day window, about 52 h built), Global AI Hackathon Series with Qwen Cloud (VyaparAI: about 52 h built) | Proof and polish on a live URL, with the sponsor's tech load-bearing | Preview deploy within 2 h, submission copy at hour 2 |
+| Online, multi-week | ET AI Hackathon 2.0 Phase 2 (Trinetra, 30 days), OpenAI Build Week (StorePilot, a 9-day window) | Depth: evidence, external validity, judge rounds | A rubric-driven backlog, clips recorded as features land |
 | Idea round, then build | TrackShift, SIH (ORCA), BOI × IIT Hyderabad (MuleShot), MUSA CodeX (FLOODLIGHT), ISRO BAH (SURYA) | The idea gate, often a single-digit advance rate | The exact form fields, proof before pitch, an early v1 |
 | Profile shortlist | MUJ HackX 4.0 Round 1 | GitHub, LinkedIn and registration answers | A profile pass for every member |
 | Multi-stage with a surprise challenge | Vibeathon 2026 (ORCA) | Seams in the architecture that absorb an unknown task | A Stage 1 deck that promises the seams |
@@ -19,7 +19,7 @@ The format decides the strategy before the problem statement does. Find the even
 ## 8 h onsite
 
 - Teams are small (Paytm: 1–2) and the clock is short, so the idea deck wins the seat and the build proves one journey.
-- Plan the build by clock time and ask for what it needs in advance. Fineprint's deck carried "The 8-hour build by clock time", targets declared before the build, a demo script and a three-risk pre-mortem, and closed on a small ask: "A table on Oct 3. NHCX sandbox credentials. Eight hours."
+- Plan the build by clock time and ask for what it needs in advance. Fineprint's deck carried a six-checkpoint timeline headed "The 8-hour build", targets declared before the build, a demo script and a three-risk pre-mortem, and closed on a small ask: "A table on Oct 3. NHCX sandbox credentials. Eight hours."
 - Hour table, scaled from the 18 h plan below (no 8 h hour log survives in the notes):
 
 | Hours | Share | Do |

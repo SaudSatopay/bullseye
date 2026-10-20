@@ -126,4 +126,4 @@ List where the build runs (hosting, database, models), the free tiers and their 
 - Public material only: no logins to other teams' spaces, no scraping behind authentication.
 - Never copy a competitor's code or assets into the project.
 - Never contact judges, and never post in other teams' threads or the event's channels on the user's behalf.
-- Credit other teams whose public work helped. Detour reproduced another team's report of wrong max-flow results from the sponsor's engine and credited that team in its README and blog.
+- Credit other teams whose public work helped. Detour reproduced another team's report of wrong max-flow results from the sponsor's engine and credited that team by name in its model spec and claims table.
