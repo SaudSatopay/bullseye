@@ -4,7 +4,7 @@ At the idea stage most teams describe what they will build. Proving the core fir
 
 ## Path A: the organiser gave you data
 
-Prove the core on it before you write the pitch. The method is MuleShot's (BOI × IIT Hyderabad 2026: 9,082 accounts, 3,924 anonymised features, 81 mules), generalised.
+Prove the core on it before you write the pitch. The method is MuleShot's (BOI × IIT Hyderabad 2026: 9,082 accounts, 3,923 anonymised features, 81 mules), generalised.
 
 ### Layout
 
@@ -72,12 +72,12 @@ Seen in: DhanDrishti reported forecast error 25% below seasonal-naive, and cover
 1. **Build a thin vertical prototype:** one input end to end (one clip, one session, one document). Capture screenshots, a 90-second screen recording and a public repo link if the form takes links.
 2. **Simulate the claim on real public data** when the real system cannot run yet. WasteOS put 240 simulated bins on a real OpenStreetMap street graph and ran 28 days × 5 seeds against a fixed collection schedule; every result was labelled SIMULATED and the weaker comparison was disclosed.
 3. **Plant ground truth in synthetic data** so accuracy can be measured. DhanDrishti generated 200 enterprises × 104 weeks with engineered distress ramps, "so accuracy is measurable, honestly", and labelled the data synthetic everywhere.
-4. **Script the concept demo** when there is no model yet, and label it. SBI Saarthi streamed scripted multi-agent traces beside a phone mock-up, with "Numbers are illustrative, for demonstration."
+4. **Script the concept demo** when there is no model yet, and label it. SBI Saarthi streamed scripted multi-agent traces beside a phone mock-up, with "Prototype simulation · synthetic personas · figures illustrative." under it
 5. **Precompute model outputs into JSON** so a static demo cannot fail on a judge's machine (NAADI baked its demo population and sensitivity curves through the real model).
 
 ## Path C: the round forbids prototypes or links
 
-MuleShot's Round 1 accepted one PDF of at most 1 MB and no prototype until the shortlist. The proof scripts ran anyway; the PDF cited their numbers and a Methods block named the scripts. Commit the scripts so the next round starts from them.
+MuleShot's Round 1 accepted one PDF of at most 1 MB and no prototype until the shortlist. The proof scripts ran anyway; the PDF cited their numbers and a Methods block pointed to runnable scripts. Commit the scripts so the next round starts from them.
 
 ## Labels for proof
 

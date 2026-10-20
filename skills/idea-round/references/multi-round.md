@@ -26,7 +26,7 @@ Put the same list in the `▶ STATUS` block that records the submission, with da
 ## Re-entering an existing project
 
 1. **Read the rules on pre-built work.** Vibeathon 2026 said "pre-developed projects allowed". TrackShift 2026 required work "developed during TrackShift 2026" with reuse disclosed. When it is unclear, email the organisers and quote the reply into the Contract: "Get it in writing; disclose everything."
-2. **Disclose on the artifact:** what existed before, what is new this round, what open source is reused. FLOODLIGHT's slide 09 box, for a fresh build: "Created fresh for MUSA CodeX 2026 Round 1 ... No prior team codebase is reused." A carried-over project writes the same box the other way round, with dates.
+2. **Disclose on the artifact:** what existed before, what is new this round, what open source is reused. FLOODLIGHT's section 09 box (slide 11 of 11), for a fresh build: "Created fresh for MUSA CodeX 2026 Round 1 ... No prior team codebase is reused." A carried-over project writes the same box the other way round, with dates.
 3. **Re-measure every number on the current build.** Numbers do not carry forward unrun.
 4. **Say the honest position the earlier pitch only implied.** ORCA's Vibeathon deck: "The honest position, said out loud: INCOIS, IMD and MOSDAC publish portals, not open JSON APIs, so ORCA is built behind a provider interface."
 5. **Pitch to this event's format, not the last one's.** ORCA came from an SIH problem statement, but at Vibeathon the pitch was built around how its seams would absorb the surprise challenge.
@@ -68,13 +68,13 @@ Rules for seams:
 ORCA's 16-page Stage 2 deck, "the project in 3, the hackathon day in 11":
 
 1. The project, compressed into three pages.
-2. The mentor's brief, scanned, with "WHAT THE MENTOR CHECKS ✓" mirroring each acceptance check.
+2. The mentor's challenge in one sentence, with "WHAT THE MENTOR CHECKS" listing each acceptance check with a tick.
 3. Before and after: "Before: confident. After: honest."
 4. The change, step by step, each step with its guarantees written as tests.
 5. Proof: the real test run, with counts before and after (backend 174 → 284, frontend 703 → 812).
 6. How it was built, "TIMES FROM THE GIT LOG": "Brief at 12:05. Shipped by 14:50." (27 commits, +3,213 product lines, +219 tests).
 7. Why it fit: "Handed a challenge. The crew absorbed it.", showing the seam each part of the work landed in; "The brief's 'do nots' held"; "The healthy demo, untouched."
-8. Try it live, with "What the brief asked us to show ✓" pointing to a page for each item.
+8. Try it live, with "What the brief asked us to show" ticked off, each item pointing to a page.
 
 Plan the challenge day before writing code: transcribe the brief, set global constraints (rehearsed numbers unchanged, healthy-path text byte-identical, no new dependencies), list the review focus (inputs the brief implies but does not spell out), break it into tasks with tests, and end with a table mapping every brief item to its task. The sibling `finale-pitch` covers the live delivery.
 

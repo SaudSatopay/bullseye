@@ -52,8 +52,8 @@ When you find an error after submitting, fix it and publish the correction where
 - **<What was wrong>, fixed after the deadline.** <What the code did, with the numbers it produced>. <Who found it>. <What changed, and what now checks it>. The submitted v1.0.0 still has the error.
 ```
 
-- Detour's counting error (a shuttle leg's two directions summed against one direction's capacity) went into "Where we lose" in exactly this shape, and into a follow-up post on the numbers that were wrong. Its lesson belongs in every proof plan: "An independent check needs independent semantics."
-- Credit whoever found it, and credit other teams whose findings you used. Detour credited the team whose bug report on the sponsor's max-flow procedure led to its certificate check, in the README, the model spec and the blog.
+- Detour's counting error (a shuttle leg's two directions summed against one direction's capacity) went into "Where we lose" in exactly this shape, and into a follow-up post draft on the numbers that were wrong. Its lesson belongs in every proof plan: "An independent check needs independent semantics."
+- Credit whoever found it, and credit other teams whose findings you used. Detour credited the team whose bug report on the sponsor's max-flow procedure led to its certificate check, in the model spec, the proof page and CLAIMS.md.
 
 ## 5. AI disclosure
 
@@ -89,7 +89,7 @@ Decide the policy before the first commit and write it in BULLSEYE.md (Owner che
 | Fonts | Google Fonts use the SIL Open Font License; name each family in the README credits | ORCA credits Fraunces, Archivo, Spline Sans Mono and Noto Serif Devanagari, self-hosted |
 | Photos | Real photography only (Wikimedia Commons, NASA, OpenStreetMap-based maps), never generated images presented as real; one record per image in `assets/photo-credits.json`; a credit chip on the image; a credits line on the last slide and in the README | ORCA's SIH deck: four Commons photos under CC BY-SA 4.0, CC BY 2.0, CC0 and CC BY-SA 3.0 |
 | UI kits | A `LICENSES.md` beside vendored components, one line per kit and its terms | ORCA: Magic UI under MIT; React Bits under MIT plus Commons Clause, which forbids selling the components themselves; a shader kit whose public use needed a paid plan was rejected |
-| Data | Cite the dataset, its URL, its licence and the date read; OpenStreetMap data is ODbL, so show "© OpenStreetMap contributors" and share derived databases alike | Detour's Data section links every MTA dataset and labels its sample riders |
+| Data | Cite the dataset, its URL, its licence and the date read; OpenStreetMap data is ODbL, so show "© OpenStreetMap contributors" and share derived databases alike | Detour's Data section links its MTA datasets and labels its sample riders |
 | Starting points | Name the template or earlier work you began from | Bridge credits Slack's bolt-js-starter-agent template |
 | Names and logos | Add "not affiliated with" when you use an organisation's data or name; no logos you have no right to | Detour's banned list includes the MTA logos |
 

@@ -78,7 +78,7 @@ Put one question to every candidate: "If we removed the sponsor's tech, what wou
 | "Results would be a bit worse" | Weak | Find the primitive that does the core reasoning |
 | "The core question could not be answered" | Load-bearing | Write the answer into the README and the video |
 
-Organisers say this out loud. Graph Hacks: "If the product still works without FalkorDB, the graph counts as decoration". The kasauti README answered it head-on: "SerpApi is not an add-on here: it is the evidence engine."
+Organisers say this out loud. Graph Hacks' rules called the graph decoration when the product still works once FalkorDB is taken out. The kasauti README answered it head-on: "SerpApi is not an add-on here: it is the evidence engine."
 
 ## Pass 4: infrastructure
 

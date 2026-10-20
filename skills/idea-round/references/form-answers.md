@@ -12,7 +12,7 @@ Most idea rounds run through a portal form: a title, two to four essays with cha
 
 - Fill 91 to 97% of every binding limit (roughly 300 to 5,000 characters). The MSME essays ran 1,372 to 1,460 of 1,500 characters. A half-empty box reads as half an idea.
 - A generous limit is not a target. SIH's description allows 50,000 characters; ORCA's description used 4,259 and its abstract 1,601 of 10,000. Write what a judge will read and stop.
-- Measure, never estimate. The ORCA pack's headings carried estimates ("~3,400 / 50,000", "~1,550 / 10,000") that ran about 25% low. Against a binding limit an estimate that size overflows the box; run `form-check.mjs --fix` and let the headings carry measured counts.
+- Measure, never estimate. The ORCA pack's headings carried estimates ("~3,400 / 50,000", "~1,550 / 10,000") that ran low: the texts measured 4,259 and 1,601 characters. Against a binding limit an estimate that size overflows the box; run `form-check.mjs --fix` and let the headings carry measured counts.
 - Titles are short by design: 72 characters (LINE MARSHAL), 89 of 100 (ORCA), 117 (MSME). No fill rule applies.
 - Count the way the portal counts. Spaces count. A line break typed in the box counts once on the page, but browsers submit it as CRLF, so a server-side limit sees two characters. A word counter that splits on spaces counts a lone hyphen or "(1)" as a word. `form-check.mjs` takes the strict reading: 2 characters per line break, every run of non-space characters is a word.
 - Write long, then cut to the budget in this order: adjectives without numbers, repeated subjects ("The system... The system..."), hedges, throat-clearing openers, then merge sentences. Never cut a number, a source or the human-in-the-loop sentence.
@@ -28,7 +28,7 @@ When identity is forbidden (no brand names), drop the name and say what it is, w
 
 ## The three-essay pattern
 
-Most hackathon forms ask three things: the solution and what makes it innovative, the technologies and data, and how it will be validated. LINE MARSHAL's answers (TrackShift 2026) ran 1,980, 1,749 and 1,704 characters.
+Most hackathon forms ask three things: the solution and what makes it innovative, the technologies and data, and how it will be validated. LINE MARSHAL's answers (TrackShift 2026) ran 1,987, 1,757 and 1,715 characters.
 
 ### Q1. The solution, and what makes it innovative
 
@@ -104,7 +104,7 @@ The SIH portal asks for a title (at most 100 characters), a description (at most
 6. **FEASIBILITY: A WORKING MVP EXISTS:** what runs today, with numbers ("0.02 s cached reads"), and "the entire demo runs on one laptop".
 7. **IMPACT:** SOCIAL, ECONOMIC, ENVIRONMENT & GOVERNANCE, one line each, with a sourced number where one exists.
 
-The abstract is four paragraphs: what it is, for whom and the gap; how it works in two sentences; the working MVP and the stack; the impact in one sentence.
+The abstract is four paragraphs: what it is, for whom and the gap; how it works in a short paragraph; the working MVP and the stack; the impact in one sentence.
 
 ## Tone
 
@@ -112,14 +112,14 @@ The abstract is four paragraphs: what it is, for whom and the gap; how it works 
 - No adjective without a number: "fast" becomes "within 2 seconds"; "affordable" becomes "under Rs 20,000 per machine".
 - Name things: model families, datasets, standards, public rails.
 - Every claim of autonomy carries its human gate in the same sentence.
-- One spelling convention, matched to the jury (LINE MARSHAL used British spelling for an Indian jury).
+- One spelling convention, matched to the jury (LINE MARSHAL mostly used British spelling for an Indian jury: "penalised", "localisation", "kerbs").
 - None of the hype words (seamless, powerful, cutting-edge, leverage and the rest), no exclamation marks, no emoji, no em dashes.
 
 ## Portal-safe text
 
 | Instead of | Write | Why |
 |---|---|---|
-| em dash, en dash | a plain hyphen, a colon or a comma | LINE MARSHAL's essays used plain hyphens, "safe for web forms" |
+| em dash, en dash | a plain hyphen, a colon or a comma | LINE MARSHAL's essays used plain hyphens and plain ASCII throughout |
 | curly quotes and apostrophes | straight quotes | editors insert them silently; plain ASCII is the one set every portal stores |
 | `%` | "per cent" | the MSME portal's sanitizer stripped it ("8-10% energy savings" was stored as "8-10 energy savings") |
 | `'` | a rephrase ("the baseline of the machine") | the same sanitizer stripped apostrophes |

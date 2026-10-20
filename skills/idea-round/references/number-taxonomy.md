@@ -32,7 +32,7 @@ Rules:
 | SIMULATED | dashed | shown in simulation only |
 | FUTURE | muted | planned |
 
-One chip per product slide or module, a key on the overview slide, and the rule from the WasteOS README: they "are set to what the deck can honestly claim today. Move them up as features ship." Architecture diagrams draw planned parts dashed and label them "(planned)". ProofChain's syllabus mapping used the same idea in a table: IMPLEMENTED, DEMONSTRATED or THEORETICAL, each with a file path.
+One chip per product slide or module, a key on the overview slide, and the rule from the WasteOS README: they "are set to what the deck can honestly claim today. Move them up as features ship." Architecture diagrams draw planned parts dashed and label them "(planned)". ProofChain's syllabus mapping used the same idea in a table: IMPLEMENTED, DEMONSTRATED or THEORETICAL, each with a Where or Notes column that names the file, screen or doc.
 
 ## Placeholders that refuse to lie
 
@@ -51,12 +51,12 @@ WasteOS beat a fixed every-2-days collection schedule on every measure. Against 
 | "freezes the proceeds" | "recommends a real-time hold", maker-checker, audit-logged, "never auto-frozen" | MuleShot |
 | "Generate STR" | "Draft STR" | MuleShot |
 | "auto-STR" in the demo plan | "STR draft" | MuleShot |
-| a hard government mandate that could not be verified | deleted; keep what is verified ("23 banks live") | MuleShot |
+| a hard government mandate that could not be verified | softened to what is verified ("23 banks live") | MuleShot |
 | "MuleHunter.AI" | "MuleHunter AI", the real name | MuleShot |
-| "integrated with" an agency that has no open API | "interface ready" | ORCA |
+| "live government APIs" from agencies that have no open API | "interface ready" | ORCA |
 | "executed" | "prepared" | Trinetra |
 | "validated" for a reconstruction | "reconstructed" | Trinetra |
-| "safe" | "no known risk" | Trinetra |
+| "safe" | "no known risk" | Dhaal |
 
 ## The appendix: every number, and where it came from
 
@@ -74,7 +74,7 @@ Smaller formats: MuleShot closed its PDF with a two-part Sources and Methods blo
 
 - The narrator says "In simulation" before the 98% (WasteOS launch film).
 - Speaker notes carry each slide's honesty line: "Everything on this slide is checkable, that is the point." (FLOODLIGHT) "Judges can hold us to these at the finale, that is the point." (LINE MARSHAL)
-- A "What every number is" table (label, meaning, example) in the deck's README tells teammates and judges how to read the slides (WasteOS).
+- A "What every number is" table (label and meaning, with examples inline) in the deck's README tells teammates and judges how to read the slides (WasteOS).
 
 ## The Numbers table
 
@@ -87,4 +87,4 @@ It lives in `idea/SPINE.md`:
 
 - One row per number, written exactly as it appears in the artifacts.
 - A changed number changes here first, then everywhere it appears.
-- `form-check.mjs --numbers idea/SPINE.md` warns about any number in the form that is missing from this table. The sibling `prove-it` keeps the same values in `facts.json` and checks every document against them; WasteOS went further and generated every deck number from the simulator's JSON, so the deck, the film and the appendix could not drift apart.
+- `form-check.mjs --numbers idea/SPINE.md` warns about any number in the form that is missing from this table. The sibling `prove-it` keeps the same values in `facts.json` and checks every document against them; WasteOS went further and generated every simulated number from the simulator's JSON, so the deck, the film and the appendix could not drift apart on them.

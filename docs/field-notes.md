@@ -6,7 +6,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 
 ### Detour · Graph Hacks 2026 (WeMakeDevs × FalkorDB)
 - **Built:** agents on a graph of the New York subway that answer what the network can still carry when a line breaks, using max flow, min cut and forked graphs to test shuttle plans. Two people, about 52 hours, 100 commits to the submission tag.
-- **Steal this:** four parallel research passes before the idea, including a scan of about 351 competitor repositories; roughly a fifth were variants of the organiser's sample app, so the concept moved to a problem where the algorithm is the product. The organiser's own test ("if the product still works without FalkorDB, the graph counts as decoration") was answered in the README, and after the deadline by a with-graph versus no-graph evaluation.
+- **Steal this:** four parallel research passes before the idea, including a scan of about 351 competitor repositories; roughly a fifth were variants of the organiser's sample app, so the concept moved to a problem where the algorithm is the product. The organiser's own test (a product that still works once FalkorDB is taken out leaves the graph as decoration) was answered in the README, and after the deadline by a with-graph versus no-graph evaluation.
 - **Scar:** the "shipped" score stayed at 6 or 7 for seven iterations because keys, the release tag, analytics and the CI token scope all needed the owner. Hence the day-1 owner checklist.
 
 ### Trinetra · ET AI Hackathon 2.0

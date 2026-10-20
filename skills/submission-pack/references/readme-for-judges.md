@@ -22,10 +22,10 @@ The structure comes from the builder's strongest READMEs: Detour (Graph Hacks 20
 | 10 | Why the sponsor's tech | The organiser's own test, answered head-on | "Each step is a graph question that a table or a vector store answers badly:" |
 | 11 | Where we lose | Losses said before a judge finds them | "Results that went against Detour, or that it cannot show yet:" |
 | 12 | Proof | Check \| Result, including Lighthouse | "pnpm judge: all 16 re-measured and matched" |
-| 13 | Run it locally | Works without keys, verified from a fresh clone | RegSutra: "No API keys, no cloud, no database ... That's the whole setup." |
-| 14 | Data | Every source linked; sample data labelled | "The remembered riders, past incidents and playbooks are sample data, labeled as such. Detour is not affiliated with the MTA." |
+| 13 | Run it locally | Works without keys, verified from a fresh clone | RegSutra: "That's the whole setup. No API keys, no cloud, no database ..." |
+| 14 | Data | Every source linked; sample data labelled | "The remembered riders, past incidents, playbooks and the agency's people and decisions are sample data, labeled as such. Detour is not affiliated with the MTA." |
 | 15 | Team and AI assistance | Plain disclosure of what the coding agent did | "it did much of the research, design, code, tests and documentation under my direction" |
-| 16 | License and credits | Fonts, photos, UI kits, data licences | ORCA credits Open-Meteo, OBIS, OpenStreetMap, each typeface and each vendored library |
+| 16 | License and credits | Fonts, photos, UI kits, data licences | ORCA's README credits Open-Meteo, OBIS, OpenStreetMap and each typeface, and a `LICENSES.md` beside the vendored UI kits credits each kit |
 
 Optional sections earn their place only with evidence: "After the deadline" (see `integrity.md`), "Use it from an agent" (an MCP server with a one-line `claude mcp add`), a failure ledger ("Failure we hit | Defense in the code", SunPath), "What to watch for during the replay" (time | what happens | why it matters, FLOODLIGHT), and a callout that pre-empts the obvious objection (FaceAttend's "Model size vs app size").
 
@@ -42,7 +42,7 @@ Cut: a table of contents on a short README, a features list without numbers, a r
 Badges are claims, so they follow the claim rules.
 
 - Every badge carries a real number or a fact and links to where it is proven: tests to the Proof section, claims to CLAIMS.md, the live demo to its URL, the track to the event page.
-- No badge for a number nobody can check, and no CI badge unless CI runs on every push. Detour's workflow never activated (the token lacked the `workflow` scope), so its proof page line about running on every change was untrue until it did.
+- No badge for a number nobody can check, and no CI badge unless CI runs on every push. Detour's workflow never activated (the token lacked the `workflow` scope), so its proof page line about running on every change was untrue until the page was corrected.
 - Order: live demo, track, the proof badge (claims re-measured N/N), tests. Stack badges are optional and come last, or not at all.
 - Colours are the palette: the accent as the message colour and the ink as `labelColor`, both without `#`.
 - The alt text spells the badge out ("Tests: 231 unit, 19 end-to-end").
@@ -130,7 +130,7 @@ Other rules: line breaks in labels are `<br/>`; a Mermaid hexagon `id{{text}}` i
 
 ## 10. Why the sponsor's tech
 
-Answer the organiser's question in the first line: does the product still work without it? Detour's organiser put it bluntly ("If the product still works without FalkorDB, the graph counts as decoration"), and the README answered no, with the reasons. Then one row per question only this tech answers well here, with the primitive and the number it produced. For platform sponsors, tell the story as subtraction: CrackWatch listed ten primitives and a strikethrough line of everything the team did not have to build.
+Answer the organiser's question in the first line: does the product still work without it? Detour's organiser put it bluntly (a product that still works once FalkorDB is taken out leaves the graph as decoration), and the README answered with the reasons. Then one row per question only this tech answers well here, with the primitive and the number it produced. For platform sponsors, tell the story as subtraction: CrackWatch listed ten primitives and a strikethrough line of everything the team did not have to build.
 
 ## 11. Run it locally
 

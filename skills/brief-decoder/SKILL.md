@@ -120,7 +120,7 @@ Gate: `brief/scan.md` holds the winning formula, an idea-cluster table with coun
 
 > Field note (Trinetra · ET AI Hackathon 2.0): The scan decoded the 2025 winner, a solo builder who beat teams of four with a "visceral human-stakes problem + multi-modal fusion (CV+RAG+agents) + instant tangible demo + multilingual accessibility + orchestrate pretrained models". The pick cloned that formula inside the sponsor's industrial theme.
 
-> Field note (Detour · Graph Hacks 2026): About 72 of 351 competitor repos (20%) were variants of the official guide's demo app, so the first concept was dropped for an uncrowded problem where max flow and min cut do the reasoning. The organiser's own test applied: "If the product still works without FalkorDB, the graph counts as decoration".
+> Field note (Detour · Graph Hacks 2026): About 72 of 351 competitor repos (20%) were variants of the official guide's demo app, so the first concept was dropped for an uncrowded problem where max flow and min cut do the reasoning. The organiser's own test applied: a product that still works once FalkorDB is taken out leaves the graph as decoration.
 
 ### 5. Pick the problem statement
 

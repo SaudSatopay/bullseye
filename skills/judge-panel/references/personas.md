@@ -91,7 +91,7 @@ Each persona below has: the line to paste, what it rewards, the questions it ask
 
 **What loses them:** a thin wrapper; sponsor technology as decoration; vague praise; not knowing where their product is weak.
 
-> Field note (Detour · Graph Hacks 2026): The organiser's rule went into the plan on day one, "If the product still works without FalkorDB, the graph counts as decoration", and the briefing answered it in one word, "No", followed by the list of work only the graph does.
+> Field note (Detour · Graph Hacks 2026): The organiser's rule went into the plan on day one (a product that still works once FalkorDB is taken out leaves the graph as decoration), and the briefing answered it in one word, "No", followed by the list of work only the graph does.
 
 ## Government officials
 

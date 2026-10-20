@@ -120,7 +120,7 @@ TrackShift finale, 24 h:
 
 ## Sponsor-platform hackathon
 
-- Apply the load-bearing test to every idea ("If the product still works without FalkorDB, the graph counts as decoration"), and answer it in the README.
+- Apply the load-bearing test to every idea (Graph Hacks' rules: if the product still works once FalkorDB is taken out, the graph is decoration), and answer it in the README.
 - Cover every named sponsor tool where it fits (engram used all 4 of 4 named tools) and show each one: a primitives table (primitive, where, what it does), "why this is meaningful use, not a wrapper", "what we did not have to build".
 - Deploy where the rules say: VyaparAI had to run on Alibaba Cloud with Qwen APIs, and captured a deployment-proof screenshot.
 - Licence rules can be specific: the CockroachDB × AWS rules required MIT or Apache, so engram shipped Apache 2.0.
