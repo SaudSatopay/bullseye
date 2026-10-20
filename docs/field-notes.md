@@ -25,7 +25,7 @@ The builds BULLSEYE was distilled from, grouped by the lesson each one teaches b
 ## Build: the demo path first, a demo that cannot die
 
 ### Dhaal · MUJ HackX 4.0
-- **Built:** a "check before you pay" scam detector with Hindi and English verdicts, voice, a community blocklist and a WhatsApp bot. Three people each driving a Claude Code session on one repository, 131 commits in about 39 hours. Reached the on-campus round.
+- **Built:** a "check before you pay" scam detector with Hindi and English verdicts, voice, a community blocklist and a WhatsApp bot. Three people each driving a Claude Code session on one repository, 130 commits inside the 18-hour build window. Reached the on-campus round.
 - **Steal this:** lanes by directory, contract-first API changes, claiming a task by pushing a `[WIP-name]` marker, a golden path locked at kickoff, hello-world deployed by hour three, feature freeze at hour twelve; a runsheet where every beat has a paste-ready input; "the verdict is computed by deterministic scoring; the model can narrate but never change it".
 - **Scar:** sponsor services changed under the team mid-event (a trial expired, a voice model was deprecated); every external call needed a mocked fallback behind a flag.
 

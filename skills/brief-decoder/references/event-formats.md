@@ -60,7 +60,7 @@ TrackShift finale, 24 h:
 | H16–H20 | Polish the demo, record the backup video, finish the real-world segment |
 | H20–H24 | Deck and pitch, rehearsed three times |
 
-> Field note (Dhaal · MUJ HackX 4.0): The freeze was declared at H12, yet hardening ran to 05:35 with judging at 11:00 (131 commits in about 39 hours). After the freeze, allow only golden-path and honesty fixes.
+> Field note (Dhaal · MUJ HackX 4.0): The freeze was declared at H12, yet hardening ran to 05:35 with judging at 11:00 (130 commits inside the 18-hour build window). After the freeze, allow only golden-path and honesty fixes.
 
 ## Online, 48–72 h
 

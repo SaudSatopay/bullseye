@@ -178,4 +178,4 @@ SCOPE AND RULES:
 - The last hours run in order: freeze, harden, record the backup video, rehearse until boring, submit 30 minutes early.
 - After the event, before the repo goes public: remove names, handles, phone numbers and organiser contacts from `docs/TASKS.md` and `docs/CONTRACTS.md`, and rotate every key.
 
-> Field note (Dhaal · MUJ HackX 4.0): three people each drove their own session on one `main` branch with claim-by-push locks and contract-first changes; 131 commits landed in about 39 hours, the last at 05:35 with judging at 11:00.
+> Field note (Dhaal · MUJ HackX 4.0): three people each drove their own session on one `main` branch with claim-by-push locks and contract-first changes; 130 commits landed inside the 18-hour build window, the last at 05:35 with judging at 11:00.

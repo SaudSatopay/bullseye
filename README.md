@@ -118,7 +118,7 @@ A few of the builds this came from (the full set is in [docs/field-notes.md](doc
 - **Detour** (Graph Hacks 2026): one command re-measured all 16 README claims against an independent reimplementation and failed on any drift; a scan of about 351 competitor repositories changed the idea on day 1.
 - **ORCA** (Smart India Hackathon 2026, then Vibeathon Stage 2): a generic dark-glass UI replaced by a living nautical chart, with the design rules enforced by unit tests; at the surprise-challenge round, a brief handed over at 12:05 shipped by 14:50.
 - **MuleShot** (Bank of India × IIT Hyderabad): the idea proposal proved its core on the organiser's own data, and turned a leakage audit into the hero of the pitch.
-- **Dhaal** (MUJ HackX 4.0): three people, three agent sessions, one repo, 131 commits in about 39 hours, with lanes, contract-first APIs and a blind evaluation published with its misses.
+- **Dhaal** (MUJ HackX 4.0): three people, three agent sessions, one repo, 130 commits inside an 18-hour build window, with lanes, contract-first APIs and a blind evaluation published with its misses.
 
 ## What is inside
 
@@ -142,7 +142,7 @@ Every bundled script is tested (`node --test`) and the repository checks itself 
 | Cursor, Gemini CLI, Copilot, OpenCode, others | Yes, via `npx skills add` | No | Same fallback as Codex |
 | Any other agent | Read `AGENTS.md` from a clone | No | Everything is Markdown and plain scripts |
 
-Scripts need Node 20+; some need Python 3.10+ with optional libraries (PyMuPDF, python-pptx, qrcode, edge-tts) and print an install hint when one is missing.
+Scripts need Node 20+. Browser steps use Playwright (the project's copy or a global one, with Chrome or Edge as the fallback browser), video steps use ffmpeg, the README render check uses the GitHub CLI, and some scripts need Python 3.10+ with optional libraries (PyMuPDF, python-pptx, qrcode, edge-tts). Each script prints an install hint when something is missing.
 
 ## Integrity
 
