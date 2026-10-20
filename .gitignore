@@ -1,0 +1,23 @@
+# Dependencies and build output
+node_modules/
+dist/
+out/
+.venv/
+__pycache__/
+*.pyc
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local agent state and scratch
+.claude/settings.local.json
+.claude/worktrees/
+.missile/
+tmp/
+
+# Secrets never belong here
+.env
+.env.*
+!.env.example

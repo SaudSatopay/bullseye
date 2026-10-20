@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>BULLSEYE banner</title>
+<!-- Source of assets/brand/banner.png. Render with: python -I scripts/render-banner.py -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+  :root {
+    /* Neutrals biased toward the target's blue. Target colors follow the World Archery face, tuned in OKLCH. */
+    --paper: oklch(0.972 0.008 95);
+    --paper-deep: oklch(0.935 0.012 95);
+    --ink: oklch(0.21 0.02 260);
+    --ink-soft: oklch(0.42 0.02 260);
+    --line: oklch(0.82 0.01 260);
+    --ring-white: oklch(0.995 0.002 95);
+    --ring-black: oklch(0.27 0.012 260);
+    --ring-blue: oklch(0.70 0.12 228);
+    --ring-red: oklch(0.64 0.19 25);
+    --ring-gold: oklch(0.88 0.155 95);
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "Instrument Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; background: var(--paper); }
+  body { position: relative; font-family: var(--body); color: var(--ink); }
+
+  .grain { position: absolute; inset: 0; background:
+      radial-gradient(1200px 640px at 100% 50%, var(--paper-deep), transparent 70%); }
+
+  .target { position: absolute; right: -250px; top: 50%; width: 760px; height: 760px; transform: translateY(-50%); }
+
+  .copy { position: absolute; left: 72px; top: 0; bottom: 0; width: 640px; display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+  .kicker { font-family: var(--mono); font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); display: flex; align-items: center; gap: 12px; }
+  .kicker i { display: inline-block; width: 28px; height: 2px; background: var(--ring-red); }
+  h1 { font-family: var(--display); font-weight: 800; font-size: 172px; line-height: 0.82; letter-spacing: -0.012em; text-transform: uppercase; }
+  .lede { font-size: 31px; line-height: 1.22; font-weight: 500; letter-spacing: -0.012em; max-width: 600px; text-wrap: balance; }
+  .chain { font-family: var(--mono); font-size: 15px; color: var(--ink-soft); line-height: 1.6; max-width: 600px; display: flex; flex-wrap: wrap; }
+  .chain b { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .chain span { color: var(--ring-red); padding: 0 6px; }
+
+  .key { display: flex; gap: 28px; font-family: var(--mono); font-size: 14px; color: var(--ink-soft); margin-top: 6px; }
+  .key span { display: inline-flex; align-items: center; gap: 9px; }
+  .key svg { flex: none; }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <svg class="target" viewBox="-380 -380 760 760" aria-hidden="true">
+    <!-- Ten scoring rings, outermost = 1. Each color band holds two rings, split by a thin line. -->
+    <g stroke-width="1.6">
+      <circle r="380" fill="var(--ring-white)" stroke="var(--line)"/>
+      <circle r="342" fill="none" stroke="var(--line)"/>
+      <circle r="304" fill="var(--ring-black)" stroke="var(--ring-black)"/>
+      <circle r="266" fill="none" stroke="oklch(0.55 0.01 260)"/>
+      <circle r="228" fill="var(--ring-blue)" stroke="var(--ring-black)"/>
+      <circle r="190" fill="none" stroke="oklch(0.45 0.08 228)"/>
+      <circle r="152" fill="var(--ring-red)" stroke="var(--ring-black)"/>
+      <circle r="114" fill="none" stroke="oklch(0.45 0.14 25)"/>
+      <circle r="76"  fill="var(--ring-gold)" stroke="var(--ring-black)"/>
+      <circle r="38"  fill="none" stroke="oklch(0.55 0.12 95)"/>
+      <circle r="19"  fill="none" stroke="oklch(0.55 0.12 95)" stroke-dasharray="3 4"/>
+    </g>
+    <!-- Where default agent output lands: scattered in the 5-6 band. -->
+    <g fill="var(--ring-white)" stroke="var(--ring-black)" stroke-width="2.5">
+      <circle cx="-168" cy="-118" r="8"/>
+      <circle cx="-205" cy="22" r="8"/>
+      <circle cx="-120" cy="171" r="8"/>
+      <circle cx="-196" cy="-60" r="8"/>
+      <circle cx="-150" cy="138" r="8"/>
+    </g>
+    <!-- Where a BULLSEYE flight lands: grouped inside the 10 ring. -->
+    <g fill="var(--ink)" stroke="var(--ring-gold)" stroke-width="2.5">
+      <circle cx="-10" cy="-6" r="8.5"/>
+      <circle cx="8" cy="10" r="8.5"/>
+      <circle cx="13" cy="-13" r="8.5"/>
+    </g>
+  </svg>
+
+  <div class="copy">
+    <div class="kicker"><i></i>Open-source playbook for coding agents</div>
+    <h1>Bullseye</h1>
+    <p class="lede">Your coding agent ships a finished, judge&#8209;ready hackathon project instead of AI slop.</p>
+    <p class="chain"><b>Decode the brief<span>→</span></b><b>Build the demo path<span>→</span></b><b>Prove every claim<span>→</span></b><b>Simulate the judges<span>→</span></b><b>Ship the package</b></p>
+    <div class="key">
+      <span><svg width="16" height="16" viewBox="-8 -8 16 16"><circle r="6" fill="var(--ring-white)" stroke="var(--ring-black)" stroke-width="2"/></svg>default agent output: 5–6</span>
+      <span><svg width="16" height="16" viewBox="-8 -8 16 16"><circle r="6" fill="var(--ink)" stroke="var(--ring-gold)" stroke-width="2"/></svg>a BULLSEYE flight: 9–10</span>
+    </div>
+  </div>
+</body>
+</html>
